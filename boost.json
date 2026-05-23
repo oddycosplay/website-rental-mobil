@@ -1,0 +1,15 @@
+{
+    "agents": [
+        "gemini"
+    ],
+    "cloud": false,
+    "packages": [
+        "filament/filament"
+    ],
+    "skills": [
+        "fortify-development",
+        "laravel-best-practices",
+        "livewire-development",
+        "tailwindcss-development"
+    ]
+}

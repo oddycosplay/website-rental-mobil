@@ -1,0 +1,85 @@
+sources:
+  rental-db:
+    kind: mysql
+    host: 127.0.0.1
+    port: 3306
+    database: rental
+    user: root
+    password: ""
+
+tools:
+  list_available_cars:
+    kind: mysql-sql
+    source: rental-db
+    description: "List all cars that are currently available for rent."
+    statement: |
+      SELECT id, car_name, plate_number, daily_price, fuel_type, transmission, seat, status 
+      FROM cars 
+      WHERE is_available = true AND status = 'available';
+
+  get_car_by_id:
+    kind: mysql-sql
+    source: rental-db
+    description: "Get detailed information of a specific car by ID."
+    parameters:
+      - name: car_id
+        type: integer
+        description: "The ID of the car"
+    statement: |
+      SELECT * FROM cars WHERE id = :car_id;
+
+  search_cars:
+    kind: mysql-sql
+    source: rental-db
+    description: "Search for cars by name or category."
+    parameters:
+      - name: query
+        type: string
+        description: "The search keyword for the car name or category"
+    statement: |
+      SELECT id, car_name, plate_number, daily_price, category, status 
+      FROM cars 
+      WHERE car_name LIKE CONCAT('%', :query, '%') OR category LIKE CONCAT('%', :query, '%');
+
+  list_recent_bookings:
+    kind: mysql-sql
+    source: rental-db
+    description: "List the 10 most recent car bookings."
+    statement: |
+      SELECT id, booking_code, rental_type, with_driver, pickup_date, return_date, total_day, grand_total, booking_status, payment_status 
+      FROM bookings 
+      ORDER BY created_at DESC 
+      LIMIT 10;
+
+  get_booking_by_code:
+    kind: mysql-sql
+    source: rental-db
+    description: "Get booking details and billing information by booking code."
+    parameters:
+      - name: booking_code
+        type: string
+        description: "The unique booking code (e.g., SLW-xxxx)"
+    statement: |
+      SELECT * FROM bookings WHERE booking_code = :booking_code;
+
+  check_car_availability:
+    kind: mysql-sql
+    source: rental-db
+    description: "Check if a car is booked/rented during a specific date range to prevent overlapping reservations."
+    parameters:
+      - name: car_id
+        type: integer
+        description: "The ID of the car to check"
+      - name: pickup_date
+        type: string
+        description: "Pickup date in YYYY-MM-DD HH:MM:SS format"
+      - name: return_date
+        type: string
+        description: "Return date in YYYY-MM-DD HH:MM:SS format"
+    statement: |
+      SELECT COUNT(*) as active_bookings
+      FROM bookings 
+      WHERE car_id = :car_id 
+        AND booking_status NOT IN ('cancelled', 'expired')
+        AND pickup_date < :return_date 
+        AND return_date > :pickup_date;
