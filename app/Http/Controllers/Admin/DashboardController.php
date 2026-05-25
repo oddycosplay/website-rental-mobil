@@ -40,10 +40,10 @@ class DashboardController extends Controller
         // Chart Data: Monthly Revenue (Last 6 Months)
         $monthlyRevenue = DB::table('payments')
             ->where('payment_status', 'success')
-            ->select(
+            ->select([
                 DB::raw('SUM(paid_amount) as total'),
                 DB::raw('MONTH(payment_date) as month')
-            )
+            ])
             ->where('payment_date', '>=', now()->subMonths(6))
             ->groupBy('month')
             ->orderBy('month')
@@ -52,10 +52,10 @@ class DashboardController extends Controller
 
         // Chart Data: Monthly Expenses (Last 6 Months)
         $monthlyExpenses = DB::table('expenses')
-            ->select(
+            ->select([
                 DB::raw('SUM(amount) as total'),
                 DB::raw('MONTH(date) as month')
-            )
+            ])
             ->where('date', '>=', now()->subMonths(6))
             ->groupBy('month')
             ->orderBy('month')
@@ -82,10 +82,23 @@ class DashboardController extends Controller
             ->where('payment_date', '>=', now()->subDays(30))
             ->sum('paid_amount');
 
-        $pnlMaintenance = DB::table('car_maintenances')
-            ->where('status', 'completed')
-            ->where('updated_at', '>=', now()->subDays(30))
-            ->sum('cost');
+        $pnlMaintenance = 0;
+        $carsWithMaintForPnl = DB::table('cars')
+            ->whereNotNull('maintenances')
+            ->get(['maintenances']);
+            
+        $thirtyDaysAgo = now()->subDays(30)->format('Y-m-d');
+        foreach ($carsWithMaintForPnl as $car) {
+            $maintenances = json_decode($car->maintenances, true);
+            if (is_array($maintenances)) {
+                foreach ($maintenances as $m) {
+                    $mDate = $m['maintenance_date'] ?? null;
+                    if ($mDate && $mDate >= $thirtyDaysAgo) {
+                        $pnlMaintenance += (float) ($m['cost'] ?? 0);
+                    }
+                }
+            }
+        }
 
         // Driver Fee Expense Calculation (Daily Fee * Days)
         $pnlDriverFees = DB::table('bookings')
@@ -126,8 +139,8 @@ class DashboardController extends Controller
             ->where('remaining_payment', '<', 0)
             ->sum(DB::raw('ABS(remaining_payment)'));
 
-        // 4. Customer Blacklist (Since customers are merged into users, retrieve inactive users as blacklisted)
-        $blacklistedCustomers = DB::table('users')->where('status', 'inactive')->get();
+        // 4. Customer Blacklist (Retrieve inactive customers)
+        $blacklistedCustomers = DB::table('customers')->where('is_active', false)->get();
 
         // --- PHASE 3: Business Intelligence & Predictions ---
         
@@ -138,7 +151,10 @@ class DashboardController extends Controller
         // 2. Branch Performance
         $branchPerformance = DB::table('bookings')
             ->join('stores', 'bookings.store_id', '=', 'stores.id')
-            ->select('stores.name', DB::raw('COUNT(*) as total'))
+            ->select([
+                'stores.name',
+                DB::raw('COUNT(*) as total')
+            ])
             ->groupBy('stores.name')
             ->get();
 
@@ -173,7 +189,12 @@ class DashboardController extends Controller
 
         // 2. Expiring Documents (Refactored for Blade consistency)
         $cars = DB::table('cars')
-            ->select('car_name', 'plate_number', 'stnk_expiry', 'tax_expiry')
+            ->select([
+                'car_name',
+                'plate_number',
+                'stnk_expiry',
+                'tax_expiry'
+            ])
             ->where('stnk_expiry', '<=', now()->addDays(30))
             ->orWhere('tax_expiry', '<=', now()->addDays(30))
             ->get();
@@ -198,21 +219,30 @@ class DashboardController extends Controller
             }
         }
 
-        // 3. Upcoming Maintenance (Fixed columns for Blade)
-        $upcomingMaintenance = DB::table('car_maintenances')
-            ->join('cars', 'car_maintenances.car_id', '=', 'cars.id')
-            ->select(
-                'cars.car_name', 
-                'cars.plate_number', 
-                'car_maintenances.start_date as date', 
-                'car_maintenances.maintenance_type as type',
-                'car_maintenances.cost as amount'
-            )
-            ->where('car_maintenances.status', 'scheduled')
-            ->where('car_maintenances.start_date', '>=', now())
-            ->where('car_maintenances.start_date', '<=', now()->addDays(30))
-            ->take(5)
-            ->get();
+        // 3. Upcoming Maintenance (Refactored to fetch from cars.maintenances JSON)
+        $upcomingMaintenance = collect();
+        $carsWithMaint = DB::table('cars')
+            ->whereNotNull('maintenances')
+            ->get(['car_name', 'plate_number', 'maintenances']);
+
+        foreach ($carsWithMaint as $car) {
+            $maintenances = json_decode($car->maintenances, true);
+            if (is_array($maintenances)) {
+                foreach ($maintenances as $m) {
+                    $mDate = $m['maintenance_date'] ?? null;
+                    if ($mDate && $mDate >= now()->format('Y-m-d') && $mDate <= now()->addDays(30)->format('Y-m-d')) {
+                        $upcomingMaintenance->push((object)[
+                            'car_name' => $car->car_name,
+                            'plate_number' => $car->plate_number,
+                            'date' => $mDate,
+                            'type' => $m['description'] ?? 'Servis Berkala',
+                            'amount' => (float) ($m['cost'] ?? 0)
+                        ]);
+                    }
+                }
+            }
+        }
+        $upcomingMaintenance = $upcomingMaintenance->sortBy('date')->take(5);
 
         return view('dashboard', compact(
             'totalBooking', 'totalRevenue', 'totalExpense', 'availableCars', 'totalCars', 

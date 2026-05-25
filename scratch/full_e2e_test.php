@@ -7,7 +7,7 @@ $kernel->bootstrap();
 use App\Models\Booking;
 use App\Models\Car;
 use App\Models\Customer;
-use App\Models\Branch;
+use App\Models\Store;
 use App\Models\Payment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -16,9 +16,9 @@ use App\Http\Controllers\MidtransController;
 echo "--- STARTING FULL E2E TEST ---\n";
 
 // 1. Setup Data
-$car = Car::where('is_available', true)->first();
-$branch = Branch::first();
-$customer = Customer::first();
+$car = Car::where('is_available', '=', true, 'and')->first(['*']);
+$branch = Store::first(['*']);
+$customer = Customer::first(['*']);
 
 if (!$car || !$branch || !$customer) {
     die("Error: Missing car, branch, or customer data.\n");
@@ -30,7 +30,7 @@ $booking = Booking::create([
     'booking_code' => $bookingCode,
     'customer_id' => $customer->id,
     'car_id' => $car->id,
-    'branch_id' => $branch->id,
+    'store_id' => $branch->id,
     'booking_type' => 'daily',
     'pickup_date' => now()->addDay(),
     'return_date' => now()->addDays(2),
@@ -79,7 +79,7 @@ echo "STEP 3: Controller Response: " . $response->getContent() . "\n";
 
 // 4. Verify Results
 $booking->refresh();
-$payment = Payment::where('booking_id', $booking->id)->latest()->first();
+$payment = Payment::where('booking_id', '=', $booking->id, 'and')->latest('created_at')->first(['*']);
 
 echo "\n--- FINAL VERIFICATION ---\n";
 echo "Booking Status: " . $booking->booking_status . " (Expected: confirmed)\n";

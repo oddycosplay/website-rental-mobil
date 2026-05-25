@@ -32,12 +32,12 @@ class BookingsTable
                     ->weight('bold')
                     ->description(fn ($record) => $record->branch->name ?? 'Cabang Utama'),
                 
-                Tables\Columns\TextColumn::make('user.name')
+                Tables\Columns\TextColumn::make('customer.name')
                     ->searchable()
                     ->sortable()
                     ->label('Pelanggan')
                     ->weight('semibold')
-                    ->description(fn($record) => $record->user->phone ?? '-'),
+                    ->description(fn($record) => $record->customer->phone ?? '-'),
                 
                 Tables\Columns\TextColumn::make('car.car_name')
                     ->searchable()

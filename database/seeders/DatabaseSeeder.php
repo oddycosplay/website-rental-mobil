@@ -16,6 +16,36 @@ class DatabaseSeeder extends Seeder
     {
         $now = Carbon::now();
 
+        \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
+        DB::table('roles')->truncate();
+        DB::table('users')->truncate();
+        DB::table('model_has_roles')->truncate();
+        DB::table('customers')->truncate();
+        DB::table('stores')->truncate();
+        if (\Illuminate\Support\Facades\Schema::hasTable('car_brands')) {
+            DB::table('car_brands')->truncate();
+        }
+        if (\Illuminate\Support\Facades\Schema::hasTable('car_types')) {
+            DB::table('car_types')->truncate();
+        }
+        DB::table('cars')->truncate();
+        DB::table('drivers')->truncate();
+        DB::table('promos')->truncate();
+        DB::table('bookings')->truncate();
+        DB::table('payments')->truncate();
+        DB::table('reviews')->truncate();
+        if (\Illuminate\Support\Facades\Schema::hasTable('car_maintenances')) {
+            DB::table('car_maintenances')->truncate();
+        }
+        if (\Illuminate\Support\Facades\Schema::hasTable('car_inspections')) {
+            DB::table('car_inspections')->truncate();
+        }
+        if (\Illuminate\Support\Facades\Schema::hasTable('car_locations')) {
+            DB::table('car_locations')->truncate();
+        }
+        DB::table('expenses')->truncate();
+        \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
+
         // 1. Roles
         DB::table('roles')->insert([
             ['id' => 1, 'name' => 'super-admin', 'guard_name' => 'web', 'created_at' => $now, 'updated_at' => $now],
@@ -35,11 +65,6 @@ class DatabaseSeeder extends Seeder
             ['id' => 5, 'name' => 'Asep Supir', 'email' => 'asep@siliwangi.com', 'phone' => '081200000005', 'password' => $password, 'status' => 'active', 'created_at' => $now, 'updated_at' => $now],
         ]);
 
-        DB::table('users')->where('id', 3)->update([
-            'identity_number' => '3171234567890001',
-            'address' => 'Jl. Merdeka No 45, Jakarta',
-        ]);
-
         // 3. Model Has Roles
         DB::table('model_has_roles')->insert([
             ['role_id' => 1, 'model_type' => 'App\\Models\\User', 'model_id' => 1],
@@ -49,6 +74,24 @@ class DatabaseSeeder extends Seeder
             ['role_id' => 5, 'model_type' => 'App\\Models\\User', 'model_id' => 5],
         ]);
 
+        // 3.5 Customers
+        DB::table('customers')->insert([
+            [
+                'id' => 1,
+                'user_id' => 3,
+                'name' => 'Budi Customer',
+                'email' => 'budi@gmail.com',
+                'phone' => '081200000003',
+                'nik' => '3171234567890001',
+                'sim_number' => '123456789012',
+                'customer_status' => 'approved',
+                'address' => 'Jl. Merdeka No 45, Jakarta',
+                'is_active' => true,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]
+        ]);
+
         // 4. Stores (formerly Branches)
         DB::table('stores')->insert([
             ['id' => 1, 'name' => 'Store Jakarta Pusat', 'slug' => 'store-jakarta-pusat', 'phone' => '021-1234567', 'email' => 'jkt@siliwangi.com', 'address' => 'Jl. Jend. Sudirman No. 1', 'city' => 'Jakarta Selatan', 'province' => 'DKI Jakarta', 'status' => 1, 'created_at' => $now, 'updated_at' => $now],
@@ -56,17 +99,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // 4.5 Car Brands
-        DB::table('car_brands')->insert([
-            ['id' => 1, 'name' => 'Toyota', 'slug' => 'toyota', 'logo' => null, 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 2, 'name' => 'Honda', 'slug' => 'honda', 'logo' => null, 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 3, 'name' => 'Mitsubishi', 'slug' => 'mitsubishi', 'logo' => null, 'created_at' => $now, 'updated_at' => $now],
-        ]);
+        if (\Illuminate\Support\Facades\Schema::hasTable('car_brands')) {
+            DB::table('car_brands')->insert([
+                ['id' => 1, 'name' => 'Toyota', 'slug' => 'toyota', 'logo' => null, 'created_at' => $now, 'updated_at' => $now],
+                ['id' => 2, 'name' => 'Honda', 'slug' => 'honda', 'logo' => null, 'created_at' => $now, 'updated_at' => $now],
+                ['id' => 3, 'name' => 'Mitsubishi', 'slug' => 'mitsubishi', 'logo' => null, 'created_at' => $now, 'updated_at' => $now],
+            ]);
+        }
 
         // 4.6 Car Types
-        DB::table('car_types')->insert([
-            ['id' => 1, 'name' => 'MPV', 'slug' => 'mpv', 'description' => 'Multi Purpose Family Vehicle', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 2, 'name' => 'SUV', 'slug' => 'suv', 'description' => 'Sport Utility Vehicle', 'created_at' => $now, 'updated_at' => $now],
-        ]);
+        if (\Illuminate\Support\Facades\Schema::hasTable('car_types')) {
+            DB::table('car_types')->insert([
+                ['id' => 1, 'name' => 'MPV', 'slug' => 'mpv', 'description' => 'Multi Purpose Family Vehicle', 'created_at' => $now, 'updated_at' => $now],
+                ['id' => 2, 'name' => 'SUV', 'slug' => 'suv', 'description' => 'Sport Utility Vehicle', 'created_at' => $now, 'updated_at' => $now],
+            ]);
+        }
 
         // 5. Cars (Merged Brand, Type, GPS, Gallery, Maintenances, Inspections)
         DB::table('cars')->insert([
@@ -234,8 +281,8 @@ class DatabaseSeeder extends Seeder
 
         // 10. Bookings
         DB::table('bookings')->insert([
-            ['id' => 1, 'booking_code' => 'TRX-202605-0001', 'user_id' => 3, 'car_id' => 1, 'driver_id' => null, 'store_id' => 1, 'promo_id' => null, 'rental_type' => 'daily', 'pickup_date' => Carbon::now()->subDays(2), 'return_date' => Carbon::now()->addDay(), 'pickup_location' => 'Kantor Pusat', 'return_location' => 'Kantor Pusat', 'total_day' => 3, 'price' => 1050000, 'driver_price' => 0, 'extra_price' => 0, 'late_fee' => 0, 'discount' => 0, 'tax' => 105000, 'grand_total' => 1155000, 'dp_amount' => 1155000, 'remaining_payment' => 0, 'payment_status' => 'paid', 'booking_status' => 'ongoing', 'notes' => 'Tolong cuci bersih sebelum pick up', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 2, 'booking_code' => 'TRX-202605-0002', 'user_id' => 3, 'car_id' => 2, 'driver_id' => 1, 'store_id' => 1, 'promo_id' => 1, 'rental_type' => 'daily', 'pickup_date' => Carbon::now()->addDays(5), 'return_date' => Carbon::now()->addDays(7), 'pickup_location' => 'Bandara Soekarno Hatta', 'return_location' => 'Kantor Pusat', 'total_day' => 2, 'price' => 1500000, 'driver_price' => 300000, 'extra_price' => 0, 'late_fee' => 0, 'discount' => 300000, 'tax' => 150000, 'grand_total' => 1650000, 'dp_amount' => 500000, 'remaining_payment' => 1150000, 'payment_status' => 'partial', 'booking_status' => 'confirmed', 'notes' => 'Jemput di Terminal 3', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 1, 'booking_code' => 'TRX-202605-0001', 'customer_id' => 1, 'car_id' => 1, 'driver_id' => null, 'store_id' => 1, 'promo_id' => null, 'rental_type' => 'daily', 'pickup_date' => Carbon::now()->subDays(2), 'return_date' => Carbon::now()->addDay(), 'pickup_location' => 'Kantor Pusat', 'return_location' => 'Kantor Pusat', 'total_day' => 3, 'price' => 1050000, 'driver_price' => 0, 'extra_price' => 0, 'late_fee' => 0, 'discount' => 0, 'tax' => 105000, 'grand_total' => 1155000, 'dp_amount' => 1155000, 'remaining_payment' => 0, 'payment_status' => 'paid', 'booking_status' => 'ongoing', 'notes' => 'Tolong cuci bersih sebelum pick up', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 2, 'booking_code' => 'TRX-202605-0002', 'customer_id' => 1, 'car_id' => 2, 'driver_id' => 1, 'store_id' => 1, 'promo_id' => 1, 'rental_type' => 'daily', 'pickup_date' => Carbon::now()->addDays(5), 'return_date' => Carbon::now()->addDays(7), 'pickup_location' => 'Bandara Soekarno Hatta', 'return_location' => 'Kantor Pusat', 'total_day' => 2, 'price' => 1500000, 'driver_price' => 300000, 'extra_price' => 0, 'late_fee' => 0, 'discount' => 300000, 'tax' => 150000, 'grand_total' => 1650000, 'dp_amount' => 500000, 'remaining_payment' => 1150000, 'payment_status' => 'partial', 'booking_status' => 'confirmed', 'notes' => 'Jemput di Terminal 3', 'created_at' => $now, 'updated_at' => $now],
         ]);
 
         // 11. Payments
@@ -246,28 +293,34 @@ class DatabaseSeeder extends Seeder
 
         // 12. Reviews
         DB::table('reviews')->insert([
-            ['id' => 1, 'booking_id' => 1, 'user_id' => 3, 'car_id' => 1, 'rating' => 5, 'review' => 'Mobil sangat bersih dan wangi, mesin juga prima!', 'status' => 1, 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 1, 'booking_id' => 1, 'customer_id' => 1, 'car_id' => 1, 'rating' => 5, 'review' => 'Mobil sangat bersih dan wangi, mesin juga prima!', 'status' => 1, 'created_at' => $now, 'updated_at' => $now],
         ]);
 
         // 13. Car Maintenances
-        DB::table('car_maintenances')->insert([
-            ['id' => 1, 'car_id' => 1, 'store_id' => 1, 'start_date' => '2026-05-10', 'end_date' => '2026-05-10', 'maintenance_type' => 'rutin', 'cost' => 350000.00, 'description' => 'Ganti Oli Mesin & Filter Oli', 'status' => 'completed', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 2, 'car_id' => 2, 'store_id' => 1, 'start_date' => '2026-04-15', 'end_date' => '2026-04-15', 'maintenance_type' => 'perbaikan', 'cost' => 1200000.00, 'description' => 'Ganti Kampas Rem & Tune Up', 'status' => 'completed', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 3, 'car_id' => 4, 'store_id' => 2, 'start_date' => '2026-05-14', 'end_date' => '2026-05-20', 'maintenance_type' => 'suspensi', 'cost' => 2500000.00, 'description' => 'Perbaikan Suspensi & Kaki-kaki', 'status' => 'ongoing', 'created_at' => $now, 'updated_at' => $now],
-        ]);
+        if (\Illuminate\Support\Facades\Schema::hasTable('car_maintenances')) {
+            DB::table('car_maintenances')->insert([
+                ['id' => 1, 'car_id' => 1, 'store_id' => 1, 'start_date' => '2026-05-10', 'end_date' => '2026-05-10', 'maintenance_type' => 'rutin', 'cost' => 350000.00, 'description' => 'Ganti Oli Mesin & Filter Oli', 'status' => 'completed', 'created_at' => $now, 'updated_at' => $now],
+                ['id' => 2, 'car_id' => 2, 'store_id' => 1, 'start_date' => '2026-04-15', 'end_date' => '2026-04-15', 'maintenance_type' => 'perbaikan', 'cost' => 1200000.00, 'description' => 'Ganti Kampas Rem & Tune Up', 'status' => 'completed', 'created_at' => $now, 'updated_at' => $now],
+                ['id' => 3, 'car_id' => 4, 'store_id' => 2, 'start_date' => '2026-05-14', 'end_date' => '2026-05-20', 'maintenance_type' => 'suspensi', 'cost' => 2500000.00, 'description' => 'Perbaikan Suspensi & Kaki-kaki', 'status' => 'ongoing', 'created_at' => $now, 'updated_at' => $now],
+            ]);
+        }
 
         // 14. Car Inspections
-        DB::table('car_inspections')->insert([
-            ['id' => 1, 'booking_id' => 1, 'type' => 'return', 'mileage' => 15000, 'fuel_level' => 'full', 'checklist' => json_encode(['body' => 'ok', 'engine' => 'ok', 'interior' => 'ok']), 'notes' => 'Mobil dalam kondisi sangat baik.', 'inspector_id' => 1, 'created_at' => $now, 'updated_at' => $now],
-        ]);
+        if (\Illuminate\Support\Facades\Schema::hasTable('car_inspections')) {
+            DB::table('car_inspections')->insert([
+                ['id' => 1, 'booking_id' => 1, 'type' => 'return', 'mileage' => 15000, 'fuel_level' => 'full', 'checklist' => json_encode(['body' => 'ok', 'engine' => 'ok', 'interior' => 'ok']), 'notes' => 'Mobil dalam kondisi sangat baik.', 'inspector_id' => 1, 'created_at' => $now, 'updated_at' => $now],
+            ]);
+        }
 
         // 15. Car Locations
-        DB::table('car_locations')->insert([
-            ['id' => 1, 'car_id' => 1, 'latitude' => -6.20880000, 'longitude' => 106.84560000, 'speed' => 0.00, 'address' => 'Pusat Jakarta', 'raw_data' => null, 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 2, 'car_id' => 2, 'latitude' => -6.17510000, 'longitude' => 106.86500000, 'speed' => 45.50, 'address' => 'Kecamatan Senen, Jakarta Pusat', 'raw_data' => null, 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 3, 'car_id' => 3, 'latitude' => -6.91750000, 'longitude' => 107.61910000, 'speed' => 0.00, 'address' => 'Jalan Asia Afrika, Bandung', 'raw_data' => null, 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 4, 'car_id' => 4, 'latitude' => -6.90340000, 'longitude' => 107.61870000, 'speed' => 0.00, 'address' => 'Perbengkelan Cabang Bandung', 'raw_data' => null, 'created_at' => $now, 'updated_at' => $now],
-        ]);
+        if (\Illuminate\Support\Facades\Schema::hasTable('car_locations')) {
+            DB::table('car_locations')->insert([
+                ['id' => 1, 'car_id' => 1, 'latitude' => -6.20880000, 'longitude' => 106.84560000, 'speed' => 0.00, 'address' => 'Pusat Jakarta', 'raw_data' => null, 'created_at' => $now, 'updated_at' => $now],
+                ['id' => 2, 'car_id' => 2, 'latitude' => -6.17510000, 'longitude' => 106.86500000, 'speed' => 45.50, 'address' => 'Kecamatan Senen, Jakarta Pusat', 'raw_data' => null, 'created_at' => $now, 'updated_at' => $now],
+                ['id' => 3, 'car_id' => 3, 'latitude' => -6.91750000, 'longitude' => 107.61910000, 'speed' => 0.00, 'address' => 'Jalan Asia Afrika, Bandung', 'raw_data' => null, 'created_at' => $now, 'updated_at' => $now],
+                ['id' => 4, 'car_id' => 4, 'latitude' => -6.90340000, 'longitude' => 107.61870000, 'speed' => 0.00, 'address' => 'Perbengkelan Cabang Bandung', 'raw_data' => null, 'created_at' => $now, 'updated_at' => $now],
+            ]);
+        }
 
         // 16. Expenses
         DB::table('expenses')->insert([

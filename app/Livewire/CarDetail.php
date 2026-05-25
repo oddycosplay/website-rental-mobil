@@ -45,7 +45,7 @@ class CarDetail extends Component
     public function mount(string $slug)
     {
         $this->car = \Illuminate\Support\Facades\Cache::remember("car_detail_{$slug}", 3600, function() use ($slug) {
-            return Car::where('slug', $slug)->firstOrFail();
+            return Car::where('slug', '=', $slug, 'and')->firstOrFail();
         });
         $this->pickup_date = now()->format('Y-m-d');
         $this->return_date = now()->addDays(2)->format('Y-m-d');
@@ -57,7 +57,10 @@ class CarDetail extends Component
             $this->email = $user->email;
             $this->phone = $user->phone;
             
-            $this->identity_number = $user->identity_number;
+            $customer = $user->customer;
+            if ($customer) {
+                $this->identity_number = $customer->nik;
+            }
         }
     }
 
@@ -113,12 +116,28 @@ class CarDetail extends Component
             Auth::login($user);
         }
 
-        // Update identity details
+        // Update user basics
         $user->update([
             'name' => $this->name,
             'phone' => $this->phone,
-            'identity_number' => $this->identity_number,
-            'identity_photo' => $photoPath,
+        ]);
+
+        // Find or create Customer profile
+        $customer = \App\Models\Customer::firstOrCreate(
+            ['user_id' => $user->id],
+            [
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+            ]
+        );
+
+        $customer->update([
+            'name' => $this->name,
+            'phone' => $this->phone,
+            'nik' => $this->identity_number,
+            'ktp_path' => $photoPath,
+            'ktp_image' => $photoPath,
         ]);
 
         // 3. Create Booking
@@ -129,7 +148,7 @@ class CarDetail extends Component
 
         $booking = Booking::create([
             'booking_code' => $bookingCode,
-            'user_id' => $user->id,
+            'customer_id' => $customer->id,
             'car_id' => $this->car->id,
             'store_id' => $this->car->store_id,
             'rental_type' => 'daily',

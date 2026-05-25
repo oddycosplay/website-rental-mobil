@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Store;
 use App\Models\Booking;
 use App\Models\Car;
+use App\Models\Customer;
 use App\Models\Promo;
 use App\Models\User;
 use Carbon\Carbon;
@@ -87,9 +88,9 @@ class Checkout extends Component
                 $this->redirect(route('cars.index'));
                 return;
             }
-            $this->cars = Car::whereIn('id', array_keys($cartItems))->get();
+            $this->cars = Car::whereIn('id', array_keys($cartItems), 'and', false)->get();
         } elseif ($car) {
-            $singleCar = Car::where('slug', $car)->first();
+            $singleCar = Car::where('slug', '=', $car, 'and')->first(['*']);
             if (!$singleCar) {
                 $this->redirect(route('cars.index'));
                 return;
@@ -108,16 +109,20 @@ class Checkout extends Component
             $this->name  = $user->name;
             $this->email = $user->email;
             $this->phone      = $user->phone;
-            $this->nik        = $user->nik;
-            $this->sim_number = $user->sim_number;
-            $this->address    = $user->address;
+            
+            $customer = $user->customer;
+            if ($customer) {
+                $this->nik        = $customer->nik;
+                $this->sim_number = $customer->sim_number;
+                $this->address    = $customer->address;
+            }
         }
 
         $this->pickup_date = now()->addDay()->format('Y-m-d');
         $this->return_date = now()->addDays(2)->format('Y-m-d');
         
         // Pre-select first store
-        $firstBranch = Store::first();
+        $firstBranch = Store::first(['*']);
         if ($firstBranch) {
             $this->branch_id = $firstBranch->id;
         }
@@ -145,7 +150,7 @@ class Checkout extends Component
             $unavailableCars = $this->getUnavailableCars();
             if ($unavailableCars->isNotEmpty()) {
                 $names = $unavailableCars->pluck('car_name')->join(', ');
-                session()->flash('error', "Sorry, the following vehicle(s) ({$names}) are already booked for your selected dates.");
+                \Illuminate\Support\Facades\Session::flash('error', "Sorry, the following vehicle(s) ({$names}) are already booked for your selected dates.");
                 return;
             }
 
@@ -194,7 +199,7 @@ class Checkout extends Component
             if ($this->with_driver) {
                 $availableDriver = \App\Models\Driver::availableForDates($this->pickup_date, $this->return_date)->first();
                 if (!$availableDriver) {
-                    session()->flash('error', "Sorry, there are no drivers available for your selected dates.");
+                    \Illuminate\Support\Facades\Session::flash('error', "Sorry, there are no drivers available for your selected dates.");
                     return;
                 }
             }
@@ -208,8 +213,8 @@ class Checkout extends Component
     private function getUnavailableCars()
     {
         return $this->cars->filter(function ($car) {
-            return Booking::where('car_id', $car->id)
-                ->whereNotIn('booking_status', ['cancelled', 'expired'])
+            return Booking::where('car_id', '=', $car->id, 'and')
+                ->whereNotIn('booking_status', ['cancelled', 'expired'], 'and')
                 ->where(function ($query) {
                     $query->whereBetween('pickup_date', [$this->pickup_date, $this->return_date])
                         ->orWhereBetween('return_date', [$this->pickup_date, $this->return_date])
@@ -254,11 +259,11 @@ class Checkout extends Component
             return;
         }
 
-        $promo = Promo::where('code', strtoupper($this->promo_code))
-            ->where('status', true)
+        $promo = Promo::where('code', '=', strtoupper($this->promo_code), 'and')
+            ->where('status', '=', true, 'and')
             ->where('start_date', '<=', now()->toDateString())
             ->where('end_date', '>=', now()->toDateString())
-            ->first();
+            ->first(['*']);
 
         if (!$promo) {
             $this->promo_error = 'Invalid or expired promo code.';
@@ -342,15 +347,14 @@ class Checkout extends Component
 
     public function submit()
     {
-        // 1. Cari atau buat User
+        // 1. Cari atau buat User (auth account)
         if (!Auth::check()) {
-            // Cek user berdasarkan email
             $user = User::firstOrCreate(
                 ['email' => $this->email],
                 [
                     'name'     => $this->name,
                     'phone'    => $this->phone,
-                    'password' => Hash::make($this->phone), // Default password = nomor HP
+                    'password' => Hash::make($this->phone),
                     'status'   => 'active',
                     'email_verified_at' => now(),
                 ]
@@ -361,37 +365,46 @@ class Checkout extends Component
             $user = Auth::user();
         }
 
-        // 2. Update data terkini di user
+        // Update data dasar user (kolom yang ada di tabel users)
         $user->update([
-            'name'    => $this->name,
-            'email'   => $this->email,
-            'phone'   => $this->phone,
-            'nik'     => $this->nik,
-            'sim_number' => $this->sim_number,
-            'address' => $this->address,
+            'name'  => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
         ]);
 
-        // Upload dokumen utama
+        // 2. Cari atau buat Customer profile (tabel customers, FK: user_id)
+        $customer = Customer::firstOrCreate(
+            ['user_id' => $user->id],
+            [
+                'name'  => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+            ]
+        );
+
+        // Update data customer di tabel customers
+        $customer->update([
+            'name'       => $this->name,
+            'email'      => $this->email,
+            'phone'      => $this->phone,
+            'nik'        => $this->nik,
+            'sim_number' => $this->sim_number,
+            'address'    => $this->address,
+        ]);
+
+        // Upload dokumen ke customers
         if ($this->ktp_image) {
-            $user->ktp_image = $this->ktp_image->store('customers/ktp', 'public');
+            $customer->ktp_image = $this->ktp_image->store('customers/ktp', 'public');
+            $customer->ktp_path  = $customer->ktp_image;
         }
         if ($this->sim_image) {
-            $user->sim_image = $this->sim_image->store('customers/sim', 'public');
+            $customer->sim_image = $this->sim_image->store('customers/sim', 'public');
+            $customer->sim_path  = $customer->sim_image;
         }
-        // Upload dokumen opsional
         if ($this->kk_image) {
-            $user->kk_image = $this->kk_image->store('customers/kk', 'public');
+            $customer->kk_photo = $this->kk_image->store('customers/kk', 'public');
         }
-        if ($this->npwp_image) {
-            $user->npwp_image = $this->npwp_image->store('customers/npwp', 'public');
-        }
-        if ($this->pelajar_image) {
-            $user->pelajar_image = $this->pelajar_image->store('customers/pelajar', 'public');
-        }
-        if ($this->mahasiswa_image) {
-            $user->mahasiswa_image = $this->mahasiswa_image->store('customers/mahasiswa', 'public');
-        }
-        $user->save();
+        $customer->save();
 
         // 3. Ambil promo jika ada
         $promo    = null;
@@ -399,10 +412,10 @@ class Checkout extends Component
         $discount = $this->promo_discount;
 
         if (!empty($this->promo_code)) {
-            $promo = Promo::where('code', strtoupper($this->promo_code))->first();
+            $promo = Promo::where('code', '=', strtoupper($this->promo_code), 'and')->first(['*']);
             if ($promo) {
                 $promoId = $promo->id;
-                $promo->increment('used');
+                $promo->increment('used', 1);
             }
         }
 
@@ -416,7 +429,7 @@ class Checkout extends Component
 
         $booking = Booking::create([
             'booking_code'    => $bookingCode,
-            'user_id'         => $user->id,
+            'customer_id'     => $customer->id,
             'car_id'          => $this->cars->first()->id, // Primary car
             'store_id'        => $this->branch_id,
             'driver_id'       => $this->with_driver ? \App\Models\Driver::availableForDates($this->pickup_date, $this->return_date)->first()?->id : null,
@@ -443,18 +456,18 @@ class Checkout extends Component
             'booking_status'  => 'pending',
             'notes'           => $finalNotes,
             'expired_at'      => now()->addHours(24),
-            'guest_token'     => session()->getId() . '_' . Str::random(10),
+            'guest_token'     => \Illuminate\Support\Facades\Session::getId() . '_' . Str::random(10),
             'guest_name'      => $this->name,
             'guest_email'     => $this->email,
             'guest_phone'     => $this->phone,
-            'ktp_path'        => $user->ktp_image ?? null,
-            'sim_path'        => $user->sim_image ?? null,
+            'ktp_path'        => $customer->ktp_path ?? null,
+            'sim_path'        => $customer->sim_path ?? null,
         ]);
 
         // (Booking items removed as consolidated to single car bookings)
 
         // Clear cart if booking from cart
-        if (request()->has('from_cart') && request('from_cart') == 'true') {
+        if (\Illuminate\Support\Facades\Request::has('from_cart') && \Illuminate\Support\Facades\Request::input('from_cart') == 'true') {
             app(\App\Services\CartService::class)->clear();
         }
 
@@ -507,15 +520,15 @@ class Checkout extends Component
     private function existingCustomerHasDocs(): bool
     {
         if (!Auth::check()) return false;
-        $user = Auth::user();
-        return $user && $user->ktp_image && $user->sim_image;
+        $customer = Customer::where('user_id', '=', Auth::id(), 'and')->first(['*']);
+        return $customer && $customer->ktp_image && $customer->sim_image;
     }
 
     #[Layout('layouts.app')]
     public function render()
     {
         return view('livewire.checkout', [
-            'branches' => Store::orderBy('name')->get(),
+            'branches' => Store::orderBy('name', 'asc')->get(),
         ]);
     }
 }

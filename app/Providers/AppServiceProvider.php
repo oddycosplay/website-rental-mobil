@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\View;
 use App\Models\Booking;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -29,10 +30,15 @@ class AppServiceProvider extends ServiceProvider
             $unpaidBookings = collect();
             if (auth()->check()) {
                 if (auth()->user()->hasRole('customer')) {
-                    $unpaidBookings = Booking::query()->where('user_id', auth()->id())
-                        ->where('payment_status', 'unpaid')
-                        ->with('car')
-                        ->get();
+                    // bookings.customer_id → customers.id, bukan users.id
+                    $customer = Customer::where('user_id', '=', auth()->id(), 'and')->first(['*']);
+                    if ($customer) {
+                        $unpaidBookings = Booking::query()
+                            ->where('customer_id', $customer->id)
+                            ->where('payment_status', 'unpaid')
+                            ->with('car')
+                            ->get();
+                    }
                 } else {
                     $unpaidBookings = Booking::query()->where('payment_status', 'unpaid')
                         ->with('car')
@@ -43,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Explicitly set Livewire routes with subdirectory prefix only when requested under Laragon subdirectory
-        if (str_contains(request()->getRequestUri(), '/rental_project/public') || str_contains(request()->getBaseUrl(), '/rental_project')) {
+        if (str_contains(\Illuminate\Support\Facades\Request::getRequestUri(), '/rental_project/public') || str_contains(\Illuminate\Support\Facades\Request::getBaseUrl(), '/rental_project')) {
             \Livewire\Livewire::setUpdateRoute(function ($handle) {
                 return Route::post('/rental_project/public/livewire/update', $handle);
             });

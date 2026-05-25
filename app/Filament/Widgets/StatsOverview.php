@@ -1,9 +1,9 @@
 <?php
  
 namespace App\Filament\Widgets;
- 
+
 use Filament\Facades\Filament;
- 
+
 use App\Models\Booking;
 use App\Models\Car;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -33,8 +33,8 @@ class StatsOverview extends BaseWidget
                 ->sum('grand_total');
         }
  
-        $onRentCount = Car::query()->when(Filament::getTenant(), fn($q, $tenant) => $q->where('store_id', $tenant->id))->where('status', 'on_rent')->count();
-        $pendingBookings = Booking::query()->when(Filament::getTenant(), fn($q, $tenant) => $q->where('bookings.store_id', $tenant->id))->where('status', 'pending')->count();
+        $onRentCount = Car::query()->when(Filament::getTenant(), fn($q, $tenant) => $q->where('store_id', $tenant->id))->where('status', 'rented')->count();
+        $pendingBookings = Booking::query()->when(Filament::getTenant(), fn($q, $tenant) => $q->where('bookings.store_id', $tenant->id))->where('booking_status', 'pending')->count();
         $todayReturns = Booking::query()->when(Filament::getTenant(), fn($q, $tenant) => $q->where('bookings.store_id', $tenant->id))
             ->whereDate('return_date', now())
             ->whereIn('booking_status', ['confirmed', 'ongoing'])

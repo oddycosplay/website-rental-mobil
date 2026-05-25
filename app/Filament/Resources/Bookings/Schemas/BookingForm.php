@@ -117,9 +117,9 @@ class BookingForm
                                     ->searchable()
                                     ->preload(),
 
-                                Select::make('user_id')
+                                Select::make('customer_id')
                                     ->label('Pilih Pelanggan')
-                                    ->relationship('user', 'name', fn ($query) => $query->whereHas('roles', fn ($q) => $q->where('name', 'customer')))
+                                    ->relationship('customer', 'name')
                                     ->required()
                                     ->searchable()
                                     ->preload(),
