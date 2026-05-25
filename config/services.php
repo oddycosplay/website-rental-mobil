@@ -38,6 +38,7 @@ return [
     'fonnte' => [
         'token' => env('FONNTE_TOKEN'),
         'enabled' => env('WHATSAPP_ENABLED', false),
+        'admin_phone' => env('WA_ADMIN', '628973816530'),
     ],
 
 ];

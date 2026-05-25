@@ -492,15 +492,15 @@ class Checkout extends Component
 
         // 6. WhatsApp Notification (Queued)
         try {
-            $msg = "Hello *{$user->name}*,\n\nThank you for booking with *Siliwangi Rental*.\n\n" .
-                   "Booking Code: *#{$booking->booking_code}*\n" .
-                   "Vehicle: {$this->car_names}\n" .
-                   "Total Amount: *Rp " . number_format($booking->grand_total, 0, ',', '.') . "*\n\n" .
-                   "Please complete your payment via the link below:\n" .
-                   route('invoice', $booking->booking_code) . "\n\n" .
-                   "Thank you!";
-            
-            \App\Jobs\SendWhatsAppMessage::dispatch($user->phone, $msg);
+            $msg = "Hello *{$this->name}*,\n\nThank you for booking with *Siliwangi Rental*.\n\n" .
+                "Booking Code: *#{$booking->booking_code}*\n" .
+                "Vehicle: {$this->car_names}\n" .
+                "Total Amount: *Rp " . number_format($booking->grand_total, 0, ',', '.') . "*\n\n" .
+                "Please complete your payment via the link below:\n" .
+                route('invoice', $booking->booking_code) . "\n\n" .
+                "Thank you!";
+    
+            \App\Jobs\SendWhatsAppMessage::dispatch($this->phone, $msg);
         } catch (\Exception $e) {
             \Illuminate\Support\Facades\Log::error('WA Notification Queue Error: ' . $e->getMessage());
         }
@@ -509,7 +509,7 @@ class Checkout extends Component
         $this->is_finished = true;
 
         if (!Auth::check()) {
-            $adminWa = env('WA_ADMIN', '6281234567890');
+            $adminWa = config('services.fonnte.admin_phone', '628973816530');
             $text = urlencode("Hello Siliwangi Rental,\nI have just made a vehicle booking.\nBooking Code: *#{$booking->booking_code}*\nVehicle: {$this->car_names}\nTotal: Rp " . number_format($booking->grand_total, 0, ',', '.') . "\nInvoice Link: " . route('invoice', $booking->booking_code) . "\nPlease confirm my booking.");
             $this->wa_url = "https://wa.me/{$adminWa}?text={$text}";
         }

@@ -259,6 +259,10 @@
                         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px] flex items-center justify-center">
                             <span class="px-6 py-2 rounded-full bg-red-500 text-white text-xs font-black uppercase tracking-widest shadow-xl">Booked Out</span>
                         </div>
+                    @elseif($car->status == 'maintenance')
+                        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px] flex items-center justify-center">
+                            <span class="px-6 py-2 rounded-full bg-amber-500 text-white text-xs font-black uppercase tracking-widest shadow-xl">Maintenance</span>
+                        </div>
                     @endif
                 </div>
                 
@@ -301,9 +305,9 @@
                             </div>
                             <div class="text-right">
                                 <span class="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-1">Status</span>
-                                <span class="text-[10px] font-bold {{ $car->status == 'available' ? 'text-emerald-500' : 'text-red-500' }} uppercase tracking-widest">
-                                    <i class="fas {{ $car->status == 'available' ? 'fa-check-circle' : 'fa-times-circle' }} mr-1"></i>
-                                    {{ $car->status == 'available' ? 'Tersedia' : 'Disewa' }}
+                                <span class="text-[10px] font-bold {{ $car->status == 'available' ? 'text-emerald-500' : ($car->status == 'rented' ? 'text-red-500' : 'text-amber-500') }} uppercase tracking-widest">
+                                    <i class="fas {{ $car->status == 'available' ? 'fa-check-circle' : ($car->status == 'rented' ? 'fa-times-circle' : 'fa-wrench') }} mr-1"></i>
+                                    {{ $car->status == 'available' ? 'Tersedia' : ($car->status == 'rented' ? 'Disewa' : 'Perbaikan') }}
                                 </span>
                             </div>
                         </div>
@@ -315,6 +319,8 @@
                             
                             @if($car->status == 'rented')
                                 <button disabled class="w-full py-3.5 rounded-2xl bg-slate-800 text-slate-600 font-black text-xs cursor-not-allowed uppercase tracking-widest">Disewa</button>
+                            @elseif($car->status == 'maintenance')
+                                <button disabled class="w-full py-3.5 rounded-2xl bg-slate-800 text-slate-600 font-black text-xs cursor-not-allowed uppercase tracking-widest">Perbaikan</button>
                             @else
                                 <a href="{{ route('checkout', $car->slug) }}" class="w-full py-3.5 rounded-2xl bg-gold text-slate-900 font-black text-xs hover:scale-105 active:scale-95 transition-all shadow-lg shadow-gold/20 flex items-center justify-center gap-2 uppercase tracking-widest">
                                     <i class="fas fa-key"></i> Booking

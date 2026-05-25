@@ -12,7 +12,6 @@ class HomeController extends Controller
     public function index()
     {
         $cars = Car::query()
-            ->where('is_available', true)
             ->orderByRaw("FIELD(status, 'available', 'rented', 'maintenance')")
             ->orderBy('daily_price', 'asc')
             ->get();
