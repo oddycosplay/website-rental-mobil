@@ -105,10 +105,8 @@ return new class extends Migration
 
             // Drop old user_id column
             Schema::table('bookings', function (Blueprint $table) {
-                if (Schema::hasColumn('bookings', 'user_id')) {
-                    if (DB::getDriverName() !== 'sqlite') {
-                        $table->dropForeign(['user_id']);
-                    }
+                if (DB::getDriverName() !== 'sqlite' && Schema::hasColumn('bookings', 'user_id')) {
+                    $table->dropForeign(['user_id']);
                     $table->dropColumn('user_id');
                 }
             });
@@ -134,31 +132,31 @@ return new class extends Migration
 
             // Drop old user_id column
             Schema::table('reviews', function (Blueprint $table) {
-                if (Schema::hasColumn('reviews', 'user_id')) {
-                    if (DB::getDriverName() !== 'sqlite') {
-                        $table->dropForeign(['user_id']);
-                    }
+                if (DB::getDriverName() !== 'sqlite' && Schema::hasColumn('reviews', 'user_id')) {
+                    $table->dropForeign(['user_id']);
                     $table->dropColumn('user_id');
                 }
             });
         }
 
         // 5. Drop customer-specific columns from users table
-        Schema::table('users', function (Blueprint $table) {
-            $columnsToDrop = [
-                'nik', 'sim_number', 'ktp_image', 'sim_image',
-                'ktp_path', 'sim_path', 'no_kk', 'kk_photo',
-                'nip_nim', 'id_card_photo', 'pekerjaan', 'customer_status',
-                'address', 'date_of_birth', 'identity_number', 'identity_photo',
-                'kk_image', 'npwp_image', 'pelajar_image', 'mahasiswa_image'
-            ];
+        if (DB::getDriverName() !== 'sqlite') {
+            Schema::table('users', function (Blueprint $table) {
+                $columnsToDrop = [
+                    'nik', 'sim_number', 'ktp_image', 'sim_image',
+                    'ktp_path', 'sim_path', 'no_kk', 'kk_photo',
+                    'nip_nim', 'id_card_photo', 'pekerjaan', 'customer_status',
+                    'address', 'date_of_birth', 'identity_number', 'identity_photo',
+                    'kk_image', 'npwp_image', 'pelajar_image', 'mahasiswa_image'
+                ];
 
-            foreach ($columnsToDrop as $column) {
-                if (Schema::hasColumn('users', $column)) {
-                    $table->dropColumn($column);
+                foreach ($columnsToDrop as $column) {
+                    if (Schema::hasColumn('users', $column)) {
+                        $table->dropColumn($column);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         // Re-enable foreign key checks
         if (DB::getDriverName() === 'sqlite') {

@@ -1,6 +1,5 @@
-@section('title', 'Checkout Booking – Siliwangi Rental')
-
 <div class="pt-28 pb-20 bg-[#0A0F1C] min-h-screen text-slate-200 font-poppins selection:bg-gold/30">
+    @section('title', 'Checkout Booking – Siliwangi Rental')
     {{-- Background Accents --}}
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
         <div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-gold/5 rounded-full blur-[120px]"></div>
@@ -783,24 +782,23 @@
             </div>
             @endif
         </aside>
+        @push('scripts')
+        <script>
+            document.addEventListener('livewire:navigated', () => {
+                Livewire.on('orderFinalized', () => {
+                    confetti({
+                        particleCount: 200,
+                        spread: 100,
+                        origin: {
+                            y: 0.6
+                        },
+                        colors: ['#D4AF37', '#ffffff', '#10B981'],
+                        ticks: 300,
+                        gravity: 1.2
+                    });
+                });
+            });
+        </script>
+        @endpush
     </div>
 </div>
-
-@push('scripts')
-<script>
-    document.addEventListener('livewire:navigated', () => {
-        Livewire.on('orderFinalized', () => {
-            confetti({
-                particleCount: 200,
-                spread: 100,
-                origin: {
-                    y: 0.6
-                },
-                colors: ['#D4AF37', '#ffffff', '#10B981'],
-                ticks: 300,
-                gravity: 1.2
-            });
-        });
-    });
-</script>
-@endpush

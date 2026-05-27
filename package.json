@@ -20,6 +20,8 @@
         "vite": "^7.0.7"
     },
     "dependencies": {
-        "startbootstrap-sb-admin": "^7.0.7"
+        "@vitejs/plugin-vue": "^6.0.7",
+        "startbootstrap-sb-admin": "^7.0.7",
+        "vue": "^3.5.34"
     }
 }

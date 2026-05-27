@@ -148,7 +148,7 @@ return new class extends Migration
 
             // Drop customer_id
             Schema::table('bookings', function (Blueprint $table) {
-                if (Schema::hasColumn('bookings', 'customer_id')) {
+                if (DB::getDriverName() !== 'sqlite' && Schema::hasColumn('bookings', 'customer_id')) {
                     $table->dropColumn('customer_id');
                 }
             });
@@ -181,7 +181,7 @@ return new class extends Migration
 
             // Drop customer_id
             Schema::table('reviews', function (Blueprint $table) {
-                if (Schema::hasColumn('reviews', 'customer_id')) {
+                if (DB::getDriverName() !== 'sqlite' && Schema::hasColumn('reviews', 'customer_id')) {
                     $table->dropColumn('customer_id');
                 }
             });
@@ -225,7 +225,7 @@ return new class extends Migration
         // 4c. cars stock removal
         if (Schema::hasTable('cars')) {
             Schema::table('cars', function (Blueprint $table) {
-                if (Schema::hasColumn('cars', 'stock')) {
+                if (DB::getDriverName() !== 'sqlite' && Schema::hasColumn('cars', 'stock')) {
                     $table->dropColumn('stock');
                 }
             });

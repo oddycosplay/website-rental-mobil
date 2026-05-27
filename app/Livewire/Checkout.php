@@ -473,7 +473,7 @@ class Checkout extends Component
 
         // 5. Generate Midtrans Snap Token
         try {
-            $midtrans = new \App\Services\MidtransService();
+            $midtrans = app(\App\Services\MidtransService::class);
             $snapToken = $midtrans->getSnapToken($booking);
 
             \App\Models\Payment::create([

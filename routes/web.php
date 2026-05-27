@@ -56,6 +56,10 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () 
         Route::get('/tracking', fn() => view('admin.tracking.index'))->name('tracking.index');
         Route::resource('bookings', \App\Http\Controllers\Admin\BookingController::class);
         Route::resource('drivers', \App\Http\Controllers\Admin\DriverController::class);
+        Route::resource('maintenances', \App\Http\Controllers\Admin\MaintenanceController::class);
+        Route::get('/car-inspections', fn() => view('admin.operational.inspections.index'))->name('car-inspections.index');
+        Route::get('/car-brands', fn() => redirect()->route('admin.cars.index'))->name('car-brands.index');
+        Route::get('/car-types', fn() => redirect()->route('admin.cars.index'))->name('car-types.index');
         Route::get('/customers', [\App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('customers.index');
         Route::get('/customers/{customer}', [\App\Http\Controllers\Admin\CustomerController::class, 'show'])->name('customers.show');
 
