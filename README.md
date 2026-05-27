@@ -134,7 +134,7 @@ Anggota Tim **[sistem informasi - 06SIFE004]**:
 **[Sicilia] - [231011700931] ([Peran : QA Engineer])**
 **Dosen Pembimbing: [Salman Farizy, S.Kom, M.Kom.] [NIDN: 0318116908]**
 
-**Terima kasih kepada Dosen Pembimbing [Salman Farizy, S.Kom, M.Kom.] dan pihak Siliwangi Rental [Supandi] atas bimbingan dan dukungannya!**
+**Terima kasih kepada Dosen Pembimbing [Salman Farizy, S.Kom, M.Kom.] dan pihak Siliwangi Rental [Supandi] atas bimbingan dan dukungannya dan**
 **Terima kasih kepada seluruh tim pengembangan atas dedikasi dan kerja keras dalam merampungkan fase inisialisasi hingga rilis stabil perdana ini!**
 
 ## 🔒 Lisensi & Hak Cipta
