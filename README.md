@@ -125,7 +125,8 @@ Aplikasi kini dapat diakses melalui browser Anda di tautan: **`http://127.0.0.1:
 ---
 
 🎓 Tim Pengembang & Kerja Praktek (KP)
-Proyek ini dikembangkan sebagai bagian dari program Kerja Praktek (KP) mahasiswa [Universitas Pamulang].
+Proyek ini dikembangkan sebagai bagian dari program Kerja Praktek (KP) 
+**mahasiswa [Universitas Pamulang]**.
 
 Anggota Tim **[sistem informasi - 06SIFE004]**:
 **[muhammad oddy rizky] - [231011700231] ([Peran : Lead Developer, UI/UX Designer])**
