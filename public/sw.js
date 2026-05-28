@@ -4,7 +4,7 @@ const ASSETS_TO_CACHE = [
     '/offline',
     '/resources/css/app.css',
     '/resources/js/app.js',
-    '/images/logo perusahaan.jpeg',
+    '/images/logo-perusahaan.jpeg',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
     'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js',
     'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js',
