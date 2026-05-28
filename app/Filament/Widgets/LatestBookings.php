@@ -29,7 +29,7 @@ class LatestBookings extends BaseWidget
             ->headerActions([
                 Tables\Actions\Action::make('view_all')
                     ->label('Lihat Semua')
-                    ->url(fn() => route('filament.admin.resources.bookings.bookings.index'))
+                    ->url(fn() => BookingResource::getUrl('index'))
                     ->icon('heroicon-m-arrow-right')
                     ->size('sm')
                     ->color('gray'),
@@ -90,7 +90,7 @@ class LatestBookings extends BaseWidget
                 Tables\Actions\Action::make('view')
                     ->icon('heroicon-m-eye')
                     ->iconButton()
-                    ->url(fn($record) => route('filament.admin.resources.bookings.bookings.view', $record)),
+                    ->url(fn($record) => BookingResource::getUrl('view', ['record' => $record])),
             ]);
     }
 }
