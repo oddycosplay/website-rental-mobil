@@ -124,6 +124,19 @@ Aplikasi kini dapat diakses melalui browser Anda di tautan: **`http://127.0.0.1:
 
 ---
 
+🎓 Tim Pengembang & Kerja Praktek (KP)
+Proyek ini dikembangkan sebagai bagian dari program Kerja Praktek (KP) 
+**mahasiswa [Universitas Pamulang]**.
+
+Anggota Tim **[sistem informasi - 06SIFE004]**:
+**[muhammad oddy rizky] - [231011700231] ([Peran : Lead Developer, UI/UX Designer])**
+**[Febriyanti Sandrina] - [231011700214] ([Peran : Bisnis analyst])**
+**[Sicilia] - [231011700931] ([Peran : QA Engineer])**
+**Dosen Pembimbing: [Salman Farizy, S.Kom, M.Kom.] [NIDN: 0318116908]**
+
+**Terima kasih kepada Dosen Pembimbing [Salman Farizy, S.Kom, M.Kom.] dan pihak Siliwangi Rental [Supandi] atas bimbingan dan dukungannya dan**
+**Terima kasih kepada seluruh tim pengembangan atas dedikasi dan kerja keras dalam merampungkan fase inisialisasi hingga rilis stabil perdana ini!**
+
 ## 🔒 Lisensi & Hak Cipta
 
 Hak Cipta © 2026 **Siliwangi Rental**. Seluruh hak dilindungi undang-undang. Sistem ini dilisensikan secara proprietary untuk penggunaan operasional internal Siliwangi Rental.
