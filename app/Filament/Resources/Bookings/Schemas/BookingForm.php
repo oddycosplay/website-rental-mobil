@@ -13,7 +13,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use App\Models\Driver;
-use App\Models\Booking;
+
 
 class BookingForm
 {
@@ -46,6 +46,7 @@ class BookingForm
                                                 'none' => 'Ambil Sendiri di Garasi',
                                                 'standard' => 'Diantar ke Lokasi (Radius 10km+)',
                                                 'airport' => 'Diantar ke Bandara (Airport)',
+                                                'grab_gojek' => 'Kirim via Ojek Online (Grab/Gojek/dll)',
                                             ])
                                             ->default('none')
                                             ->native(false)
@@ -56,6 +57,7 @@ class BookingForm
                                                 'none' => 'Kembalikan Sendiri ke Garasi',
                                                 'standard' => 'Dijemput di Lokasi (Radius 10km+)',
                                                 'airport' => 'Dijemput di Bandara (Airport)',
+                                                'grab_gojek' => 'Dijemput via Ojek Online (Grab/Gojek/dll)',
                                             ])
                                             ->default('none')
                                             ->native(false)
@@ -95,6 +97,16 @@ class BookingForm
                                     ->required()
                                     ->native(false),
 
+                                Select::make('rental_category')
+                                    ->label('Kategori Rental')
+                                    ->options([
+                                        'pribadi' => 'Pribadi',
+                                        'perusahaan' => 'Perusahaan',
+                                    ])
+                                    ->default('pribadi')
+                                    ->required()
+                                    ->native(false),
+
                                 Select::make('rental_type')
                                     ->label('Tipe Rental')
                                     ->options([
@@ -117,31 +129,72 @@ class BookingForm
                                     ->searchable()
                                     ->preload(),
 
+                                Toggle::make('is_new_customer')
+                                    ->label('Kustomer Baru (New User)')
+                                    ->live()
+                                    ->helperText('Aktifkan untuk mendaftarkan kustomer baru secara langsung'),
+
                                 Select::make('customer_id')
                                     ->label('Pilih Pelanggan')
                                     ->relationship('customer', 'name')
-                                    ->required()
                                     ->searchable()
-                                    ->preload(),
+                                    ->preload()
+                                    ->hidden(fn(Get $get) => $get('is_new_customer'))
+                                    ->required(fn(Get $get) => !$get('is_new_customer')),
+
+                                Grid::make(2)
+                                    ->schema([
+                                        TextInput::make('new_customer_name')
+                                            ->label('Nama Kustomer Baru')
+                                            ->required(fn(Get $get) => $get('is_new_customer')),
+                                        TextInput::make('new_customer_email')
+                                            ->label('Email Kustomer Baru')
+                                            ->email()
+                                            ->required(fn(Get $get) => $get('is_new_customer')),
+                                        TextInput::make('new_customer_phone')
+                                            ->label('No Telepon Kustomer Baru')
+                                            ->required(fn(Get $get) => $get('is_new_customer')),
+                                        TextInput::make('new_customer_nik')
+                                            ->label('NIK (KTP) Kustomer Baru')
+                                            ->required(fn(Get $get) => $get('is_new_customer')),
+                                        Textarea::make('new_customer_address')
+                                            ->label('Alamat Kustomer Baru')
+                                            ->columnSpanFull()
+                                            ->required(fn(Get $get) => $get('is_new_customer')),
+                                    ])
+                                    ->visible(fn(Get $get) => $get('is_new_customer')),
+
                                 Toggle::make('with_driver')
                                     ->label('Gunakan Sopir')
                                     ->live(),
-                                Select::make('driver_id')
-                                    ->label('Pilih Sopir')
-                                    ->relationship('driver', 'name')
-                                    ->searchable()
-                                    ->preload()
-                                    ->visible(fn(Get $get) => $get('with_driver'))
-                                    ->options(function (Get $get) {
-                                        if (! $get('with_driver')) {
-                                            return [];
-                                        }
 
-                                        return Driver::active()->pluck('name', 'id');
-                                    })
-                                    ->required(fn(Get $get) => $get('with_driver'))
-                                    ->disabled(fn(Get $get) => ! $get('with_driver'))
-                                    ->hint('Wajib jika "Gunakan Sopir" aktif'),
+                                Grid::make(2)
+                                    ->schema([
+                                        Select::make('driver_id')
+                                            ->label('Pilih Sopir Registered (Opsional)')
+                                            ->searchable()
+                                            ->preload()
+                                            ->options(function (Get $get) {
+                                                if (! $get('with_driver')) {
+                                                    return [];
+                                                }
+                                                return Driver::active()->pluck('name', 'id');
+                                            })
+                                            ->live()
+                                            ->afterStateUpdated(function (?string $state, Set $set) {
+                                                if ($state) {
+                                                    $driver = Driver::find((int) $state, ['id', 'name']);
+                                                    if ($driver) {
+                                                        $set('driver_name', $driver->name);
+                                                    }
+                                                }
+                                            }),
+                                        TextInput::make('driver_name')
+                                            ->label('Nama Sopir')
+                                            ->required(fn(Get $get) => $get('with_driver'))
+                                            ->placeholder('Masukkan nama sopir...'),
+                                    ])
+                                    ->visible(fn(Get $get) => $get('with_driver')),
                             ])->columnSpan(2),
                         Section::make('Rincian Biaya')
                             ->schema([

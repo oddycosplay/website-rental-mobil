@@ -21,40 +21,40 @@
 
 ## Routes (top 15)
 
- | Method | URI | Controller |
-| --- | --- | --- |
- | GET | `/user` | GET /user |
- | POST | `/midtrans/callback` | POST /midtrans/callback |
- | GET | `/register` | GET /register |
- | POST | `/register` | POST /register |
- | GET | `/login` | GET /login |
- | POST | `/login` | POST /login |
- | GET | `/forgot-password` | GET /forgot-password |
- | POST | `/forgot-password` | POST /forgot-password |
- | GET | `/reset-password/{token}` | GET /reset-password/{token} |
- | POST | `/reset-password` | POST /reset-password |
- | GET | `/verify-email` | GET /verify-email |
- | GET | `/verify-email/{id}/{hash}` | GET /verify-email/{id}/{hash} |
- | POST | `/email/verification-notification` | POST /email/verification-notification |
- | GET | `/confirm-password` | GET /confirm-password |
- | POST | `/confirm-password` | POST /confirm-password |
+| Method | URI                                | Controller                            |
+| ------ | ---------------------------------- | ------------------------------------- |
+| GET    | `/user`                            | GET /user                             |
+| POST   | `/midtrans/callback`               | POST /midtrans/callback               |
+| GET    | `/register`                        | GET /register                         |
+| POST   | `/register`                        | POST /register                        |
+| GET    | `/login`                           | GET /login                            |
+| POST   | `/login`                           | POST /login                           |
+| GET    | `/forgot-password`                 | GET /forgot-password                  |
+| POST   | `/forgot-password`                 | POST /forgot-password                 |
+| GET    | `/reset-password/{token}`          | GET /reset-password/{token}           |
+| POST   | `/reset-password`                  | POST /reset-password                  |
+| GET    | `/verify-email`                    | GET /verify-email                     |
+| GET    | `/verify-email/{id}/{hash}`        | GET /verify-email/{id}/{hash}         |
+| POST   | `/email/verification-notification` | POST /email/verification-notification |
+| GET    | `/confirm-password`                | GET /confirm-password                 |
+| POST   | `/confirm-password`                | POST /confirm-password                |
 
 ## Complexity Hotspots
 
 > Methods with high cyclomatic complexity — review before modifying.
 
- | Class / Method | Cyclomatic | Lines |
-| --- | --- | --- |
- | CarCatalog@render | 13 | 62 |
- | MidtransController@callback | 9 | 46 |
- | Checkout@submit | 7 | 106 |
- | Checkout@applyPromo | 6 | 41 |
- | MidtransController@updateStatus | 5 | 32 |
- | Checkout@nextStep | 5 | 37 |
- | CarController@update | 4 | 41 |
- | CarMaintenanceController@update | 4 | 30 |
- | Checkout@existingCustomerHasDocs | 4 | 6 |
- | VerifyEmailController@__invoke | 3 | 12 |
+| Class / Method                   | Cyclomatic | Lines |
+| -------------------------------- | ---------- | ----- |
+| CarCatalog@render                | 13         | 62    |
+| MidtransController@callback      | 9          | 46    |
+| Checkout@submit                  | 7          | 106   |
+| Checkout@applyPromo              | 6          | 41    |
+| MidtransController@updateStatus  | 5          | 32    |
+| Checkout@nextStep                | 5          | 37    |
+| CarController@update             | 4          | 41    |
+| CarMaintenanceController@update  | 4          | 30    |
+| Checkout@existingCustomerHasDocs | 4          | 6     |
+| VerifyEmailController@\_\_invoke | 3          | 12    |
 
 ## Code Smells
 
@@ -73,40 +73,51 @@
 
 ## Backend Packages
 
- | Package | Version | Dev |
-| --- | --- | --- |
- | `fakerphp/faker` | ^1.23 | ✓ |
- | `filament/filament` | ^4.2 | |
- | `laramint/laravel-brain` | ^1.2 | ✓ |
- | `laravel/boost` | ^2.4 | ✓ |
- | `laravel/breeze` | ^2.4 | ✓ |
- | `laravel/framework` | ^12.0 | |
- | `laravel/jetstream` | ^5.5 | |
- | `laravel/pail` | ^1.2.2 | ✓ |
- | `laravel/pint` | ^1.24 | ✓ |
- | `laravel/sail` | ^1.41 | ✓ |
- | `laravel/sanctum` | ^4.0 | |
- | `laravel/tinker` | ^2.10.1 | |
- | `livewire/livewire` | ^3.6.4 | |
- | `midtrans/midtrans-php` | ^2.6 | |
- | `mockery/mockery` | ^1.6 | ✓ |
- | `nunomaduro/collision` | ^8.6 | ✓ |
- | `phpunit/phpunit` | ^11.5.50 | ✓ |
- | `spatie/laravel-permission` | ^7.4 | |
+| Package                     | Version  | Dev |
+| --------------------------- | -------- | --- |
+| `fakerphp/faker`            | ^1.23    | ✓   |
+| `filament/filament`         | ^4.2     |     |
+| `laramint/laravel-brain`    | ^1.2     | ✓   |
+| `laravel/boost`             | ^2.4     | ✓   |
+| `laravel/breeze`            | ^2.4     | ✓   |
+| `laravel/framework`         | ^12.0    |     |
+| `laravel/jetstream`         | ^5.5     |     |
+| `laravel/pail`              | ^1.2.2   | ✓   |
+| `laravel/pint`              | ^1.24    | ✓   |
+| `laravel/sail`              | ^1.41    | ✓   |
+| `laravel/sanctum`           | ^4.0     |     |
+| `laravel/tinker`            | ^2.10.1  |     |
+| `livewire/livewire`         | ^3.6.4   |     |
+| `midtrans/midtrans-php`     | ^2.6     |     |
+| `mockery/mockery`           | ^1.6     | ✓   |
+| `nunomaduro/collision`      | ^8.6     | ✓   |
+| `phpunit/phpunit`           | ^11.5.50 | ✓   |
+| `spatie/laravel-permission` | ^7.4     |     |
 
 ## Frontend Packages
 
- | Package | Version | Dev |
-| --- | --- | --- |
- | `@tailwindcss/forms` | ^0.5.7 | ✓ |
- | `@tailwindcss/typography` | ^0.5.10 | ✓ |
- | `@tailwindcss/vite` | ^4.0.0 | ✓ |
- | `alpinejs` | ^3.4.2 | ✓ |
- | `autoprefixer` | ^10.4.16 | ✓ |
- | `axios` | ^1.11.0 | ✓ |
- | `concurrently` | ^9.0.1 | ✓ |
- | `laravel-vite-plugin` | ^2.0.0 | ✓ |
- | `postcss` | ^8.4.32 | ✓ |
- | `startbootstrap-sb-admin` | ^7.0.7 | |
- | `tailwindcss` | ^3.4.0 | ✓ |
- | `vite` | ^7.0.7 | ✓ |
+| Package                   | Version  | Dev |
+| ------------------------- | -------- | --- |
+| `@tailwindcss/forms`      | ^0.5.7   | ✓   |
+| `@tailwindcss/typography` | ^0.5.10  | ✓   |
+| `@tailwindcss/vite`       | ^4.0.0   | ✓   |
+| `alpinejs`                | ^3.4.2   | ✓   |
+| `autoprefixer`            | ^10.4.16 | ✓   |
+| `axios`                   | ^1.11.0  | ✓   |
+| `concurrently`            | ^9.0.1   | ✓   |
+| `laravel-vite-plugin`     | ^2.0.0   | ✓   |
+| `postcss`                 | ^8.4.32  | ✓   |
+| `startbootstrap-sb-admin` | ^7.0.7   |     |
+| `tailwindcss`             | ^3.4.0   | ✓   |
+| `vite`                    | ^7.0.7   | ✓   |
+
+## Browser Automation
+
+Use `agent-browser` for web automation. Run `agent-browser --help` for all commands.
+
+Core workflow:
+
+1. `agent-browser open <url>` - Navigate to page
+2. `agent-browser snapshot -i` - Get interactive elements with refs (@e1, @e2)
+3. `agent-browser click @e1` / `fill @e2 "text"` - Interact using refs
+4. Re-snapshot after page changes

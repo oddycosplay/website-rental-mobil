@@ -864,62 +864,60 @@
         </div>
     </div>
 
-@endsection
 
-@push('css')
-<style>
-    .bg-primary-light { background-color: rgba(15, 23, 42, 0.05) !important; }
-    .bg-success-light { background-color: rgba(16, 185, 129, 0.1) !important; }
-    .bg-danger-light { background-color: rgba(239, 68, 68, 0.1) !important; }
-    .bg-info-light { background-color: rgba(59, 130, 246, 0.1) !important; }
-    .bg-warning-light { background-color: rgba(245, 158, 11, 0.1) !important; }
-    
-    .text-main { color: #1E293B !important; }
-    [data-theme="dark"] .text-main { color: #F1F5F9 !important; }
-    .text-secondary { color: #D4AF37 !important; }
-    
-    .transition-all { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-    .hov-move-up:hover { transform: translateY(-10px); }
-    .hov-move-right:hover i { transform: translateX(5px); }
-    
-    .card { border-radius: 16px !important; border: 1px solid rgba(0,0,0,0.05) !important; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04) !important; }
-    [data-theme="dark"] .card { background-color: #0F172A !important; border-color: rgba(255,255,255,0.05) !important; }
-    
-    .icon-box { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    
-    .dot { height: 10px; width: 10px; border-radius: 50%; display: inline-block; }
-    .animate-pulse { animation: pulse 2s infinite; }
-    
-    @keyframes pulse {
-        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-    }
-    
-    .chart-center-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
-    
-    .table-hover tbody tr:hover {
-        background-color: rgba(15, 23, 42, 0.02) !important;
-    }
-    
-    /* Ensure Bootstrap Grid is visible */
-    .row { display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px; }
-    .col-12 { flex: 0 0 100%; max-width: 100%; padding: 0 15px; }
-    @media (min-width: 768px) {
-        .col-md-6 { flex: 0 0 50%; max-width: 50%; padding: 0 15px; }
-    }
-    @media (min-width: 1200px) {
-        .col-xl-3 { flex: 0 0 25%; max-width: 25%; padding: 0 15px; }
-        .col-xl-8 { flex: 0 0 66.666667%; max-width: 66.666667%; padding: 0 15px; }
-        .col-xl-4 { flex: 0 0 33.333333%; max-width: 33.333333%; padding: 0 15px; }
-    }
-</style>
+    <style>
+        .bg-primary-light { background-color: rgba(15, 23, 42, 0.05) !important; }
+        .bg-success-light { background-color: rgba(16, 185, 129, 0.1) !important; }
+        .bg-danger-light { background-color: rgba(239, 68, 68, 0.1) !important; }
+        .bg-info-light { background-color: rgba(59, 130, 246, 0.1) !important; }
+        .bg-warning-light { background-color: rgba(245, 158, 11, 0.1) !important; }
+        
+        .text-main { color: #1E293B !important; }
+        [data-theme="dark"] .text-main { color: #F1F5F9 !important; }
+        .text-secondary { color: #D4AF37 !important; }
+        
+        .transition-all { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hov-move-up:hover { transform: translateY(-10px); }
+        .hov-move-right:hover i { transform: translateX(5px); }
+        
+        .card { border-radius: 16px !important; border: 1px solid rgba(0,0,0,0.05) !important; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04) !important; }
+        [data-theme="dark"] .card { background-color: #0F172A !important; border-color: rgba(255,255,255,0.05) !important; }
+        
+        .icon-box { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        
+        .dot { height: 10px; width: 10px; border-radius: 50%; display: inline-block; }
+        .animate-pulse { animation: pulse 2s infinite; }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        
+        .chart-center-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        .table-hover tbody tr:hover {
+            background-color: rgba(15, 23, 42, 0.02) !important;
+        }
+        
+        /* Ensure Bootstrap Grid is visible */
+        .row { display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px; }
+        .col-12 { flex: 0 0 100%; max-width: 100%; padding: 0 15px; }
+        @media (min-width: 768px) {
+            .col-md-6 { flex: 0 0 50%; max-width: 50%; padding: 0 15px; }
+        }
+        @media (min-width: 1200px) {
+            .col-xl-3 { flex: 0 0 25%; max-width: 25%; padding: 0 15px; }
+            .col-xl-8 { flex: 0 0 66.666667%; max-width: 66.666667%; padding: 0 15px; }
+            .col-xl-4 { flex: 0 0 33.333333%; max-width: 33.333333%; padding: 0 15px; }
+        }
+    </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Apply progress bar widths from data attributes to avoid CSS parser errors
@@ -928,9 +926,9 @@
             });
         });
     </script>
-@endpush
+@endsection
 
-@push('scripts')
+@section('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Financial Chart
@@ -1090,4 +1088,5 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof lucide !== 'undefined') { lucide.createIcons(); }
 });
 </script>
-@endpush
+@endsection
+

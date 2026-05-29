@@ -155,6 +155,68 @@
     </div>
 </div>
 
+@php
+    // Get last 5 months dynamically
+    $months = collect([]);
+    for ($i = 4; $i >= 0; $i--) {
+        $months->push(now()->subMonths($i)->format('Y-m'));
+    }
+
+    $monthlyData = $months->mapWithKeys(function($month) use ($maintenances) {
+        $records = $maintenances->filter(function($m) use ($month) {
+            return $m->start_date->format('Y-m') === $month;
+        });
+        return [$month => [
+            'label' => Carbon\Carbon::parse($month . '-01')->translatedFormat('M Y'),
+            'cost' => $records->sum('cost'),
+            'count' => $records->count()
+        ]];
+    });
+
+    $chartLabels = $monthlyData->pluck('label')->toArray();
+    $chartCosts = $monthlyData->pluck('cost')->toArray();
+    $chartCounts = $monthlyData->pluck('count')->toArray();
+
+    // Group by Service Type for Doughnut chart
+    $typeGroups = $maintenances->groupBy('maintenance_type');
+    $typeLabels = $typeGroups->keys()->toArray();
+    $typeCounts = $typeGroups->map->count()->values()->toArray();
+@endphp
+
+{{-- Analytics Intelligence Section --}}
+<div class="row g-4 mb-4">
+    <!-- Cost & Volume Trend -->
+    <div class="col-xl-8 col-lg-7">
+        <div class="card-premium h-100" style="padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div style="font-size: 14px; font-weight: 800; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px;">
+                    <i class="fas fa-chart-line" style="color: var(--secondary); margin-right: 8px;"></i>
+                    Maintenance Costs & Frequency Trends
+                </div>
+                <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); background: rgba(0,0,0,0.03); padding: 4px 8px; border-radius: 6px;">Last 5 Months</span>
+            </div>
+            <div style="position: relative; height: 300px;">
+                <canvas id="maintCostTrendChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Distribution -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card-premium h-100" style="padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div style="font-size: 14px; font-weight: 800; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px;">
+                    <i class="fas fa-chart-pie" style="color: var(--secondary); margin-right: 8px;"></i>
+                    Service Categories
+                </div>
+            </div>
+            <div style="position: relative; height: 300px; display: flex; align-items: center; justify-content: center;">
+                <canvas id="maintTypeShareChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{-- Table --}}
 <div class="card-premium">
     <div class="card-header-premium">
@@ -243,4 +305,174 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+    let maintCostChartInstance = null;
+    let maintTypeChartInstance = null;
+
+    function initMaintCharts(theme = 'light') {
+        const textColor = theme === 'dark' ? '#F1F5F9' : '#1E293B';
+        const mutedColor = theme === 'dark' ? '#94A3B8' : '#64748B';
+        const gridColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.04)';
+        
+        // 1. Costs & Volume Chart
+        const ctxCost = document.getElementById('maintCostTrendChart');
+        if (ctxCost) {
+            const ctx = ctxCost.getContext('2d');
+            if (maintCostChartInstance) maintCostChartInstance.destroy();
+            
+            const costData = @json($chartCosts);
+            const countData = @json($chartCounts);
+            const labels = @json($chartLabels);
+            
+            maintCostChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            type: 'line',
+                            label: 'Total Cost (IDR)',
+                            data: costData,
+                            borderColor: '#D4AF37',
+                            borderWidth: 3,
+                            pointBackgroundColor: theme === 'dark' ? '#0F172A' : '#FFFFFF',
+                            pointBorderColor: '#D4AF37',
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            tension: 0.4,
+                            fill: false,
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'bar',
+                            label: 'Service Count',
+                            data: countData,
+                            backgroundColor: 'rgba(212, 175, 55, 0.15)',
+                            borderColor: 'rgba(212, 175, 55, 0.4)',
+                            borderWidth: 1,
+                            borderRadius: 6,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: textColor,
+                                font: { family: 'Inter', weight: 'bold', size: 11 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.datasetIndex === 0) {
+                                        label += 'Rp ' + context.parsed.y.toLocaleString('id-ID');
+                                    } else {
+                                        label += context.parsed.y + ' Service(s)';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: gridColor },
+                            ticks: { color: mutedColor, font: { family: 'Inter', size: 10 } }
+                        },
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            grid: { color: gridColor },
+                            ticks: {
+                                color: mutedColor,
+                                font: { family: 'Inter', size: 10 },
+                                callback: function(value) {
+                                    if (value >= 1000000) return 'Rp ' + (value/1000000) + 'M';
+                                    return 'Rp ' + value.toLocaleString('id-ID');
+                                }
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            grid: { drawOnChartArea: false },
+                            ticks: {
+                                color: mutedColor,
+                                font: { family: 'Inter', size: 10 },
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 2. Service Category Share
+        const ctxType = document.getElementById('maintTypeShareChart');
+        if (ctxType) {
+            const ctx = ctxType.getContext('2d');
+            if (maintTypeChartInstance) maintTypeChartInstance.destroy();
+            
+            const typeLabels = @json($typeLabels);
+            const typeCounts = @json($typeCounts);
+            
+            maintTypeChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: typeLabels,
+                    datasets: [{
+                        data: typeCounts,
+                        backgroundColor: [
+                            '#D4AF37', // Gold
+                            '#10B981', // Green
+                            '#3B82F6', // Blue
+                            '#F59E0B', // Orange
+                            '#EF4444', // Red
+                            '#6366F1'  // Indigo
+                        ],
+                        borderWidth: theme === 'dark' ? 2 : 1,
+                        borderColor: theme === 'dark' ? '#0F172A' : '#FFFFFF'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: textColor,
+                                padding: 16,
+                                font: { family: 'Inter', size: 11 }
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+        }
+    }
+
+    // Initialize charts on DOM loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        const initialTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        initMaintCharts(initialTheme);
+    });
+
+    // Theme Toggle callback integration
+    window.updateChartsTheme = function(newTheme) {
+        initMaintCharts(newTheme);
+    };
+</script>
 @endsection

@@ -49,6 +49,11 @@ class Driver extends Model
         return $this->hasMany(DriverSchedule::class);
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('is_available', true);
+    }
+
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $startDate

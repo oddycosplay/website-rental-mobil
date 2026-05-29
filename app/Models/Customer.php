@@ -18,6 +18,7 @@ class Customer extends Model
         'sim_number',
         'ktp_image',
         'sim_image',
+        'selfie_image',
         'ktp_path',
         'sim_path',
         'no_kk',

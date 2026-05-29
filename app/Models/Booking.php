@@ -13,7 +13,7 @@ class Booking extends Model
 
     protected $fillable = [
         'booking_code', 'customer_id', 'car_id', 'store_id', 'driver_id', 'promo_id',
-        'rental_type', 'with_driver', 'pickup_date', 'return_date', 'pickup_location', 'return_location',
+        'rental_type', 'rental_category', 'with_driver', 'driver_name', 'pickup_date', 'return_date', 'pickup_location', 'return_location',
         'total_day', 'price', 'driver_price', 'extra_price', 'late_fee', 'discount', 'tax',
         'grand_total', 'dp_amount', 'remaining_payment', 'payment_status', 'booking_status', 'notes', 'expired_at',
         'guest_token', 'guest_name', 'guest_email', 'guest_phone', 'ktp_path', 'sim_path',
@@ -40,7 +40,9 @@ class Booking extends Model
                 }
             } elseif (in_array($booking->booking_status, ['completed', 'cancelled', 'expired'])) {
                 if ($booking->car) {
-                    $booking->car->update(['status' => 'available']);
+                    if ($booking->car->status !== 'maintenance') {
+                        $booking->car->update(['status' => 'available']);
+                    }
                 }
 
                 // Jika status selesai, hitung denda final jika telat
@@ -93,6 +95,14 @@ class Booking extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    /**
+     * Get the payment details for this booking.
+     */
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
     }
 
     /**

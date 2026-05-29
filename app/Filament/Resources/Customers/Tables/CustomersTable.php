@@ -25,11 +25,25 @@ class CustomersTable
                     ->label('Telepon')
                     ->icon('heroicon-m-phone')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('identity_number')
+                Tables\Columns\TextColumn::make('customer.nik')
                     ->label('No. KTP')
                     ->icon('heroicon-m-identification')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('identity_photo')
+                Tables\Columns\TextColumn::make('customer.pekerjaan')
+                    ->label('Pekerjaan')
+                    ->icon('heroicon-m-briefcase')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('customer.customer_status')
+                    ->label('Status Verifikasi')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'warning',
+                        'approved' => 'success',
+                        'rejected' => 'danger',
+                        default => 'gray',
+                    })
+                    ->searchable(),
+                Tables\Columns\ImageColumn::make('customer.ktp_image')
                     ->label('Foto KTP')
                     ->circular()
                     ->disk('public'),
@@ -43,6 +57,7 @@ class CustomersTable
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
             ])

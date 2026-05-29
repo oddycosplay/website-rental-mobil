@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" modified="2026-05-29T11:01:44.000Z" agent="Mozilla/5.0" version="21.0.0" type="device">
+  <diagram id="diagram_1" name="Siliwangi Rental - Flowchart Inspeksi">
+    <mxGraphModel dx="1420" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1350" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ==================== COLUMN SWIMLANES ==================== -->
+        <!-- 1. CUSTOMER -->
+        <mxCell id="lane_customer" value="CUSTOMER (PELANGGAN)" style="swimlane;horizontal=0;fillColor=#0F172A;strokeColor=#475569;fontColor=#D4AF37;fontStyle=1;align=center;startSize=40;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="0" y="0" width="240" height="1300" as="geometry" />
+        </mxCell>
+
+        <!-- 2. ADMIN -->
+        <mxCell id="lane_admin" value="ADMINISTRATOR" style="swimlane;horizontal=0;fillColor=#0F172A;strokeColor=#475569;fontColor=#D4AF37;fontStyle=1;align=center;startSize=40;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="240" y="0" width="240" height="1300" as="geometry" />
+        </mxCell>
+
+        <!-- 3. SISTEM -->
+        <mxCell id="lane_system" value="SISTEM (APLIKASI LARAVEL)" style="swimlane;horizontal=0;fillColor=#0F172A;strokeColor=#475569;fontColor=#D4AF37;fontStyle=1;align=center;startSize=40;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="480" y="0" width="240" height="1300" as="geometry" />
+        </mxCell>
+
+        <!-- 4. KENDARAAN -->
+        <mxCell id="lane_vehicle" value="KENDARAAN (ASET MOBIL)" style="swimlane;horizontal=0;fillColor=#0F172A;strokeColor=#475569;fontColor=#D4AF37;fontStyle=1;align=center;startSize=40;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="720" y="0" width="200" height="1300" as="geometry" />
+        </mxCell>
+
+        <!-- 5. TIM OPERASIONAL -->
+        <mxCell id="lane_ops" value="TIM OPERASIONAL (AUDITOR)" style="swimlane;horizontal=0;fillColor=#0F172A;strokeColor=#475569;fontColor=#D4AF37;fontStyle=1;align=center;startSize=40;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="920" y="0" width="240" height="1300" as="geometry" />
+        </mxCell>
+
+        <!-- 6. DRIVER -->
+        <mxCell id="lane_driver" value="DRIVER (SOPIR SILIWANGI)" style="swimlane;horizontal=0;fillColor=#0F172A;strokeColor=#475569;fontColor=#D4AF37;fontStyle=1;align=center;startSize=40;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="0" width="200" height="1300" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== FLOW NODES (ABSOLUTE COORDS) ==================== -->
+        
+        <!-- Mulai (Admin) -->
+        <mxCell id="node_start" value="Mulai: Admin Trigger Checkout" style="ellipse;whiteSpace=wrap;html=1;fillColor=#020617;strokeColor=#D4AF37;strokeWidth=2;fontColor=#D4AF37;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="300" y="60" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Load Form (Sistem) -->
+        <mxCell id="node_show_form" value="Sistem Load Data &amp; Form Checkout" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="540" y="60" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Audit Out (Tim Ops) -->
+        <mxCell id="node_audit_out" value="Audit Check-out Fisik&#xa;(Bodi, Mesin, AC, Ban)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="980" y="130" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Submit Out (Admin) -->
+        <mxCell id="node_submit_out" value="Submit Hasil Audit &amp; Odometer Awal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="300" y="210" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- DB Out Update (Sistem) -->
+        <mxCell id="node_db_out" value="Update Status:&#xa;Mobil -> 'rented'&#xa;Booking -> 'ongoing'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="540" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Decision: Metode Sewa (Customer) -->
+        <mxCell id="node_dec_lease" value="Metode Sewa?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#334155;strokeColor=#64748b;fontColor=#f8fafc;align=center;" parent="1" vertex="1">
+          <mxGeometry x="80" y="290" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Lepas Kunci (Customer) -->
+        <mxCell id="node_key_customer" value="Lepas Kunci: Serah Terima &amp; Customer Nyetir" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="60" y="410" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Dengan Sopir (Driver) -->
+        <mxCell id="node_key_driver" value="Dengan Sopir: Driver Mengambil Mobil &amp; Jalan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="410" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Mobil Beroperasi (Kendaraan) -->
+        <mxCell id="node_car_active" value="Mobil Aktif Beroperasi (rented)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="760" y="500" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Mobil Kembali (Customer) -->
+        <mxCell id="node_return_car" value="Mobil Dikembalikan ke Pool Siliwangi" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="60" y="590" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Audit In (Tim Ops) -->
+        <mxCell id="node_audit_in" value="Audit Check-in Fisik&#xa;(Odometer &amp; Kerusakan)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="980" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Submit In (Admin) -->
+        <mxCell id="node_submit_in" value="Input Odometer Akhir &amp; Hasil Audit" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="300" y="760" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Proses & Validasi (Sistem) -->
+        <mxCell id="node_process_in" value="Sistem Validasi Odometer &amp; Cek Kerusakan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="540" y="760" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Decision: Ada Kerusakan Berat? (Sistem) -->
+        <mxCell id="node_dec_damage" value="Ada Kerusakan Berat?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#334155;strokeColor=#64748b;fontColor=#f8fafc;align=center;" parent="1" vertex="1">
+          <mxGeometry x="560" y="860" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Mobil -> Maintenance (Kendaraan) -->
+        <mxCell id="node_set_maint" value="Mobil -> 'maintenance'&#xa;(Kirim ke Bengkel)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7f1d1d;strokeColor=#f87171;fontColor=#fef2f2;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="760" y="980" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Mobil -> Available (Kendaraan) -->
+        <mxCell id="node_set_avail" value="Mobil -> 'available'&#xa;(Ready &amp; Bersih)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#064e3b;strokeColor=#34d399;fontColor=#ecfdf5;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="760" y="875" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Booking -> Completed (Sistem) -->
+        <mxCell id="node_complete_booking" value="Ubah Booking -> 'completed'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="540" y="1090" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Finalisasi (Admin) -->
+        <mxCell id="node_finalize" value="Finalisasi Tagihan &amp; Deposit Selesai" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;arcSize=10;align=center;" parent="1" vertex="1">
+          <mxGeometry x="300" y="1090" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Selesai (Admin) -->
+        <mxCell id="node_end" value="Selesai" style="ellipse;whiteSpace=wrap;html=1;fillColor=#020617;strokeColor=#D4AF37;strokeWidth=2;fontColor=#D4AF37;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="300" y="1180" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== CONNECTORS / ARROWS ==================== -->
+        
+        <!-- Mulai -> Load Form -->
+        <mxCell id="arrow_1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_start" target="node_show_form" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Load Form -> Audit Out -->
+        <mxCell id="arrow_2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_show_form" target="node_audit_out" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Audit Out -> Submit Out -->
+        <mxCell id="arrow_3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_audit_out" target="node_submit_out" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="235" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Submit Out -> DB Out -->
+        <mxCell id="arrow_4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_submit_out" target="node_db_out" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- DB Out -> Decision: Metode Sewa -->
+        <mxCell id="arrow_5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_db_out" target="node_dec_lease" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Decision -> Lepas Kunci -->
+        <mxCell id="arrow_6" value="Lepas Kunci" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;labelBackgroundColor=#0F172A;" parent="1" source="node_dec_lease" target="node_key_customer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Decision -> Dengan Sopir -->
+        <mxCell id="arrow_7" value="Dengan Sopir" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;labelBackgroundColor=#0F172A;" parent="1" source="node_dec_lease" target="node_key_driver" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="120" y="330" />
+              <mxPoint x="1260" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Lepas Kunci -> Mobil Beroperasi -->
+        <mxCell id="arrow_8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_key_customer" target="node_car_active" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="120" y="525" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Dengan Sopir -> Mobil Beroperasi -->
+        <mxCell id="arrow_9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_key_driver" target="node_car_active" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1260" y="525" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Mobil Beroperasi -> Mobil Kembali -->
+        <mxCell id="arrow_10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_car_active" target="node_return_car" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="615" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Mobil Kembali -> Audit In -->
+        <mxCell id="arrow_11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_return_car" target="node_audit_in" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="120" y="700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Audit In -> Submit In -->
+        <mxCell id="arrow_12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_audit_in" target="node_submit_in" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="785" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Submit In -> Proses & Validasi -->
+        <mxCell id="arrow_13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_submit_in" target="node_process_in" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Proses & Validasi -> Decision: Ada Kerusakan Berat? -->
+        <mxCell id="arrow_14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_process_in" target="node_dec_damage" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Decision -> Mobil -> Available (Tidak/Aman) -->
+        <mxCell id="arrow_15" value="Tidak" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;labelBackgroundColor=#0F172A;" parent="1" source="node_dec_damage" target="node_set_avail" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="900" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Decision -> Mobil -> Maintenance (Ya/Damaged) -->
+        <mxCell id="arrow_16" value="Ya" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;labelBackgroundColor=#0F172A;" parent="1" source="node_dec_damage" target="node_set_maint" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="1005" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Mobil -> Maintenance -> Booking -> Completed -->
+        <mxCell id="arrow_17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_set_maint" target="node_complete_booking" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="1115" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Mobil -> Available -> Booking -> Completed -->
+        <mxCell id="arrow_18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_set_avail" target="node_complete_booking" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="1115" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Booking -> Completed -> Finalisasi -->
+        <mxCell id="arrow_19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_complete_booking" target="node_finalize" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Finalisasi -> Selesai -->
+        <mxCell id="arrow_20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4AF37;strokeWidth=1.5;fontColor=#f8fafc;" parent="1" source="node_finalize" target="node_end" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

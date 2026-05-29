@@ -21,8 +21,9 @@ class ExpenseCategory extends Model
         return collect($categories)->map(fn ($cat) => (object) $cat);
     }
 
-    public static function find(mixed $id)
+    public static function find(mixed $id, array|string $columns = ['*'])
     {
+        // Parameter $columns diabaikan karena data hardcoded (tidak query ke DB)
         return static::all()->firstWhere('id', $id);
     }
 }

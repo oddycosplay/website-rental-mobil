@@ -31,6 +31,8 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    @yield('styles')
+
     <style>
         /* ===================== CSS VARIABLES ===================== */
         :root {
@@ -356,6 +358,18 @@
             transition: all var(--transition);
         }
 
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
         .toggle-sidebar {
             width: 40px;
             height: 40px;
@@ -539,6 +553,19 @@
                 display: none;
             }
         }
+        
+        /* Custom branch dropdown hover */
+        #adminBranchDropdown .dropdown-item:hover {
+            background: rgba(212, 175, 55, 0.08) !important;
+            color: var(--secondary) !important;
+        }
+        #adminBranchDropdown .dropdown-item:hover .rounded-circle {
+            background: rgba(212, 175, 55, 0.2) !important;
+            transform: scale(1.05);
+        }
+        #adminBranchDropdown .dropdown-item .rounded-circle {
+            transition: all 0.2s ease;
+        }
     </style>
     @yield('styles')
 </head>
@@ -592,8 +619,8 @@
                     </a>
                 </div>
 
-                <div class="menu-item">
-                    <a href="#fleetMap" class="menu-link">
+                <div class="menu-item {{ request()->routeIs('admin.tracking.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.tracking.index') }}" class="menu-link">
                         <i class="fas fa-satellite-dish"></i>
                         <span class="text">Live GPS Tracking</span>
                         <span class="badge bg-primary ms-auto" style="font-size: 8px;">LIVE</span>
@@ -696,7 +723,66 @@
                     <button class="toggle-sidebar" onclick="toggleSidebar()" title="Toggle Sidebar">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <div class="search-container">
+                    
+                    @php
+                        $stores = \App\Models\Store::all();
+                        $currentStore = null;
+                        if (auth()->user()->store_id) {
+                            $currentStore = \App\Models\Store::find(auth()->user()->store_id);
+                        }
+                    @endphp
+                    <!-- Branch & Filament Admin Selector (Opsi B - Pemisahan Sistem dengan Dropdown /admin) -->
+                    <div class="dropdown ms-3" id="adminBranchDropdown">
+                        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2 px-3 py-2 rounded-3 text-main hover-secondary" onclick="toggleDropdown('adminBranchDropdown')" style="border-color: rgba(212, 175, 55, 0.4); font-weight: 600; font-family: 'Poppins', sans-serif; background: transparent;">
+                            <i class="fas fa-store text-warning"></i>
+                            <span>Admin Panel</span>
+                            <i class="fas fa-chevron-down small opacity-50 ms-1" style="font-size: 10px;"></i>
+                        </button>
+                        <div class="dropdown-card" style="left: 0; right: auto; width: 280px;">
+                            <div style="padding: 16px; border-bottom: 1px solid var(--card-border); background: rgba(212, 175, 55, 0.05);">
+                                <div style="font-weight: 700; font-size: 12px; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">Beralih ke Admin Cabang</div>
+                                <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">Pilih cabang untuk transaksi harian (Filament)</div>
+                            </div>
+                            <div style="padding: 8px; max-height: 250px; overflow-y: auto;">
+                                @if(auth()->user()->hasRole('super-admin'))
+                                    @foreach($stores as $st)
+                                        <a href="{{ url('/admin/' . $st->id) }}" class="dropdown-item d-flex align-items-center gap-3 p-3 rounded-3" style="text-decoration: none; color: var(--text-main); font-size: 13px; transition: 0.2s; margin-bottom: 4px;">
+                                            <div class="rounded-circle bg-warning-light text-warning d-flex align-items-center justify-content-center shadow-sm" style="width: 32px; height: 32px; flex-shrink: 0; background: rgba(212,175,55,0.1);">
+                                                <i class="fas fa-map-pin"></i>
+                                            </div>
+                                            <div style="line-height: 1.2; text-align: left;">
+                                                <div style="font-weight: 700; font-family: 'Poppins', sans-serif;">{{ $st->name }}</div>
+                                                <div style="font-size: 10px; color: var(--text-muted);">{{ $st->city ?? 'Siliwangi Rental' }}</div>
+                                            </div>
+                                        </a>
+                                    @endforeach
+                                @else
+                                    @if($currentStore)
+                                        <a href="{{ url('/admin/' . $currentStore->id) }}" class="dropdown-item d-flex align-items-center gap-3 p-3 rounded-3" style="text-decoration: none; color: var(--text-main); font-size: 13px; transition: 0.2s;">
+                                            <div class="rounded-circle bg-warning-light text-warning d-flex align-items-center justify-content-center shadow-sm" style="width: 32px; height: 32px; flex-shrink: 0; background: rgba(212,175,55,0.1);">
+                                                <i class="fas fa-map-pin"></i>
+                                            </div>
+                                            <div style="line-height: 1.2; text-align: left;">
+                                                <div style="font-weight: 700; font-family: 'Poppins', sans-serif;">{{ $currentStore->name }}</div>
+                                                <div style="font-size: 10px; color: var(--text-muted);">{{ $currentStore->city ?? 'Siliwangi Rental' }}</div>
+                                            </div>
+                                        </a>
+                                    @else
+                                        <div class="p-3 text-center text-muted small" style="font-size: 11px;">
+                                            <i class="fas fa-info-circle mb-1"></i> Cabang tidak diatur untuk user ini.
+                                        </div>
+                                    @endif
+                                @endif
+                            </div>
+                            <div style="border-top: 1px solid var(--card-border); padding: 8px; background: rgba(0,0,0,0.01);">
+                                <a href="{{ url('/admin') }}" class="dropdown-item d-flex align-items-center justify-content-center gap-2 p-2 rounded-3 text-primary" style="text-decoration: none; font-size: 12.5px; font-weight: 700; transition: 0.2s; font-family: 'Poppins', sans-serif;">
+                                    <i class="fas fa-sliders-h"></i> Ke Portal Admin Utama
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="search-container ms-3">
                         <i class="fas fa-search"></i>
                         <input type="text" placeholder="Search records, vehicles, or clients...">
                     </div>

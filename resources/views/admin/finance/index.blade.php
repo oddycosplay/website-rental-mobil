@@ -89,6 +89,19 @@
         overflow: hidden;
         box-shadow: var(--card-shadow);
     }
+    .chart-center-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    .dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+    }
 </style>
 @endsection
 
@@ -105,12 +118,12 @@
     </div>
     <div class="header-actions">
         <div class="flex gap-3">
-            <button class="btn-glass px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+            <a href="{{ route('admin.payments.export') }}" class="btn-glass px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center gap-2 text-decoration-none" style="color: var(--secondary); background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.2);">
                 <i class="fas fa-download text-gold"></i> Export Statement
-            </button>
-            <button class="btn-gold px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest flex items-center gap-2 shadow-lg shadow-gold/20">
-                <i class="fas fa-plus-circle"></i> Add Transaction
-            </button>
+            </a>
+            <a href="{{ route('admin.expenses.create') }}" class="btn-gold px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest flex items-center gap-2 shadow-lg shadow-gold/20 text-decoration-none" style="background: linear-gradient(135deg, var(--secondary), var(--secondary-dark)); color: var(--primary);">
+                <i class="fas fa-plus-circle"></i> Add Expense
+            </a>
         </div>
     </div>
 </div>
@@ -140,6 +153,59 @@
         <div class="finance-amount">Rp {{ number_format($netIncome, 0, ',', '.') }}</div>
         <div class="finance-trend text-secondary">
             <i class="fas fa-vault"></i> <span class="text-muted font-medium">Stable Capital Reserve</span>
+        </div>
+    </div>
+</div>
+
+<!-- Financial Performance Chart Section -->
+<div class="row g-4 mb-4" data-aos="fade-up" data-aos-delay="150">
+    <div class="col-xl-8 col-lg-7">
+        <div class="card h-100 border-0 shadow-lg" style="border-radius: var(--radius-xl); background: var(--card-bg); border: 1px solid var(--card-border) !important; padding: 24px;">
+            <div class="card-header border-0 bg-transparent d-flex align-items-center justify-content-between p-0 mb-4">
+                <div>
+                    <h5 class="text-main fw-black mb-1" style="font-size: 16px; font-weight: 800;">Tren Kinerja Keuangan</h5>
+                    <p class="text-xs text-muted mb-0" style="font-size: 11px;">Analisis Pendapatan Bulanan (Inflow) vs Pengeluaran Operasional (Outflow)</p>
+                </div>
+                <div>
+                    <span class="badge rounded-pill px-3 py-2 font-bold text-xs" style="background: rgba(212,175,55,0.1); color: var(--secondary); border: 1px solid rgba(212,175,55,0.2); font-size: 10px;">
+                        <i class="far fa-calendar-alt me-1"></i> 6 Bulan Terakhir
+                    </span>
+                </div>
+            </div>
+            <div style="height: 280px; position: relative;">
+                <canvas id="financeDetailChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-5">
+        <div class="card h-100 border-0 shadow-lg" style="border-radius: var(--radius-xl); background: var(--card-bg); border: 1px solid var(--card-border) !important; padding: 24px;">
+            <div class="card-header border-0 bg-transparent p-0 mb-4">
+                <h5 class="text-main fw-black mb-1" style="font-size: 16px; font-weight: 800;">Status Pembayaran</h5>
+                <p class="text-xs text-muted mb-0" style="font-size: 11px;">Distribusi transaksi real-time berdasarkan status</p>
+            </div>
+            <div class="d-flex flex-column align-items-center justify-content-center" style="position: relative; height: 280px;">
+                <div style="height: 180px; width: 180px; position: relative; display: flex; align-items: center; justify-content: center;">
+                    <canvas id="financeStatusChart"></canvas>
+                    <div class="chart-center-content" style="position: absolute; pointer-events: none;">
+                        <span class="d-block text-muted font-bold text-uppercase tracking-wider" style="font-size: 9px; letter-spacing: 1px;">SUCCESS</span>
+                        <h4 class="text-main fw-black mb-0" id="successRateVal" style="font-size: 22px; font-weight: 900;">0%</h4>
+                    </div>
+                </div>
+                <div class="w-100 mt-3 d-flex justify-content-center flex-wrap gap-2 text-center">
+                    <div class="d-flex align-items-center gap-1">
+                        <span class="dot" style="background-color: var(--success); width: 8px; height: 8px; border-radius: 50%;"></span>
+                        <span class="font-semibold text-main" style="font-size: 11px;">Success ({{ $paymentStats['success'] }})</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-1">
+                        <span class="dot" style="background-color: var(--warning); width: 8px; height: 8px; border-radius: 50%;"></span>
+                        <span class="font-semibold text-main" style="font-size: 11px;">Pending ({{ $paymentStats['pending'] }})</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-1">
+                        <span class="dot" style="background-color: var(--danger); width: 8px; height: 8px; border-radius: 50%;"></span>
+                        <span class="font-semibold text-main" style="font-size: 11px;">Failed ({{ $paymentStats['failed'] }})</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -228,4 +294,99 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Financial Detail Chart
+    const ctxFin = document.getElementById("financeDetailChart");
+    if(ctxFin) {
+        new Chart(ctxFin, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($months ?? []) !!},
+                datasets: [{
+                    label: "Inflow (Revenue)",
+                    borderColor: "#10B981",
+                    backgroundColor: "rgba(16, 185, 129, 0.05)",
+                    borderWidth: 3,
+                    pointBackgroundColor: "#10B981",
+                    pointBorderColor: "#fff",
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    tension: 0.4,
+                    fill: true,
+                    data: {!! json_encode($revenueData ?? []) !!},
+                }, {
+                    label: "Outflow (Expenses)",
+                    borderColor: "#EF4444",
+                    backgroundColor: "rgba(239, 68, 68, 0.05)",
+                    borderWidth: 3,
+                    pointBackgroundColor: "#EF4444",
+                    pointBorderColor: "#fff",
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    tension: 0.4,
+                    fill: true,
+                    data: {!! json_encode($expenseData ?? []) !!},
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            font: { family: 'Plus Jakarta Sans', size: 12, weight: '600' }
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index', intersect: false, backgroundColor: '#0F172A', padding: 12, cornerRadius: 8,
+                        titleFont: { family: 'Poppins', size: 13 }, bodyFont: { family: 'Inter', size: 12 }
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { borderDash: [5, 5], color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'Inter' } } },
+                    x: { grid: { display: false }, ticks: { font: { family: 'Inter' } } }
+                }
+            }
+        });
+    }
+
+    // Payment Status Chart (Doughnut)
+    const ctxStatus = document.getElementById("financeStatusChart");
+    if(ctxStatus) {
+        const statsData = {!! json_encode($paymentStats['data'] ?? []) !!};
+        const total = statsData.reduce((a, b) => a + b, 0);
+        const successRate = total > 0 ? Math.round((statsData[0] / total) * 100) : 0;
+        
+        document.getElementById('successRateVal').innerText = successRate + '%';
+
+        new Chart(ctxStatus, {
+            type: 'doughnut',
+            data: {
+                labels: {!! json_encode($paymentStats['labels'] ?? []) !!},
+                datasets: [{
+                    data: statsData,
+                    backgroundColor: ['#10B981', '#F59E0B', '#EF4444'],
+                    borderWidth: 0, hoverOffset: 15
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, cutout: '80%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { backgroundColor: '#0F172A', padding: 12, cornerRadius: 8, titleFont: { family: 'Poppins', size: 13 }, bodyFont: { family: 'Inter', size: 12 } }
+                }
+            }
+        });
+    }
+});
+</script>
 @endsection

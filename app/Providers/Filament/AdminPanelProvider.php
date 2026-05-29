@@ -40,7 +40,7 @@ class AdminPanelProvider extends PanelProvider
             ->font('Inter')
             ->brandName('Siliwangi Admin')
             ->brandLogo(asset('images/logo-perusahaan.jpeg'))
-            ->brandLogoHeight('6rem')
+            ->brandLogoHeight('2.8rem')
             ->favicon(asset('favicon.ico'))
             ->tenant(\App\Models\Store::class)
             ->renderHook(

@@ -143,6 +143,19 @@
         padding: 16px 24px; border-top: 1px solid var(--card-border);
         display: flex; justify-content: flex-end; gap: 12px; background: var(--bg-color);
     }
+    .chart-center-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    .dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+    }
 </style>
 @endsection
 
@@ -158,11 +171,11 @@
         </div>
     </div>
     <div class="header-actions">
-        <button class="btn btn-outline" style="margin-right: 8px;">
+        <a href="{{ route('admin.payments.export', request()->all()) }}" class="btn btn-outline" style="margin-right: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
             <i class="fas fa-download"></i> Export Laporan
-        </button>
-        <button class="btn btn-gold">
-            <i class="fas fa-sync-alt"></i> Sync Midtrans
+        </a>
+        <button class="btn btn-gold" id="syncMidtransBtn" onclick="triggerSync()">
+            <i class="fas fa-sync-alt" id="syncIcon"></i> Sync Midtrans
         </button>
     </div>
 </div>
@@ -176,7 +189,7 @@
                 <i class="fas fa-wallet"></i>
             </div>
         </div>
-        <div class="finance-amount">Rp {{ number_format($stats['total_income_month'] / 1000000, 1) }}M</div>
+        <div class="finance-amount">Rp {{ number_format($stats['total_income_month'] / 1000000, 1, ',', '.') }} Jt</div>
         <div class="finance-trend trend-up">
             <i class="fas fa-arrow-up"></i> 12.5% vs bulan lalu
         </div>
@@ -189,7 +202,7 @@
                 <i class="fas fa-hourglass-half"></i>
             </div>
         </div>
-        <div class="finance-amount">Rp {{ number_format($stats['pending_payment_amount'] / 1000000, 1) }}M</div>
+        <div class="finance-amount">Rp {{ number_format($stats['pending_payment_amount'] / 1000000, 1, ',', '.') }} Jt</div>
         <div class="finance-trend" style="color: var(--text-muted)">
             <span>{{ $stats['pending_payment_count'] }} transaksi menunggu</span>
         </div>
@@ -202,7 +215,7 @@
                 <i class="fas fa-undo-alt"></i>
             </div>
         </div>
-        <div class="finance-amount">Rp {{ number_format($stats['refund_amount'] / 1000000, 1) }}M</div>
+        <div class="finance-amount">Rp {{ number_format($stats['refund_amount'] / 1000000, 1, ',', '.') }} Jt</div>
         <div class="finance-trend trend-down">
             <i class="fas fa-arrow-down"></i> {{ $stats['refund_count'] }} transaksi direfund
         </div>
@@ -215,30 +228,89 @@
                 <i class="fas fa-university"></i>
             </div>
         </div>
-        <div class="finance-amount">Rp {{ number_format($stats['midtrans_balance'] / 1000000, 1) }}M</div>
+        <div class="finance-amount">Rp {{ number_format($stats['midtrans_balance'] / 1000000, 1, ',', '.') }} Jt</div>
         <div class="finance-trend" style="color: var(--text-muted)">
             <span>Siap ditarik (Withdraw)</span>
         </div>
     </div>
 </div>
 
-<div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 16px;">
-        <div class="search-box" style="display: block; width: 350px;">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Cari ID Invoice, ID Pesanan, atau Nama Pelanggan...">
-        </div>
-        <div style="display: flex; gap: 12px;">
-            <input type="date" class="btn btn-outline" style="padding: 8px 12px; border-radius: 6px; font-size: 13px; color: var(--text-main);">
-            <select class="btn btn-outline" style="padding: 8px 12px; border-radius: 6px; font-size: 13px;">
-                <option value="">Semua Metode</option>
-                <option value="bca_va">BCA Virtual Account</option>
-                <option value="mandiri_va">Mandiri Virtual Account</option>
-                <option value="qris">QRIS</option>
-                <option value="cc">Credit Card</option>
-            </select>
+<!-- Charts Section -->
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 24px;">
+    <!-- Line Chart: Monthly performance -->
+    <div class="finance-card" style="min-height: 380px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                <div>
+                    <h5 style="margin: 0 0 4px 0; font-size: 15px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-chart-line" style="color: var(--secondary);"></i> Tren Kinerja Keuangan
+                    </h5>
+                    <span style="font-size: 12px; color: var(--text-muted);">Analisis Pendapatan Bulanan (Inflow) vs Pengeluaran Operasional (Outflow)</span>
+                </div>
+                <span class="badge" style="background: rgba(214, 175, 55, 0.1); color: var(--secondary); font-size: 11px; padding: 6px 12px; border-radius: 30px; font-weight: 600;">
+                    <i class="far fa-calendar-alt"></i> 6 Bulan Terakhir
+                </span>
+            </div>
+            <div style="position: relative; height: 260px; width: 100%;">
+                <canvas id="financeDetailChart"></canvas>
+            </div>
         </div>
     </div>
+
+    <!-- Doughnut Chart: Payment status distribution -->
+    <div class="finance-card" style="min-height: 380px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <div style="margin-bottom: 20px;">
+                <h5 style="margin: 0 0 4px 0; font-size: 15px; font-weight: 700; color: var(--text-main);">Status Pembayaran</h5>
+                <span style="font-size: 12px; color: var(--text-muted);">Distribusi transaksi real-time berdasarkan status</span>
+            </div>
+            
+            <div style="position: relative; height: 180px; width: 100%; margin-bottom: 20px;">
+                <canvas id="financeStatusChart"></canvas>
+                <div class="chart-center-content">
+                    <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; margin-bottom: 2px;">SUCCESS</div>
+                    <div id="successRateVal" style="font-size: 24px; font-weight: 800; color: var(--text-main); font-family: 'Poppins', sans-serif;">0%</div>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-around; font-size: 12px; font-weight: 600;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span class="dot" style="background: #10B981;"></span>
+                    <span style="color: var(--text-main);">Success ({{ $paymentStats['success'] ?? 0 }})</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span class="dot" style="background: #F59E0B;"></span>
+                    <span style="color: var(--text-main);">Pending ({{ $paymentStats['pending'] ?? 0 }})</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span class="dot" style="background: #EF4444;"></span>
+                    <span style="color: var(--text-main);">Failed ({{ $paymentStats['failed'] ?? 0 }})</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <form action="{{ route('admin.finance.payments') }}" method="GET" id="filterForm">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 16px;">
+            <div class="search-box" style="display: block; width: 350px;">
+                <i class="fas fa-search"></i>
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari ID Invoice, ID Pesanan, atau Nama Pelanggan..." onkeypress="if(event.key === 'Enter') this.form.submit();">
+            </div>
+            <div style="display: flex; gap: 12px;">
+                <input type="date" name="date" value="{{ request('date') }}" class="btn btn-outline" style="padding: 8px 12px; border-radius: 6px; font-size: 13px; color: var(--text-main);" onchange="this.form.submit()">
+                <select name="method" class="btn btn-outline" style="padding: 8px 12px; border-radius: 6px; font-size: 13px;" onchange="this.form.submit()">
+                    <option value="">Semua Metode</option>
+                    <option value="bank_transfer" {{ request('method') === 'bank_transfer' ? 'selected' : '' }}>Bank Transfer</option>
+                    <option value="qris" {{ request('method') === 'qris' ? 'selected' : '' }}>QRIS</option>
+                    <option value="gopay" {{ request('method') === 'gopay' ? 'selected' : '' }}>GoPay</option>
+                    <option value="shopeepay" {{ request('method') === 'shopeepay' ? 'selected' : '' }}>ShopeePay</option>
+                    <option value="credit_card" {{ request('method') === 'credit_card' ? 'selected' : '' }}>Credit Card</option>
+                </select>
+            </div>
+        </div>
+    </form>
 
     <div class="table-container">
         <table class="admin-table">
@@ -253,7 +325,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($payments as $payment)
+                @forelse($payments as $payment)
                 <tr>
                     <td>
                         <div class="inv-pill">{{ $payment->payment_code }}</div>
@@ -265,7 +337,7 @@
                     </td>
                     <td>
                         <div class="payment-method">
-                            <span style="font-weight: 600; font-size: 12px;">{{ strtoupper($payment->payment_method ?? 'Midtrans') }}</span>
+                            <span style="font-weight: 600; font-size: 12px;">{{ strtoupper(str_replace('_', ' ', $payment->payment_method ?? 'Midtrans')) }}</span>
                         </div>
                     </td>
                     <td>
@@ -288,7 +360,14 @@
                         <button class="btn btn-outline" style="padding: 6px 12px;" onclick="openModal('paymentDetailModal', '{{ $payment->id }}')">Detail</button>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                        <i class="fas fa-receipt" style="font-size: 32px; margin-bottom: 12px; display: block; opacity: 0.3;"></i>
+                        Tidak ada transaksi pembayaran yang ditemukan.
+                    </td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
@@ -309,37 +388,37 @@
             <div class="receipt-box">
                 <div class="receipt-header">
                     <p>Total Pembayaran</p>
-                    <h3>Rp 3.750.000</h3>
+                    <h3 id="detail-paid-amount">Rp 0</h3>
                     <span class="badge badge-success" style="margin-top: 8px;">Pelunasan (Berhasil)</span>
                 </div>
                 
                 <div class="receipt-row">
                     <span class="lbl">ID Invoice</span>
-                    <span class="val inv-pill" style="color: var(--text-main);">INV-2605-0891</span>
+                    <span class="val inv-pill" id="detail-invoice-code" style="color: var(--text-main);">-</span>
                 </div>
                 <div class="receipt-row">
                     <span class="lbl">ID Pesanan / Pemesanan</span>
-                    <span class="val">BK-2605-002</span>
+                    <span class="val" id="detail-booking-code">-</span>
                 </div>
                 <div class="receipt-row">
                     <span class="lbl">Pelanggan</span>
-                    <span class="val">Andi Wijaya</span>
+                    <span class="val" id="detail-customer-name">-</span>
                 </div>
                 <div class="receipt-row">
                     <span class="lbl">Waktu Transaksi</span>
-                    <span class="val">04 Mei 2026, 14:35:12 WIB</span>
+                    <span class="val" id="detail-payment-date">-</span>
                 </div>
                 <div class="receipt-row" style="margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--card-border);">
                     <span class="lbl">Gerbang Pembayaran</span>
-                    <span class="val" style="color: var(--secondary);">Midtrans</span>
+                    <span class="val" id="detail-gateway-name" style="color: var(--secondary);">Midtrans</span>
                 </div>
                 <div class="receipt-row">
                     <span class="lbl">Metode</span>
-                    <span class="val">BCA Virtual Account</span>
+                    <span class="val" id="detail-payment-method">-</span>
                 </div>
                 <div class="receipt-row">
-                    <span class="lbl">Nomor VA</span>
-                    <span class="val" style="font-family: monospace; font-size: 14px;">700123456789</span>
+                    <span class="lbl">ID Transaksi / VA</span>
+                    <span class="val" id="detail-va-number" style="font-family: monospace; font-size: 14px;">-</span>
                 </div>
             </div>
 
@@ -351,24 +430,12 @@
             </div>
 
             <div style="margin-top: 20px; margin-bottom: 8px; font-size: 13px; font-weight: 600;">Log Respon Gerbang:</div>
-            <div class="json-box">
-{
-  <span class="json-key">"transaction_id"</span>: <span class="json-string">"f8a9d1b2-c3e4-4d5f-b6a7-09876543210f"</span>,
-  <span class="json-key">"order_id"</span>: <span class="json-string">"INV-2605-0891"</span>,
-  <span class="json-key">"gross_amount"</span>: <span class="json-string">"3750000.00"</span>,
-  <span class="json-key">"payment_type"</span>: <span class="json-string">"bank_transfer"</span>,
-  <span class="json-key">"transaction_time"</span>: <span class="json-string">"2026-05-04 14:35:12"</span>,
-  <span class="json-key">"transaction_status"</span>: <span class="json-string">"settlement"</span>,
-  <span class="json-key">"fraud_status"</span>: <span class="json-string">"accept"</span>,
-  <span class="json-key">"bank"</span>: <span class="json-string">"bca"</span>,
-  <span class="json-key">"va_number"</span>: <span class="json-string">"700123456789"</span>
-}
-            </div>
+            <pre class="json-box" id="json-response-box" style="margin: 0; padding: 16px; border-radius: 6px; font-size: 11px; overflow-x: auto; background: var(--card-bg-hover); border: 1px solid var(--card-border); color: var(--text-main); font-family: monospace; max-height: 250px;"></pre>
 
         </div>
         <div class="modal-footer">
             <button class="btn btn-outline" onclick="closeModal('paymentDetailModal')">Tutup</button>
-            <button class="btn btn-gold"><i class="fas fa-print"></i> Cetak Struk</button>
+            <button class="btn btn-gold" id="printReceiptBtn"><i class="fas fa-print"></i> Cetak Struk</button>
         </div>
     </div>
 </div>
@@ -377,6 +444,158 @@
 
 @section('scripts')
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Financial Detail Chart
+    const ctxFin = document.getElementById("financeDetailChart");
+    if(ctxFin) {
+        new Chart(ctxFin, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($months ?? []) !!},
+                datasets: [{
+                    label: "Pendapatan (Inflow)",
+                    borderColor: "#10B981",
+                    backgroundColor: "rgba(16, 185, 129, 0.05)",
+                    borderWidth: 3,
+                    pointBackgroundColor: "#10B981",
+                    pointBorderColor: "#fff",
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    tension: 0.4,
+                    fill: true,
+                    data: {!! json_encode($revenueData ?? []) !!},
+                }, {
+                    label: "Pengeluaran (Outflow)",
+                    borderColor: "#EF4444",
+                    backgroundColor: "rgba(239, 68, 68, 0.05)",
+                    borderWidth: 3,
+                    pointBackgroundColor: "#EF4444",
+                    pointBorderColor: "#fff",
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    tension: 0.4,
+                    fill: true,
+                    data: {!! json_encode($expenseData ?? []) !!},
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            font: { family: 'Plus Jakarta Sans', size: 12, weight: '600' }
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index', intersect: false, backgroundColor: '#0F172A', padding: 12, cornerRadius: 8,
+                        titleFont: { family: 'Poppins', size: 13 }, bodyFont: { family: 'Inter', size: 12 }
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { borderDash: [5, 5], color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'Inter' } } },
+                    x: { grid: { display: false }, ticks: { font: { family: 'Inter' } } }
+                }
+            }
+        });
+    }
+
+    // Payment Status Chart (Doughnut)
+    const ctxStatus = document.getElementById("financeStatusChart");
+    if(ctxStatus) {
+        const statsData = {!! json_encode($paymentStats['data'] ?? []) !!};
+        const total = statsData.reduce((a, b) => a + b, 0);
+        const successRate = total > 0 ? Math.round((statsData[0] / total) * 100) : 0;
+        
+        document.getElementById('successRateVal').innerText = successRate + '%';
+
+        new Chart(ctxStatus, {
+            type: 'doughnut',
+            data: {
+                labels: {!! json_encode($paymentStats['labels'] ?? []) !!},
+                datasets: [{
+                    data: statsData,
+                    backgroundColor: ['#10B981', '#F59E0B', '#EF4444'],
+                    borderWidth: 0, hoverOffset: 15
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, cutout: '80%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { backgroundColor: '#0F172A', padding: 12, cornerRadius: 8, titleFont: { family: 'Poppins', size: 13 }, bodyFont: { family: 'Inter', size: 12 } }
+                }
+            }
+        });
+    }
+});
+
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.style.position = 'fixed';
+        toast.style.top = '24px';
+        toast.style.right = '24px';
+        toast.style.padding = '16px 24px';
+        toast.style.borderRadius = '8px';
+        toast.style.background = type === 'success' ? '#10B981' : '#EF4444';
+        toast.style.color = '#FFF';
+        toast.style.fontWeight = 'bold';
+        toast.style.fontSize = '14px';
+        toast.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+        toast.style.zIndex = '9999';
+        toast.style.display = 'flex';
+        toast.style.alignItems = 'center';
+        toast.style.gap = '10px';
+        toast.style.transition = 'all 0.3s ease';
+        toast.style.transform = 'translateY(-20px)';
+        toast.style.opacity = '0';
+        
+        toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> <span>${message}</span>`;
+        document.body.appendChild(toast);
+        
+        toast.offsetHeight;
+        
+        toast.style.transform = 'translateY(0)';
+        toast.style.opacity = '1';
+        
+        setTimeout(() => {
+            toast.style.transform = 'translateY(-20px)';
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    function syntaxHighlightJson(json) {
+        if (typeof json !== 'string') {
+            json = JSON.stringify(json, undefined, 2);
+        }
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            if (cls === 'key') {
+                return '<span class="json-key" style="color: var(--secondary); font-weight: bold;">' + match + '</span>';
+            } else {
+                return '<span class="json-string" style="color: #10B981;">' + match + '</span>';
+            }
+        });
+    }
+
     async function openModal(id, paymentId) {
         if (id === 'paymentDetailModal' && paymentId) {
             try {
@@ -384,20 +603,33 @@
                 const data = await response.json();
                 
                 // Update modal elements
-                document.querySelector('#paymentDetailModal h3').innerText = 'Rp ' + new Intl.NumberFormat('id-ID').format(data.paid_amount);
-                document.querySelector('#paymentDetailModal .inv-pill').innerText = data.payment_code;
-                document.querySelector('#paymentDetailModal .receipt-row:nth-child(3) .val').innerText = data.booking?.booking_code || '-';
-                document.querySelector('#paymentDetailModal .receipt-row:nth-child(4) .val').innerText = data.booking?.customer?.name || '-';
-                document.querySelector('#paymentDetailModal .receipt-row:nth-child(5) .val').innerText = data.payment_date || '-';
-                document.querySelector('#paymentDetailModal .receipt-row:nth-child(7) .val').innerText = data.payment_method?.toUpperCase() || '-';
-                document.querySelector('#paymentDetailModal .receipt-row:nth-child(8) .val').innerText = data.transaction_id || '-';
+                document.getElementById('detail-paid-amount').innerText = 'Rp ' + new Intl.NumberFormat('id-ID').format(data.paid_amount);
+                document.getElementById('detail-invoice-code').innerText = data.payment_code;
+                document.getElementById('detail-booking-code').innerText = data.booking?.booking_code || '-';
+                document.getElementById('detail-customer-name').innerText = data.booking?.customer?.name || '-';
+                
+                let formattedDate = '-';
+                if (data.payment_date) {
+                    const dateObj = new Date(data.payment_date);
+                    formattedDate = dateObj.toLocaleDateString('id-ID', {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric'
+                    }) + ', ' + dateObj.toLocaleTimeString('id-ID', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }) + ' WIB';
+                }
+                document.getElementById('detail-payment-date').innerText = formattedDate;
+                document.getElementById('detail-payment-method').innerText = data.payment_method ? data.payment_method.toUpperCase().replace('_', ' ') : 'MIDTRANS';
+                document.getElementById('detail-va-number').innerText = data.transaction_id || '-';
                 
                 // Logs
-                const logsList = document.querySelector('#payment-logs-list');
+                const logsList = document.getElementById('payment-logs-list');
                 logsList.innerHTML = '';
-                if (data.logs && data.logs.length > 0) {
-                    data.logs.forEach(log => {
-                        const date = new Date(log.created_at).toLocaleString('id-ID');
+                if (data.payment_logs && data.payment_logs.length > 0) {
+                    data.payment_logs.forEach(log => {
+                        const date = log.created_at ? new Date(log.created_at).toLocaleString('id-ID') : '-';
                         logsList.innerHTML += `
                             <div style="padding: 10px; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between;">
                                 <span style="font-weight: 600; color: var(--secondary);">${log.status.toUpperCase()}</span>
@@ -410,8 +642,17 @@
                 }
 
                 const badge = document.querySelector('#paymentDetailModal .badge');
-                badge.className = 'badge badge-' + (data.payment_status === 'settlement' || data.payment_status === 'success' ? 'success' : 'warning');
+                const isPaid = data.payment_status === 'settlement' || data.payment_status === 'success';
+                badge.className = 'badge badge-' + (isPaid ? 'success' : (data.payment_status === 'pending' ? 'warning' : 'danger'));
                 badge.innerText = data.payment_status.toUpperCase();
+                
+                // Gateway Response Box
+                const jsonBox = document.getElementById('json-response-box');
+                if (data.midtrans_response) {
+                    jsonBox.innerHTML = syntaxHighlightJson(data.midtrans_response);
+                } else {
+                    jsonBox.innerHTML = '<span style="color: var(--text-muted);">Tidak ada log respon (pembayaran pending/manual).</span>';
+                }
                 
             } catch (e) {
                 console.error('Error fetching payment details:', e);
@@ -432,5 +673,84 @@
             closeModal('paymentDetailModal');
         }
     });
+
+    // Print Receipt Action
+    document.getElementById('printReceiptBtn').addEventListener('click', function() {
+        const receiptContent = document.querySelector('#paymentDetailModal .receipt-box').innerHTML;
+        const printWindow = window.open('', '_blank', 'width=600,height=600');
+        printWindow.document.write(
+            '<' + 'html>' +
+            '<' + 'head>' +
+            '    <' + 'title>Cetak Struk Pembayaran</' + 'title>' +
+            '    <' + 'style>' +
+            '        body { font-family: \'Poppins\', sans-serif; padding: 40px; color: #333; line-height: 1.5; }' +
+            '        .receipt-box { border: 1px dashed #ccc; padding: 30px; border-radius: 8px; background: #fafafa; }' +
+            '        .receipt-header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }' +
+            '        .receipt-header h3 { font-size: 28px; margin: 10px 0; color: #D4AF37; }' +
+            '        .receipt-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; }' +
+            '        .receipt-row .lbl { color: #666; }' +
+            '        .receipt-row .val { font-weight: bold; text-align: right; }' +
+            '        .inv-pill { font-family: monospace; font-weight: bold; }' +
+            '        .badge { display: inline-block; padding: 6px 12px; border-radius: 50px; font-size: 11px; font-weight: bold; text-transform: uppercase; }' +
+            '        .badge-success { background: #dcfce7; color: #15803d; }' +
+            '        .badge-warning { background: #fef9c3; color: #a16207; }' +
+            '        .badge-danger { background: #fee2e2; color: #b91c1c; }' +
+            '    </' + 'style>' +
+            '</' + 'head>' +
+            '<' + 'body>' +
+            '    <' + 'div class="receipt-box">' +
+            receiptContent +
+            '    </' + 'div>' +
+            '    <' + 'script>' +
+            '        window.onload = function() { window.print(); setTimeout(function() { window.close(); }, 500); };' +
+            '    </' + 'script>' +
+            '</' + 'body>' +
+            '</' + 'html>'
+        );
+        printWindow.document.close();
+    });
+
+    // AJAX Midtrans Sync
+    async function triggerSync() {
+        const btn = document.getElementById('syncMidtransBtn');
+        const icon = document.getElementById('syncIcon');
+        
+        // Add rotating class & disable
+        btn.disabled = true;
+        icon.classList.add('fa-spin');
+        btn.style.opacity = '0.7';
+        btn.innerHTML = `<i class="fas fa-sync-alt fa-spin"></i> Syncing...`;
+        
+        try {
+            const response = await fetch('{{ route('admin.payments.sync') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showToast(result.message, 'success');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+            } else {
+                showToast(result.message || 'Gagal melakukan sinkronisasi.', 'error');
+                btn.disabled = false;
+                icon.classList.remove('fa-spin');
+                btn.style.opacity = '1';
+                btn.innerHTML = `<i class="fas fa-sync-alt" id="syncIcon"></i> Sync Midtrans`;
+            }
+        } catch (error) {
+            showToast('Terjadi kesalahan jaringan atau server error.', 'error');
+            btn.disabled = false;
+            icon.classList.remove('fa-spin');
+            btn.style.opacity = '1';
+            btn.innerHTML = `<i class="fas fa-sync-alt" id="syncIcon"></i> Sync Midtrans`;
+        }
+    }
 </script>
 @endsection

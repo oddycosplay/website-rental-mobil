@@ -47,6 +47,8 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () 
         // Finance Module
         Route::get('/finance', [\App\Http\Controllers\Admin\FinanceController::class, 'index'])->name('finance.index');
         Route::get('/finance/payments', [\App\Http\Controllers\Admin\FinanceController::class, 'payments'])->name('finance.payments');
+        Route::post('/finance/payments/sync', [\App\Http\Controllers\Admin\FinanceController::class, 'syncMidtrans'])->name('payments.sync');
+        Route::get('/finance/payments/export', [\App\Http\Controllers\Admin\FinanceController::class, 'export'])->name('payments.export');
         Route::get('/finance/payments/{payment}', [\App\Http\Controllers\Admin\FinanceController::class, 'showPayment'])->name('payments.show');
         Route::resource('expenses', \App\Http\Controllers\Admin\ExpenseController::class);
         Route::resource('expense-categories', \App\Http\Controllers\Admin\ExpenseCategoryController::class);
@@ -55,9 +57,12 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () 
         Route::get('/car-schedules', [\App\Http\Controllers\Admin\CarScheduleController::class, 'index'])->name('schedules.index');
         Route::get('/tracking', fn() => view('admin.tracking.index'))->name('tracking.index');
         Route::resource('bookings', \App\Http\Controllers\Admin\BookingController::class);
+        Route::post('/bookings/{booking}/approve', [\App\Http\Controllers\Admin\BookingController::class, 'approve'])->name('bookings.approve');
+        Route::post('/bookings/{booking}/cancel', [\App\Http\Controllers\Admin\BookingController::class, 'cancel'])->name('bookings.cancel');
         Route::resource('drivers', \App\Http\Controllers\Admin\DriverController::class);
         Route::resource('maintenances', \App\Http\Controllers\Admin\MaintenanceController::class);
-        Route::get('/car-inspections', fn() => view('admin.operational.inspections.index'))->name('car-inspections.index');
+        Route::get('/car-inspections', [\App\Http\Controllers\Admin\CarInspectionController::class, 'index'])->name('car-inspections.index');
+        Route::post('/car-inspections', [\App\Http\Controllers\Admin\CarInspectionController::class, 'store'])->name('car-inspections.store');
         Route::get('/car-brands', fn() => redirect()->route('admin.cars.index'))->name('car-brands.index');
         Route::get('/car-types', fn() => redirect()->route('admin.cars.index'))->name('car-types.index');
         Route::get('/customers', [\App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('customers.index');

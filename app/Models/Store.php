@@ -42,4 +42,9 @@ class Store extends Model
     {
         return $this->hasMany(Driver::class, 'store_id');
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'store_id');
+    }
 }

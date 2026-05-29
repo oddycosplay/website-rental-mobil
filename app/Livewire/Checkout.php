@@ -24,19 +24,22 @@ class Checkout extends Component
     public $cars = [];
     public $car_names = '';
     public int $step = 1;
+    public ?string $booking_code = null;
 
-    // Step 1: Konfigurasi Sewa
+        // Step 1: Konfigurasi Sewa
     public ?string $pickup_date = null;
     public ?string $return_date = null;
     public string $need_type = 'jemput'; // jemput or antar
     public ?string $pickup_location = null;
     public ?string $return_location = null;
     public string $rental_type = 'daily'; // daily, monthly
+    public string $rental_category = 'pribadi'; // pribadi, perusahaan
     public ?int $branch_id = null;
     public string $delivery_type = 'none'; // none, standard, airport
     public string $pickup_type = 'none'; // none, standard, airport
     public float $delivery_fee = 0;
     public float $pickup_fee = 0;
+    public string $ojol_service = 'none'; // none, gojek, grab, maxim, lainnya
 
     // Step 2: Identitas
     public ?string $name = null;
@@ -44,21 +47,31 @@ class Checkout extends Component
     public ?string $phone = null;
     public ?string $nik = null;
     public ?string $sim_number = null;
+    public ?string $no_kk = null;
+    public ?string $nip_nim = null;
+    public ?string $pekerjaan = null;
     public ?string $address = null;
 
     // Step 3: Verifikasi Dokumen
+    public mixed $selfie_image = null;
     public mixed $ktp_image = null;
     public mixed $sim_image = null;
     public mixed $kk_image = null;
-    public mixed $npwp_image = null;
-    public mixed $pelajar_image = null;
-    public mixed $mahasiswa_image = null;
+    public mixed $id_card_image = null;
 
     // Step 4: Opsi Driver & Catatan
     public bool $with_driver = false; 
+    public ?int $selected_driver_id = null;
     public ?string $driver_request = null;
     public ?string $additional_notes = null;
     public float $ojol_fee = 0;
+    public bool $needs_ojol = false;
+
+    // Step 4 tambahan: Lepas Kunci Destination
+    public string $dest_type = 'jabotabek'; // 'jabotabek' or 'luar_jabotabek'
+    public string $dest_region = 'jabar'; // 'jabar', 'jateng', 'diy', 'jatim', 'banten', 'bali'
+    public ?string $dest_city = null;
+    public float $dest_multiplier = 1.0;
 
     // Step 5: Konfirmasi & Promo
     public $promo_code = '';
@@ -103,28 +116,38 @@ class Checkout extends Component
 
         $this->car_names = $this->cars->pluck('car_name')->join(', ');
 
-        // Pre-fill data dari user yang sudah login
-        if (Auth::check()) {
-            $user = Auth::user();
-            $this->name  = $user->name;
-            $this->email = $user->email;
-            $this->phone      = $user->phone;
-            
-            $customer = $user->customer;
-            if ($customer) {
-                $this->nik        = $customer->nik;
-                $this->sim_number = $customer->sim_number;
-                $this->address    = $customer->address;
-            }
-        }
+        // Try restoring draft
+        $restored = $this->restoreDraft();
 
-        $this->pickup_date = now()->addDay()->format('Y-m-d');
-        $this->return_date = now()->addDays(2)->format('Y-m-d');
-        
-        // Pre-select first store
-        $firstBranch = Store::first(['*']);
-        if ($firstBranch) {
-            $this->branch_id = $firstBranch->id;
+        if (!$restored) {
+            $this->booking_code = 'INV-' . date('Ymd') . '-' . strtoupper(Str::random(5));
+            
+            // Pre-fill data dari user yang sudah login
+            if (Auth::check()) {
+                $user = Auth::user();
+                $this->name  = $user->name;
+                $this->email = $user->email;
+                $this->phone      = $user->phone;
+                
+                $customer = $user->customer;
+                if ($customer) {
+                    $this->nik        = $customer->nik;
+                    $this->sim_number = $customer->sim_number;
+                    $this->no_kk      = $customer->no_kk;
+                    $this->nip_nim    = $customer->nip_nim;
+                    $this->pekerjaan  = $customer->pekerjaan;
+                    $this->address    = $customer->address;
+                }
+            }
+
+            $this->pickup_date = now()->addDay()->format('Y-m-d');
+            $this->return_date = now()->addDays(2)->format('Y-m-d');
+            
+            // Pre-select first store
+            $firstBranch = Store::first(['*']);
+            if ($firstBranch) {
+                $this->branch_id = $firstBranch->id;
+            }
         }
 
         // Initial calculation
@@ -144,6 +167,8 @@ class Checkout extends Component
                 'need_type'        => 'required|in:jemput,antar',
                 'pickup_location'  => 'nullable|string|max:255',
                 'rental_type'      => 'required|in:daily,monthly',
+                'rental_category'  => 'required|in:pribadi,perusahaan',
+                'ojol_service'     => 'required|in:none,gojek,grab,maxim,lainnya',
                 'branch_id'        => 'required|exists:stores,id',
             ]);
 
@@ -164,12 +189,16 @@ class Checkout extends Component
                 'phone'      => 'required|string|max:20',
                 'nik'        => 'required|string|max:50',
                 'sim_number' => 'required|string|max:50',
+                'no_kk'      => 'required|string|max:50',
+                'nip_nim'    => 'required|string|max:50',
+                'pekerjaan'  => 'required|string|max:100',
                 'address'    => 'required|string',
             ]);
 
             // Optional: Skip step 3 if already has docs and user is logged in
             if ($this->existingCustomerHasDocs()) {
                 $this->step = 4; // Go straight to booking options
+                $this->saveDraft();
                 return;
             }
         }
@@ -178,29 +207,65 @@ class Checkout extends Component
             // Upload dokumen wajib jika belum punya atau belum login
             if (!$this->existingCustomerHasDocs()) {
                 $this->validate([
-                    'ktp_image' => 'required|image|max:2048',
-                    'sim_image' => 'required|image|max:2048',
-                    'kk_image'  => 'nullable|image|max:2048',
-                    'npwp_image' => 'nullable|image|max:2048',
-                    'pelajar_image' => 'nullable|image|max:2048',
-                    'mahasiswa_image' => 'nullable|image|max:2048',
+                    'selfie_image'  => 'required',
+                    'ktp_image'     => 'required|image|max:5120',
+                    'sim_image'     => 'required|image|max:5120',
+                    'kk_image'      => 'required|image|max:5120',
+                    'id_card_image' => 'required|image|max:5120',
                 ]);
             }
         }
 
         if ($this->step === 4) {
             $this->with_driver = (bool) $this->with_driver;
-            $this->validate([
+            $this->needs_ojol  = (bool) $this->needs_ojol;
+            
+            // Rules dinamis untuk Step 4
+            $rules = [
                 'with_driver'      => 'required|boolean',
-                'driver_request'   => 'nullable|string|max:100',
+                'needs_ojol'       => 'required|boolean',
+                'ojol_service'     => 'nullable|string',
+                'ojol_fee'         => 'nullable|numeric|min:0',
                 'additional_notes' => 'nullable|string',
-            ]);
+            ];
 
             if ($this->with_driver) {
-                $availableDriver = \App\Models\Driver::availableForDates($this->pickup_date, $this->return_date)->first();
-                if (!$availableDriver) {
-                    \Illuminate\Support\Facades\Session::flash('error', "Sorry, there are no drivers available for your selected dates.");
+                $rules['selected_driver_id'] = 'nullable|exists:drivers,id';
+            } else {
+                $rules['dest_type'] = 'required|in:jabotabek,luar_jabotabek';
+                if ($this->dest_type === 'luar_jabotabek') {
+                    $rules['dest_region'] = 'required|in:jabar,jateng,diy,jatim,banten,bali';
+                    $rules['dest_city']   = 'required|string|min:3|max:100';
+                }
+            }
+
+            $this->validate($rules);
+
+            // Validasi minimum hari sewa Lepas Kunci untuk daerah luar kota
+            if (!$this->with_driver && $this->dest_type === 'luar_jabotabek') {
+                $minDays = $this->getMinDaysForDestination();
+                if ($this->total_days < $minDays) {
+                    $regionName = match($this->dest_region) {
+                        'jabar'   => 'Jawa Barat',
+                        'jateng'  => 'Jawa Tengah',
+                        'diy'     => 'D.I. Yogyakarta',
+                        'jatim'   => 'Jawa Timur & Madura',
+                        'banten'  => 'Banten',
+                        'bali'    => 'Bali',
+                        default   => 'Luar Jabotabek',
+                    };
+                    $cityName = $this->dest_city ? " ({$this->dest_city})" : "";
+                    
+                    \Illuminate\Support\Facades\Session::flash('error', "Untuk wilayah tujuan {$regionName}{$cityName}, minimum sewa lepas kunci adalah {$minDays} hari. Durasi sewa Anda saat ini adalah {$this->total_days} hari.");
                     return;
+                }
+            }
+
+            // Jika memilih driver, simpan nama driver pilihan sebagai request
+            if ($this->with_driver && $this->selected_driver_id) {
+                $driver = \App\Models\Driver::where('id', '=', $this->selected_driver_id, 'and')->first();
+                if ($driver) {
+                    $this->driver_request = $driver->name;
                 }
             }
 
@@ -208,6 +273,67 @@ class Checkout extends Component
         }
 
         $this->step++;
+        $this->saveDraft();
+    }
+
+    public function getMinDaysForDestination(): int
+    {
+        if ($this->with_driver || $this->dest_type === 'jabotabek') {
+            return 1;
+        }
+
+        $region = $this->dest_region;
+        $city = strtolower(trim($this->dest_city ?? ''));
+
+        switch ($region) {
+            case 'banten':
+                return 1;
+            case 'jabar':
+                if (str_contains($city, 'pangandaran') || str_contains($city, 'tasikmalaya') || str_contains($city, 'tasik')) {
+                    return 2;
+                }
+                return 1;
+            case 'jateng':
+                return 3;
+            case 'diy':
+                return 3;
+            case 'jatim':
+                return 5;
+            case 'bali':
+                return 7;
+            default:
+                return 1;
+        }
+    }
+
+    public function getDestinationMultiplier(): float
+    {
+        if ($this->with_driver || $this->dest_type === 'jabotabek') {
+            return 1.0;
+        }
+
+        $region = $this->dest_region;
+        $city = strtolower(trim($this->dest_city ?? ''));
+
+        switch ($region) {
+            case 'banten':
+                return 1.0;
+            case 'jabar':
+                if (str_contains($city, 'pangandaran') || str_contains($city, 'tasikmalaya') || str_contains($city, 'tasik')) {
+                    return 2.0;
+                }
+                return 1.5;
+            case 'jateng':
+                return 3.0;
+            case 'diy':
+                return 3.0;
+            case 'jatim':
+                return 5.0;
+            case 'bali':
+                return 7.0;
+            default:
+                return 1.0;
+        }
     }
 
     private function getUnavailableCars()
@@ -230,20 +356,30 @@ class Checkout extends Component
     {
         if ($this->step === 4 && $this->existingCustomerHasDocs()) {
             $this->step = 2;
+            $this->saveDraft();
             return;
         }
         $this->step--;
+        $this->saveDraft();
     }
 
     public function updated(string $propertyName): void
     {
-        if (in_array($propertyName, ['pickup_date', 'return_date', 'with_driver', 'delivery_type', 'pickup_type', 'ojol_fee'])) {
+        if (in_array($propertyName, ['pickup_date', 'return_date', 'with_driver', 'delivery_type', 'pickup_type', 'ojol_fee', 'ojol_service', 'dest_type', 'dest_region', 'dest_city', 'needs_ojol'])) {
             // Ensure boolean casting for with_driver
             if ($propertyName === 'with_driver') {
                 $this->with_driver = (bool) $this->with_driver;
             }
+            if ($propertyName === 'needs_ojol') {
+                $this->needs_ojol = (bool) $this->needs_ojol;
+                if (!$this->needs_ojol) {
+                    $this->ojol_service = 'none';
+                    $this->ojol_fee = 0;
+                }
+            }
             $this->calculateTotal();
         }
+        $this->saveDraft();
     }
 
     // ── Promo ──────────────────────────────────────────────────────────────────
@@ -308,8 +444,9 @@ class Checkout extends Component
             }
         }
 
-        $this->subtotal    = $carPrices;
-        $this->driver_fee  = $driverPrices;
+        $this->dest_multiplier = $this->getDestinationMultiplier();
+        $this->subtotal        = $carPrices * $this->dest_multiplier;
+        $this->driver_fee      = $driverPrices;
         
         // Calculate delivery fee
         if ($this->delivery_type === 'standard') {
@@ -341,6 +478,22 @@ class Checkout extends Component
         $this->promo_discount = 0;
         $this->promo_message  = '';
         $this->promo_code     = '';
+    }
+
+    public function updatedOjolService(?string $value): void
+    {
+        if ($value === 'gojek') {
+            $this->ojol_fee = 25000;
+        } elseif ($value === 'grab') {
+            $this->ojol_fee = 25000;
+        } elseif ($value === 'maxim') {
+            $this->ojol_fee = 20000;
+        } elseif ($value === 'lainnya') {
+            $this->ojol_fee = 25000;
+        } else {
+            $this->ojol_fee = 0;
+        }
+        $this->calculateTotal();
     }
 
     // ── Submit ────────────────────────────────────────────────────────────────
@@ -389,10 +542,28 @@ class Checkout extends Component
             'phone'      => $this->phone,
             'nik'        => $this->nik,
             'sim_number' => $this->sim_number,
+            'no_kk'      => $this->no_kk,
+            'nip_nim'    => $this->nip_nim,
+            'pekerjaan'  => $this->pekerjaan,
             'address'    => $this->address,
         ]);
 
         // Upload dokumen ke customers
+        if ($this->selfie_image) {
+            if (is_string($this->selfie_image) && str_starts_with($this->selfie_image, 'data:image')) {
+                // Decode base64 and save
+                $image_parts = explode(";base64,", $this->selfie_image);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $fileName = 'customers/selfie/' . uniqid() . '.' . $image_type;
+                \Illuminate\Support\Facades\Storage::disk('public')->put($fileName, $image_base64);
+                $customer->selfie_image = $fileName;
+            } elseif ($this->selfie_image instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
+                // Regular uploaded file
+                $customer->selfie_image = $this->selfie_image->store('customers/selfie', 'public');
+            }
+        }
         if ($this->ktp_image) {
             $customer->ktp_image = $this->ktp_image->store('customers/ktp', 'public');
             $customer->ktp_path  = $customer->ktp_image;
@@ -403,6 +574,9 @@ class Checkout extends Component
         }
         if ($this->kk_image) {
             $customer->kk_photo = $this->kk_image->store('customers/kk', 'public');
+        }
+        if ($this->id_card_image) {
+            $customer->id_card_photo = $this->id_card_image->store('customers/id_card', 'public');
         }
         $customer->save();
 
@@ -420,11 +594,30 @@ class Checkout extends Component
         }
 
         // 4. Buat Booking
-        $bookingCode = 'INV-' . date('Ymd') . '-' . strtoupper(Str::random(5));
+        $bookingCode = $this->booking_code ?: 'INV-' . date('Ymd') . '-' . strtoupper(Str::random(5));
 
         $finalNotes = $this->additional_notes;
+        if (!$this->with_driver) {
+            $destText = "Tujuan: " . ($this->dest_type === 'jabotabek' ? 'Dalam JABODETABEK' : 'Luar JABODETABEK');
+            if ($this->dest_type === 'luar_jabotabek') {
+                $regionName = match($this->dest_region) {
+                    'jabar'   => 'Jawa Barat',
+                    'jateng'  => 'Jawa Tengah',
+                    'diy'     => 'D.I. Yogyakarta',
+                    'jatim'   => 'Jawa Timur & Madura',
+                    'banten'  => 'Banten',
+                    'bali'    => 'Bali',
+                    default   => 'Luar Jabotabek',
+                };
+                $destText .= " ({$regionName} - {$this->dest_city})";
+            }
+            $finalNotes = $destText . "\n" . $finalNotes;
+        }
         if ($this->with_driver && $this->driver_request) {
-            $finalNotes = "Request Driver: " . $this->driver_request . "\n" . $this->additional_notes;
+            $finalNotes = "Request Driver: " . $this->driver_request . "\n" . $finalNotes;
+        }
+        if ($this->ojol_service !== 'none') {
+            $finalNotes = "Layanan Ojol: " . strtoupper($this->ojol_service) . "\n" . $finalNotes;
         }
 
         $booking = Booking::create([
@@ -432,9 +625,11 @@ class Checkout extends Component
             'customer_id'     => $customer->id,
             'car_id'          => $this->cars->first()->id, // Primary car
             'store_id'        => $this->branch_id,
-            'driver_id'       => $this->with_driver ? \App\Models\Driver::availableForDates($this->pickup_date, $this->return_date)->first()?->id : null,
+            'driver_id'       => $this->with_driver ? ($this->selected_driver_id ?? \App\Models\Driver::availableForDates($this->pickup_date, $this->return_date)->first()?->id) : null,
+            'driver_name'     => $this->with_driver ? ($this->driver_request ?? \App\Models\Driver::where('id', '=', $this->selected_driver_id ?? 0, 'and')->value('name')) : null,
             'promo_id'        => $promoId,
             'rental_type'     => $this->rental_type,
+            'rental_category' => $this->rental_category,
             'with_driver'     => $this->with_driver,
             'pickup_date'     => $this->pickup_date,
             'return_date'     => $this->return_date,
@@ -513,6 +708,11 @@ class Checkout extends Component
             $text = urlencode("Hello Siliwangi Rental,\nI have just made a vehicle booking.\nBooking Code: *#{$booking->booking_code}*\nVehicle: {$this->car_names}\nTotal: Rp " . number_format($booking->grand_total, 0, ',', '.') . "\nInvoice Link: " . route('invoice', $booking->booking_code) . "\nPlease confirm my booking.");
             $this->wa_url = "https://wa.me/{$adminWa}?text={$text}";
         }
+
+        // Delete checkout draft upon successful submission
+        \App\Models\CheckoutDraft::where('user_id', '=', Auth::id(), 'and')
+            ->orWhere('ip_address', '=', request()->ip())
+            ->delete();
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────
@@ -521,7 +721,92 @@ class Checkout extends Component
     {
         if (!Auth::check()) return false;
         $customer = Customer::where('user_id', '=', Auth::id(), 'and')->first(['*']);
-        return $customer && $customer->ktp_image && $customer->sim_image;
+        return $customer && $customer->ktp_image && $customer->sim_image && $customer->selfie_image && $customer->kk_photo && $customer->id_card_photo;
+    }
+
+    public function saveDraft(): void
+    {
+        if ($this->is_finished) {
+            return;
+        }
+
+        $payload = [
+            'booking_code'       => $this->booking_code,
+            'pickup_date'        => $this->pickup_date,
+            'return_date'        => $this->return_date,
+            'need_type'          => $this->need_type,
+            'pickup_location'    => $this->pickup_location,
+            'return_location'    => $this->return_location,
+            'rental_type'        => $this->rental_type,
+            'rental_category'    => $this->rental_category,
+            'branch_id'          => $this->branch_id,
+            'delivery_type'      => $this->delivery_type,
+            'pickup_type'        => $this->pickup_type,
+            'ojol_service'       => $this->ojol_service,
+            'name'               => $this->name,
+            'email'              => $this->email,
+            'phone'              => $this->phone,
+            'nik'                => $this->nik,
+            'sim_number'         => $this->sim_number,
+            'no_kk'              => $this->no_kk,
+            'nip_nim'            => $this->nip_nim,
+            'pekerjaan'          => $this->pekerjaan,
+            'address'            => $this->address,
+            'with_driver'        => $this->with_driver,
+            'selected_driver_id' => $this->selected_driver_id,
+            'driver_request'     => $this->driver_request,
+            'additional_notes'   => $this->additional_notes,
+            'ojol_fee'           => $this->ojol_fee,
+            'needs_ojol'         => $this->needs_ojol,
+            'dest_type'          => $this->dest_type,
+            'dest_region'        => $this->dest_region,
+            'dest_city'          => $this->dest_city,
+        ];
+
+        \App\Models\CheckoutDraft::updateOrCreate(
+            [
+                'user_id'    => Auth::id(),
+                'ip_address' => request()->ip(),
+            ],
+            [
+                'step'    => $this->step,
+                'payload' => $payload,
+            ]
+        );
+    }
+
+    public function restoreDraft(): bool
+    {
+        $draft = null;
+
+        if (Auth::check()) {
+            $draft = \App\Models\CheckoutDraft::where('user_id', '=', Auth::id(), 'and')->first(['*']);
+        }
+
+        if (!$draft) {
+            $draft = \App\Models\CheckoutDraft::where('ip_address', '=', request()->ip(), 'and')
+                ->whereNull('user_id', 'and', false)
+                ->first(['*']);
+        }
+
+        if ($draft && $draft->payload) {
+            $payload = $draft->payload;
+            $this->step = $draft->step;
+
+            foreach ($payload as $key => $value) {
+                if ($key && is_string($key) && !str_starts_with($key, '$') && $key !== '$' && property_exists($this, $key)) {
+                    $this->{$key} = $value;
+                }
+            }
+
+            $this->with_driver = (bool) $this->with_driver;
+            $this->needs_ojol  = (bool) $this->needs_ojol;
+
+            session()->flash('info', 'Formulir Anda sebelumnya telah dipulihkan secara otomatis.');
+            return true;
+        }
+
+        return false;
     }
 
     #[Layout('layouts.app')]
