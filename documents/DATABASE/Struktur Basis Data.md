@@ -12,7 +12,7 @@ Dokumen ini berisi dokumentasi teknis lengkap mengenai struktur basis data (data
 | **RDBMS**             | MySQL 8.x / SQLite        |
 | **ORM / Framework**   | Eloquent ORM (Laravel 12) |
 | **Status Database**   | Produksi (Telah Migrasi)  |
-| **Tanggal Pembaruan** | 23 Mei 2026               |
+| **Tanggal Pembaruan** | 31 Mei 2026               |
 
 ---
 
@@ -217,22 +217,76 @@ erDiagram
         timestamp created_at
     }
 
+    location_surveys {
+        bigint id PK
+        bigint store_id FK
+        bigint booking_id FK
+        string surveyor_name
+        date survey_date
+        enum survey_type
+        text address
+        json residence_status
+        json job_status
+        json neighbor_interview
+        json photos
+        enum recommendation
+        text notes
+        enum status
+        bigint approved_by FK
+        timestamp approved_at
+        timestamp created_at
+    }
+
+    vehicle_inspections {
+        bigint id PK
+        bigint store_id FK
+        bigint booking_id FK
+        bigint car_id FK
+        string inspector_name
+        enum inspection_type
+        timestamp inspected_at
+        integer odometer_km
+        enum fuel_level
+        json exterior
+        json interior
+        json equipment
+        json engine
+        json photos
+        json fuel_photos
+        boolean damage_found
+        text damage_description
+        decimal damage_cost
+        decimal dirty_fine
+        decimal fuel_fine
+        json damage_photos
+        boolean customer_confirmed
+        text customer_note
+        text notes
+        enum status
+        timestamp created_at
+    }
+
     users ||--o| customers : "has profile"
     users ||--o{ drivers : "is driver"
     stores ||--o{ cars : "owns"
     stores ||--o{ drivers : "employs"
     stores ||--o{ expenses : "incurs"
+    stores ||--o{ location_surveys : "conducts"
+    stores ||--o{ vehicle_inspections : "oversees"
     cars ||--o{ bookings : "booked in"
     customers ||--o{ bookings : "makes"
     drivers ||--o{ bookings : "assigned to"
     promos ||--o{ bookings : "applied to"
     bookings ||--o{ payments : "has payments"
     bookings ||--o{ reviews : "reviewed in"
+    bookings ||--o{ location_surveys : "surveyed in"
+    bookings ||--o{ vehicle_inspections : "inspected in"
+    cars ||--o{ vehicle_inspections : "inspected"
 ```
 
 ---
 
-## 🗂️ 2. Hubungan dan Relasi Antar Tabel
+## 🧬 2. Hubungan dan Relasi Antar Tabel
 
 Sistem ini dirancang dengan integritas data menggunakan hubungan kunci asing (Foreign Key). Berikut adalah tabel ringkasan relasi kunci utama sistem:
 
@@ -244,9 +298,14 @@ Sistem ini dirancang dengan integritas data menggunakan hubungan kunci asing (Fo
 | **`stores` ➔ `cars`** | `1:N (One to Many)` | Toko cabang rental memiliki/menguasai beberapa armada mobil yang terdaftar di cabang tersebut. |
 | **`stores` ➔ `drivers`** | `1:N (One to Many)` | Driver ditugaskan dan bekerja di bawah koordinasi toko cabang tertentu. |
 | **`stores` ➔ `expenses`** | `1:N (One to Many)` | Log transaksi pengeluaran dicatat berdasarkan toko cabang yang membiayainya. |
+| **`stores` ➔ `location_surveys`** | `1:N (One to Many)` | Toko cabang mengoordinasikan survei validasi lokasi tempat tinggal kustomer. |
+| **`stores` ➔ `vehicle_inspections`** | `1:N (One to Many)` | Toko cabang mengawasi proses pengecekan keluar/masuk unit mobil. |
 | **`cars` ➔ `bookings`** | `1:N (One to Many)` | Satu unit mobil dapat disewa dalam banyak pemesanan (pada periode berbeda). |
 | **`bookings` ➔ `payments`** | `1:N (One to Many)` | Satu pemesanan dapat memiliki beberapa transaksi pembayaran (DP, pelunasan, atau denda). |
 | **`bookings` ➔ `reviews`** | `1:1` | Transaksi penyewaan yang selesai dapat diulas sekali oleh kustomer. |
+| **`bookings` ➔ `location_surveys`** | `1:N (One to Many)` | Pemesanan memicu pembuatan survei validasi kelayakan kustomer. |
+| **`bookings` ➔ `vehicle_inspections`** | `1:N (One to Many)` | Log pengecekan mobil sebelum sewa dan sesudah sewa. |
+| **`cars` ➔ `vehicle_inspections`** | `1:N (One to Many)` | Armada mobil menerima log inspeksi kelayakan fisik berkala. |
 
 ---
 
@@ -508,4 +567,65 @@ Ulasan dan bintang penilaian kepuasan sewa mobil.
 | rating | Integer | - | Skala ulasan nilai kepuasan customer (1-5). |
 | review | Text | - | Komentar tertulis tanggapan ulasan kustomer (nullable). |
 | status | Boolean | - | Status moderasi ulasan: `true` (tampil), `false` (disembunyikan). |
+| created_at | Timestamp | - | Waktu data dibuat. |
+
+### 🏠 3.11. Tabel: `location_surveys`
+
+Tabel penugasan survei kelayakan kustomer melalui validasi data tempat tinggal, pekerjaan, dan wawancara lingkungan (RT/RW/tetangga) oleh tim operasional (surveyor).
+
+- **Fungsi:** Menyimpan data checklist validitas kustomer guna menentukan kelayakan sewa (jika tidak layak, customer diblacklist otomatis).
+
+| Nama Atribut | Tipe Data | Panjang | Keterangan |
+| :--- | :--- | :--- | :--- |
+| id | Bigint Unsigned | - | Primary Key, Auto Increment. |
+| store_id | Bigint Unsigned | - | Foreign Key ke `stores.id`. Cabang outlet penanggung jawab. |
+| booking_id | Bigint Unsigned | - | Foreign Key ke `bookings.id`. Transaksi booking kustomer terkait. |
+| surveyor_name | String | 255 | Nama petugas surveyor dari tim operasional. |
+| survey_date | Date | - | Tanggal pelaksanaan kegiatan survei ke lokasi. |
+| survey_type | Enum | - | Tipe penyerahan kendaraan: `'delivery'` (diantar) atau `'pickup'` (diambil kustomer). |
+| address | Text | - | Alamat lengkap lokasi rumah kustomer yang disurvei. |
+| residence_status | Json | - | Status rumah (Rumah Sendiri/Sewa/Kost/Milik Orang Tua) dan bukti kepemilikan. |
+| job_status | Json | - | Keterangan status pekerjaan kustomer (Wiraswasta/Karyawan/Kontrak/PNS) beserta nama kantor/usaha. |
+| neighbor_interview | Json | - | Catatan wawancara singkat dengan tetangga/RT/RW untuk verifikasi karakter kustomer. |
+| photos | Json | - | Kumpulan path URL foto dokumentasi bukti pelaksanaan survei lokasi kustomer. |
+| recommendation | Enum | - | Rekomendasi kelayakan surveyor: `'layak'` atau `'tidak_layak'`. |
+| notes | Text | - | Catatan tambahan pelaksanaan survei (nullable). |
+| status | Enum | - | Status keputusan admin: `'pending'`, `'approved'`, `'rejected'`. |
+| approved_by | Bigint Unsigned | - | Foreign Key ke `users.id` (nullable). Admin yang mengevaluasi dan menyetujui survei. |
+| approved_at | Timestamp | - | Tanggal persetujuan admin (nullable). |
+| created_at | Timestamp | - | Waktu data dibuat. |
+
+### 🚗 3.12. Tabel: `vehicle_inspections`
+
+Tabel pencatatan inspeksi fisik kelayakan unit kendaraan sebelum diserahkan ke kustomer (pre_rental) atau setelah dikembalikan dari kustomer (post_rental) oleh petugas inspektur.
+
+- **Fungsi:** Menyimpan checklist detail bodi luar, interior, kelengkapan surat/alat darurat, bensin, dan denda fisik terpisah jika terjadi kerusakan/kekurangan.
+
+| Nama Atribut | Tipe Data | Panjang | Keterangan |
+| :--- | :--- | :--- | :--- |
+| id | Bigint Unsigned | - | Primary Key, Auto Increment. |
+| store_id | Bigint Unsigned | - | Foreign Key ke `stores.id`. Cabang outlet penanggung jawab unit mobil. |
+| booking_id | Bigint Unsigned | - | Foreign Key ke `bookings.id`. Transaksi sewa rental mobil terkait. |
+| car_id | Bigint Unsigned | - | Foreign Key ke `cars.id`. Armada unit mobil yang diinspeksi. |
+| inspector_name | String | 255 | Nama petugas inspektur dari tim operasional. |
+| inspection_type | Enum | - | Tipe pengecekan sewa: `'pre_rental'` (keluar) atau `'post_rental'` (kembali). |
+| inspected_at | Timestamp | - | Tanggal dan waktu inspeksi fisik selesai dilakukan. |
+| odometer_km | Integer | - | Jarak kilometer yang tertera pada odometer dasbor mobil. |
+| fuel_level | Enum | - | Level tangki BBM bensin: `'full'`, `'three_quarter'`, `'half'`, `'quarter'`, `'empty'`. |
+| exterior | Json | - | Checklist kondisi eksterior (bodi luar, ban, lampu, kaca) beserta catatan detail. |
+| interior | Json | - | Checklist kondisi interior (kursi, dasbor, AC, kemudi, audio) beserta catatan detail. |
+| equipment | Json | - | Checklist kelengkapan bawaan mobil (Ban serep, STNK asli, kunci roda, segitiga pengaman, dongkrak). |
+| engine | Json | - | Checklist kondisi mekanis mesin, oli, air radiator, aki, fungsionalitas rem. |
+| photos | Json | - | Kumpulan path URL foto visual kondisi umum mobil serah terima. |
+| fuel_photos | Json | - | Kumpulan path URL foto visual indikator bensin/bahan bakar dasbor. |
+| damage_found | Boolean | - | Indikasi temuan kerusakan baru selama masa sewa (`true`/`false`). |
+| damage_description | Text | - | Deskripsi detail lokasi dan jenis temuan kerusakan baru (nullable). |
+| damage_cost | Decimal | 15,2 | Biaya denda ganti rugi kerusakan fisik mobil yang ditagihkan terpisah ke penyewa. |
+| dirty_fine | Decimal | 15,2 | Denda cuci mobil jika mobil dikembalikan dalam keadaan kotor/bau rokok terpisah. |
+| fuel_fine | Decimal | 15,2 | Denda BBM bensin jika level bensin berkurang dari kondisi awal sewa terpisah. |
+| damage_photos | Json | - | Kumpulan path URL foto visual detail kerusakan baru yang ditemukan (nullable). |
+| customer_confirmed | Boolean | - | Status konfirmasi persetujuan dari kustomer sewa (`true`/`false`). |
+| customer_note | Text | - | Catatan / keluhan / feedback dari kustomer saat proses serah terima (nullable). |
+| notes | Text | - | Catatan umum inspektur terkait kelayakan unit (nullable). |
+| status | Enum | - | Status persetujuan pengecekan admin: `'pending'`, `'approved'`. |
 | created_at | Timestamp | - | Waktu data dibuat. |

@@ -127,6 +127,14 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     }
 
     /**
+     * Get the employee profile linked to this user account.
+     */
+    public function employee()
+    {
+        return $this->hasOne(\App\Models\Employee::class);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

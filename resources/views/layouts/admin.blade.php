@@ -958,6 +958,8 @@
         });
     </script>
     
+    @stack('modals')
+    
     @yield('scripts')
     <script>
         lucide.createIcons();

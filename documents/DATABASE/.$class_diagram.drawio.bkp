@@ -1,0 +1,191 @@
+<mxfile host="65bd71144e">
+  <diagram id="diagram-class-siliwangi" name="Class Diagram Siliwangi Rental">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="2100" math="0" shadow="0">
+      <root>
+        <!-- Layer Root standard draw.io -->
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title Block -->
+        <mxCell id="title_block" value="&lt;b&gt;CLASS DIAGRAM SISTEM SILIWANGI RENTAL&lt;/b&gt;&lt;br/&gt;&lt;font color=&quot;#475569&quot;&gt;Enterprise Architecture Model - Berbasis Laravel 12 &amp;amp; Eloquent ORM&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="100" y="30" width="550" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Legend Block -->
+        <mxCell id="legend_block" value="&lt;b&gt;LEGENDA RELASI ELOQUENT&lt;/b&gt;&lt;br/&gt;➔ &lt;b&gt;hasOne / hasMany&lt;/b&gt;: Relasi Satu-ke-Satu / Satu-ke-Banyak (Arah Asosiasi)&lt;br/&gt;➔ &lt;b&gt;belongsTo&lt;/b&gt;: Relasi Kepemilikan (Memiliki Foreign Key)&lt;br/&gt;➔ &lt;b&gt;hasOneThrough&lt;/b&gt;: Relasi Melalui Model Perantara" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f1f5f9;strokeColor=#cbd5e1;strokeWidth=1;fontSize=11;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=8;fontFamily=Helvetica;fontColor=#334155;" vertex="1" parent="1">
+          <mxGeometry x="780" y="25" width="600" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ========================================== -->
+        <!--              KOLOM 1 (KIRI)                -->
+        <!-- ========================================== -->
+
+        <!-- 1. Model: User -->
+        <mxCell id="class_user" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;User&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ name: string&lt;br/&gt;+ email: string&lt;br/&gt;+ phone: string&lt;br/&gt;+ password: string&lt;br/&gt;+ role: string&lt;br/&gt;+ status: enum&lt;br/&gt;+ is_active: boolean&lt;br/&gt;+ store_id: bigint (FK)&lt;br/&gt;+ email_verified_at: timestamp&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ canAccessPanel(panel): bool&lt;br/&gt;+ getTenants(panel): Collection&lt;br/&gt;+ canAccessTenant(tenant): bool&lt;br/&gt;+ store(): BelongsTo&lt;br/&gt;+ branch(): BelongsTo&lt;br/&gt;+ customer(): HasOne" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="100" y="120" width="240" height="280" as="geometry" />
+        </mxCell>
+
+        <!-- 2. Model: Driver -->
+        <mxCell id="class_driver" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;Driver&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ user_id: bigint (FK)&lt;br/&gt;+ store_id: bigint (FK)&lt;br/&gt;+ name: string&lt;br/&gt;+ phone: string&lt;br/&gt;+ address: text&lt;br/&gt;+ license_number: string&lt;br/&gt;+ photo: string&lt;br/&gt;+ daily_fee: decimal&lt;br/&gt;+ rating: decimal&lt;br/&gt;+ status: string&lt;br/&gt;+ is_available: boolean&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ store(): BelongsTo&lt;br/&gt;+ branch(): BelongsTo&lt;br/&gt;+ user(): BelongsTo&lt;br/&gt;+ schedules(): HasMany&lt;br/&gt;+ scopeActive(query): Builder&lt;br/&gt;+ scopeAvailableForDates(): Builder&lt;br/&gt;+ getIsBusyAttribute(): bool" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="100" y="440" width="240" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- 3. Model: DriverSchedule -->
+        <mxCell id="class_schedule" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;DriverSchedule&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ driver_id: bigint (FK)&lt;br/&gt;+ booking_id: bigint (FK)&lt;br/&gt;+ start_date: datetime&lt;br/&gt;+ end_date: datetime&lt;br/&gt;+ status: string&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ driver(): BelongsTo&lt;br/&gt;+ booking(): BelongsTo" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="100" y="780" width="240" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- 4. Model: CheckoutDraft -->
+        <mxCell id="class_draft" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;CheckoutDraft&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ user_id: bigint (FK)&lt;br/&gt;+ ip_address: string&lt;br/&gt;+ step: integer&lt;br/&gt;+ payload: array&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ user(): BelongsTo" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="100" y="1020" width="240" height="150" as="geometry" />
+        </mxCell>
+
+
+        <!-- ========================================== -->
+        <!--             KOLOM 2 (TENGAH-KIRI)          -->
+        <!-- ========================================== -->
+
+        <!-- 5. Model: Customer -->
+        <mxCell id="class_customer" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;Customer&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ user_id: bigint (FK)&lt;br/&gt;+ name: string&lt;br/&gt;+ email: string&lt;br/&gt;+ phone: string&lt;br/&gt;+ nik: string&lt;br/&gt;+ sim_number: string&lt;br/&gt;+ ktp_image: string&lt;br/&gt;+ sim_image: string&lt;br/&gt;+ selfie_image: string&lt;br/&gt;+ ktp_path: string&lt;br/&gt;+ sim_path: string&lt;br/&gt;+ no_kk: string&lt;br/&gt;+ kk_photo: string&lt;br/&gt;+ nip_nim: string&lt;br/&gt;+ id_card_photo: string&lt;br/&gt;+ pekerjaan: string&lt;br/&gt;+ customer_status: string&lt;br/&gt;+ address: text&lt;br/&gt;+ date_of_birth: string&lt;br/&gt;+ is_active: boolean&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ user(): BelongsTo&lt;br/&gt;+ bookings(): HasMany&lt;br/&gt;+ reviews(): HasMany" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="440" y="120" width="240" height="440" as="geometry" />
+        </mxCell>
+
+        <!-- 6. Model: Store -->
+        <mxCell id="class_store" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;Store&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ name: string&lt;br/&gt;+ slug: string&lt;br/&gt;+ phone: string&lt;br/&gt;+ email: string&lt;br/&gt;+ address: text&lt;br/&gt;+ city: string&lt;br/&gt;+ province: string&lt;br/&gt;+ google_maps: text&lt;br/&gt;+ status: boolean&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ booted(): void&lt;br/&gt;+ cars(): HasMany&lt;br/&gt;+ drivers(): HasMany&lt;br/&gt;+ bookings(): HasMany" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="440" y="600" width="240" height="250" as="geometry" />
+        </mxCell>
+
+        <!-- 7. Model: Car -->
+        <mxCell id="class_car" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;Car&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ store_id: bigint (FK)&lt;br/&gt;+ category: string&lt;br/&gt;+ car_name: string&lt;br/&gt;+ slug: string&lt;br/&gt;+ plate_number: string&lt;br/&gt;+ stnk_expiry: string&lt;br/&gt;+ tax_expiry: string&lt;br/&gt;+ year: integer&lt;br/&gt;+ color: string&lt;br/&gt;+ seat: integer&lt;br/&gt;+ transmission: string&lt;br/&gt;+ fuel_type: string&lt;br/&gt;+ mileage: integer&lt;br/&gt;+ daily_price: decimal&lt;br/&gt;+ driver_daily_price: decimal&lt;br/&gt;+ is_call_for_price: boolean&lt;br/&gt;+ monthly_price: decimal&lt;br/&gt;+ late_fee: decimal&lt;br/&gt;+ thumbnail: string&lt;br/&gt;+ description: text&lt;br/&gt;+ status: string&lt;br/&gt;+ is_available: boolean&lt;br/&gt;+ featured: boolean&lt;br/&gt;+ brand_name: string&lt;br/&gt;+ brand_slug: string&lt;br/&gt;+ brand_logo: string&lt;br/&gt;+ type_name: string&lt;br/&gt;+ type_description: text&lt;br/&gt;+ images: array&lt;br/&gt;+ latitude: decimal&lt;br/&gt;+ longitude: decimal&lt;br/&gt;+ speed: decimal&lt;br/&gt;+ location_address: string&lt;br/&gt;+ location_raw_data: array&lt;br/&gt;+ maintenances: array&lt;br/&gt;+ inspections: array&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ store(): BelongsTo&lt;br/&gt;+ branch(): BelongsTo&lt;br/&gt;+ bookings(): HasMany&lt;br/&gt;+ reviews(): HasMany&lt;br/&gt;+ getBrandAttribute(): object&lt;br/&gt;+ getTypeAttribute(): object&lt;br/&gt;+ getLatestLocationAttribute(): object&lt;br/&gt;+ getStockAttribute(): int" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="440" y="890" width="240" height="710" as="geometry" />
+        </mxCell>
+
+        <!-- 8. Model: Expense -->
+        <mxCell id="class_expense" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;Expense&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ date: date&lt;br/&gt;+ category: string&lt;br/&gt;+ store_id: bigint (FK)&lt;br/&gt;+ amount: decimal&lt;br/&gt;+ description: string&lt;br/&gt;+ attachment: string&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ store(): BelongsTo&lt;br/&gt;+ branch(): BelongsTo&lt;br/&gt;+ getCategoryAttribute(): object" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="440" y="1640" width="240" height="200" as="geometry" />
+        </mxCell>
+
+
+        <!-- ========================================== -->
+        <!--             KOLOM 3 (TENGAH-KANAN)         -->
+        <!-- ========================================== -->
+
+        <!-- 9. Model: Promo -->
+        <mxCell id="class_promo" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;Promo&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ code: string&lt;br/&gt;+ title: string&lt;br/&gt;+ description: text&lt;br/&gt;+ discount_type: string&lt;br/&gt;+ discount_value: decimal&lt;br/&gt;+ minimum_transaction: decimal&lt;br/&gt;+ start_date: date&lt;br/&gt;+ end_date: date&lt;br/&gt;+ quota: integer&lt;br/&gt;+ used: integer&lt;br/&gt;+ status: boolean&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ bookings(): HasMany" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="780" y="120" width="250" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- 10. Model: Booking -->
+        <mxCell id="class_booking" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;Booking&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ booking_code: string&lt;br/&gt;+ customer_id: bigint (FK)&lt;br/&gt;+ car_id: bigint (FK)&lt;br/&gt;+ store_id: bigint (FK)&lt;br/&gt;+ driver_id: bigint (FK)&lt;br/&gt;+ promo_id: bigint (FK)&lt;br/&gt;+ rental_type: string&lt;br/&gt;+ rental_category: string&lt;br/&gt;+ with_driver: boolean&lt;br/&gt;+ driver_name: string&lt;br/&gt;+ pickup_date: datetime&lt;br/&gt;+ return_date: datetime&lt;br/&gt;+ pickup_location: text&lt;br/&gt;+ return_location: text&lt;br/&gt;+ total_day: integer&lt;br/&gt;+ price: decimal&lt;br/&gt;+ driver_price: decimal&lt;br/&gt;+ extra_price: decimal&lt;br/&gt;+ late_fee: decimal&lt;br/&gt;+ discount: decimal&lt;br/&gt;+ tax: decimal&lt;br/&gt;+ grand_total: decimal&lt;br/&gt;+ dp_amount: decimal&lt;br/&gt;+ remaining_payment: decimal&lt;br/&gt;+ payment_status: string&lt;br/&gt;+ booking_status: string&lt;br/&gt;+ notes: text&lt;br/&gt;+ expired_at: datetime&lt;br/&gt;+ guest_token: string&lt;br/&gt;+ guest_name: string&lt;br/&gt;+ guest_email: string&lt;br/&gt;+ guest_phone: string&lt;br/&gt;+ ktp_path: string&lt;br/&gt;+ sim_path: string&lt;br/&gt;+ delivery_type: string&lt;br/&gt;+ pickup_type: string&lt;br/&gt;+ delivery_fee: float&lt;br/&gt;+ pickup_fee: float&lt;br/&gt;+ ojol_fee: float&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ customer(): BelongsTo&lt;br/&gt;+ payment(): HasOne&lt;br/&gt;+ user(): BelongsTo&lt;br/&gt;+ car(): BelongsTo&lt;br/&gt;+ store(): BelongsTo&lt;br/&gt;+ branch(): BelongsTo&lt;br/&gt;+ driver(): BelongsTo&lt;br/&gt;+ promo(): BelongsTo&lt;br/&gt;+ getBookingTypeAttribute(): string&lt;br/&gt;+ getBookingCategoryAttribute(): string" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="780" y="440" width="260" height="780" as="geometry" />
+        </mxCell>
+
+
+        <!-- ========================================== -->
+        <!--              KOLOM 4 (KANAN)               -->
+        <!-- ========================================== -->
+
+        <!-- 11. Model: Payment -->
+        <mxCell id="class_payment" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;Payment&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ booking_id: bigint (FK)&lt;br/&gt;+ payment_code: string&lt;br/&gt;+ payment_method: string&lt;br/&gt;+ transaction_id: string&lt;br/&gt;+ snap_token: text&lt;br/&gt;+ gross_amount: decimal&lt;br/&gt;+ paid_amount: decimal&lt;br/&gt;+ payment_status: string&lt;br/&gt;+ payment_date: datetime&lt;br/&gt;+ proof_payment: string&lt;br/&gt;+ midtrans_response: array&lt;br/&gt;+ payment_logs: array&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ booking(): BelongsTo&lt;br/&gt;+ store(): HasOneThrough&lt;br/&gt;+ getLogsAttribute(): Collection" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="440" width="240" height="280" as="geometry" />
+        </mxCell>
+
+        <!-- 12. Model: Review -->
+        <mxCell id="class_review" value="&lt;b&gt;&amp;lt;&amp;lt;Model&amp;gt;&amp;gt;&lt;br/&gt;Review&lt;/b&gt;&lt;hr/&gt;+ id: bigint (PK)&lt;br/&gt;+ booking_id: bigint (FK)&lt;br/&gt;+ customer_id: bigint (FK)&lt;br/&gt;+ car_id: bigint (FK)&lt;br/&gt;+ rating: integer&lt;br/&gt;+ review: text&lt;br/&gt;+ status: boolean&lt;br/&gt;+ created_at: timestamp&lt;br/&gt;+ updated_at: timestamp&lt;hr/&gt;+ booking(): BelongsTo&lt;br/&gt;+ customer(): BelongsTo&lt;br/&gt;+ user(): BelongsTo&lt;br/&gt;+ car(): BelongsTo" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="780" width="240" height="200" as="geometry" />
+        </mxCell>
+
+
+        <!-- ========================================== -->
+        <!--                 EDGES (RELASI)             -->
+        <!-- ========================================== -->
+
+        <!-- 1. User -> Customer -->
+        <mxCell id="edge_user_customer" value="hasOne" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_user" target="class_customer" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 2. User -> Driver -->
+        <mxCell id="edge_user_driver" value="hasOne" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_user" target="class_driver" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 3. User -> Store -->
+        <mxCell id="edge_user_store" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_user" target="class_store" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 4. Driver -> Store -->
+        <mxCell id="edge_driver_store" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_driver" target="class_store" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 5. Driver -> DriverSchedule -->
+        <mxCell id="edge_driver_schedule" value="hasMany" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_driver" target="class_schedule" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 6. Booking -> DriverSchedule -->
+        <mxCell id="edge_booking_schedule" value="hasMany" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_booking" target="class_schedule" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 7. Customer -> Booking -->
+        <mxCell id="edge_customer_booking" value="hasMany" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_customer" target="class_booking" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 8. Store -> Car -->
+        <mxCell id="edge_store_car" value="hasMany" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_store" target="class_car" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 9. Store -> Booking -->
+        <mxCell id="edge_store_booking" value="hasMany" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_store" target="class_booking" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 10. Store -> Expense -->
+        <mxCell id="edge_store_expense" value="hasMany" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_store" target="class_expense" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 11. Car -> Booking -->
+        <mxCell id="edge_car_booking" value="hasMany" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_car" target="class_booking" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 12. Booking -> Payment -->
+        <mxCell id="edge_booking_payment" value="hasOne" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_booking" target="class_payment" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 13. Booking -> Review -->
+        <mxCell id="edge_booking_review" value="hasOne" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_booking" target="class_review" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 14. Booking -> Promo -->
+        <mxCell id="edge_booking_promo" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_booking" target="class_promo" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 15. Review -> Customer -->
+        <mxCell id="edge_review_customer" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_review" target="class_customer" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 16. Review -> Car -->
+        <mxCell id="edge_review_car" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_review" target="class_car" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 17. CheckoutDraft -> User -->
+        <mxCell id="edge_draft_user" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" edge="1" source="class_draft" target="class_user" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

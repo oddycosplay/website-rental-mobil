@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 800" width="2000" height="800" style="background-color: #0F172A; font-family: 'Inter', sans-serif;">
+  <defs>
+    <style>
+      .bg-canvas { fill: #0F172A; }
+      .bg-screen { fill: #FFFFFF; }
+      .border-cool { stroke: #E2E8F0; stroke-width: 1px; fill: none; }
+      .text-primary { fill: #0F172A; font-family: 'Inter', sans-serif; }
+      .text-muted { fill: #64748B; font-family: 'Inter', sans-serif; }
+      .text-brand { fill: #1D4ED8; font-weight: bold; font-family: 'Inter', sans-serif; }
+      .btn-primary { fill: #1D4ED8; }
+      .btn-accent { fill: #F59E0B; }
+      .card-bg { fill: #F8FAFC; stroke: #F1F5F9; stroke-width: 1px; }
+      .form-input { fill: #FFFFFF; stroke: #CBD5E1; stroke-width: 1.5px; }
+    </style>
+  </defs>
+
+  <!-- BACKGROUND FIGMA CANVAS -->
+  <rect width="2000" height="800" class="bg-canvas" />
+
+  <!-- CANVAS ANNOTATIONS -->
+  <text x="50" y="40" fill="#94A3B8" font-size="20" font-weight="700">Siliwangi Rental — Figma Wireframe Design Board 2 (Auth vector screens)</text>
+  <text x="50" y="65" fill="#64748B" font-size="14">Drag and drop this SVG file directly into Figma to import editable frames, shapes, and texts.</text>
+
+  <!-- ==================== SCREEN 1: LOGIN (LEFT) ==================== -->
+  <g id="Frame_3_Login" transform="translate(100, 100)">
+    <!-- Screen Container -->
+    <rect width="700" height="600" class="bg-screen" rx="12" />
+    <rect width="700" height="600" class="border-cool" rx="12" />
+
+    <!-- Browser Header Bar -->
+    <g id="Browser_Header_3">
+      <circle cx="20" cy="20" r="6" fill="#EF4444" />
+      <circle cx="40" cy="20" r="6" fill="#F59E0B" />
+      <circle cx="60" cy="20" r="6" fill="#10B981" />
+      <rect x="100" y="8" width="450" height="24" rx="6" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1" />
+      <text x="120" y="24" class="text-muted" font-size="11">https://siliwangirental.com/login</text>
+      <line x1="0" y1="40" x2="700" y2="40" stroke="#E2E8F0" stroke-width="1" />
+    </g>
+
+    <!-- Glassmorphic Login Card -->
+    <g id="Login_Card" transform="translate(150, 80)">
+      <rect width="400" height="460" class="card-bg" rx="16" />
+      <text x="40" y="50" class="text-primary" font-size="24" font-weight="800">Selamat Datang Kembali</text>
+      <text x="40" y="75" class="text-muted" font-size="13">Silakan login untuk mengelola booking Anda</text>
+
+      <!-- Email Field -->
+      <g id="Email_Field" transform="translate(40, 110)">
+        <text x="0" y="15" class="text-primary" font-size="13" font-weight="600">Alamat Email</text>
+        <rect x="0" y="25" width="320" height="44" class="form-input" rx="8" />
+        <text x="15" y="52" class="text-muted" font-size="13">contoh@email.com</text>
+      </g>
+
+      <!-- Password Field -->
+      <g id="Password_Field" transform="translate(40, 200)">
+        <text x="0" y="15" class="text-primary" font-size="13" font-weight="600">Kata Sandi</text>
+        <rect x="0" y="25" width="320" height="44" class="form-input" rx="8" />
+        <text x="15" y="52" class="text-muted" font-size="13">••••••••••••••</text>
+        <text x="235" y="15" class="text-brand" font-size="12" font-weight="600">Lupa Sandi?</text>
+      </g>
+
+      <!-- Remember Me Checkbox -->
+      <g id="Remember_Me" transform="translate(40, 290)">
+        <rect x="0" y="0" width="16" height="16" rx="4" fill="none" stroke="#CBD5E1" stroke-width="1.5" />
+        <text x="25" y="13" class="text-muted" font-size="12">Ingat Saya di perangkat ini</text>
+      </g>
+
+      <!-- Sign In Button -->
+      <g id="Sign_In_Action" transform="translate(40, 330)">
+        <rect width="320" height="46" class="btn-primary" rx="8" />
+        <text x="135" y="28" fill="#FFFFFF" font-size="14" font-weight="700">Masuk Akun</text>
+      </g>
+
+      <text x="100" y="415" class="text-muted" font-size="12">Belum punya akun? <tspan fill="#1D4ED8" font-weight="600">Daftar Sekarang</tspan></text>
+    </g>
+  </g>
+
+  <!-- ==================== SCREEN 2: REGISTER (RIGHT) ==================== -->
+  <g id="Frame_4_Register" transform="translate(1000, 100)">
+    <!-- Screen Container -->
+    <rect width="700" height="600" class="bg-screen" rx="12" />
+    <rect width="700" height="600" class="border-cool" rx="12" />
+
+    <!-- Browser Header Bar -->
+    <g id="Browser_Header_4">
+      <circle cx="20" cy="20" r="6" fill="#EF4444" />
+      <circle cx="40" cy="20" r="6" fill="#F59E0B" />
+      <circle cx="60" cy="20" r="6" fill="#10B981" />
+      <rect x="100" y="8" width="450" height="24" rx="6" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1" />
+      <text x="120" y="24" class="text-muted" font-size="11">https://siliwangirental.com/register</text>
+      <line x1="0" y1="40" x2="700" y2="40" stroke="#E2E8F0" stroke-width="1" />
+    </g>
+
+    <!-- Register Card -->
+    <g id="Register_Card" transform="translate(150, 60)">
+      <rect width="400" height="510" class="card-bg" rx="16" />
+      <text x="40" y="40" class="text-primary" font-size="24" font-weight="800">Buat Akun Pelanggan</text>
+      <text x="40" y="60" class="text-muted" font-size="13">Lengkapi formulir untuk pendaftaran instan</text>
+
+      <!-- Nama Field -->
+      <g id="Nama_Field" transform="translate(40, 85)">
+        <text x="0" y="15" class="text-primary" font-size="12" font-weight="600">Nama Lengkap (Sesuai KTP)</text>
+        <rect x="0" y="22" width="320" height="38" class="form-input" rx="8" />
+        <text x="15" y="45" class="text-muted" font-size="12">Budi Santoso</text>
+      </g>
+
+      <!-- Email Field -->
+      <g id="Reg_Email_Field" transform="translate(40, 160)">
+        <text x="0" y="15" class="text-primary" font-size="12" font-weight="600">Alamat Email</text>
+        <rect x="0" y="22" width="320" height="38" class="form-input" rx="8" />
+        <text x="15" y="45" class="text-muted" font-size="12">budi@email.com</text>
+      </g>
+
+      <!-- WhatsApp Field -->
+      <g id="WA_Field" transform="translate(40, 235)">
+        <text x="0" y="15" class="text-primary" font-size="12" font-weight="600">Nomor WhatsApp Aktif</text>
+        <rect x="0" y="22" width="320" height="38" class="form-input" rx="8" />
+        <text x="15" y="45" class="text-muted" font-size="12">081234567890</text>
+      </g>
+
+      <!-- Password Field -->
+      <g id="Reg_Password_Field" transform="translate(40, 310)">
+        <text x="0" y="15" class="text-primary" font-size="12" font-weight="600">Kata Sandi</text>
+        <rect x="0" y="22" width="320" height="38" class="form-input" rx="8" />
+        <text x="15" y="45" class="text-muted" font-size="12">••••••••••••••</text>
+      </g>
+
+      <!-- Terms Checkbox -->
+      <g id="Terms_Checkbox" transform="translate(40, 385)">
+        <rect x="0" y="0" width="14" height="14" rx="4" fill="none" stroke="#CBD5E1" stroke-width="1.5" />
+        <text x="22" y="11" class="text-muted" font-size="11">Saya menyetujui Kebijakan Persyaratan Dokumen Sewa</text>
+      </g>
+
+      <!-- Register Button -->
+      <g id="Register_Action" transform="translate(40, 415)">
+        <rect width="320" height="42" class="btn-primary" rx="8" />
+        <text x="125" y="26" fill="#FFFFFF" font-size="13" font-weight="700">Daftar Akun Baru</text>
+      </g>
+
+      <text x="100" y="485" class="text-muted" font-size="11">Sudah memiliki akun? <tspan fill="#1D4ED8" font-weight="600">Masuk Akun</tspan></text>
+    </g>
+  </g>
+</svg>

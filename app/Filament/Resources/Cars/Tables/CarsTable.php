@@ -14,6 +14,7 @@ class CarsTable
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail')
+                    ->disk('public')
                     ->square(),
                 
                 Tables\Columns\TextColumn::make('car_name')

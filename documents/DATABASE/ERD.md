@@ -60,6 +60,19 @@ erDiagram
         timestamp created_at
     }
 
+    employees {
+        bigint id PK
+        bigint user_id FK
+        bigint store_id FK
+        string name
+        string email
+        string phone
+        string nip
+        string position
+        boolean is_active
+        timestamp created_at
+    }
+
     stores {
         bigint id PK
         string name
@@ -217,37 +230,100 @@ erDiagram
         timestamp created_at
     }
 
+    location_surveys {
+        bigint id PK
+        bigint store_id FK
+        bigint booking_id FK
+        string surveyor_name
+        date survey_date
+        enum survey_type
+        text address
+        json residence_status
+        json job_status
+        json neighbor_interview
+        json photos
+        enum recommendation
+        text notes
+        enum status
+        bigint approved_by FK
+        timestamp approved_at
+        timestamp created_at
+    }
+
+    vehicle_inspections {
+        bigint id PK
+        bigint store_id FK
+        bigint booking_id FK
+        bigint car_id FK
+        string inspector_name
+        enum inspection_type
+        timestamp inspected_at
+        integer odometer_km
+        enum fuel_level
+        json exterior
+        json interior
+        json equipment
+        json engine
+        json photos
+        json fuel_photos
+        boolean damage_found
+        text damage_description
+        decimal damage_cost
+        decimal dirty_fine
+        decimal fuel_fine
+        json damage_photos
+        boolean customer_confirmed
+        text customer_note
+        text notes
+        enum status
+        timestamp created_at
+    }
+
     users ||--o| customers : "has profile"
+    users ||--o| employees : "has profile"
     users ||--o{ drivers : "is driver"
     stores ||--o{ cars : "owns"
     stores ||--o{ drivers : "employs"
+    stores ||--o{ employees : "employs"
     stores ||--o{ expenses : "incurs"
+    stores ||--o{ location_surveys : "conducts"
+    stores ||--o{ vehicle_inspections : "oversees"
     cars ||--o{ bookings : "booked in"
     customers ||--o{ bookings : "makes"
     drivers ||--o{ bookings : "assigned to"
     promos ||--o{ bookings : "applied to"
     bookings ||--o{ payments : "has payments"
     bookings ||--o{ reviews : "reviewed in"
+    bookings ||--o{ location_surveys : "surveyed in"
+    bookings ||--o{ vehicle_inspections : "inspected in"
+    cars ||--o{ vehicle_inspections : "inspected"
 ```
 
 ---
 
 ## 2. Deskripsi Relasi Utama
 
-| Relasi            | Tipe | Keterangan |
-| ----------------- | ---- | ---------- |
-| **User → Customer**   | `1:1 (Optional)` | Akun user terhubung ke detail dokumen kustomer di tabel `customers` jika login sebagai kustomer. |
-| **User → Driver**     | `1:1 (Optional)` | User dengan role `driver` terhubung ke data detail driver di tabel `drivers`. |
-| **Customer → Booking** | `1:N` | Kustomer terdaftar (`customers`) melakukan transaksi pemesanan mobil (`bookings`). |
-| **Store → Car**       | `1:N` | Cabang rental/toko (`stores`) mengelola unit kendaraan (`cars`) yang dialokasikan di sana. |
-| **Store → Driver**     | `1:N` | Cabang menugaskan pengemudi (`drivers`) untuk transaksi sewa dengan supir. |
-| **Store → Expense**    | `1:N` | Cabang mencatat pengeluaran operasional cabang langsung (`expenses`). |
-| **Car → Booking**     | `1:N` | Satu unit kendaraan dapat dipesan pada banyak transaksi booking berbeda. |
-| **Driver → Booking**  | `1:N` | Pengemudi ditugaskan pada transaksi booking sewa dengan sopir. |
-| **Promo → Booking**   | `1:N` | Kode kupon promo dapat digunakan pada transaksi booking untuk mendapatkan potongan harga. |
-| **Booking → Payment** | `1:N` | Satu transaksi booking dapat menerima beberapa transaksi pembayaran (misalnya DP lalu pelunasan). |
-| **Booking → Review**  | `1:1` | Setiap transaksi booking yang selesai dapat dinilai oleh penyewa dalam bentuk 1 ulasan. |
-| **Customer → Review** | `1:N` | Kustomer memberikan penilaian kepuasan sewa terhadap kendaraan. |
+| Relasi                           | Tipe             | Keterangan                                                                                               |
+| -------------------------------- | ---------------- | -------------------------------------------------------------------------------------------------------- |
+| **User → Customer**              | `1:1 (Optional)` | Akun user terhubung ke detail dokumen kustomer di tabel `customers` jika login sebagai kustomer.         |
+| **User → Employee**              | `1:1 (Optional)` | Akun user terhubung ke profil karyawan di tabel `employees` jika karyawan diberikan akses dashboard.     |
+| **User → Driver**                | `1:1 (Optional)` | User dengan role `driver` terhubung ke data detail driver di tabel `drivers`.                            |
+| **Customer → Booking**           | `1:N`            | Kustomer terdaftar (`customers`) melakukan transaksi pemesanan mobil (`bookings`).                       |
+| **Store → Car**                  | `1:N`            | Cabang rental/toko (`stores`) mengelola unit kendaraan (`cars`) yang dialokasikan di sana.               |
+| **Store → Employee**             | `1:N`            | Cabang menugaskan/mempekerjakan karyawan (`employees`).                                                  |
+| **Store → Driver**               | `1:N`            | Cabang menugaskan pengemudi (`drivers`) untuk transaksi sewa dengan supir.                               |
+| **Store → Expense**              | `1:N`            | Cabang mencatat pengeluaran operasional cabang langsung (`expenses`).                                    |
+| **Store → Location Survey**      | `1:N`            | Toko cabang mengoordinasikan survei validasi lokasi tempat tinggal kustomer (`location_surveys`).        |
+| **Store → Vehicle Inspection**   | `1:N`            | Toko cabang mengawasi proses pengecekan keluar/masuk unit mobil (`vehicle_inspections`).                 |
+| **Car → Booking**                | `1:N`            | Satu unit kendaraan dapat dipesan pada banyak transaksi booking berbeda.                                 |
+| **Driver → Booking**             | `1:N`            | Pengemudi ditugaskan pada transaksi booking sewa dengan sopir.                                           |
+| **Promo → Booking**              | `1:N`            | Kode kupon promo dapat digunakan pada transaksi booking untuk mendapatkan potongan harga.                |
+| **Booking → Payment**            | `1:N`            | Satu transaksi booking dapat menerima beberapa transaksi pembayaran (misalnya DP lalu pelunasan).        |
+| **Booking → Review**             | `1:1`            | Setiap transaksi booking yang selesai dapat dinilai oleh penyewa dalam bentuk 1 ulasan.                  |
+| **Customer → Review**            | `1:N`            | Kustomer memberikan penilaian kepuasan sewa terhadap kendaraan.                                          |
+| **Booking → Location Survey**    | `1:N`            | Transaksi pemesanan memicu pembuatan survei validasi kelayakan kustomer (`location_surveys`).            |
+| **Booking → Vehicle Inspection** | `1:N`            | Transaksi pemesanan memiliki log pengecekan mobil sebelum sewa dan sesudah sewa (`vehicle_inspections`). |
+| **Car → Vehicle Inspection**     | `1:N`            | Armada mobil menerima log inspeksi kelayakan fisik berkala (`vehicle_inspections`).                      |
 
 ---
 

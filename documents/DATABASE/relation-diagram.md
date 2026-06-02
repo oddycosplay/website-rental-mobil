@@ -34,6 +34,8 @@ Model `Store` mewakili outlet / toko kantor cabang operasional persewaan.
 - `hasMany` ➔ `Driver` `(drivers.store_id = stores.id)`
 - `hasMany` ➔ `Booking` `(bookings.store_id = stores.id)`
 - `hasMany` ➔ `Expense` `(expenses.store_id = stores.id)`
+- `hasMany` ➔ `LocationSurvey` `(location_surveys.store_id = stores.id)`
+- `hasMany` ➔ `VehicleInspection` `(vehicle_inspections.store_id = stores.id)`
 
 ### Car Model
 
@@ -42,6 +44,7 @@ Model `Car` mewakili unit armada mobil yang tersedia untuk disewa.
 - `belongsTo` ➔ `Store` `(cars.store_id = stores.id)`
 - `hasMany` ➔ `Booking` `(bookings.car_id = cars.id)`
 - `hasMany` ➔ `Review` `(reviews.car_id = cars.id)`
+- `hasMany` ➔ `VehicleInspection` `(vehicle_inspections.car_id = cars.id)`
 
 ### Driver Model
 
@@ -68,6 +71,8 @@ Model utama transaksi persewaan mobil.
 - `belongsTo` ➔ `Promo` `(bookings.promo_id = promos.id)` [Nullable]
 - `hasMany` ➔ `Payment` `(payments.booking_id = bookings.id)`
 - `hasOne` ➔ `Review` `(reviews.booking_id = bookings.id)`
+- `hasMany` ➔ `LocationSurvey` `(location_surveys.booking_id = bookings.id)`
+- `hasMany` ➔ `VehicleInspection` `(vehicle_inspections.booking_id = bookings.id)`
 
 ### Payment Model
 
@@ -88,6 +93,22 @@ Review dan rating mobil yang diberikan oleh pelanggan setelah selesai sewa.
 - `belongsTo` ➔ `Booking` `(reviews.booking_id = bookings.id)`
 - `belongsTo` ➔ `Customer` `(reviews.customer_id = customers.id)`
 - `belongsTo` ➔ `Car` `(reviews.car_id = cars.id)`
+
+### LocationSurvey Model
+
+Model pencatatan survei tempat tinggal renter untuk validasi data customer.
+
+- `belongsTo` ➔ `Store` `(location_surveys.store_id = stores.id)`
+- `belongsTo` ➔ `Booking` `(location_surveys.booking_id = bookings.id)`
+- `belongsTo` ➔ `User` `(location_surveys.approved_by = users.id)` [Nullable, admin/surveyor yang menyetujui]
+
+### VehicleInspection Model
+
+Model pencatatan inspeksi fisik kendaraan sebelum (pre_rental) atau sesudah (post_rental) penyewaan.
+
+- `belongsTo` ➔ `Store` `(vehicle_inspections.store_id = stores.id)`
+- `belongsTo` ➔ `Booking` `(vehicle_inspections.booking_id = bookings.id)`
+- `belongsTo` ➔ `Car` `(vehicle_inspections.car_id = cars.id)`
 
 ---
 
@@ -290,17 +311,71 @@ erDiagram
         timestamp created_at
     }
 
+    location_surveys {
+        bigint id PK
+        bigint store_id FK
+        bigint booking_id FK
+        string surveyor_name
+        date survey_date
+        enum survey_type
+        text address
+        json residence_status
+        json job_status
+        json neighbor_interview
+        json photos
+        enum recommendation
+        text notes
+        enum status
+        bigint approved_by FK
+        timestamp approved_at
+        timestamp created_at
+    }
+
+    vehicle_inspections {
+        bigint id PK
+        bigint store_id FK
+        bigint booking_id FK
+        bigint car_id FK
+        string inspector_name
+        enum inspection_type
+        timestamp inspected_at
+        integer odometer_km
+        enum fuel_level
+        json exterior
+        json interior
+        json equipment
+        json engine
+        json photos
+        json fuel_photos
+        boolean damage_found
+        text damage_description
+        decimal damage_cost
+        decimal dirty_fine
+        decimal fuel_fine
+        json damage_photos
+        boolean customer_confirmed
+        text customer_note
+        text notes
+        enum status
+        timestamp created_at
+    }
+
     users ||--o| customers : "has profile"
     users ||--o{ drivers : "is driver"
     stores ||--o{ cars : "owns"
     stores ||--o{ drivers : "employs"
     stores ||--o{ expenses : "incurs"
+    stores ||--o{ location_surveys : "conducts"
+    stores ||--o{ vehicle_inspections : "oversees"
     cars ||--o{ bookings : "booked in"
     customers ||--o{ bookings : "makes"
     drivers ||--o{ bookings : "assigned to"
     promos ||--o{ bookings : "applied to"
     bookings ||--o{ payments : "has payments"
     bookings ||--o{ reviews : "reviewed in"
+    bookings ||--o{ location_surveys : "surveyed in"
+    bookings ||--o{ vehicle_inspections : "inspected in"
+    cars ||--o{ vehicle_inspections : "inspected"
 ```
 
 ---
@@ -325,7 +400,13 @@ Aturan cascading ini secara eksplisit dikonfigurasi pada file migration Laravel 
 | `reviews.customer_id`          | `customers.id`          | **CASCADE**        | Ulasan otomatis dihapus jika profil customer yang memberikan ulasan dihapus. |
 | `reviews.car_id`               | `cars.id`               | **CASCADE**        | Ulasan otomatis terhapus jika armada mobil yang bersangkutan dihapus dari database. |
 | `expenses.store_id`            | `stores.id`             | **CASCADE**        | Pengeluaran keuangan toko cabang otomatis terhapus jika toko tersebut dihapus. |
+| `location_surveys.store_id`    | `stores.id`             | **CASCADE**        | Jika toko cabang dihapus, riwayat survei kustomer di cabang tersebut ikut dibersihkan. |
+| `location_surveys.booking_id`  | `bookings.id`           | **CASCADE**        | Jika transaksi booking dihapus, log survei kelayakan kustomer terkait otomatis dihapus. |
+| `location_surveys.approved_by`  | `users.id`              | **SET NULL**       | Jika akun surveyor/admin dihapus, data survei tetap dipertahankan dengan persetujuan diset menjadi NULL. |
+| `vehicle_inspections.store_id` | `stores.id`             | **CASCADE**        | Jika toko cabang dihapus, data inspeksi mobil di cabang tersebut ikut dibersihkan. |
+| `vehicle_inspections.booking_id`| `bookings.id`           | **CASCADE**        | Jika transaksi booking dihapus, log pengecekan mobil keluar/masuk ikut dihapus. |
+| `vehicle_inspections.car_id`   | `cars.id`               | **CASCADE**        | Jika unit armada mobil dihapus, data log pengecekan fisik mobil tersebut ikut dibersihkan. |
 
 ---
 
-Versi: 5.0.0 | Diperbarui Tanggal: 23 Mei 2026 | Penyelarasan Penuh dengan Skema Akademik Kerja Praktik
+Versi: 5.1.0 | Diperbarui Tanggal: 31 Mei 2026 | Penyelarasan Penuh dengan Fitur Operasional Backend & Skema Akademik Kerja Praktik

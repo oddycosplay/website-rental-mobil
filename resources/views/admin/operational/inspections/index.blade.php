@@ -403,6 +403,7 @@
     </div>
 </div>
 
+@push('modals')
 <!-- ================= MODAL FORM INSPEKSI ================= -->
 <div class="modal fade" id="inspectionFormModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -596,6 +597,7 @@
         </div>
     </div>
 </div>
+@endpush
 
 @endsection
 

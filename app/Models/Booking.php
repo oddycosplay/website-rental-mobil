@@ -154,6 +154,16 @@ class Booking extends Model
         return $this->belongsTo(Promo::class);
     }
 
+    public function locationSurveys()
+    {
+        return $this->hasMany(LocationSurvey::class);
+    }
+
+    public function vehicleInspections()
+    {
+        return $this->hasMany(VehicleInspection::class);
+    }
+
     /**
      * BACKWARD COMPATIBILITY: booking_type Accessor & Mutator
      */

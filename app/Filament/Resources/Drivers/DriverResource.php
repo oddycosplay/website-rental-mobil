@@ -23,6 +23,14 @@ class DriverResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-identification';
 
+    protected static ?string $navigationLabel = 'Data Driver';
+
+    protected static ?string $pluralLabel = 'Data Driver';
+
+    protected static ?string $modelLabel = 'Driver';
+
+    protected static ?string $navigationGroup = 'Karyawan';
+
     protected static ?string $recordTitleAttribute = 'Driver';
 
     public static function canAccess(): bool

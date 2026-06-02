@@ -17,17 +17,9 @@ class CustomerResource extends Resource
 {
     protected static bool $isScopedToTenant = false;
 
-    protected static ?string $model = User::class;
+    protected static ?string $model = \App\Models\Customer::class;
 
     protected static ?string $navigationLabel = 'Pelanggan';
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->whereHas('roles', function ($query) {
-                $query->where('name', 'customer');
-            });
-    }
 
     public static function getNavigationIcon(): ?string
     {

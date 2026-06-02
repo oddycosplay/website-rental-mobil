@@ -56,4 +56,76 @@ CREATE TABLE bookings (
 
 ---
 
-Versi: 1.1.0 | Tanggal: 2026-05-14
+## 11. Tabel: location_surveys
+
+```sql
+CREATE TABLE location_surveys (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    store_id BIGINT UNSIGNED NOT NULL,
+    booking_id BIGINT UNSIGNED NOT NULL,
+    surveyor_name VARCHAR(255) NOT NULL,
+    survey_date DATE NOT NULL,
+    survey_type ENUM('delivery', 'pickup') NOT NULL DEFAULT 'delivery',
+    address TEXT NOT NULL,
+    residence_status JSON NOT NULL,
+    job_status JSON NOT NULL,
+    neighbor_interview JSON NOT NULL,
+    photos JSON NOT NULL,
+    recommendation ENUM('layak', 'tidak_layak') NOT NULL DEFAULT 'layak',
+    notes TEXT NULL,
+    status ENUM('pending', 'approved', 'rejected') NOT NULL DEFAULT 'pending',
+    approved_by BIGINT UNSIGNED NULL,
+    approved_at TIMESTAMP NULL,
+    created_at TIMESTAMP NULL,
+    updated_at TIMESTAMP NULL,
+    FOREIGN KEY (store_id) REFERENCES stores(id) ON DELETE CASCADE,
+    FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE,
+    FOREIGN KEY (approved_by) REFERENCES users(id) ON DELETE SET NULL,
+    INDEX idx_location_surveys_status (status)
+) ENGINE=InnoDB;
+```
+
+---
+
+## 12. Tabel: vehicle_inspections
+
+```sql
+CREATE TABLE vehicle_inspections (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    store_id BIGINT UNSIGNED NOT NULL,
+    booking_id BIGINT UNSIGNED NOT NULL,
+    car_id BIGINT UNSIGNED NOT NULL,
+    inspector_name VARCHAR(255) NOT NULL,
+    inspection_type ENUM('pre_rental', 'post_rental') NOT NULL DEFAULT 'pre_rental',
+    inspected_at TIMESTAMP NOT NULL,
+    odometer_km INT UNSIGNED NOT NULL,
+    fuel_level ENUM('full', 'three_quarter', 'half', 'quarter', 'empty') NOT NULL DEFAULT 'full',
+    exterior JSON NOT NULL,
+    interior JSON NOT NULL,
+    equipment JSON NOT NULL,
+    engine JSON NOT NULL,
+    photos JSON NOT NULL,
+    fuel_photos JSON NOT NULL,
+    damage_found BOOLEAN NOT NULL DEFAULT 0,
+    damage_description TEXT NULL,
+    damage_cost DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    dirty_fine DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    fuel_fine DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    damage_photos JSON NULL,
+    customer_confirmed BOOLEAN NOT NULL DEFAULT 0,
+    customer_note TEXT NULL,
+    notes TEXT NULL,
+    status ENUM('pending', 'approved') NOT NULL DEFAULT 'pending',
+    created_at TIMESTAMP NULL,
+    updated_at TIMESTAMP NULL,
+    FOREIGN KEY (store_id) REFERENCES stores(id) ON DELETE CASCADE,
+    FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE,
+    FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE,
+    INDEX idx_vehicle_inspections_status (status)
+) ENGINE=InnoDB;
+```
+
+---
+
+Versi: 1.2.0 | Tanggal: 2026-05-31
+

@@ -66,13 +66,6 @@
             </div>
             @endif
 
-            @if(session()->has('info'))
-            <div class="bg-emerald-500/10 text-emerald-400 p-5 rounded-2xl border border-emerald-500/20 flex items-center gap-4 animate-fade-in">
-                <i class="fas fa-circle-info text-emerald-400"></i>
-                <p class="text-xs font-bold">{{ session('info') }}</p>
-            </div>
-            @endif
-
             {{-- FORM CARDS --}}
             <div class="bg-white/5 backdrop-blur-3xl rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden min-h-[400px]">
 
@@ -678,55 +671,16 @@
                     </div>
                     @endif
 
-                    {{-- Layanan Ojol Antar-Jemput Toggle --}}
-                    <div class="mt-8 space-y-4">
-                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Layanan Antar-Jemput Ojek Online (Ojol)?</label>
-                        <div class="grid grid-cols-2 gap-4">
-                            <label class="cursor-pointer group">
-                                <input type="radio" wire:model.live="needs_ojol" value="0" class="peer sr-only">
-                                <div class="py-4 text-center rounded-2xl border border-white/5 bg-slate-900/30 peer-checked:border-gold peer-checked:bg-gold/10 transition-all flex flex-col items-center gap-1 group-hover:bg-white/5">
-                                    <p class="text-xs font-black text-white">Tidak</p>
-                                    <p class="text-[8px] text-slate-500">Ambil / kembalikan sendiri</p>
-                                </div>
-                            </label>
-                            <label class="cursor-pointer group">
-                                <input type="radio" wire:model.live="needs_ojol" value="1" class="peer sr-only">
-                                <div class="py-4 text-center rounded-2xl border border-white/5 bg-slate-900/30 peer-checked:border-gold peer-checked:bg-gold/10 transition-all flex flex-col items-center gap-1 group-hover:bg-white/5">
-                                    <p class="text-xs font-black text-white">Ya</p>
-                                    <p class="text-[8px] text-slate-500">Butuh penjemputan/pengantaran ojol</p>
-                                </div>
-                            </label>
+                    {{-- Biaya Ojol Antar-Jemput --}}
+                    <div class="mt-8 space-y-3">
+                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Biaya Ojol Antar-Jemput <span class="text-slate-600 normal-case font-medium">(Opsional - Bisa diinput Pelanggan atau Admin)</span></label>
+                        <div class="relative group">
+                            <span class="absolute left-6 top-1/2 -translate-y-1/2 text-slate-500 font-bold text-xs pr-3 border-r border-white/10">Rp</span>
+                            <input type="number" wire:model.live="ojol_fee" class="w-full bg-slate-900/50 border border-white/10 rounded-2xl pl-16 pr-6 py-4 text-white focus:border-gold outline-none transition-all font-medium placeholder:text-slate-700" placeholder="0">
                         </div>
+                        <p class="text-[9px] text-slate-500 ml-1">Masukkan perkiraan biaya ojek online untuk penjemputan/pengantaran staf kami, jika diperlukan.</p>
+                        @error('ojol_fee') <span class="text-red-500 text-[10px] font-bold ml-1">{{ $message }}</span> @enderror
                     </div>
-
-                    {{-- Conditional Ojol Details --}}
-                    @if($needs_ojol)
-                    <div class="mt-6 p-6 rounded-3xl bg-white/5 border border-white/10 space-y-6 animate-fade-in">
-                        <div class="space-y-3">
-                            <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Layanan Ojol Yang Digunakan <span class="text-slate-600 normal-case font-medium">(Opsional)</span></label>
-                            <div class="relative">
-                                <select wire:model.live="ojol_service" class="w-full bg-slate-900/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-gold outline-none transition-all font-medium appearance-none cursor-pointer">
-                                    <option value="none" class="bg-slate-900">-- Pilih Layanan Ojol (Opsional) --</option>
-                                    <option value="gojek" class="bg-slate-900">Gojek</option>
-                                    <option value="grab" class="bg-slate-900">Grab</option>
-                                    <option value="maxim" class="bg-slate-900">Maxim</option>
-                                    <option value="lainnya" class="bg-slate-900">Lainnya</option>
-                                </select>
-                                <i class="fas fa-chevron-down absolute right-6 top-1/2 -translate-y-1/2 text-slate-600 pointer-events-none"></i>
-                            </div>
-                        </div>
-
-                        <div class="space-y-3">
-                            <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Biaya Ojol Antar-Jemput <span class="text-slate-600 normal-case font-medium">(Opsional)</span></label>
-                            <div class="relative group">
-                                <span class="absolute left-6 top-1/2 -translate-y-1/2 text-slate-500 font-bold text-xs pr-3 border-r border-white/10">Rp</span>
-                                <input type="number" wire:model.live="ojol_fee" class="w-full bg-slate-900/50 border border-white/10 rounded-2xl pl-16 pr-6 py-4 text-white focus:border-gold outline-none transition-all font-medium placeholder:text-slate-700" placeholder="0">
-                            </div>
-                            <p class="text-[9px] text-slate-500 ml-1">Masukkan perkiraan biaya ojek online untuk penjemputan/pengantaran staf kami, jika diperlukan.</p>
-                            @error('ojol_fee') <span class="text-red-500 text-[10px] font-bold ml-1">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                    @endif
 
                     {{-- Additional Notes --}}
                     <div class="mt-8 space-y-3">
@@ -739,19 +693,13 @@
                 {{-- Step 5: Summary & Confirmation --}}
                 @if($step == 5)
                 <div class="p-8 md:p-12" data-aos="fade-up">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-white/5">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-2xl bg-gold/10 text-gold flex items-center justify-center text-xl shadow-inner">
-                                <i class="fas fa-receipt"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-black text-white">Konfirmasi & Ringkasan</h3>
-                                <p class="text-xs text-slate-500 font-medium mt-1">Periksa kembali data anda sebelum melanjutkan.</p>
-                            </div>
+                    <div class="flex items-center gap-4 mb-10">
+                        <div class="w-12 h-12 rounded-2xl bg-gold/10 text-gold flex items-center justify-center text-xl shadow-inner">
+                            <i class="fas fa-receipt"></i>
                         </div>
-                        <div class="bg-gold/10 border border-gold/20 px-4 py-2 rounded-2xl flex flex-col items-start sm:items-end flex-shrink-0">
-                            <span class="text-[9px] font-black text-gold/60 uppercase tracking-widest">Kode Booking / Transaksi</span>
-                            <span class="text-sm font-black text-white tracking-wider font-mono">{{ $booking_code }}</span>
+                        <div>
+                            <h3 class="text-xl font-black text-white">Konfirmasi & Ringkasan</h3>
+                            <p class="text-xs text-slate-500 font-medium mt-1">Periksa kembali data anda sebelum melanjutkan.</p>
                         </div>
                     </div>
 
@@ -844,7 +792,7 @@
                         {{-- Driver --}}
                         <div class="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-4">
                             <div class="w-10 h-10 rounded-xl bg-gold/10 text-gold flex items-center justify-center flex-shrink-0"><i class="fas fa-steering-wheel"></i></div>
-                             <div class="flex-1">
+                            <div class="flex-1">
                                 <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Mode Berkendara</p>
                                 <p class="text-sm font-bold text-white">{{ $with_driver ? '👨‍✈️ Dengan Driver' : '🔑 Lepas Kunci' }}</p>
                                 @if(!$with_driver && $dest_type === 'luar_jabotabek')
@@ -945,11 +893,6 @@
                     {{-- Booking Details Summary --}}
                     <div class="space-y-4">
                         <h5 class="text-[10px] font-black text-slate-500 uppercase tracking-widest border-b border-white/5 pb-2">Ringkasan Sewa</h5>
-
-                        <div class="flex justify-between items-center text-xs pb-2 border-b border-white/5">
-                            <span class="text-slate-400">Kode Transaksi</span>
-                            <span class="text-gold font-mono font-black tracking-wider">{{ $booking_code }}</span>
-                        </div>
 
                         <div class="flex justify-between items-center text-xs">
                             <span class="text-slate-400">Durasi</span>

@@ -1,4 +1,4 @@
-﻿# Class Diagram — Siliwangi Rental
+# Class Diagram — Siliwangi Rental
 
 **Nama File:** `class-diagram.md`  
 **Lokasi:** `documents/UML/`  
@@ -107,6 +107,60 @@ classDiagram
         +updateRating()
     }
 
+    class LocationSurvey {
+        +bigint id
+        +bigint store_id
+        +bigint booking_id
+        +string surveyor_name
+        +date survey_date
+        +enum survey_type
+        +text address
+        +json residence_status
+        +json job_status
+        +json neighbor_interview
+        +json photos
+        +enum recommendation
+        +text notes
+        +enum status
+        +bigint approved_by
+        +timestamp approved_at
+        +belongsTo() Store
+        +belongsTo() Booking
+        +belongsTo() User
+        +boot() void
+    }
+
+    class VehicleInspection {
+        +bigint id
+        +bigint store_id
+        +bigint booking_id
+        +bigint car_id
+        +string inspector_name
+        +enum inspection_type
+        +timestamp inspected_at
+        +integer odometer_km
+        +enum fuel_level
+        +json exterior
+        +json interior
+        +json equipment
+        +json engine
+        +json photos
+        +json fuel_photos
+        +boolean damage_found
+        +text damage_description
+        +decimal damage_cost
+        +decimal dirty_fine
+        +decimal fuel_fine
+        +json damage_photos
+        +boolean customer_confirmed
+        +text customer_note
+        +text notes
+        +enum status
+        +belongsTo() Store
+        +belongsTo() Booking
+        +belongsTo() Car
+    }
+
     class MidtransService {
         +createSnapToken(Booking) string
         +handleWebhook(array payload) void
@@ -127,6 +181,9 @@ classDiagram
     Customer "1" --> "0..*" Booking
     Driver "0..1" --> "0..*" Booking
     Booking "1" --> "1..*" Payment
+    Booking "1" --> "0..*" LocationSurvey
+    Booking "1" --> "0..*" VehicleInspection
+    Car "1" --> "0..*" VehicleInspection
 ```
 
 ---
@@ -143,4 +200,4 @@ classDiagram
 
 ---
 
-Versi: 1.0.0 | Tanggal: 2026-05-14
+Versi: 1.1.0 | Tanggal: 2026-05-31

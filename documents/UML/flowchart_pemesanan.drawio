@@ -1,0 +1,231 @@
+<mxfile host="65bd71144e">
+  <diagram id="diagram-flowchart-siliwangi" name="Flowchart Pemesanan Siliwangi Rental">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2550" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <!-- Layer Root standard draw.io -->
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title Block -->
+        <mxCell id="title_block" value="&lt;b&gt;FLOWCHART OPERASIONAL PENYEWAAN SILIWANGI RENTAL&lt;/b&gt;&lt;br/&gt;&lt;font color=&quot;#475569&quot;&gt;Proses Bisnis Terintegrasi End-to-End: Pemesanan s.d Pengembalian Kendaraan&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="50" y="30" width="700" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ========================================== -->
+        <!--              SWIMLANES (BACKGROUND)        -->
+        <!-- ========================================== -->
+
+        <!-- 1. Customer Lane -->
+        <mxCell id="lane_customer" value="&lt;b&gt;PENYEWA (CUSTOMER)&lt;/b&gt;" style="swimlane;horizontal=0;html=1;startSize=40;fillColor=#f8fafc;strokeColor=#cbd5e1;strokeWidth=1.5;fontColor=#334155;fontSize=12;fontStyle=1;collapsible=0;connectable=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="100" width="2450" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- 2. Sistem Lane -->
+        <mxCell id="lane_sistem" value="&lt;b&gt;SISTEM (LARAVEL &amp;amp; MIDTRANS)&lt;/b&gt;" style="swimlane;horizontal=0;html=1;startSize=40;fillColor=#f1f5f9;strokeColor=#cbd5e1;strokeWidth=1.5;fontColor=#334155;fontSize=12;fontStyle=1;collapsible=0;connectable=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="400" width="2450" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- 3. Admin Lane -->
+        <mxCell id="lane_admin" value="&lt;b&gt;STAF TOKO (ADMIN)&lt;/b&gt;" style="swimlane;horizontal=0;html=1;startSize=40;fillColor=#f8fafc;strokeColor=#cbd5e1;strokeWidth=1.5;fontColor=#334155;fontSize=12;fontStyle=1;collapsible=0;connectable=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="700" width="2450" height="300" as="geometry" />
+        </mxCell>
+
+
+        <!-- ========================================== -->
+        <!--                   NODES                    -->
+        <!-- ========================================== -->
+
+        <!-- Customer Lane Nodes -->
+        <mxCell id="node_start" value="Mulai" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#0f172a;strokeWidth=2;fontColor=#ffffff;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="220" width="90" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_pilih" value="Pilih Mobil &lt;br/&gt;&amp;amp; Tanggal Sewa" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="215" width="140" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_checkout" value="Isi Form Checkout &lt;br/&gt;&amp;amp; Unggah Berkas &lt;br/&gt;(KTP, SIM, KK)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="215" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_payment" value="Lakukan Pembayaran&lt;br/&gt;via Snap Pop-up&lt;br/&gt;(DP atau Lunas)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="215" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_batal_end" value="Batal" style="ellipse;whiteSpace=wrap;html=1;fillColor=#b91c1c;strokeColor=#7f1d1d;strokeWidth=2;fontColor=#ffffff;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="220" width="90" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_drive" value="Menggunakan Mobil&lt;br/&gt;(Masa Rental)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="215" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_denda" value="Bayar Sisa Tagihan&lt;br/&gt;/ Denda Late Fee" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1800" y="215" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_review" value="Isi Ulasan &amp;amp; Rating&lt;br/&gt;Mobil &amp;amp; Layanan Supir" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2200" y="215" width="140" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_end" value="Selesai" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#0f172a;strokeWidth=2;fontColor=#ffffff;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2390" y="220" width="90" height="60" as="geometry" />
+        </mxCell>
+
+
+        <!-- Sistem Lane Nodes -->
+        <mxCell id="node_save_booking" value="Simpan Booking (Pending)&lt;br/&gt;&amp;amp; Generate Snap Token&lt;br/&gt;Midtrans" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="515" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_webhook" value="Midtrans Webhook Callback&lt;br/&gt;&amp;amp; Update Status&lt;br/&gt;Pembayaran" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="515" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_reject" value="Batalkan Booking&lt;br/&gt;&amp;amp; Bebaskan Kuota&lt;br/&gt;Mobil &amp;amp; Supir" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#fee2e2;strokeColor=#ef4444;strokeWidth=2;fontColor=#991b1b;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="515" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_confirm" value="Set Status Confirmed,&lt;br/&gt;Set Mobil &quot;Rented&quot;,&lt;br/&gt;Konfirmasi Supir" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="515" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_ongoing" value="Set Status Ongoing &lt;br/&gt;&amp;amp; Aktifkan GPS&lt;br/&gt;Telemetry Tracker" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="515" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_dec_late" value="Terlambat&lt;br/&gt;Kembali?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1820" y="485" width="110" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_complete" value="Set Status Completed,&lt;br/&gt;Bebaskan Supir &amp;amp;&lt;br/&gt;Set Mobil &quot;Available&quot;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2000" y="515" width="160" height="70" as="geometry" />
+        </mxCell>
+
+
+        <!-- Admin Lane Nodes -->
+        <mxCell id="node_verify" value="Verifikasi Persyaratan&lt;br/&gt;Dokumen Jaminan" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="815" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_dec_valid" value="Dokumen&lt;br/&gt;Valid?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="800" width="110" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_handover" value="Hand-over Mobil &amp;amp;&lt;br/&gt;Inspeksi Fisik Awal&lt;br/&gt;(Form Serah Terima)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="815" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="node_return" value="Terima Mobil Kembali&lt;br/&gt;&amp;amp; Inspeksi Fisik Akhir&lt;br/&gt;(Cek BBM, Odo, Baret)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontColor=#0f172a;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1620" y="815" width="150" height="70" as="geometry" />
+        </mxCell>
+
+
+        <!-- ========================================== -->
+        <!--                   EDGES                    -->
+        <!-- ========================================== -->
+
+        <!-- 1. Start -> Pilih Mobil -->
+        <mxCell id="edge_1" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_start" target="node_pilih" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 2. Pilih Mobil -> Checkout -->
+        <mxCell id="edge_2" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_pilih" target="node_checkout" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 3. Checkout -> Simpan Booking -->
+        <mxCell id="edge_3" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_checkout" target="node_save_booking" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 4. Simpan Booking -> Lakukan Pembayaran -->
+        <mxCell id="edge_4" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_save_booking" target="node_payment" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 5. Lakukan Pembayaran -> Webhook -->
+        <mxCell id="edge_5" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_payment" target="node_webhook" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 6. Webhook -> Verifikasi Dokumen -->
+        <mxCell id="edge_6" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_webhook" target="node_verify" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 7. Verifikasi -> Apakah Valid? -->
+        <mxCell id="edge_7" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_verify" target="node_dec_valid" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 8. Apakah Valid -> Tidak (Reject) -->
+        <mxCell id="edge_8" value="Tidak" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#ef4444;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;fontColor=#b91c1c;fontSize=11;fontFamily=Helvetica;fontStyle=1;" edge="1" source="node_dec_valid" target="node_reject" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 9. Reject -> Batal (Selesai Batal) -->
+        <mxCell id="edge_9" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#ef4444;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_reject" target="node_batal_end" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 10. Apakah Valid -> Ya (Confirm) -->
+        <mxCell id="edge_10" value="Ya" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#22c55e;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;fontColor=#15803d;fontSize=11;fontFamily=Helvetica;fontStyle=1;" edge="1" source="node_dec_valid" target="node_confirm" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 11. Confirm -> Handover -->
+        <mxCell id="edge_11" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_confirm" target="node_handover" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 12. Handover -> Set Status Ongoing -->
+        <mxCell id="edge_12" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_handover" target="node_ongoing" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 13. Set Status Ongoing -> Gunakan Kendaraan -->
+        <mxCell id="edge_13" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_ongoing" target="node_drive" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 14. Gunakan Kendaraan -> Pengembalian -->
+        <mxCell id="edge_14" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_drive" target="node_return" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 15. Pengembalian -> Apakah Terlambat? -->
+        <mxCell id="edge_15" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_return" target="node_dec_late" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 16. Apakah Terlambat -> Ya (Hitung Denda) -->
+        <mxCell id="edge_16" value="Ya" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;fontSize=11;fontFamily=Helvetica;fontColor=#475569;" edge="1" source="node_dec_late" target="node_denda" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 17. Hitung Denda -> Selesaikan Transaksi -->
+        <mxCell id="edge_17" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_denda" target="node_complete" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 18. Apakah Terlambat -> Tidak (Selesaikan Transaksi) -->
+        <mxCell id="edge_18" value="Tidak" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;fontSize=11;fontFamily=Helvetica;fontColor=#475569;" edge="1" source="node_dec_late" target="node_complete" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 19. Selesaikan Transaksi -> Ulasan & Rating -->
+        <mxCell id="edge_19" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_complete" target="node_review" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- 20. Ulasan & Rating -> Selesai -->
+        <mxCell id="edge_20" style="endArrow=block;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;" edge="1" source="node_review" target="node_end" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

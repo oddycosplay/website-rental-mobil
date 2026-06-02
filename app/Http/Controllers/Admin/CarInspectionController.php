@@ -55,8 +55,8 @@ class CarInspectionController extends Controller
         // 4. Hitung Metrik Utama (KPIs)
         $totalInspections = $inspectionsLog->count();
         $pendingInspections = $activeBookings->count();
-        $readyCarsCount = Car::where('status', 'available')->where('is_available', true)->count();
-        $maintenanceCarsCount = Car::where('status', 'maintenance')->count();
+        $readyCarsCount = Car::query()->where('status', 'available')->where('is_available', true)->count();
+        $maintenanceCarsCount = Car::query()->where('status', 'maintenance')->count();
 
         return view('admin.operational.inspections.index', compact(
             'cars',

@@ -1,0 +1,236 @@
+<mxfile host="Electron" version="28.2.8">
+  <diagram name="Sistem Berjalan Digital" id="digital_sistem">
+    <mxGraphModel dx="580" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- OUTER SWIMLANE -->
+        <mxCell id="outer" value="&lt;font style=&quot;font-size:18px;&quot;&gt;SISTEM BERJALAN DIGITAL — SILIWANGI RENTAL&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=50;" parent="1" vertex="1">
+          <mxGeometry y="50" width="1680" height="3600" as="geometry" />
+        </mxCell>
+
+        <!-- LANE: PELANGGAN -->
+        <mxCell id="lC" value="&lt;font style=&quot;font-size:14px;&quot;&gt;Pelanggan&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;" parent="outer" vertex="1">
+          <mxGeometry y="50" width="340" height="3550" as="geometry" />
+        </mxCell>
+
+        <!-- LANE: ADMIN -->
+        <mxCell id="lA" value="&lt;font style=&quot;font-size:14px;&quot;&gt;Admin&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;" parent="outer" vertex="1">
+          <mxGeometry x="340" y="50" width="320" height="3550" as="geometry" />
+        </mxCell>
+
+        <!-- LANE: SISTEM -->
+        <mxCell id="lS" value="&lt;font style=&quot;font-size:14px;&quot;&gt;Sistem (Laravel)&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;" parent="outer" vertex="1">
+          <mxGeometry x="660" y="50" width="320" height="3550" as="geometry" />
+        </mxCell>
+
+        <!-- LANE: KENDARAAN -->
+        <mxCell id="lK" value="&lt;font style=&quot;font-size:14px;&quot;&gt;Kendaraan (Unit)&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;" parent="outer" vertex="1">
+          <mxGeometry x="980" y="50" width="260" height="3550" as="geometry" />
+        </mxCell>
+
+        <!-- LANE: TIM OPERASIONAL -->
+        <mxCell id="lO" value="&lt;font style=&quot;font-size:14px;&quot;&gt;Tim Operasional&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;" parent="outer" vertex="1">
+          <mxGeometry x="1240" y="50" width="260" height="3550" as="geometry" />
+        </mxCell>
+
+        <!-- LANE: DRIVER -->
+        <mxCell id="lD" value="&lt;font style=&quot;font-size:14px;&quot;&gt;Driver&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;" parent="outer" vertex="1">
+          <mxGeometry x="1500" y="50" width="180" height="3550" as="geometry" />
+        </mxCell>
+
+        <!-- ===== PELANGGAN NODES ===== -->
+        <mxCell id="cStart" value="Mulai" style="ellipse;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="110" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="Akses website &amp; lihat katalog mobil" style="rounded=1;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="70" y="190" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="Isi form booking (5-step checkout wizard)" style="rounded=1;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="70" y="290" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="Upload dokumen: KTP, SIM, Selfie" style="rounded=1;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="70" y="390" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c4dec" value="Metode Sewa?" style="rhombus;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="100" y="490" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="c5a" value="Lepas Kunci" style="rounded=1;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="160" y="620" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c5b" value="Dengan Sopir" style="rounded=1;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="20" y="620" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" value="Pilih pembayaran: DP / Lunas (Midtrans)" style="rounded=1;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="70" y="710" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" value="Terima Invoice PDF &amp; notifikasi konfirmasi" style="rounded=1;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="70" y="900" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c8" value="Gunakan mobil selama masa sewa" style="rounded=1;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="70" y="1900" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c9" value="Kembalikan mobil ke pool Siliwangi" style="rounded=1;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="70" y="2300" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c10" value="Foto serah terima selesai, transaksi berakhir" style="rounded=1;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="70" y="3150" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cEnd" value="Selesai" style="ellipse;whiteSpace=wrap;html=1;" parent="lC" vertex="1">
+          <mxGeometry x="110" y="3320" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===== ADMIN NODES ===== -->
+        <mxCell id="a1" value="Terima notifikasi booking baru di dashboard" style="rounded=1;whiteSpace=wrap;html=1;" parent="lA" vertex="1">
+          <mxGeometry x="60" y="900" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="Review dokumen &amp; validasi data customer" style="rounded=1;whiteSpace=wrap;html=1;" parent="lA" vertex="1">
+          <mxGeometry x="60" y="990" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a2dec" value="Data Valid?" style="rhombus;whiteSpace=wrap;html=1;" parent="lA" vertex="1">
+          <mxGeometry x="90" y="1080" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="a2no" value="Tolak &amp; blacklist customer" style="rounded=1;whiteSpace=wrap;html=1;" parent="lA" vertex="1">
+          <mxGeometry x="180" y="1200" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="Assign driver (jika dengan sopir)" style="rounded=1;whiteSpace=wrap;html=1;" parent="lA" vertex="1">
+          <mxGeometry x="60" y="1290" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="Input form check-out: odometer &amp; kondisi awal" style="rounded=1;whiteSpace=wrap;html=1;" parent="lA" vertex="1">
+          <mxGeometry x="60" y="1550" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" value="Input form check-in: odometer akhir &amp; temuan" style="rounded=1;whiteSpace=wrap;html=1;" parent="lA" vertex="1">
+          <mxGeometry x="60" y="2450" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" value="Finalisasi tagihan &amp; kembalikan deposit" style="rounded=1;whiteSpace=wrap;html=1;" parent="lA" vertex="1">
+          <mxGeometry x="60" y="3150" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" value="Catat laporan transaksi selesai" style="rounded=1;whiteSpace=wrap;html=1;" parent="lA" vertex="1">
+          <mxGeometry x="60" y="3250" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ===== SISTEM NODES ===== -->
+        <mxCell id="s1" value="Cek ketersediaan unit real-time" style="rounded=1;whiteSpace=wrap;html=1;" parent="lS" vertex="1">
+          <mxGeometry x="60" y="190" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" value="Validasi dokumen digital otomatis" style="rounded=1;whiteSpace=wrap;html=1;" parent="lS" vertex="1">
+          <mxGeometry x="60" y="390" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="Proses gateway Midtrans" style="rounded=1;whiteSpace=wrap;html=1;" parent="lS" vertex="1">
+          <mxGeometry x="60" y="710" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s3dec" value="Pembayaran Berhasil?" style="rhombus;whiteSpace=wrap;html=1;" parent="lS" vertex="1">
+          <mxGeometry x="80" y="800" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="s3no" value="Booking PENDING / EXPIRED" style="rounded=1;whiteSpace=wrap;html=1;" parent="lS" vertex="1">
+          <mxGeometry x="170" y="920" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" value="Update status: Booking CONFIRMED, kirim Invoice PDF" style="rounded=1;whiteSpace=wrap;html=1;" parent="lS" vertex="1">
+          <mxGeometry x="60" y="900" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="s5" value="Update status Mobil: available → rented, Booking → ongoing" style="rounded=1;whiteSpace=wrap;html=1;" parent="lS" vertex="1">
+          <mxGeometry x="60" y="1650" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="s6" value="Validasi odometer akhir ≥ odometer awal" style="rounded=1;whiteSpace=wrap;html=1;" parent="lS" vertex="1">
+          <mxGeometry x="60" y="2550" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s7dec" value="Ada Kerusakan Berat?" style="rhombus;whiteSpace=wrap;html=1;" parent="lS" vertex="1">
+          <mxGeometry x="80" y="2650" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s8" value="Booking → completed" style="rounded=1;whiteSpace=wrap;html=1;" parent="lS" vertex="1">
+          <mxGeometry x="60" y="3050" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ===== KENDARAAN NODES ===== -->
+        <mxCell id="k1" value="Status: available" style="rounded=1;whiteSpace=wrap;html=1;" parent="lK" vertex="1">
+          <mxGeometry x="40" y="190" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="k2" value="Status: rented (sedang digunakan)" style="rounded=1;whiteSpace=wrap;html=1;" parent="lK" vertex="1">
+          <mxGeometry x="40" y="1750" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="k3ok" value="Status: available (kembali siap)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="lK" vertex="1">
+          <mxGeometry x="40" y="2800" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="k3maint" value="Status: maintenance (kirim ke bengkel)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="lK" vertex="1">
+          <mxGeometry x="40" y="2900" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===== TIM OPERASIONAL NODES ===== -->
+        <mxCell id="o1" value="Audit fisik check-out: bodi, mesin, ban, BBM, interior" style="rounded=1;whiteSpace=wrap;html=1;" parent="lO" vertex="1">
+          <mxGeometry x="30" y="1420" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="o2" value="Konfirmasi unit siap &amp; serahkan kunci/supir" style="rounded=1;whiteSpace=wrap;html=1;" parent="lO" vertex="1">
+          <mxGeometry x="30" y="1800" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o3" value="Audit fisik check-in: odometer, kerusakan, kebersihan, BBM" style="rounded=1;whiteSpace=wrap;html=1;" parent="lO" vertex="1">
+          <mxGeometry x="30" y="2350" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="o4" value="Laporkan kondisi unit ke admin" style="rounded=1;whiteSpace=wrap;html=1;" parent="lO" vertex="1">
+          <mxGeometry x="30" y="2480" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ===== DRIVER NODES ===== -->
+        <mxCell id="d1" value="Ambil unit &amp; antar customer" style="rounded=1;whiteSpace=wrap;html=1;" parent="lD" vertex="1">
+          <mxGeometry x="20" y="1900" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="Jemput customer &amp; kembali ke pool" style="rounded=1;whiteSpace=wrap;html=1;" parent="lD" vertex="1">
+          <mxGeometry x="20" y="2250" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ===== EDGES — PELANGGAN ===== -->
+        <mxCell id="e_cS_c1" style="edgeStyle=orthogonalEdgeStyle;" parent="lC" source="cStart" target="c1" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c1_c2" style="edgeStyle=orthogonalEdgeStyle;" parent="lC" source="c1" target="c2" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c2_c3" style="edgeStyle=orthogonalEdgeStyle;" parent="lC" source="c2" target="c3" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c3_c4" style="edgeStyle=orthogonalEdgeStyle;" parent="lC" source="c3" target="c4dec" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c4_5a" value="Lepas Kunci" style="edgeStyle=orthogonalEdgeStyle;" parent="lC" source="c4dec" target="c5a" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c4_5b" value="Dengan Sopir" style="edgeStyle=orthogonalEdgeStyle;" parent="lC" source="c4dec" target="c5b" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c5a_c6" style="edgeStyle=orthogonalEdgeStyle;" parent="lC" source="c5a" target="c6" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c5b_c6" style="edgeStyle=orthogonalEdgeStyle;" parent="lC" source="c5b" target="c6" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c7_c8" style="edgeStyle=orthogonalEdgeStyle;" parent="lC" source="c7" target="c8" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c8_c9" style="edgeStyle=orthogonalEdgeStyle;" parent="lC" source="c8" target="c9" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c10_cE" style="edgeStyle=orthogonalEdgeStyle;" parent="lC" source="c10" target="cEnd" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ===== EDGES — ADMIN ===== -->
+        <mxCell id="e_a1_a2" style="edgeStyle=orthogonalEdgeStyle;" parent="lA" source="a1" target="a2" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_a2_a2d" style="edgeStyle=orthogonalEdgeStyle;" parent="lA" source="a2" target="a2dec" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_a2d_no" value="Tidak" style="edgeStyle=orthogonalEdgeStyle;" parent="lA" source="a2dec" target="a2no" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_a2d_a3" value="Ya" style="edgeStyle=orthogonalEdgeStyle;" parent="lA" source="a2dec" target="a3" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_a3_a4" style="edgeStyle=orthogonalEdgeStyle;" parent="lA" source="a3" target="a4" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_a5_a6" style="edgeStyle=orthogonalEdgeStyle;" parent="lA" source="a5" target="a6" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_a6_a7" style="edgeStyle=orthogonalEdgeStyle;" parent="lA" source="a6" target="a7" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ===== EDGES — SISTEM ===== -->
+        <mxCell id="e_s3_s3d" style="edgeStyle=orthogonalEdgeStyle;" parent="lS" source="s3" target="s3dec" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_s3d_no" value="Tidak" style="edgeStyle=orthogonalEdgeStyle;" parent="lS" source="s3dec" target="s3no" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_s3d_s4" value="Ya" style="edgeStyle=orthogonalEdgeStyle;" parent="lS" source="s3dec" target="s4" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_s6_s7" style="edgeStyle=orthogonalEdgeStyle;" parent="lS" source="s6" target="s7dec" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_s7_s8" value="Tidak" style="edgeStyle=orthogonalEdgeStyle;" parent="lS" source="s7dec" target="s8" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ===== CROSS-LANE EDGES (parent=outer) ===== -->
+        <mxCell id="x1" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="c1" target="s1" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x2" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="c3" target="s2" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x3" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="c6" target="s3" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x4" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="s4" target="a1" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x5" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="s4" target="c7" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x6" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="a4" target="o1" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x7" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="o1" target="s5" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x8" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="s5" target="k2" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x9" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="o2" target="c8" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x10" value="(Dengan Sopir)" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="a3" target="d1" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x11" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="c9" target="o3" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x12" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="o4" target="a5" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x13" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="a5" target="s6" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x14" value="Tidak Ada" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="s7dec" target="k3ok" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x15" value="Ada Kerusakan" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="s7dec" target="k3maint" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x16" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="s8" target="a6" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x17" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="a6" target="c10" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x18" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="o3" target="o4" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x19" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="k3ok" target="s8" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x20" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="k3maint" target="s8" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x21" style="edgeStyle=orthogonalEdgeStyle;" parent="outer" source="d2" target="c9" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
