@@ -1009,7 +1009,7 @@
                 {{-- Security Badge --}}
                 <div class="bg-emerald-500/5 p-6 flex items-center gap-4">
                     <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
-                        <i class="fas fa-shield-check"></i>
+                        <i class="fas fa-lock"></i>
                     </div>
                     <p class="text-[9px] text-slate-400 font-medium leading-relaxed">Transaksi ini aman dengan enkripsi SSL 256-bit.</p>
                 </div>
@@ -1021,7 +1021,7 @@
                     <i class="fas fa-headset"></i>
                 </div>
                 <div>
-                    <p class="text-[10px] font-black text-white uppercase tracking-widest">Butuh Bantuan?</p>
+                    <p class="text-[10px] font-black text-black dark:text-white uppercase tracking-widest">Butuh Bantuan?</p>
                     <p class="text-[9px] text-slate-500">Hubungi 0812-xxxx-xxxx</p>
                 </div>
             </div>
