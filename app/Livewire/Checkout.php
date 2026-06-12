@@ -633,6 +633,7 @@ class Checkout extends Component
             'promo_id'        => $promoId,
             'rental_type'     => $this->rental_type,
             'rental_category' => $this->rental_category,
+            'area'            => !$this->with_driver ? ($this->dest_type === 'jabotabek' ? 'jabodetabek' : 'luar_jabodetabek') : null,
             'with_driver'     => $this->with_driver,
             'pickup_date'     => $this->pickup_date,
             'return_date'     => $this->return_date,

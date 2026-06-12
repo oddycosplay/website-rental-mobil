@@ -42,7 +42,7 @@ class BookingPaymentTest extends TestCase
     // Booking Creation
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_booking_can_be_created_in_database(): void
     {
         $booking = Booking::factory()->create([
@@ -60,7 +60,7 @@ class BookingPaymentTest extends TestCase
         ]);
     }
 
-    /** @test */
+
     public function test_booking_code_is_stored_correctly(): void
     {
         $booking = Booking::factory()->create([
@@ -75,7 +75,7 @@ class BookingPaymentTest extends TestCase
         ]);
     }
 
-    /** @test */
+
     public function test_grand_total_is_calculated_correctly(): void
     {
         $totalDay   = 3;
@@ -101,7 +101,7 @@ class BookingPaymentTest extends TestCase
     // Payment Creation
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_payment_can_be_created_for_booking(): void
     {
         $booking = Booking::factory()->create([
@@ -124,7 +124,7 @@ class BookingPaymentTest extends TestCase
         ]);
     }
 
-    /** @test */
+
     public function test_successful_payment_records_paid_amount(): void
     {
         $booking = Booking::factory()->create([
@@ -151,7 +151,7 @@ class BookingPaymentTest extends TestCase
     // Multiple Booking Records
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_customer_can_have_multiple_bookings(): void
     {
         Booking::factory()->count(3)->create([
@@ -163,7 +163,7 @@ class BookingPaymentTest extends TestCase
         $this->assertEquals(3, $this->customer->bookings()->count());
     }
 
-    /** @test */
+
     public function test_booking_retrieval_by_code(): void
     {
         $booking = Booking::factory()->create([
@@ -179,7 +179,7 @@ class BookingPaymentTest extends TestCase
         $this->assertEquals($booking->id, $found->id);
     }
 
-    /** @test */
+
     public function test_total_payment_calculation_for_customer(): void
     {
         $booking1 = Booking::factory()->create([
@@ -216,7 +216,7 @@ class BookingPaymentTest extends TestCase
     // Car Status Transition
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_car_status_updates_to_rented_when_booking_confirmed(): void
     {
         $booking = Booking::factory()->create([
@@ -231,7 +231,7 @@ class BookingPaymentTest extends TestCase
         $this->assertEquals('rented', $this->car->status);
     }
 
-    /** @test */
+
     public function test_car_status_reverts_to_available_when_booking_cancelled(): void
     {
         // First set the car as rented

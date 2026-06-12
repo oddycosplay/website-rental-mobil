@@ -7,6 +7,14 @@ use Spatie\Permission\Models\Role;
 
 abstract class TestCase extends BaseTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        if (\Illuminate\Support\Facades\Schema::hasTable('roles')) {
+            $this->seedRoles();
+        }
+    }
+
     /**
      * Seed the Spatie roles required by the application.
      * Called in setUp of tests that need role-based functionality.

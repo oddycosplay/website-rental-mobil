@@ -30,7 +30,7 @@ class ModelUnitTest extends TestCase
     // User Model
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_user_has_customer_relationship(): void
     {
         $user     = User::factory()->create();
@@ -40,7 +40,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals($customer->id, $user->customer->id);
     }
 
-    /** @test */
+
     public function test_user_has_bookings_through_customer(): void
     {
         $store    = Store::factory()->create();
@@ -57,7 +57,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals(1, $user->bookings()->count());
     }
 
-    /** @test */
+
     public function test_user_has_store_relationship(): void
     {
         $store = Store::factory()->create();
@@ -67,7 +67,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals($store->id, $user->store->id);
     }
 
-    /** @test */
+
     public function test_user_branch_accessor_maps_to_store(): void
     {
         $store = Store::factory()->create();
@@ -77,7 +77,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals($store->id, $user->branch_id);
     }
 
-    /** @test */
+
     public function test_user_can_have_role_assigned(): void
     {
         $user = User::factory()->create();
@@ -91,7 +91,7 @@ class ModelUnitTest extends TestCase
     // Car Model
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_car_belongs_to_store(): void
     {
         $store = Store::factory()->create();
@@ -101,7 +101,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals($store->id, $car->store->id);
     }
 
-    /** @test */
+
     public function test_car_brand_accessor_returns_object(): void
     {
         $car = Car::factory()->create([
@@ -115,7 +115,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals('toyota', $brand->slug);
     }
 
-    /** @test */
+
     public function test_car_type_accessor_returns_object(): void
     {
         $car = Car::factory()->create([
@@ -129,7 +129,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals('Multi Purpose Vehicle', $type->description);
     }
 
-    /** @test */
+
     public function test_car_stock_accessor_always_returns_one(): void
     {
         $car = Car::factory()->create(['store_id' => Store::factory()->create()->id]);
@@ -137,7 +137,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals(1, $car->stock);
     }
 
-    /** @test */
+
     public function test_car_branch_id_maps_to_store_id(): void
     {
         $store = Store::factory()->create();
@@ -150,7 +150,7 @@ class ModelUnitTest extends TestCase
     // Store Model
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_store_has_many_cars(): void
     {
         $store = Store::factory()->create();
@@ -159,7 +159,7 @@ class ModelUnitTest extends TestCase
         $this->assertCount(3, $store->cars);
     }
 
-    /** @test */
+
     public function test_store_has_many_bookings(): void
     {
         $store    = Store::factory()->create();
@@ -179,7 +179,7 @@ class ModelUnitTest extends TestCase
     // Customer Model
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_customer_belongs_to_user(): void
     {
         $user     = User::factory()->create();
@@ -189,7 +189,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals($user->id, $customer->user->id);
     }
 
-    /** @test */
+
     public function test_customer_has_many_bookings(): void
     {
         $store    = Store::factory()->create();
@@ -209,7 +209,7 @@ class ModelUnitTest extends TestCase
     // Booking Model
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_booking_has_correct_relationships(): void
     {
         $store    = Store::factory()->create();
@@ -227,7 +227,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals($store->id, $booking->store->id);
     }
 
-    /** @test */
+
     public function test_booking_has_one_payment(): void
     {
         $store    = Store::factory()->create();
@@ -249,7 +249,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals($booking->id, $booking->payment->booking_id);
     }
 
-    /** @test */
+
     public function test_booking_branch_accessor_maps_to_store(): void
     {
         $store    = Store::factory()->create();
@@ -266,7 +266,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals($store->id, $booking->branch_id);
     }
 
-    /** @test */
+
     public function test_booking_rental_type_alias_accessors(): void
     {
         $store    = Store::factory()->create();
@@ -289,7 +289,7 @@ class ModelUnitTest extends TestCase
     // Payment Model
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_payment_belongs_to_booking(): void
     {
         $store    = Store::factory()->create();
@@ -307,7 +307,7 @@ class ModelUnitTest extends TestCase
         $this->assertEquals($booking->id, $payment->booking->id);
     }
 
-    /** @test */
+
     public function test_payment_logs_virtual_attribute_returns_collection(): void
     {
         $store    = Store::factory()->create();

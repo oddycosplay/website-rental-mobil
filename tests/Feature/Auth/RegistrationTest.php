@@ -23,7 +23,13 @@ class RegistrationTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
+            'role' => 'customer',
         ]);
+
+        dump($response->status());
+        if ($response->status() !== 302 && $response->status() !== 200) {
+            dump($response->content());
+        }
 
         $this->assertAuthenticated();
         $response->assertRedirect(route('dashboard', absolute: false));

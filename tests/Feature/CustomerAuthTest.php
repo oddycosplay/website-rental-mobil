@@ -24,7 +24,7 @@ class CustomerAuthTest extends TestCase
     // Login
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_customer_can_login_with_valid_credentials(): void
     {
         $user = User::factory()->create([
@@ -42,7 +42,7 @@ class CustomerAuthTest extends TestCase
         $response->assertRedirect(route('dashboard', absolute: false));
     }
 
-    /** @test */
+
     public function test_login_fails_with_wrong_password(): void
     {
         $user = User::factory()->create(['password' => bcrypt('correct-password')]);
@@ -55,7 +55,7 @@ class CustomerAuthTest extends TestCase
         $this->assertGuest();
     }
 
-    /** @test */
+
     public function test_login_fails_with_non_existent_email(): void
     {
         $this->post('/login', [
@@ -66,7 +66,7 @@ class CustomerAuthTest extends TestCase
         $this->assertGuest();
     }
 
-    /** @test */
+
     public function test_login_requires_email_and_password(): void
     {
         $response = $this->post('/login', []);
@@ -79,7 +79,7 @@ class CustomerAuthTest extends TestCase
     // Logout
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_authenticated_user_can_logout(): void
     {
         $user = User::factory()->create();
@@ -95,7 +95,7 @@ class CustomerAuthTest extends TestCase
     // Registration
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_new_user_can_register(): void
     {
         $response = $this->post('/register', [
@@ -109,7 +109,7 @@ class CustomerAuthTest extends TestCase
         $this->assertDatabaseHas('users', ['email' => 'budi.baru@gmail.com']);
     }
 
-    /** @test */
+
     public function test_registration_fails_with_duplicate_email(): void
     {
         User::factory()->create(['email' => 'already@taken.com']);
@@ -125,7 +125,7 @@ class CustomerAuthTest extends TestCase
         $this->assertGuest();
     }
 
-    /** @test */
+
     public function test_registration_fails_with_password_mismatch(): void
     {
         $response = $this->post('/register', [
@@ -143,7 +143,7 @@ class CustomerAuthTest extends TestCase
     // Auth Guard - Protected Routes
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_unauthenticated_user_cannot_access_dashboard(): void
     {
         $response = $this->get('/dashboard');
@@ -151,7 +151,7 @@ class CustomerAuthTest extends TestCase
         $response->assertRedirect('/login');
     }
 
-    /** @test */
+
     public function test_unauthenticated_user_cannot_access_profile(): void
     {
         $response = $this->get('/profile');
@@ -159,7 +159,7 @@ class CustomerAuthTest extends TestCase
         $response->assertRedirect('/login');
     }
 
-    /** @test */
+
     public function test_authenticated_user_can_access_dashboard(): void
     {
         $user = User::factory()->create();

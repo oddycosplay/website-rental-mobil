@@ -45,7 +45,7 @@ class AdminRoutesTest extends TestCase
     // Role-Based Access Control
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_customer_cannot_access_admin_bookings(): void
     {
         $response = $this->actingAs($this->customerUser)
@@ -55,7 +55,7 @@ class AdminRoutesTest extends TestCase
         $this->assertNotEquals(200, $response->getStatusCode());
     }
 
-    /** @test */
+
     public function test_admin_can_access_customer_list(): void
     {
         $response = $this->actingAs($this->adminUser)
@@ -64,7 +64,7 @@ class AdminRoutesTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+
     public function test_unauthenticated_user_cannot_access_admin_customers(): void
     {
         $response = $this->get('/dashboard/customers');
@@ -72,7 +72,7 @@ class AdminRoutesTest extends TestCase
         $response->assertRedirect('/login');
     }
 
-    /** @test */
+
     public function test_admin_can_access_bookings_list(): void
     {
         $response = $this->actingAs($this->adminUser)
@@ -81,7 +81,7 @@ class AdminRoutesTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+
     public function test_admin_can_access_car_schedules(): void
     {
         $response = $this->actingAs($this->adminUser)
@@ -94,7 +94,7 @@ class AdminRoutesTest extends TestCase
     // Customer Detail API
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_admin_can_view_customer_detail(): void
     {
         $targetUser = User::factory()->create();
@@ -112,7 +112,7 @@ class AdminRoutesTest extends TestCase
     // Reports Access (Owner/Finance Only)
     // ─────────────────────────────────────────────
 
-    /** @test */
+
     public function test_owner_can_access_reports(): void
     {
         $response = $this->actingAs($this->ownerUser)
@@ -121,7 +121,7 @@ class AdminRoutesTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+
     public function test_finance_user_can_access_finance_page(): void
     {
         $financeUser = User::factory()->create(['store_id' => $this->store->id]);
@@ -133,7 +133,7 @@ class AdminRoutesTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+
     public function test_admin_can_access_drivers_page(): void
     {
         $response = $this->actingAs($this->adminUser)

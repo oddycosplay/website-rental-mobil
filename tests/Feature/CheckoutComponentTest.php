@@ -17,15 +17,7 @@ class CheckoutComponentTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
 
-        // Seed roles defensively if Spatie Role system is present in the codebase
-        if (class_exists(\Spatie\Permission\Models\Role::class)) {
-            \Spatie\Permission\Models\Role::create(['name' => 'customer']);
-        }
-    }
 
     public function test_checkout_wizard_can_be_completed_successfully()
     {
@@ -92,6 +84,9 @@ class CheckoutComponentTest extends TestCase
             ->set('phone', '6281234567899')
             ->set('nik', '3273123456789001')
             ->set('sim_number', '9876543210')
+            ->set('no_kk', '3273000000000000')
+            ->set('nip_nim', '12345678')
+            ->set('pekerjaan', 'Karyawan Swasta')
             ->set('address', 'Jalan Merdeka No. 10, Bandung')
             ->call('nextStep');
 
@@ -101,9 +96,15 @@ class CheckoutComponentTest extends TestCase
         // 6. Fill Step 3 (Documents)
         $ktp = UploadedFile::fake()->create('ktp.jpg', 100);
         $sim = UploadedFile::fake()->create('sim.jpg', 100);
+        $kk = UploadedFile::fake()->create('kk.jpg', 100);
+        $idCard = UploadedFile::fake()->create('id_card.jpg', 100);
+        $selfie = 'data:image/jpeg;base64,' . base64_encode('fake-selfie');
 
         $component->set('ktp_image', $ktp)
             ->set('sim_image', $sim)
+            ->set('kk_image', $kk)
+            ->set('id_card_image', $idCard)
+            ->set('selfie_image', $selfie)
             ->call('nextStep');
 
         $component->assertHasNoErrors();

@@ -28,7 +28,7 @@ class WhatsAppNotificationTest extends TestCase
         Http::assertSent(function ($request) {
             return $request->url() == 'https://api.fonnte.com/send' &&
                    $request->header('Authorization')[0] == 'test-token' &&
-                   $request['target'] == '08973816530' &&
+                   $request['target'] == '628973816530' &&
                    $request['message'] == 'Test Message';
         });
     }

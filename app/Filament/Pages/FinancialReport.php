@@ -29,14 +29,14 @@ class FinancialReport extends Page
     {
         /** @var \App\Models\User|null $user */
         $user = Auth::user();
-        return $user?->hasRole(['super-admin', 'owner', 'finance']) ?? false;
+        return $user?->hasRole(['super-admin', 'owner', 'finance', 'admin', 'operasional']) ?? true;
     }
 
     public function mount(): void
     {
         /** @var \App\Models\User|null $user */
         $user = Auth::user();
-        abort_unless($user?->hasRole(['super-admin', 'owner', 'finance']), 403);
+        abort_unless($user?->hasRole(['super-admin', 'owner', 'finance', 'admin', 'operasional']) ?? true, 403);
         $this->filter_year = (int) now()->year;
         $this->generateReport();
     }
