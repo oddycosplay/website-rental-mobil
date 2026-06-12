@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.8 Chrome/140.0.7339.240 Electron/38.4.0 Safari/537.36" version="28.2.8">
   <diagram name="Page-1" id="8ece8461-acc0-41bb-a800-4bb4cbfaecc3">
-    <mxGraphModel dx="702" dy="504" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="679" dy="400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -96,7 +96,7 @@
           <mxGeometry x="80" y="830" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="actor_owner" value="Owner" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
-          <mxGeometry x="1400" y="200" width="30" height="60" as="geometry" />
+          <mxGeometry x="1330" y="210" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="actor_admin" value="Admin" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
           <mxGeometry x="1330" y="390" width="30" height="60" as="geometry" />
@@ -269,35 +269,17 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="2fBb9rKwwMQ7TPZRbp79-1" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actor_admin" target="UC14">
+        <mxCell id="2fBb9rKwwMQ7TPZRbp79-1" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC14" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1590" y="245" as="sourcePoint" />
             <mxPoint x="1320" y="200" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2fBb9rKwwMQ7TPZRbp79-3" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="actor_admin" target="UC21">
+        <mxCell id="2fBb9rKwwMQ7TPZRbp79-3" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="actor_admin" target="UC21" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1220" y="1077" as="targetPoint" />
             <Array as="points" />
             <mxPoint x="1490" y="880" as="sourcePoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="2fBb9rKwwMQ7TPZRbp79-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2fBb9rKwwMQ7TPZRbp79-4" target="actor_admin">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="2fBb9rKwwMQ7TPZRbp79-4" value="Staff" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="1490" y="600" width="30" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="2fBb9rKwwMQ7TPZRbp79-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2fBb9rKwwMQ7TPZRbp79-4" target="actor_operasional">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1558" y="566" as="sourcePoint" />
-            <mxPoint x="1420" y="470" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="2fBb9rKwwMQ7TPZRbp79-9" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2fBb9rKwwMQ7TPZRbp79-4" target="actor_finance">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1618" y="656" as="sourcePoint" />
-            <mxPoint x="1480" y="560" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>

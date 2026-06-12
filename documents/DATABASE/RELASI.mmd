@@ -214,7 +214,7 @@ erDiagram
         timestamp created_at
     }
 
-    vehicle_inspections {
+    operationals {
         bigint id PK
         bigint store_id FK
         bigint booking_id FK
@@ -249,7 +249,7 @@ erDiagram
     stores ||--o{ drivers : "employs"
     stores ||--o{ expenses : "incurs"
     stores ||--o{ location_surveys : "conducts"
-    stores ||--o{ vehicle_inspections : "oversees"
+    stores ||--o{ operationals : "oversees"
     cars ||--o{ bookings : "booked in"
     customers ||--o{ bookings : "makes"
     drivers ||--o{ bookings : "assigned to"
@@ -257,5 +257,5 @@ erDiagram
     bookings ||--o{ payments : "has payments"
     bookings ||--o{ reviews : "reviewed in"
     bookings ||--o{ location_surveys : "surveyed in"
-    bookings ||--o{ vehicle_inspections : "inspected in"
-    cars ||--o{ vehicle_inspections : "inspected"
+    bookings ||--o{ operationals : "inspected in"
+    cars ||--o{ operationals : "inspected"

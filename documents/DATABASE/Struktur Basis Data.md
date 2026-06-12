@@ -237,7 +237,7 @@ erDiagram
         timestamp created_at
     }
 
-    vehicle_inspections {
+    operationals {
         bigint id PK
         bigint store_id FK
         bigint booking_id FK
@@ -272,7 +272,7 @@ erDiagram
     stores ||--o{ drivers : "employs"
     stores ||--o{ expenses : "incurs"
     stores ||--o{ location_surveys : "conducts"
-    stores ||--o{ vehicle_inspections : "oversees"
+    stores ||--o{ operationals : "oversees"
     cars ||--o{ bookings : "booked in"
     customers ||--o{ bookings : "makes"
     drivers ||--o{ bookings : "assigned to"
@@ -280,8 +280,8 @@ erDiagram
     bookings ||--o{ payments : "has payments"
     bookings ||--o{ reviews : "reviewed in"
     bookings ||--o{ location_surveys : "surveyed in"
-    bookings ||--o{ vehicle_inspections : "inspected in"
-    cars ||--o{ vehicle_inspections : "inspected"
+    bookings ||--o{ operationals : "inspected in"
+    cars ||--o{ operationals : "inspected"
 ```
 
 ---
@@ -299,13 +299,13 @@ Sistem ini dirancang dengan integritas data menggunakan hubungan kunci asing (Fo
 | **`stores` ➔ `drivers`** | `1:N (One to Many)` | Driver ditugaskan dan bekerja di bawah koordinasi toko cabang tertentu. |
 | **`stores` ➔ `expenses`** | `1:N (One to Many)` | Log transaksi pengeluaran dicatat berdasarkan toko cabang yang membiayainya. |
 | **`stores` ➔ `location_surveys`** | `1:N (One to Many)` | Toko cabang mengoordinasikan survei validasi lokasi tempat tinggal kustomer. |
-| **`stores` ➔ `vehicle_inspections`** | `1:N (One to Many)` | Toko cabang mengawasi proses pengecekan keluar/masuk unit mobil. |
+| **`stores` ➔ `operationals`** | `1:N (One to Many)` | Toko cabang mengawasi proses pengecekan keluar/masuk unit mobil. |
 | **`cars` ➔ `bookings`** | `1:N (One to Many)` | Satu unit mobil dapat disewa dalam banyak pemesanan (pada periode berbeda). |
 | **`bookings` ➔ `payments`** | `1:N (One to Many)` | Satu pemesanan dapat memiliki beberapa transaksi pembayaran (DP, pelunasan, atau denda). |
 | **`bookings` ➔ `reviews`** | `1:1` | Transaksi penyewaan yang selesai dapat diulas sekali oleh kustomer. |
 | **`bookings` ➔ `location_surveys`** | `1:N (One to Many)` | Pemesanan memicu pembuatan survei validasi kelayakan kustomer. |
-| **`bookings` ➔ `vehicle_inspections`** | `1:N (One to Many)` | Log pengecekan mobil sebelum sewa dan sesudah sewa. |
-| **`cars` ➔ `vehicle_inspections`** | `1:N (One to Many)` | Armada mobil menerima log inspeksi kelayakan fisik berkala. |
+| **`bookings` ➔ `operationals`** | `1:N (One to Many)` | Log pengecekan mobil sebelum sewa dan sesudah sewa. |
+| **`cars` ➔ `operationals`** | `1:N (One to Many)` | Armada mobil menerima log inspeksi kelayakan fisik berkala. |
 
 ---
 
@@ -595,7 +595,7 @@ Tabel penugasan survei kelayakan kustomer melalui validasi data tempat tinggal, 
 | approved_at | Timestamp | - | Tanggal persetujuan admin (nullable). |
 | created_at | Timestamp | - | Waktu data dibuat. |
 
-### 🚗 3.12. Tabel: `vehicle_inspections`
+### 🚗 3.12. Tabel: `operationals`
 
 Tabel pencatatan inspeksi fisik kelayakan unit kendaraan sebelum diserahkan ke kustomer (pre_rental) atau setelah dikembalikan dari kustomer (post_rental) oleh petugas inspektur.
 

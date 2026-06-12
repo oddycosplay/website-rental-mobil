@@ -13,13 +13,14 @@ return new class extends Migration
             $table->foreignId('store_id')->nullable()->after('id')->constrained('stores')->cascadeOnDelete();
         });
 
-        Schema::table('vehicle_inspections', function (Blueprint $table) {
+        Schema::table('operationals', function (Blueprint $table) {
             $table->foreignId('store_id')->nullable()->after('id')->constrained('stores')->cascadeOnDelete();
         });
 
         // Sync existing records store_id from their bookings
-        DB::statement("UPDATE location_surveys ls JOIN bookings b ON ls.booking_id = b.id SET ls.store_id = b.store_id");
-        DB::statement("UPDATE vehicle_inspections vi JOIN bookings b ON vi.booking_id = b.id SET vi.store_id = b.store_id");
+        // Use subquery syntax compatible with both MySQL and SQLite (for testing)
+        DB::statement("UPDATE location_surveys SET store_id = (SELECT store_id FROM bookings WHERE bookings.id = location_surveys.booking_id) WHERE booking_id IS NOT NULL");
+        DB::statement("UPDATE operationals SET store_id = (SELECT store_id FROM bookings WHERE bookings.id = operationals.booking_id) WHERE booking_id IS NOT NULL");
     }
 
     public function down(): void
@@ -29,7 +30,7 @@ return new class extends Migration
             $table->dropColumn('store_id');
         });
 
-        Schema::table('vehicle_inspections', function (Blueprint $table) {
+        Schema::table('operationals', function (Blueprint $table) {
             $table->dropForeign(['store_id']);
             $table->dropColumn('store_id');
         });

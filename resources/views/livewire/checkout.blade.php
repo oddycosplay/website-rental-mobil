@@ -531,7 +531,7 @@
                 <div class="p-8 md:p-12" data-aos="fade-up">
                     <div class="flex items-center gap-4 mb-10">
                         <div class="w-12 h-12 rounded-2xl bg-gold/10 text-gold flex items-center justify-center text-xl shadow-inner">
-                            <i class="fas fa-steering-wheel"></i>
+                            <i class="fas fa-route"></i>
                         </div>
                         <div>
                             <h3 class="text-xl font-black text-white">pilih driver atau lepas kunci</h3>
@@ -791,7 +791,7 @@
                         </div>
                         {{-- Driver --}}
                         <div class="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-gold/10 text-gold flex items-center justify-center flex-shrink-0"><i class="fas fa-steering-wheel"></i></div>
+                            <div class="w-10 h-10 rounded-xl bg-gold/10 text-gold flex items-center justify-center flex-shrink-0"><i class="fas fa-route"></i></div>
                             <div class="flex-1">
                                 <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Mode Berkendara</p>
                                 <p class="text-sm font-bold text-white">{{ $with_driver ? '👨‍✈️ Dengan Driver' : '🔑 Lepas Kunci' }}</p>

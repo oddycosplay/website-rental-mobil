@@ -35,7 +35,7 @@ Model `Store` mewakili outlet / toko kantor cabang operasional persewaan.
 - `hasMany` ➔ `Booking` `(bookings.store_id = stores.id)`
 - `hasMany` ➔ `Expense` `(expenses.store_id = stores.id)`
 - `hasMany` ➔ `LocationSurvey` `(location_surveys.store_id = stores.id)`
-- `hasMany` ➔ `VehicleInspection` `(vehicle_inspections.store_id = stores.id)`
+- `hasMany` ➔ `Operational` `(operationals.store_id = stores.id)`
 
 ### Car Model
 
@@ -44,7 +44,7 @@ Model `Car` mewakili unit armada mobil yang tersedia untuk disewa.
 - `belongsTo` ➔ `Store` `(cars.store_id = stores.id)`
 - `hasMany` ➔ `Booking` `(bookings.car_id = cars.id)`
 - `hasMany` ➔ `Review` `(reviews.car_id = cars.id)`
-- `hasMany` ➔ `VehicleInspection` `(vehicle_inspections.car_id = cars.id)`
+- `hasMany` ➔ `Operational` `(operationals.car_id = cars.id)`
 
 ### Driver Model
 
@@ -72,7 +72,7 @@ Model utama transaksi persewaan mobil.
 - `hasMany` ➔ `Payment` `(payments.booking_id = bookings.id)`
 - `hasOne` ➔ `Review` `(reviews.booking_id = bookings.id)`
 - `hasMany` ➔ `LocationSurvey` `(location_surveys.booking_id = bookings.id)`
-- `hasMany` ➔ `VehicleInspection` `(vehicle_inspections.booking_id = bookings.id)`
+- `hasMany` ➔ `Operational` `(operationals.booking_id = bookings.id)`
 
 ### Payment Model
 
@@ -102,13 +102,13 @@ Model pencatatan survei tempat tinggal renter untuk validasi data customer.
 - `belongsTo` ➔ `Booking` `(location_surveys.booking_id = bookings.id)`
 - `belongsTo` ➔ `User` `(location_surveys.approved_by = users.id)` [Nullable, admin/surveyor yang menyetujui]
 
-### VehicleInspection Model
+### Operational Model
 
 Model pencatatan inspeksi fisik kendaraan sebelum (pre_rental) atau sesudah (post_rental) penyewaan.
 
-- `belongsTo` ➔ `Store` `(vehicle_inspections.store_id = stores.id)`
-- `belongsTo` ➔ `Booking` `(vehicle_inspections.booking_id = bookings.id)`
-- `belongsTo` ➔ `Car` `(vehicle_inspections.car_id = cars.id)`
+- `belongsTo` ➔ `Store` `(operationals.store_id = stores.id)`
+- `belongsTo` ➔ `Booking` `(operationals.booking_id = bookings.id)`
+- `belongsTo` ➔ `Car` `(operationals.car_id = cars.id)`
 
 ---
 
@@ -331,7 +331,7 @@ erDiagram
         timestamp created_at
     }
 
-    vehicle_inspections {
+    operationals {
         bigint id PK
         bigint store_id FK
         bigint booking_id FK
@@ -366,7 +366,7 @@ erDiagram
     stores ||--o{ drivers : "employs"
     stores ||--o{ expenses : "incurs"
     stores ||--o{ location_surveys : "conducts"
-    stores ||--o{ vehicle_inspections : "oversees"
+    stores ||--o{ operationals : "oversees"
     cars ||--o{ bookings : "booked in"
     customers ||--o{ bookings : "makes"
     drivers ||--o{ bookings : "assigned to"
@@ -374,8 +374,8 @@ erDiagram
     bookings ||--o{ payments : "has payments"
     bookings ||--o{ reviews : "reviewed in"
     bookings ||--o{ location_surveys : "surveyed in"
-    bookings ||--o{ vehicle_inspections : "inspected in"
-    cars ||--o{ vehicle_inspections : "inspected"
+    bookings ||--o{ operationals : "inspected in"
+    cars ||--o{ operationals : "inspected"
 ```
 
 ---
@@ -403,9 +403,9 @@ Aturan cascading ini secara eksplisit dikonfigurasi pada file migration Laravel 
 | `location_surveys.store_id`    | `stores.id`             | **CASCADE**        | Jika toko cabang dihapus, riwayat survei kustomer di cabang tersebut ikut dibersihkan. |
 | `location_surveys.booking_id`  | `bookings.id`           | **CASCADE**        | Jika transaksi booking dihapus, log survei kelayakan kustomer terkait otomatis dihapus. |
 | `location_surveys.approved_by`  | `users.id`              | **SET NULL**       | Jika akun surveyor/admin dihapus, data survei tetap dipertahankan dengan persetujuan diset menjadi NULL. |
-| `vehicle_inspections.store_id` | `stores.id`             | **CASCADE**        | Jika toko cabang dihapus, data inspeksi mobil di cabang tersebut ikut dibersihkan. |
-| `vehicle_inspections.booking_id`| `bookings.id`           | **CASCADE**        | Jika transaksi booking dihapus, log pengecekan mobil keluar/masuk ikut dihapus. |
-| `vehicle_inspections.car_id`   | `cars.id`               | **CASCADE**        | Jika unit armada mobil dihapus, data log pengecekan fisik mobil tersebut ikut dibersihkan. |
+| `operationals.store_id` | `stores.id`             | **CASCADE**        | Jika toko cabang dihapus, data inspeksi mobil di cabang tersebut ikut dibersihkan. |
+| `operationals.booking_id`| `bookings.id`           | **CASCADE**        | Jika transaksi booking dihapus, log pengecekan mobil keluar/masuk ikut dihapus. |
+| `operationals.car_id`   | `cars.id`               | **CASCADE**        | Jika unit armada mobil dihapus, data log pengecekan fisik mobil tersebut ikut dibersihkan. |
 
 ---
 

@@ -25,6 +25,7 @@ class Checkout extends Component
     public $car_names = '';
     public int $step = 1;
     public ?string $booking_code = null;
+    public bool $from_cart = false;
 
         // Step 1: Konfigurasi Sewa
     public ?string $pickup_date = null;
@@ -95,7 +96,9 @@ class Checkout extends Component
 
     public function mount(\App\Services\CartService $cartService, ?string $car = null, bool $from_cart = false): void
     {
-        if ($from_cart) {
+        $this->from_cart = $from_cart || request()->query('from_cart') || request()->has('from_cart');
+
+        if ($this->from_cart) {
             $cartItems = $cartService->get();
             if (empty($cartItems)) {
                 $this->redirect(route('cars.index'));
@@ -662,7 +665,7 @@ class Checkout extends Component
         // (Booking items removed as consolidated to single car bookings)
 
         // Clear cart if booking from cart
-        if (\Illuminate\Support\Facades\Request::has('from_cart') && \Illuminate\Support\Facades\Request::input('from_cart') == 'true') {
+        if ($this->from_cart) {
             app(\App\Services\CartService::class)->clear();
         }
 

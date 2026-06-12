@@ -61,7 +61,7 @@
                                         <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{{ $item['brand'] }}</p>
                                     </div>
                                     <div class="text-right">
-                                        <p class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Harga Sewa</p>
+                                        <p class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Harga Lepas Kunci</p>
                                         <p class="text-xl font-black text-white tracking-tighter">
                                             Rp {{ number_format($item['price'], 0, ',', '.') }}<span class="text-[10px] text-slate-500 font-bold ml-1 uppercase">/Hari</span>
                                         </p>
@@ -101,7 +101,7 @@
                                 <div class="text-left">
                                     <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Total Sewa</p>
                                     <p class="text-2xl font-black text-white tracking-tighter">Rp {{ number_format(collect($items)->sum('price'), 0, ',', '.') }}</p>
-                                    <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">Estimasi Per Hari</p>
+                                    <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">Estimasi Lepas Kunci Per Hari</p>
                                 </div>
                             </div>
                         </div>

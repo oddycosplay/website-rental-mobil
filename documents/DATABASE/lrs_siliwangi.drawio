@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.8 Chrome/140.0.7339.240 Electron/38.4.0 Safari/537.36" version="28.2.8">
   <diagram id="LRS-Diagram-Native" name="Siliwangi Rental LRS">
-    <mxGraphModel dx="1245" dy="1798" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="2037" dy="2028" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="583" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -871,7 +871,7 @@
             <mxPoint x="60" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="label_edge_users_id_customers_user_id_1_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_users_id_customers_user_id_1" vertex="1" connectable="0">
+        <mxCell id="label_edge_users_id_customers_user_id_1_target" value="1" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_users_id_customers_user_id_1" vertex="1" connectable="0">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="-50" y="-10" as="offset" />
           </mxGeometry>
@@ -891,9 +891,9 @@
             <mxPoint x="-50" y="30" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="label_edge_users_id_employees_user_id_2_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_users_id_employees_user_id_2" vertex="1" connectable="0">
+        <mxCell id="label_edge_users_id_employees_user_id_2_target" value="1" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_users_id_employees_user_id_2" vertex="1" connectable="0">
           <mxGeometry x="1" relative="1" as="geometry">
-            <mxPoint x="-15" y="-10" as="offset" />
+            <mxPoint x="-30" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_users_id_drivers_user_id_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=ERmany;endFill=0;startArrow=ERmany;startFill=0;startSize=10;endSize=10;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;" parent="1" edge="1">
@@ -911,7 +911,7 @@
             <mxPoint x="-50" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="label_edge_users_id_drivers_user_id_3_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_users_id_drivers_user_id_3" vertex="1" connectable="0">
+        <mxCell id="label_edge_users_id_drivers_user_id_3_target" value="1" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_users_id_drivers_user_id_3" vertex="1" connectable="0">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="-60" y="-10" as="offset" />
           </mxGeometry>
@@ -962,8 +962,9 @@
             <mxPoint x="240" y="360" as="sourcePoint" />
             <mxPoint x="220" y="845" as="targetPoint" />
             <Array as="points">
+              <mxPoint x="190" y="360" />
               <mxPoint x="190" y="361" />
-              <mxPoint x="100" y="360" />
+              <mxPoint x="100" y="361" />
               <mxPoint x="100" y="845" />
             </Array>
           </mxGeometry>
@@ -975,7 +976,7 @@
         </mxCell>
         <mxCell id="label_edge_stores_id_employees_store_id_6_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_stores_id_employees_store_id_6" vertex="1" connectable="0">
           <mxGeometry x="1" relative="1" as="geometry">
-            <mxPoint x="-15" y="-10" as="offset" />
+            <mxPoint x="-30" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_stores_id_expenses_store_id_7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=ERmany;endFill=0;startArrow=ERmany;startFill=0;startSize=10;endSize=10;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;" parent="1" edge="1">
@@ -1020,21 +1021,21 @@
             <mxPoint x="-50" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge_stores_id_operasional_store_id_9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=ERmany;endFill=0;startArrow=ERmany;startFill=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;startSize=10;endSize=10;" parent="1" source="cell_stores_id_val" edge="1">
+        <mxCell id="edge_stores_id_operationals_store_id_9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=ERmany;endFill=0;startArrow=ERmany;startFill=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;startSize=10;endSize=10;" parent="1" source="cell_stores_id_val" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1370" y="-587" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1210" y="361" />
+              <mxPoint x="1210" y="360" />
               <mxPoint x="1210" y="-587" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="label_edge_stores_id_operasional_store_id_9_source" value="1" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_stores_id_operasional_store_id_9" vertex="1" connectable="0">
+        <mxCell id="label_edge_stores_id_operationals_store_id_9_source" value="1" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_stores_id_operationals_store_id_9" vertex="1" connectable="0">
           <mxGeometry x="-1" relative="1" as="geometry">
             <mxPoint x="15" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="label_edge_stores_id_operasional_store_id_9_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_stores_id_operasional_store_id_9" vertex="1" connectable="0">
+        <mxCell id="label_edge_stores_id_operationals_store_id_9_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_stores_id_operationals_store_id_9" vertex="1" connectable="0">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="-50" y="-13" as="offset" />
           </mxGeometry>
@@ -1120,8 +1121,8 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1200" y="1483" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1170" y="1095" />
-              <mxPoint x="1170" y="1483" />
+              <mxPoint x="1120" y="1095" />
+              <mxPoint x="1120" y="1483" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1132,7 +1133,7 @@
         </mxCell>
         <mxCell id="label_edge_bookings_id_payments_booking_id_14_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_bookings_id_payments_booking_id_14" vertex="1" connectable="0">
           <mxGeometry x="1" relative="1" as="geometry">
-            <mxPoint x="-40" y="-23" as="offset" />
+            <mxPoint x="-41" y="-13" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_bookings_id_reviews_booking_id_15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=ERmany;endFill=0;startArrow=ERmany;startFill=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;startSize=10;endSize=10;" parent="1" source="cell_bookings_id_val" edge="1">
@@ -1149,7 +1150,7 @@
             <mxPoint x="120" y="15" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="label_edge_bookings_id_reviews_booking_id_15_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_bookings_id_reviews_booking_id_15" vertex="1" connectable="0">
+        <mxCell id="label_edge_bookings_id_reviews_booking_id_15_target" value="1" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_bookings_id_reviews_booking_id_15" vertex="1" connectable="0">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="-60" y="-10" as="offset" />
           </mxGeometry>
@@ -1173,26 +1174,27 @@
             <mxPoint x="-50" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge_bookings_id_operasional_booking_id_17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=ERmany;endFill=0;startArrow=ERmany;startFill=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;startSize=10;endSize=10;" parent="1" source="cell_bookings_id_val" edge="1">
+        <mxCell id="edge_bookings_id_operationals_booking_id_17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=ERmany;endFill=0;startArrow=ERmany;startFill=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;startSize=10;endSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="cell_bookings_id_val" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1370" y="-565" as="targetPoint" />
             <Array as="points">
               <mxPoint x="1260" y="1095" />
               <mxPoint x="1260" y="-565" />
             </Array>
+            <mxPoint x="490" y="1080" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="label_edge_bookings_id_operasional_booking_id_17_source" value="1" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_bookings_id_operasional_booking_id_17" vertex="1" connectable="0">
+        <mxCell id="label_edge_bookings_id_operationals_booking_id_17_source" value="1" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_bookings_id_operationals_booking_id_17" vertex="1" connectable="0">
           <mxGeometry x="-1" relative="1" as="geometry">
             <mxPoint x="690" y="25" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="label_edge_bookings_id_operasional_booking_id_17_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_bookings_id_operasional_booking_id_17" vertex="1" connectable="0">
+        <mxCell id="label_edge_bookings_id_operationals_booking_id_17_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_bookings_id_operationals_booking_id_17" vertex="1" connectable="0">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="-50" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge_cars_id_operasional_car_id_18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=ERmany;endFill=0;startArrow=ERmany;startFill=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;startSize=10;endSize=10;" parent="1" edge="1">
+        <mxCell id="edge_cars_id_operationals_car_id_18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=ERmany;endFill=0;startArrow=ERmany;startFill=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;startSize=10;endSize=10;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="2000" y="562" as="sourcePoint" />
             <mxPoint x="1370" y="-543" as="targetPoint" />
@@ -1202,12 +1204,12 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="label_edge_cars_id_operasional_car_id_18_source" value="1" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_cars_id_operasional_car_id_18" vertex="1" connectable="0">
+        <mxCell id="label_edge_cars_id_operationals_car_id_18_source" value="1" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_cars_id_operationals_car_id_18" vertex="1" connectable="0">
           <mxGeometry x="-1" relative="1" as="geometry">
             <mxPoint x="-680" y="-32" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="label_edge_cars_id_operasional_car_id_18_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_cars_id_operasional_car_id_18" vertex="1" connectable="0">
+        <mxCell id="label_edge_cars_id_operationals_car_id_18_target" value="M" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=default;fontSize=11;fontFamily=Helvetica;fontColor=default;rounded=1;strokeColor=#000000;strokeWidth=1.2;" parent="edge_cars_id_operationals_car_id_18" vertex="1" connectable="0">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="-50" y="-10" as="offset" />
           </mxGeometry>
@@ -1587,241 +1589,241 @@
         <mxCell id="cell_employees_created_at_val" value="created_at" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_employees_created_at" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="table_operasional" value="operasional" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;rowLines=0;columnLines=1;" parent="1" vertex="1">
+        <mxCell id="table_operationals" value="operationals" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;rowLines=0;columnLines=1;" parent="1" vertex="1">
           <mxGeometry x="1370" y="-650" width="240" height="602" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_id" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_id" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="30" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_id_key" value="PK" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=1;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_id" vertex="1">
+        <mxCell id="cell_operationals_id_key" value="PK" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=1;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_id" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_id_val" value="&lt;u&gt;&lt;b&gt;id&lt;/b&gt;&lt;/u&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_id" vertex="1">
+        <mxCell id="cell_operationals_id_val" value="&lt;u&gt;&lt;b&gt;id&lt;/b&gt;&lt;/u&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_id" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_store_id" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_store_id" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="52" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_store_id_key" value="FK" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_store_id" vertex="1">
+        <mxCell id="cell_operationals_store_id_key" value="FK" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_store_id" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_store_id_val" value="store_id" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_store_id" vertex="1">
+        <mxCell id="cell_operationals_store_id_val" value="store_id" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_store_id" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_booking_id" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_booking_id" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="74" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_booking_id_key" value="FK" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_booking_id" vertex="1">
+        <mxCell id="cell_operationals_booking_id_key" value="FK" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_booking_id" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_booking_id_val" value="booking_id" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_booking_id" vertex="1">
+        <mxCell id="cell_operationals_booking_id_val" value="booking_id" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_booking_id" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_car_id" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_car_id" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="96" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_car_id_key" value="FK" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_car_id" vertex="1">
+        <mxCell id="cell_operationals_car_id_key" value="FK" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_car_id" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_car_id_val" value="car_id" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_car_id" vertex="1">
+        <mxCell id="cell_operationals_car_id_val" value="car_id" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_car_id" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_inspector_name" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_inspector_name" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="118" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_inspector_name_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_inspector_name" vertex="1">
+        <mxCell id="cell_operationals_inspector_name_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_inspector_name" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_inspector_name_val" value="inspector_name" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_inspector_name" vertex="1">
+        <mxCell id="cell_operationals_inspector_name_val" value="inspector_name" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_inspector_name" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_inspection_type" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_inspection_type" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="140" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_inspection_type_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_inspection_type" vertex="1">
+        <mxCell id="cell_operationals_inspection_type_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_inspection_type" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_inspection_type_val" value="inspection_type" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_inspection_type" vertex="1">
+        <mxCell id="cell_operationals_inspection_type_val" value="inspection_type" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_inspection_type" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_inspected_at" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_inspected_at" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="162" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_inspected_at_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_inspected_at" vertex="1">
+        <mxCell id="cell_operationals_inspected_at_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_inspected_at" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_inspected_at_val" value="inspected_at" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_inspected_at" vertex="1">
+        <mxCell id="cell_operationals_inspected_at_val" value="inspected_at" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_inspected_at" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_odometer_km" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_odometer_km" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="184" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_odometer_km_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_odometer_km" vertex="1">
+        <mxCell id="cell_operationals_odometer_km_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_odometer_km" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_odometer_km_val" value="odometer_km" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_odometer_km" vertex="1">
+        <mxCell id="cell_operationals_odometer_km_val" value="odometer_km" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_odometer_km" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_fuel_level" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_fuel_level" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="206" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_fuel_level_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_fuel_level" vertex="1">
+        <mxCell id="cell_operationals_fuel_level_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_fuel_level" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_fuel_level_val" value="fuel_level" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_fuel_level" vertex="1">
+        <mxCell id="cell_operationals_fuel_level_val" value="fuel_level" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_fuel_level" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_exterior" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_exterior" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="228" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_exterior_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_exterior" vertex="1">
+        <mxCell id="cell_operationals_exterior_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_exterior" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_exterior_val" value="exterior" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_exterior" vertex="1">
+        <mxCell id="cell_operationals_exterior_val" value="exterior" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_exterior" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_interior" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_interior" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="250" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_interior_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_interior" vertex="1">
+        <mxCell id="cell_operationals_interior_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_interior" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_interior_val" value="interior" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_interior" vertex="1">
+        <mxCell id="cell_operationals_interior_val" value="interior" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_interior" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_equipment" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_equipment" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="272" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_equipment_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_equipment" vertex="1">
+        <mxCell id="cell_operationals_equipment_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_equipment" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_equipment_val" value="equipment" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_equipment" vertex="1">
+        <mxCell id="cell_operationals_equipment_val" value="equipment" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_equipment" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_engine" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_engine" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="294" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_engine_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_engine" vertex="1">
+        <mxCell id="cell_operationals_engine_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_engine" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_engine_val" value="engine" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_engine" vertex="1">
+        <mxCell id="cell_operationals_engine_val" value="engine" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_engine" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_photos" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_photos" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="316" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_photos_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_photos" vertex="1">
+        <mxCell id="cell_operationals_photos_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_photos" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_photos_val" value="photos" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_photos" vertex="1">
+        <mxCell id="cell_operationals_photos_val" value="photos" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_photos" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_fuel_photos" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_fuel_photos" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="338" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_fuel_photos_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_fuel_photos" vertex="1">
+        <mxCell id="cell_operationals_fuel_photos_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_fuel_photos" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_fuel_photos_val" value="fuel_photos" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_fuel_photos" vertex="1">
+        <mxCell id="cell_operationals_fuel_photos_val" value="fuel_photos" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_fuel_photos" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_damage_found" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_damage_found" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="360" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_damage_found_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_damage_found" vertex="1">
+        <mxCell id="cell_operationals_damage_found_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_damage_found" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_damage_found_val" value="damage_found" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_damage_found" vertex="1">
+        <mxCell id="cell_operationals_damage_found_val" value="damage_found" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_damage_found" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_damage_description" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_damage_description" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="382" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_damage_description_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_damage_description" vertex="1">
+        <mxCell id="cell_operationals_damage_description_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_damage_description" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_damage_description_val" value="damage_description" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_damage_description" vertex="1">
+        <mxCell id="cell_operationals_damage_description_val" value="damage_description" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_damage_description" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_damage_cost" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_damage_cost" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="404" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_damage_cost_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_damage_cost" vertex="1">
+        <mxCell id="cell_operationals_damage_cost_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_damage_cost" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_damage_cost_val" value="damage_cost" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_damage_cost" vertex="1">
+        <mxCell id="cell_operationals_damage_cost_val" value="damage_cost" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_damage_cost" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_dirty_fine" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_dirty_fine" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="426" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_dirty_fine_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_dirty_fine" vertex="1">
+        <mxCell id="cell_operationals_dirty_fine_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_dirty_fine" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_dirty_fine_val" value="dirty_fine" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_dirty_fine" vertex="1">
+        <mxCell id="cell_operationals_dirty_fine_val" value="dirty_fine" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_dirty_fine" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_fuel_fine" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_fuel_fine" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="448" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_fuel_fine_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_fuel_fine" vertex="1">
+        <mxCell id="cell_operationals_fuel_fine_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_fuel_fine" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_fuel_fine_val" value="fuel_fine" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_fuel_fine" vertex="1">
+        <mxCell id="cell_operationals_fuel_fine_val" value="fuel_fine" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_fuel_fine" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_damage_photos" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_damage_photos" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="470" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_damage_photos_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_damage_photos" vertex="1">
+        <mxCell id="cell_operationals_damage_photos_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_damage_photos" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_damage_photos_val" value="damage_photos" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_damage_photos" vertex="1">
+        <mxCell id="cell_operationals_damage_photos_val" value="damage_photos" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_damage_photos" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_customer_confirmed" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_customer_confirmed" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="492" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_customer_confirmed_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_customer_confirmed" vertex="1">
+        <mxCell id="cell_operationals_customer_confirmed_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_customer_confirmed" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_customer_confirmed_val" value="customer_confirmed" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_customer_confirmed" vertex="1">
+        <mxCell id="cell_operationals_customer_confirmed_val" value="customer_confirmed" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_customer_confirmed" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_customer_note" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_customer_note" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="514" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_customer_note_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_customer_note" vertex="1">
+        <mxCell id="cell_operationals_customer_note_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_customer_note" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_customer_note_val" value="customer_note" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_customer_note" vertex="1">
+        <mxCell id="cell_operationals_customer_note_val" value="customer_note" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_customer_note" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_notes" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_notes" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="536" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_notes_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_notes" vertex="1">
+        <mxCell id="cell_operationals_notes_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_notes" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_notes_val" value="notes" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_notes" vertex="1">
+        <mxCell id="cell_operationals_notes_val" value="notes" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_notes" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_status" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_status" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="558" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_status_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_status" vertex="1">
+        <mxCell id="cell_operationals_status_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_status" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_status_val" value="status" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_status" vertex="1">
+        <mxCell id="cell_operationals_status_val" value="status" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_status" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="row_operasional_created_at" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operasional" vertex="1">
+        <mxCell id="row_operationals_created_at" value="" style="shape=tableRow;horizontal=0;startSize=0;html=1;whiteSpace=wrap;collapsible=0;strokeColor=none;fillColor=none;connectable=0;points=[];" parent="table_operationals" vertex="1">
           <mxGeometry y="580" width="240" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_created_at_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operasional_created_at" vertex="1">
+        <mxCell id="cell_operationals_created_at_key" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;fontStyle=0;align=center;verticalAlign=middle;fontColor=#000000;" parent="row_operationals_created_at" vertex="1">
           <mxGeometry width="35" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="cell_operasional_created_at_val" value="created_at" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operasional_created_at" vertex="1">
+        <mxCell id="cell_operationals_created_at_val" value="created_at" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;connectable=1;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=none;fontStyle=0;align=left;verticalAlign=middle;spacingLeft=8;fontColor=#000000;" parent="row_operationals_created_at" vertex="1">
           <mxGeometry x="35" width="205" height="22" as="geometry" />
         </mxCell>
         <mxCell id="table_cars" value="cars" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;rowLines=0;columnLines=1;" parent="1" vertex="1">

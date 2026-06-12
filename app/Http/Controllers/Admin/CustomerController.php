@@ -22,7 +22,7 @@ class CustomerController extends Controller
 
         // Add total transaction amount for each customer
         foreach ($customers as $customer) {
-            $customer->total_transaction = Payment::whereIn('booking_id', $customer->bookings->pluck('id'))
+            $customer->total_transaction = Payment::query()->whereIn('booking_id', $customer->bookings->pluck('id'))
                 ->where('payment_status', 'success')
                 ->sum('paid_amount');
         }
@@ -34,11 +34,11 @@ class CustomerController extends Controller
             'active_customers' => User::whereHas('roles', function($q) {
                 $q->where('name', 'customer');
             })->whereHas('bookings', function($q) {
-                $q->where('created_at', '>=', now()->startOfMonth());
+                $q->where('bookings.created_at', '>=', now()->startOfMonth());
             })->count(),
             'new_customers' => User::whereHas('roles', function($q) {
                 $q->where('name', 'customer');
-            })->where('created_at', '>=', now()->subDays(30))->count(),
+            })->where('users.created_at', '>=', now()->subDays(30))->count(),
             'blacklist_customers' => User::whereHas('roles', function($q) {
                 $q->where('name', 'customer');
             })->where('status', 'blacklist')->count(),
@@ -52,7 +52,7 @@ class CustomerController extends Controller
         $customer->load(['bookings.car', 'bookings.payments']);
         
         $customer->total_rental = $customer->bookings->count();
-        $customer->total_transaction = Payment::whereIn('booking_id', $customer->bookings->pluck('id'))
+        $customer->total_transaction = Payment::query()->whereIn('booking_id', $customer->bookings->pluck('id'))
             ->where('payment_status', 'success')
             ->sum('paid_amount');
 

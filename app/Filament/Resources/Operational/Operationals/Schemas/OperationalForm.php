@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Operational\VehicleInspections\Schemas;
+namespace App\Filament\Resources\Operational\Operationals\Schemas;
 
 use App\Models\Booking;
 use Filament\Forms\Form;
@@ -17,7 +17,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 
-class VehicleInspectionForm
+class OperationalForm
 {
     public static function configure(Form $form): Form
     {

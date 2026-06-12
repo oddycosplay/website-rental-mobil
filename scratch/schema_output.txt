@@ -1,0 +1,395 @@
+### Table: bookings
+  - id (bigint unsigned) [PRI]
+  - booking_code (varchar(100)) [UNI]
+  - customer_id (bigint unsigned) nullable [MUL]
+  - car_id (bigint unsigned) [MUL]
+  - driver_id (bigint unsigned) nullable [MUL]
+  - driver_name (varchar(255)) nullable
+  - store_id (bigint unsigned) [MUL]
+  - promo_id (bigint unsigned) nullable [MUL]
+  - rental_type (varchar(20))
+  - rental_category (varchar(255))
+  - guest_token (varchar(255)) nullable
+  - guest_name (varchar(255)) nullable
+  - guest_email (varchar(255)) nullable
+  - guest_phone (varchar(255)) nullable
+  - ktp_path (varchar(255)) nullable
+  - sim_path (varchar(255)) nullable
+  - with_driver (tinyint(1))
+  - pickup_date (datetime)
+  - return_date (datetime)
+  - pickup_location (text) nullable
+  - return_location (text) nullable
+  - delivery_type (varchar(255))
+  - pickup_type (varchar(255))
+  - total_day (int)
+  - price (decimal(15,2))
+  - delivery_fee (decimal(15,2))
+  - pickup_fee (decimal(15,2))
+  - ojol_fee (decimal(15,2))
+  - driver_price (decimal(15,2))
+  - extra_price (decimal(15,2))
+  - late_fee (decimal(15,2))
+  - discount (decimal(15,2))
+  - tax (decimal(15,2))
+  - grand_total (decimal(15,2))
+  - dp_amount (decimal(15,2))
+  - remaining_payment (decimal(15,2))
+  - payment_status (enum('unpaid','partial','paid','refunded'))
+  - booking_status (enum('pending','confirmed','ongoing','completed','cancelled','expired'))
+  - notes (text) nullable
+  - expired_at (datetime) nullable
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - car_id -> cars.id
+    - customer_id -> customers.id
+    - driver_id -> drivers.id
+    - promo_id -> promos.id
+    - store_id -> stores.id
+
+### Table: cars
+  - id (bigint unsigned) [PRI]
+  - store_id (bigint unsigned) [MUL]
+  - car_name (varchar(255))
+  - slug (varchar(255)) [UNI]
+  - plate_number (varchar(20)) [UNI]
+  - stnk_expiry (date) nullable
+  - tax_expiry (date) nullable
+  - year (year)
+  - color (varchar(50)) nullable
+  - seat (int)
+  - transmission (enum('Manual','Automatic'))
+  - fuel_type (enum('Bensin','Diesel','Listrik'))
+  - mileage (int)
+  - daily_price (decimal(15,2))
+  - driver_daily_price (decimal(15,2))
+  - is_call_for_price (tinyint(1))
+  - monthly_price (decimal(15,2))
+  - late_fee (decimal(15,2))
+  - thumbnail (varchar(255)) nullable
+  - description (text) nullable
+  - status (enum('available','rented','maintenance'))
+  - is_available (tinyint(1))
+  - featured (tinyint(1))
+  - brand_name (varchar(255))
+  - brand_slug (varchar(255))
+  - brand_logo (varchar(255)) nullable
+  - type_name (varchar(255))
+  - category (enum('pribadi','perusahaan','both'))
+  - type_description (text) nullable
+  - images (json) nullable
+  - latitude (decimal(10,8)) nullable
+  - longitude (decimal(11,8)) nullable
+  - speed (decimal(5,2)) nullable
+  - location_address (varchar(255)) nullable
+  - location_raw_data (json) nullable
+  - maintenances (json) nullable
+  - inspections (json) nullable
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - store_id -> stores.id
+
+### Table: checkout_drafts
+  - id (bigint unsigned) [PRI]
+  - user_id (bigint unsigned) nullable [MUL]
+  - ip_address (varchar(255)) nullable
+  - step (int)
+  - payload (json)
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - user_id -> users.id
+
+### Table: customers
+  - id (bigint unsigned) [PRI]
+  - user_id (bigint unsigned) nullable [MUL]
+  - name (varchar(255))
+  - email (varchar(255)) nullable
+  - phone (varchar(255)) nullable
+  - nik (varchar(50)) nullable
+  - sim_number (varchar(50)) nullable
+  - ktp_image (varchar(255)) nullable
+  - sim_image (varchar(255)) nullable
+  - selfie_image (varchar(255)) nullable
+  - ktp_path (varchar(255)) nullable
+  - sim_path (varchar(255)) nullable
+  - no_kk (varchar(50)) nullable
+  - kk_photo (varchar(255)) nullable
+  - nip_nim (varchar(50)) nullable
+  - id_card_photo (varchar(255)) nullable
+  - pekerjaan (varchar(100)) nullable
+  - customer_status (varchar(50)) nullable
+  - address (text) nullable
+  - date_of_birth (varchar(50)) nullable
+  - is_active (tinyint(1))
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - user_id -> users.id
+
+### Table: driver_schedules
+  - id (bigint unsigned) [PRI]
+  - driver_id (bigint unsigned) [MUL]
+  - booking_id (bigint unsigned) [MUL]
+  - start_date (datetime)
+  - end_date (datetime)
+  - status (enum('scheduled','ongoing','completed','cancelled'))
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - booking_id -> bookings.id
+    - driver_id -> drivers.id
+
+### Table: drivers
+  - id (bigint unsigned) [PRI]
+  - user_id (bigint unsigned) nullable [MUL]
+  - store_id (bigint unsigned) [MUL]
+  - name (varchar(255))
+  - phone (varchar(20))
+  - address (text) nullable
+  - license_number (varchar(50)) nullable
+  - photo (varchar(255)) nullable
+  - daily_fee (decimal(15,2))
+  - rating (decimal(3,2))
+  - status (enum('active','inactive'))
+  - is_available (tinyint(1))
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - store_id -> stores.id
+    - user_id -> users.id
+
+### Table: employees
+  - id (bigint unsigned) [PRI]
+  - user_id (bigint unsigned) nullable [MUL]
+  - store_id (bigint unsigned) nullable [MUL]
+  - name (varchar(255))
+  - email (varchar(255)) nullable
+  - phone (varchar(255)) nullable
+  - nip (varchar(50)) nullable [UNI]
+  - position (varchar(100)) nullable
+  - is_active (tinyint(1))
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - store_id -> stores.id
+    - user_id -> users.id
+
+### Table: expenses
+  - id (bigint unsigned) [PRI]
+  - date (date)
+  - category (varchar(255))
+  - store_id (bigint unsigned) [MUL]
+  - amount (decimal(15,2))
+  - description (varchar(255)) nullable
+  - attachment (varchar(255)) nullable
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - store_id -> stores.id
+
+### Table: location_surveys
+  - id (bigint unsigned) [PRI]
+  - store_id (bigint unsigned) nullable [MUL]
+  - booking_id (bigint unsigned) [MUL]
+  - surveyor_name (varchar(255))
+  - survey_date (date)
+  - survey_type (enum('delivery','pickup'))
+  - address (text)
+  - residence_status (json) nullable
+  - job_status (json) nullable
+  - neighbor_interview (json) nullable
+  - photos (json) nullable
+  - recommendation (enum('layak','tidak_layak','layak_dengan_catatan')) nullable
+  - notes (text) nullable
+  - status (enum('draft','submitted','approved','rejected'))
+  - approved_by (bigint unsigned) nullable [MUL]
+  - approved_at (timestamp) nullable
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - approved_by -> users.id
+    - booking_id -> bookings.id
+    - store_id -> stores.id
+
+### Table: model_has_permissions
+  - permission_id (bigint unsigned) [PRI]
+  - model_type (varchar(255)) [PRI]
+  - model_id (bigint unsigned) [PRI]
+  Foreign Keys:
+    - permission_id -> permissions.id
+
+### Table: model_has_roles
+  - role_id (bigint unsigned) [PRI]
+  - model_type (varchar(255)) [PRI]
+  - model_id (bigint unsigned) [PRI]
+  Foreign Keys:
+    - role_id -> roles.id
+
+### Table: operationals
+  - id (bigint unsigned) [PRI]
+  - store_id (bigint unsigned) nullable [MUL]
+  - booking_id (bigint unsigned) [MUL]
+  - car_id (bigint unsigned) [MUL]
+  - inspector_name (varchar(255))
+  - inspection_type (enum('pre_rental','post_rental'))
+  - inspected_at (timestamp)
+  - odometer_km (int) nullable
+  - fuel_level (enum('full','three_quarter','half','quarter','empty'))
+  - exterior (json) nullable
+  - interior (json) nullable
+  - equipment (json) nullable
+  - engine (json) nullable
+  - photos (json) nullable
+  - fuel_photos (json) nullable
+  - damage_found (tinyint(1))
+  - damage_description (text) nullable
+  - damage_cost (decimal(12,2)) nullable
+  - dirty_fine (decimal(12,2)) nullable
+  - fuel_fine (decimal(12,2)) nullable
+  - damage_photos (json) nullable
+  - customer_confirmed (tinyint(1))
+  - customer_note (text) nullable
+  - notes (text) nullable
+  - status (enum('draft','submitted','approved'))
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - booking_id -> bookings.id
+    - car_id -> cars.id
+    - store_id -> stores.id
+
+### Table: passkeys
+  - id (bigint unsigned) [PRI]
+  - user_id (bigint unsigned) [MUL]
+  - name (varchar(255))
+  - credential_id (varchar(255)) [UNI]
+  - credential (json)
+  - last_used_at (timestamp) nullable
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - user_id -> users.id
+
+### Table: password_reset_tokens
+  - email (varchar(255)) [PRI]
+  - token (varchar(255))
+  - created_at (timestamp) nullable
+
+### Table: payments
+  - id (bigint unsigned) [PRI]
+  - booking_id (bigint unsigned) [MUL]
+  - payment_code (varchar(100)) [UNI]
+  - payment_method (varchar(50)) nullable
+  - transaction_id (varchar(255)) nullable
+  - snap_token (text) nullable
+  - gross_amount (decimal(15,2))
+  - paid_amount (decimal(15,2))
+  - payment_status (enum('pending','success','failed','expired','refund'))
+  - payment_date (datetime) nullable
+  - proof_payment (varchar(255)) nullable
+  - midtrans_response (json) nullable
+  - payment_logs (json) nullable
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - booking_id -> bookings.id
+
+### Table: permissions
+  - id (bigint unsigned) [PRI]
+  - name (varchar(255)) [MUL]
+  - guard_name (varchar(255))
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+
+### Table: promos
+  - id (bigint unsigned) [PRI]
+  - code (varchar(50)) [UNI]
+  - title (varchar(255))
+  - description (text) nullable
+  - discount_type (enum('percentage','fixed'))
+  - discount_value (decimal(15,2))
+  - minimum_transaction (decimal(15,2))
+  - start_date (date)
+  - end_date (date)
+  - quota (int)
+  - used (int)
+  - status (tinyint(1))
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+
+### Table: reviews
+  - id (bigint unsigned) [PRI]
+  - booking_id (bigint unsigned) [MUL]
+  - customer_id (bigint unsigned) nullable [MUL]
+  - car_id (bigint unsigned) [MUL]
+  - rating (int)
+  - review (text) nullable
+  - status (tinyint(1))
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  Foreign Keys:
+    - booking_id -> bookings.id
+    - car_id -> cars.id
+    - customer_id -> customers.id
+
+### Table: role_has_permissions
+  - permission_id (bigint unsigned) [PRI]
+  - role_id (bigint unsigned) [PRI]
+  Foreign Keys:
+    - permission_id -> permissions.id
+    - role_id -> roles.id
+
+### Table: roles
+  - id (bigint unsigned) [PRI]
+  - name (varchar(255)) [MUL]
+  - guard_name (varchar(255))
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+
+### Table: sessions
+  - id (varchar(255)) [PRI]
+  - user_id (bigint unsigned) nullable [MUL]
+  - ip_address (varchar(45)) nullable
+  - user_agent (text) nullable
+  - payload (longtext)
+  - last_activity (int) [MUL]
+
+### Table: stores
+  - id (bigint unsigned) [PRI]
+  - name (varchar(255))
+  - slug (varchar(255)) [UNI]
+  - phone (varchar(20)) nullable
+  - email (varchar(255)) nullable
+  - address (text) nullable
+  - city (varchar(100)) nullable
+  - province (varchar(100)) nullable
+  - google_maps (text) nullable
+  - status (tinyint(1))
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+
+### Table: users
+  - id (bigint unsigned) [PRI]
+  - name (varchar(255))
+  - email (varchar(255)) [UNI]
+  - phone (varchar(20)) nullable [UNI]
+  - email_verified_at (timestamp) nullable
+  - password (varchar(255))
+  - avatar (varchar(255)) nullable
+  - status (enum('active','inactive'))
+  - last_login (timestamp) nullable
+  - two_factor_secret (text) nullable
+  - two_factor_recovery_codes (text) nullable
+  - two_factor_confirmed_at (timestamp) nullable
+  - remember_token (varchar(100)) nullable
+  - current_team_id (bigint unsigned) nullable
+  - profile_photo_path (varchar(2048)) nullable
+  - created_at (timestamp) nullable
+  - updated_at (timestamp) nullable
+  - store_id (bigint unsigned) nullable [MUL]
+  Foreign Keys:
+    - store_id -> stores.id
+

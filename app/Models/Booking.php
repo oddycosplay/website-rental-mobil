@@ -159,9 +159,9 @@ class Booking extends Model
         return $this->hasMany(LocationSurvey::class);
     }
 
-    public function vehicleInspections()
+    public function operationals()
     {
-        return $this->hasMany(VehicleInspection::class);
+        return $this->hasMany(Operational::class);
     }
 
     /**

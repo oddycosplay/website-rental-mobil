@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\Operational\VehicleInspections\Tables;
+namespace App\Filament\Resources\Operational\Operationals\Tables;
 
 use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Notifications\Notification;
 
-class VehicleInspectionTable
+class OperationalTable
 {
     public static function configure(Table $table): Table
     {

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Operational\VehicleInspections\Pages;
+namespace App\Filament\Resources\Operational\Operationals\Pages;
 
-use App\Filament\Resources\Operational\VehicleInspections\VehicleInspectionResource;
+use App\Filament\Resources\Operational\Operationals\OperationalResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditVehicleInspection extends EditRecord
+class EditOperational extends EditRecord
 {
-    protected static string $resource = VehicleInspectionResource::class;
+    protected static string $resource = OperationalResource::class;
 
     protected function getHeaderActions(): array
     {

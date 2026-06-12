@@ -46,13 +46,14 @@ _Rincian item disimpan dalam tabel `booking_items` untuk mendukung pelaporan per
 
 ## 3. Informasi Kredensial (Default Seeder)
 
-| Role            | Email                             | Password   |
-| --------------- | --------------------------------- | ---------- |
-| **Super Admin** | email = `[admin@siliwangi.com]`   | `password` |
-| **Owner**       | email = `[owner@siliwangi.com]`   | `password` |
-| **Finance**     | email = `[finance@siliwangi.com]` | `password` |
-| **Driver**      | email = `[asep@siliwangi.com]`    | `password` |
-| **Customer**    | email = `[budi@gmail.com]`        | `password` |
+| Role            | Email                                 | Password   |
+| --------------- | ------------------------------------- | ---------- |
+| **Super Admin** | email = `[admin@siliwangi.com]`       | `password` |
+| **Owner**       | email = `[owner@siliwangi.com]`       | `password` |
+| **Finance**     | email = `[finance@siliwangi.com]`     | `password` |
+| **Driver**      | email = `[asep@siliwangi.com]`        | `password` |
+| **Customer**    | email = `[budi@gmail.com]`            | `password` |
+| **Operasional** | email = `[operasional@siliwangi.com]` | `password` |
 
 ---
 

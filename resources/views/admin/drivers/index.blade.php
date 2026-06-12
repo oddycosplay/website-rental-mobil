@@ -224,7 +224,7 @@
     </div>
     <div class="summary-card">
         <div class="summary-icon" style="background: var(--warning-bg); color: var(--warning-text);">
-            <i class="fas fa-steering-wheel"></i>
+            <i class="fas fa-route"></i>
         </div>
         <div class="summary-info">
             <h4>{{ $stats['on_duty_drivers'] }}</h4>

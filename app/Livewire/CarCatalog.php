@@ -101,7 +101,7 @@ class CarCatalog extends Component
         }
 
         // Always put available cars first, then rented
-        $query->orderByRaw("FIELD(status, 'available', 'rented', 'maintenance')", []);
+        $query->orderByRaw("CASE status WHEN 'available' THEN 1 WHEN 'rented' THEN 2 WHEN 'maintenance' THEN 3 ELSE 4 END");
         $query->orderBy('daily_price', 'asc');
 
         $cars = $query->paginate(9);

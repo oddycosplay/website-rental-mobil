@@ -22,7 +22,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants
 {
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRole('super-admin') || $this->hasRole('admin') || $this->hasRole('owner');
+        return $this->hasAnyRole(['super-admin', 'admin', 'owner', 'finance', 'operasional']);
     }
 
     public function getTenants(Panel $panel): Collection
@@ -124,6 +124,21 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     public function customer()
     {
         return $this->hasOne(\App\Models\Customer::class);
+    }
+
+    /**
+     * Get all bookings for this user through their customer profile.
+     */
+    public function bookings()
+    {
+        return $this->hasManyThrough(
+            \App\Models\Booking::class,
+            \App\Models\Customer::class,
+            'user_id',
+            'customer_id',
+            'id',
+            'id'
+        );
     }
 
     /**

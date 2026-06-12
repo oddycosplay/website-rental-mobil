@@ -16,7 +16,7 @@ return new class extends Migration
             $table->json('neighbor_interview')->nullable()->after('job_status');
         });
 
-        Schema::table('vehicle_inspections', function (Blueprint $table) {
+        Schema::table('operationals', function (Blueprint $table) {
             $table->decimal('dirty_fine', 12, 2)->nullable()->after('damage_cost');
             $table->decimal('fuel_fine', 12, 2)->nullable()->after('dirty_fine');
             $table->json('fuel_photos')->nullable()->after('photos');
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->dropColumn(['residence_status', 'job_status', 'neighbor_interview']);
         });
 
-        Schema::table('vehicle_inspections', function (Blueprint $table) {
+        Schema::table('operationals', function (Blueprint $table) {
             $table->dropColumn(['dirty_fine', 'fuel_fine', 'fuel_photos']);
         });
     }

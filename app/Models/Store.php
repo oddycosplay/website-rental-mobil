@@ -53,8 +53,8 @@ class Store extends Model
         return $this->hasMany(LocationSurvey::class, 'store_id');
     }
 
-    public function vehicleInspections()
+    public function operationals()
     {
-        return $this->hasMany(VehicleInspection::class, 'store_id');
+        return $this->hasMany(Operational::class, 'store_id');
     }
 }

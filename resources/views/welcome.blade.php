@@ -24,23 +24,32 @@
                     Premium Experience Guaranteed
                 </div>
                 
-                <h1 class="font-poppins text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] mb-8 text-white">
-                    Ride in <span class="bg-clip-text text-transparent bg-gradient-to-r from-gold via-gold-light to-gold-dark">Style</span><br>
-                    with Siliwangi
+                <h1 class="hero-title font-poppins text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] mb-8 text-white">
+                    <span class="hero-text-shadow">Sewa Mobil</span> <span class="bg-clip-text text-transparent bg-gradient-to-r from-gold via-gold-light to-gold-dark">Terpercaya</span><br>
+                    <span class="hero-text-shadow">untuk Perjalanan Anda</span>
                 </h1>
                 
-                <p class="text-slate-300 text-lg lg:text-xl leading-relaxed mb-12 max-w-lg opacity-80">
-                    Enjoy the luxury of driving with our best selection of fleet. Fast process, transparent pricing, and 24-hour service for an unforgettable journey.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-5 mb-16 hero-buttons">
-                    <a href="{{ url('/cars') }}" class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gold text-slate-900 font-black text-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-gold/20">
-                        <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                        <i class="fas fa-calendar-alt"></i> Rent Now
-                    </a>
-                    <a href="{{ url('/cars') }}" class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl border-2 border-white/10 text-white font-bold text-lg backdrop-blur-md hover:bg-white/5 hover:border-gold/50 hover:text-gold transition-all">
-                        <i class="fas fa-car-side"></i> View Fleet
-                    </a>
+                <div class="hero-content-card bg-white/20 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-8 mb-8 max-w-xl">
+                    <p class="hero-desc text-slate-300 text-lg lg:text-xl leading-relaxed mb-6 opacity-80">
+                        <strong>Siliwangi Rental Trans Nusa</strong> menyediakan layanan sewa mobil lepas kunci maupun dengan driver profesional untuk kebutuhan pribadi, wisata, perjalanan dinas, hingga operasional perusahaan.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-8 text-sm font-bold text-white">
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-gold"></i> Armada Terawat</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-gold"></i> Harga Transparan</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-gold"></i> Driver Berpengalaman</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-gold"></i> Booking Cepat & Mudah</div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-5 hero-buttons">
+                        <a href="{{ url('/cars') }}" class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gold text-slate-900 font-black text-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-gold/20">
+                            <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                            <i class="fas fa-calendar-alt"></i> Pesan Sekarang
+                        </a>
+                        <a href="{{ url('/cars') }}" class="btn-lihat-armada inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl border-2 border-white/10 text-white font-bold text-lg backdrop-blur-md hover:bg-white/5 hover:border-gold/50 hover:text-gold transition-all">
+                            <i class="fas fa-car-side"></i> Lihat Armada
+                        </a>
+                    </div>
                 </div>
                 
                 <!-- Trust Stats -->
@@ -55,7 +64,7 @@
                         <div class="flex text-gold text-xs gap-0.5 mb-1">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
-                        <p class="text-slate-400 font-medium">Trusted by 12,000+ happy customers</p>
+                        <p class="text-slate-400 font-medium">Dipercaya oleh ribuan pelanggan</p>
                     </div>
                 </div>
             </div>
@@ -73,34 +82,34 @@
                                 <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80" alt="Featured Car" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60"></div>
                                 <div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
-                                    <span class="px-4 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-widest">Featured</span>
-                                    <div class="bg-gold text-slate-900 px-4 py-1.5 rounded-xl font-black text-sm">Rp 1.5M+</div>
+                                    <span class="px-4 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-widest">Pilihan Tepat</span>
+                                    <div class="bg-gold text-slate-900 px-4 py-1.5 rounded-xl font-black text-sm">Armada Terbaik</div>
                                 </div>
                             </div>
                             
                             <div class="mt-8 space-y-6">
                                 <div class="flex justify-between items-center">
                                     <div>
-                                        <h3 class="text-2xl font-black text-white group-hover:text-gold transition-colors">Porsche Cayenne S</h3>
-                                        <p class="text-slate-400 text-sm mt-1 uppercase tracking-widest font-bold">Luxury SUV • V8 Engine</p>
+                                        <h3 class="text-2xl font-black text-white group-hover:text-gold transition-colors">Nyaman & Aman</h3>
+                                        <p class="text-slate-400 text-sm mt-1 uppercase tracking-widest font-bold">Layanan Premium</p>
                                     </div>
                                     <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-gold text-2xl border border-white/10">
-                                        <i class="fas fa-bolt"></i>
+                                        <i class="fas fa-shield-alt"></i>
                                     </div>
                                 </div>
                                 
                                 <div class="grid grid-cols-3 gap-4">
                                     <div class="p-4 rounded-2xl bg-white/5 border border-white/5 text-center">
                                         <i class="fas fa-tachometer-alt text-gold mb-2 block"></i>
-                                        <span class="text-xs font-bold text-slate-300">Fastest</span>
+                                        <span class="text-xs font-bold text-slate-300">Terawat</span>
                                     </div>
                                     <div class="p-4 rounded-2xl bg-white/5 border border-white/5 text-center">
                                         <i class="fas fa-couch text-gold mb-2 block"></i>
                                         <span class="text-xs font-bold text-slate-300">Premium</span>
                                     </div>
                                     <div class="p-4 rounded-2xl bg-white/5 border border-white/5 text-center">
-                                        <i class="fas fa-shield-check text-gold mb-2 block"></i>
-                                        <span class="text-xs font-bold text-slate-300">Secure</span>
+                                        <i class="fas fa-shield-alt text-gold mb-2 block"></i>
+                                        <span class="text-xs font-bold text-slate-300">Aman</span>
                                     </div>
                                 </div>
                             </div>
@@ -113,94 +122,80 @@
     </div>
 </section>
 
-<!-- QUICK BOOKING WIDGET -->
-<section class="relative z-20 -mt-20 px-6" data-aos="fade-up" data-aos-offset="0">
-    <div class="max-w-6xl mx-auto">
-        <div class="bg-slate-900/80 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 pb-8 border-b border-white/5">
-                <div>
-                    <h2 class="font-poppins font-black text-2xl text-white">Find Your <span class="text-gold">Perfect Ride</span></h2>
-                    <p class="text-slate-400 text-sm mt-1">Fill in search details for the best fleet availability</p>
+
+<!-- TENTANG KAMI & LAYANAN -->
+<section class="py-24 px-4 md:px-8 bg-slate-900">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <span class="inline-block px-4 py-1.5 rounded-lg bg-gold/10 text-gold text-xs font-black tracking-[0.2em] uppercase mb-6">Tentang Kami</span>
+                <h2 class="font-poppins text-4xl font-black text-white mb-6 leading-tight">Selamat Datang di <br><span class="text-gold">Siliwangi Rental Trans Nusa</span></h2>
+                <p class="text-slate-400 text-lg leading-relaxed mb-6">
+                    Siliwangi Rental Trans Nusa merupakan perusahaan penyedia jasa rental mobil yang berkomitmen memberikan layanan transportasi terbaik dengan armada yang selalu terawat dan siap digunakan.
+                </p>
+                <p class="text-slate-400 text-lg leading-relaxed">
+                    Kami melayani kebutuhan transportasi harian, mingguan, bulanan, perjalanan bisnis, wisata keluarga, hingga kontrak kendaraan perusahaan dengan berbagai pilihan armada sesuai kebutuhan Anda.
+                </p>
+            </div>
+            <div class="space-y-6" data-aos="fade-left">
+                <!-- Layanan 1 -->
+                <div class="p-8 rounded-3xl bg-slate-800/50 border border-white/5 hover:border-gold/30 transition-colors group relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-gold/5 rounded-full blur-2xl group-hover:bg-gold/10 transition-colors"></div>
+                    <div class="flex items-start gap-6">
+                        <div class="w-16 h-16 rounded-2xl bg-gold/10 flex items-center justify-center text-gold text-2xl flex-shrink-0">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-black text-white mb-2">Sewa Mobil Lepas Kunci</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">Nikmati kebebasan berkendara dengan layanan rental mobil tanpa sopir. Cocok untuk kebutuhan pribadi, keluarga, maupun perjalanan bisnis.</p>
+                            <ul class="space-y-2 text-sm text-slate-300 font-medium">
+                                <li><i class="fas fa-check text-gold mr-2"></i> Proses cepat dan mudah</li>
+                                <li><i class="fas fa-check text-gold mr-2"></i> Armada bersih dan terawat</li>
+                                <li><i class="fas fa-check text-gold mr-2"></i> Harga terjangkau</li>
+                                <li><i class="fas fa-check text-gold mr-2"></i> Pilihan mobil lengkap</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex items-center gap-3">
-                    <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Support</span>
-                    <a href="tel:+6281234567890" class="w-12 h-12 rounded-2xl bg-gold/10 flex items-center justify-center text-gold border border-gold/20 hover:bg-gold hover:text-slate-900 transition-all">
-                        <i class="fas fa-phone"></i>
-                    </a>
+                <!-- Layanan 2 -->
+                <div class="p-8 rounded-3xl bg-slate-800/50 border border-white/5 hover:border-gold/30 transition-colors group relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-colors"></div>
+                    <div class="flex items-start gap-6">
+                        <div class="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-2xl flex-shrink-0">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-black text-white mb-2">Sewa Mobil Dengan Driver</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">Layanan rental mobil lengkap dengan pengemudi profesional yang siap memberikan kenyamanan dan keamanan selama perjalanan.</p>
+                            <ul class="space-y-2 text-sm text-slate-300 font-medium">
+                                <li><i class="fas fa-check text-blue-400 mr-2"></i> Driver berpengalaman</li>
+                                <li><i class="fas fa-check text-blue-400 mr-2"></i> Perjalanan lebih nyaman</li>
+                                <li><i class="fas fa-check text-blue-400 mr-2"></i> Tidak perlu repot mengemudi</li>
+                                <li><i class="fas fa-check text-blue-400 mr-2"></i> Cocok untuk tamu perusahaan dan wisata</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <form action="{{ url('/cars') }}" method="GET" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="space-y-2">
-                    <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Pick-up Location</label>
-                    <div class="relative group">
-                        <i class="fas fa-map-marker-alt absolute left-4 top-1/2 -translate-y-1/2 text-gold opacity-50 group-focus-within:opacity-100 transition-opacity"></i>
-                        <select name="branch" class="w-full bg-slate-800/50 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-white appearance-none focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all cursor-pointer">
-                            <option value="" class="bg-slate-900">All Locations</option>
-                            <option value="Bandung" class="bg-slate-900">Bandung</option>
-                            <option value="Jakarta" class="bg-slate-900">Jakarta</option>
-                            <option value="Bogor" class="bg-slate-900">Bogor</option>
-                        </select>
-                        <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
-                    </div>
-                </div>
-                
-                <div class="space-y-2">
-                    <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Car Category</label>
-                    <div class="relative group">
-                        <i class="fas fa-car absolute left-4 top-1/2 -translate-y-1/2 text-gold opacity-50 group-focus-within:opacity-100 transition-opacity"></i>
-                        <select name="type" class="w-full bg-slate-800/50 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-white appearance-none focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all cursor-pointer">
-                            <option value="" class="bg-slate-900">All Types</option>
-                            <option value="SUV" class="bg-slate-900">Premium SUV</option>
-                            <option value="Sedan" class="bg-slate-900">Executive Sedan</option>
-                            <option value="MPV" class="bg-slate-900">Family MPV</option>
-                            <option value="City Car" class="bg-slate-900">Comfort City Car</option>
-                        </select>
-                        <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Estimated Budget</label>
-                    <div class="relative group">
-                        <i class="fas fa-tag absolute left-4 top-1/2 -translate-y-1/2 text-gold opacity-50 group-focus-within:opacity-100 transition-opacity"></i>
-                        <select name="price_range" class="w-full bg-slate-800/50 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-white appearance-none focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all cursor-pointer">
-                            <option value="" class="bg-slate-900">All Prices</option>
-                            <option value="under_500k" class="bg-slate-900">Budget (< 500k)</option>
-                            <option value="500k_1m" class="bg-slate-900">Regular (500k - 1M)</option>
-                            <option value="over_1m" class="bg-slate-900">Premium (> 1M)</option>
-                        </select>
-                        <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
-                    </div>
-                </div>
-
-                <div class="flex items-end">
-                    <button type="submit" class="w-full h-[60px] rounded-2xl bg-gold text-slate-900 font-black text-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-gold/20 flex items-center justify-center gap-3">
-                        <i class="fas fa-search"></i> Search Now
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
 </section>
 
 <!-- FEATURES -->
-<section class="py-24 px-4 md:px-8 overflow-hidden">
+<section class="py-24 px-4 md:px-8 overflow-hidden bg-slate-900/50">
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="inline-block px-4 py-1.5 rounded-lg bg-gold/10 text-gold text-xs font-black tracking-[0.2em] uppercase mb-6">Our Advantages</span>
-            <h2 class="font-poppins text-4xl md:text-5xl font-black mb-6 text-white leading-tight">Why Choose <span class="text-gold">Siliwangi Rental</span>?</h2>
-            <p class="text-slate-400 max-w-2xl mx-auto text-lg">We redefine car rental standards with premium fleet quality and personalized service.</p>
+            <span class="inline-block px-4 py-1.5 rounded-lg bg-gold/10 text-gold text-xs font-black tracking-[0.2em] uppercase mb-6">Keunggulan</span>
+            <h2 class="font-poppins text-4xl md:text-5xl font-black mb-6 text-white leading-tight">Mengapa Memilih <span class="text-gold">Kami</span>?</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto text-lg">Kami berkomitmen memberikan pengalaman sewa mobil terbaik dengan layanan yang transparan dan aman.</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
             @php $features=[
-                ['fas fa-gem', 'Premium Quality', 'All our fleets are the latest release cars with routine official manufacturer standard maintenance.'],
-                ['fas fa-clock', '24/7 Booking', 'Online booking system that is always active whenever you need it. Instant and seamless.'],
-                ['fas fa-fingerprint', 'High Security', 'Each vehicle is equipped with real-time GPS tracking and all-risk insurance for your peace of mind.'],
-                ['fas fa-user-tie', 'VIP Service', 'Professional chauffeur options trained with high-level service ethics and route knowledge.'],
-                ['fas fa-tags', 'Best Pricing', 'Transparent pricing without hidden fees. Attractive promo systems every month for loyal customers.'],
-                ['fas fa-handshake', 'Easy Process', 'Flexible rental requirements with a fast and digital document verification process.'],
+                ['fas fa-car', 'Armada Lengkap', 'Tersedia berbagai pilihan kendaraan mulai dari city car, MPV, SUV hingga kendaraan premium.'],
+                ['fas fa-tags', 'Harga Kompetitif', 'Harga sewa transparan dan sesuai dengan kualitas layanan yang diberikan.'],
+                ['fas fa-user-tie', 'Pelayanan Profesional', 'Tim kami siap membantu mulai dari konsultasi armada hingga proses penyewaan.'],
+                ['fas fa-shield-alt', 'Aman dan Terpercaya', 'Seluruh armada dirawat secara berkala untuk memastikan kenyamanan dan keselamatan pelanggan.'],
             ]; @endphp
 
             @foreach($features as $index => $f)
@@ -217,19 +212,105 @@
     </div>
 </section>
 
+<!-- RENTAL PERUSAHAAN -->
+<section class="py-16 px-4 md:px-8 bg-slate-800/50 border-y border-white/5 relative overflow-hidden">
+    <div class="absolute -left-20 top-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px]"></div>
+    <div class="absolute -right-20 bottom-0 w-64 h-64 bg-gold/10 rounded-full blur-[80px]"></div>
+    <div class="max-w-4xl mx-auto text-center relative z-10" data-aos="zoom-in">
+        <h2 class="font-poppins text-3xl font-black text-white mb-4">Rental Mobil untuk <span class="text-gold">Perusahaan</span></h2>
+        <p class="text-slate-400 text-base md:text-lg mx-auto mb-8 leading-relaxed">
+            Kami melayani kebutuhan kendaraan operasional perusahaan, instansi, proyek, maupun kontrak jangka panjang dengan penawaran harga khusus dan dukungan layanan profesional.
+        </p>
+        <a href="https://wa.me/628973716530" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-white text-slate-900 font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl">
+            <i class="fas fa-briefcase"></i> Dapatkan Penawaran
+        </a>
+    </div>
+</section>
+
+<!-- QUICK BOOKING WIDGET -->
+<section class="relative z-20 pt-24 px-6 bg-[#0B1120]" data-aos="fade-up" data-aos-offset="0">
+    <div class="max-w-6xl mx-auto">
+        <div class="bg-slate-900/80 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 pb-8 border-b border-white/5">
+                <div>
+                    <h2 class="font-poppins font-black text-2xl text-white">Cari <span class="text-gold">Kendaraan</span></h2>
+                    <p class="text-slate-400 text-sm mt-1">Temukan armada yang sesuai dengan rencana perjalanan Anda</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Bantuan Hubungi</span>
+                    <a href="https://wa.me/628973716530" target="_blank" class="w-12 h-12 rounded-2xl bg-[#25D366]/10 flex items-center justify-center text-[#25D366] border border-[#25D366]/20 hover:bg-[#25D366] hover:text-white transition-all">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <form action="{{ url('/cars') }}" method="GET" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Lokasi Jemput/Ambil</label>
+                    <div class="relative group">
+                        <i class="fas fa-map-marker-alt absolute left-4 top-1/2 -translate-y-1/2 text-gold opacity-50 group-focus-within:opacity-100 transition-opacity"></i>
+                        <select name="branch" class="w-full bg-slate-800/50 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-white appearance-none focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all cursor-pointer">
+                            <option value="" class="bg-slate-900">Semua Lokasi</option>
+                            <option value="Bandung" class="bg-slate-900">Bandung</option>
+                            <option value="Jakarta" class="bg-slate-900">Jakarta</option>
+                            <option value="Bogor" class="bg-slate-900">Bogor</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                    </div>
+                </div>
+                
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Kategori Mobil</label>
+                    <div class="relative group">
+                        <i class="fas fa-car absolute left-4 top-1/2 -translate-y-1/2 text-gold opacity-50 group-focus-within:opacity-100 transition-opacity"></i>
+                        <select name="type" class="w-full bg-slate-800/50 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-white appearance-none focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all cursor-pointer">
+                            <option value="" class="bg-slate-900">Semua Tipe</option>
+                            <option value="SUV" class="bg-slate-900">Premium SUV</option>
+                            <option value="Sedan" class="bg-slate-900">Executive Sedan</option>
+                            <option value="MPV" class="bg-slate-900">Family MPV</option>
+                            <option value="City Car" class="bg-slate-900">Comfort City Car</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Estimasi Harga</label>
+                    <div class="relative group">
+                        <i class="fas fa-tag absolute left-4 top-1/2 -translate-y-1/2 text-gold opacity-50 group-focus-within:opacity-100 transition-opacity"></i>
+                        <select name="price_range" class="w-full bg-slate-800/50 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-white appearance-none focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all cursor-pointer">
+                            <option value="" class="bg-slate-900">Semua Harga</option>
+                            <option value="under_500k" class="bg-slate-900">Ekonomis (< 500k)</option>
+                            <option value="500k_1m" class="bg-slate-900">Reguler (500k - 1M)</option>
+                            <option value="over_1m" class="bg-slate-900">Premium (> 1M)</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <div class="flex items-end">
+                    <button type="submit" class="w-full h-[60px] rounded-2xl bg-gold text-slate-900 font-black text-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-gold/20 flex items-center justify-center gap-3">
+                        <i class="fas fa-search"></i> Cari Sekarang
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
 <!-- CAR CATALOG PREVIEW -->
-<section class="py-24 px-4 md:px-8 bg-[#0B1120]">
+<section class="pt-12 pb-24 px-4 md:px-8 bg-[#0B1120]">
     <div class="max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-end gap-8 md:gap-10 mb-14 md:mb-20" data-aos="fade-up">
             <div class="max-w-xl">
-                <span class="inline-block px-4 py-1.5 rounded-lg bg-gold/10 text-gold text-xs font-black tracking-[0.2em] uppercase mb-6">Explore Fleet</span>
-                <h2 class="font-poppins text-4xl md:text-5xl font-black text-white mb-6 leading-tight">Semua <span class="text-gold">Armada</span> Kami</h2>
-                <p class="text-slate-400 text-lg">Dari city car lincah hingga SUV mewah — pilih sesuai kebutuhan perjalanan Anda.</p>
+                <span class="inline-block px-4 py-1.5 rounded-lg bg-gold/10 text-gold text-xs font-black tracking-[0.2em] uppercase mb-6">Katalog</span>
+                <h2 class="font-poppins text-4xl md:text-5xl font-black text-white mb-6 leading-tight">Daftar Harga <span class="text-gold">Mulai Dari</span></h2>
+                <p class="text-slate-400 text-lg">Pilih dari berbagai kategori mobil unggulan kami untuk melengkapi perjalanan Anda.</p>
             </div>
             <div class="flex items-center gap-4">
                 <span class="text-slate-500 text-sm font-bold">{{ $cars->count() }} <span class="text-gold">Armada</span> Tersedia</span>
                 <a href="{{ url('/cars') }}" class="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gold text-slate-900 font-black shadow-lg shadow-gold/20 hover:bg-yellow-400 hover:text-slate-900 border border-gold/40 transition-all text-base md:text-lg">
-                    Lihat Katalog Lengkap <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                    Lihat Semua Harga <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
                 </a>
             </div>
         </div>
@@ -294,18 +375,33 @@
                     
                     <div class="pt-8 border-t border-white/5 space-y-5">
                         <div class="flex justify-between items-end">
-                            <div>
+                            <div class="space-y-4">
                                 @if($car->is_call_for_price)
-                                    <div class="text-gold font-black text-2xl tracking-tight">Hubungi Kami</div>
-                                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">untuk harga terbaik</span>
+                                    <div>
+                                        <div class="text-gold font-black text-2xl tracking-tight">Hubungi Kami</div>
+                                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">untuk harga terbaik</span>
+                                    </div>
                                 @else
-                                    <div class="text-gold font-black text-2xl tracking-tight">Rp {{ number_format($car->daily_price, 0, ',', '.') }}</div>
-                                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">per hari</span>
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <i class="fas fa-key text-slate-500 text-[10px]"></i>
+                                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Lepas Kunci</span>
+                                        </div>
+                                        <div class="text-white font-black text-lg tracking-tight">Rp {{ number_format($car->daily_price, 0, ',', '.') }} <span class="text-[10px] font-normal text-slate-500">/hari</span></div>
+                                    </div>
+                                    @if($car->driver_daily_price)
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <i class="fas fa-user-tie text-slate-500 text-[10px]"></i>
+                                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Dengan Supir</span>
+                                        </div>
+                                        <div class="text-gold font-black text-lg tracking-tight">Rp {{ number_format($car->driver_daily_price, 0, ',', '.') }} <span class="text-[10px] font-normal text-slate-500">/hari</span></div>
+                                    </div>
+                                    @endif
                                 @endif
                             </div>
-                            <div class="text-right">
-                                <span class="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-1">Status</span>
-                                <span class="text-[10px] font-bold {{ $car->status == 'available' ? 'text-emerald-500' : ($car->status == 'rented' ? 'text-red-500' : 'text-amber-500') }} uppercase tracking-widest">
+                            <div class="text-right pb-1">
+                                <span class="text-[10px] font-bold {{ $car->status == 'available' ? 'text-emerald-500' : ($car->status == 'rented' ? 'text-red-500' : 'text-amber-500') }} uppercase tracking-widest bg-slate-900 px-3 py-1.5 rounded-full border border-white/5 shadow-inner whitespace-nowrap">
                                     <i class="fas {{ $car->status == 'available' ? 'fa-check-circle' : ($car->status == 'rented' ? 'fa-times-circle' : 'fa-wrench') }} mr-1"></i>
                                     {{ $car->status == 'available' ? 'Tersedia' : ($car->status == 'rented' ? 'Disewa' : 'Perbaikan') }}
                                 </span>
@@ -338,16 +434,19 @@
             </div>
             @endforelse
         </div>
+
+        <div class="mt-14 text-center bg-gold/10 border border-gold/20 p-6 rounded-2xl max-w-3xl mx-auto" data-aos="fade-up">
+            <p class="text-gold font-bold text-sm md:text-base"><i class="fas fa-info-circle mr-2"></i> Untuk kendaraan premium, harga bulanan, dan kebutuhan perusahaan silakan hubungi Admin.</p>
+        </div>
     </div>
 </section>
-
 
 <!-- TESTIMONIALS (Premium Slider feel) -->
 <section class="py-24 px-4 md:px-8">
     <div class="max-w-7xl mx-auto">
         <div class="flex flex-col items-center text-center mb-16 md:mb-20" data-aos="fade-up">
-            <span class="inline-block px-4 py-1.5 rounded-lg bg-gold/10 text-gold text-xs font-black tracking-[0.2em] uppercase mb-6">Real Reviews</span>
-            <h2 class="font-poppins text-4xl md:text-5xl font-black text-white mb-6">What <span class="text-gold">They</span> Say?</h2>
+            <span class="inline-block px-4 py-1.5 rounded-lg bg-gold/10 text-gold text-xs font-black tracking-[0.2em] uppercase mb-6">Ulasan</span>
+            <h2 class="font-poppins text-4xl md:text-5xl font-black text-white mb-6">Testimoni <span class="text-gold">Pelanggan</span></h2>
             <div class="flex text-gold gap-1 text-lg mb-8">
                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
             </div>
@@ -355,9 +454,9 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
             @php $testis=[
-                ['Five-star service! The Porsche I rented was in excellent condition and clean. The driver was on time and very professional.', 'Aditya Pratama', 'Entrepreneur', 'AP'],
-                ['Seamless booking experience. The customer dashboard is very helpful for tracking payments and documents. Best!', 'Siska Amelia', 'Travel Blogger', 'SA'],
-                ['Price is worth the quality. Real-time GPS security made my trip very peaceful. Siliwangi Rental is TOP.', 'Marcus Tan', 'Expatriate', 'MT'],
+                ['Pelayanan cepat, armada bersih dan nyaman. Sangat direkomendasikan untuk kebutuhan perjalanan keluarga.', 'Pelanggan Setia', 'Keluarga', 'P'],
+                ['Driver ramah dan profesional. Perjalanan bisnis menjadi lebih nyaman.', 'Corporate Client', 'Bisnis', 'C'],
+                ['Proses booking mudah dan harga sesuai. Akan menggunakan layanan ini kembali.', 'Wisatawan', 'Personal', 'W'],
             ]; @endphp
             @foreach($testis as $index => $t)
             <div class="p-8 md:p-10 rounded-3xl bg-slate-900/80 border border-white/10 relative overflow-hidden group hover:bg-slate-900/90 transition-all duration-500 shadow-lg hover:shadow-gold/10" data-aos="fade-up" data-aos-delay="{{ $index * 150 }}">
@@ -382,18 +481,20 @@
     <div class="max-w-5xl mx-auto relative z-10">
         <div class="p-8 md:p-16 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 border border-white/10 text-center shadow-2xl overflow-hidden relative group">
             <div class="absolute top-0 right-0 w-64 h-64 bg-gold/10 rounded-full blur-[80px] group-hover:bg-gold/20 transition-colors"></div>
-            <h2 class="font-poppins text-3xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-tight" data-aos="fade-up">
-                Ready to Step Up with <br><span class="text-gold">Premium Style?</span>
+            <span class="inline-block px-4 py-1.5 rounded-lg bg-gold/10 text-gold text-xs font-black tracking-[0.2em] uppercase mb-6">Hubungi Kami</span>
+            <h2 class="font-poppins text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight" data-aos="fade-up">
+                Siap memesan <br><span class="text-gold">Kendaraan?</span>
             </h2>
             <p class="text-slate-400 text-lg md:text-xl mb-10 md:mb-14 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                Book your dream car now and experience the new standard in premium vehicle rental in Indonesia.
+                Tim <strong>Siliwangi Rental Trans Nusa</strong> siap membantu Anda menemukan kendaraan yang tepat untuk setiap kebutuhan perjalanan.<br><br>
+                <span class="text-white font-bold">Booking Sekarang dan Nikmati Perjalanan yang Nyaman, Aman, dan Terpercaya.</span>
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-5 md:gap-8" data-aos="fade-up" data-aos-delay="200">
                 <a href="{{ url('/cars') }}" class="px-10 md:px-12 py-4 md:py-5 rounded-2xl bg-gold text-slate-900 font-black text-lg md:text-xl hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-gold/30 uppercase tracking-widest">
-                    Book Now
+                    Pesan Sekarang
                 </a>
                 <a href="https://wa.me/628973716530" target="_blank" class="px-10 md:px-12 py-4 md:py-5 rounded-2xl border-2 border-[#25D366] text-[#25D366] font-black text-lg md:text-xl hover:bg-[#25D366]/10 transition-all uppercase tracking-widest flex items-center justify-center gap-3">
-                    <i class="fab fa-whatsapp"></i> Chat Us
+                    <i class="fab fa-whatsapp"></i> Chat Admin
                 </a>
             </div>
         </div>

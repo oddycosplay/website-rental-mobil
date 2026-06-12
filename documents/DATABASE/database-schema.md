@@ -87,10 +87,10 @@ CREATE TABLE location_surveys (
 
 ---
 
-## 12. Tabel: vehicle_inspections
+## 12. Tabel: operationals
 
 ```sql
-CREATE TABLE vehicle_inspections (
+CREATE TABLE operationals (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     store_id BIGINT UNSIGNED NOT NULL,
     booking_id BIGINT UNSIGNED NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE vehicle_inspections (
     FOREIGN KEY (store_id) REFERENCES stores(id) ON DELETE CASCADE,
     FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE,
     FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE,
-    INDEX idx_vehicle_inspections_status (status)
+    INDEX idx_operationals_status (status)
 ) ENGINE=InnoDB;
 ```
 

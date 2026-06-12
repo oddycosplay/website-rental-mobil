@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         $cars = Car::query()
-            ->orderByRaw("FIELD(status, 'available', 'rented', 'maintenance')", [])
+            ->orderByRaw("CASE status WHEN 'available' THEN 1 WHEN 'rented' THEN 2 WHEN 'maintenance' THEN 3 ELSE 4 END")
             ->orderBy('daily_price', 'asc')
             ->get();
 

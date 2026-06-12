@@ -72,6 +72,34 @@ class BookingController extends Controller
             ->with(['customer', 'car', 'branch', 'driver', 'promo', 'payment'])
             ->firstOrFail();
 
+        // Dynamically create payment / snap token if missing
+        if (in_array($booking->payment_status, ['unpaid', 'pending'])) {
+            if (!$booking->payment || !$booking->payment->snap_token) {
+                try {
+                    $midtrans = app(\App\Services\MidtransService::class);
+                    $snapToken = $midtrans->getSnapToken($booking);
+
+                    if (!$booking->payment) {
+                        $payment = \App\Models\Payment::create([
+                            'booking_id'     => $booking->id,
+                            'payment_code'   => 'PAY-' . date('Ymd') . '-' . strtoupper(\Illuminate\Support\Str::random(5)),
+                            'snap_token'     => $snapToken,
+                            'gross_amount'   => $booking->grand_total,
+                            'payment_status' => 'pending',
+                        ]);
+                        $booking->setRelation('payment', $payment);
+                    } else {
+                        $booking->payment->update([
+                            'snap_token' => $snapToken,
+                            'gross_amount' => $booking->grand_total,
+                        ]);
+                    }
+                } catch (\Exception $e) {
+                    \Illuminate\Support\Facades\Log::error('Dynamic Midtrans Token Generation Error: ' . $e->getMessage());
+                }
+            }
+        }
+
         $viewData = ['booking' => $booking];
 
         // Check if the request explicitly wants a PDF download

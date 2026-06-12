@@ -35,9 +35,9 @@ Berikut adalah daftar migration database yang terdaftar dalam sistem:
 | 11 | `2026_05_19_052121_consolidate_customers_and_cleanup_tables.php` | `users` (profil customer), `bookings` / `reviews` | **Konsolidasi Utama:** Menghapus tabel `customers` dan `booking_items`, menggabungkan seluruh data identitas customer langsung ke tabel `users`. Menambahkan penanganan checkout tamu (guest checkout). |
 | 12 | `2026_05_19_052122_recreate_missing_operational_tables.php` | `car_brands`, `car_types`, `car_maintenances`, `car_inspections` | Menyediakan tabel master & pencatatan log operasional mobil secara terpisah dan terstruktur. |
 | 13 | `2026_05_31_000001_create_location_surveys_table.php` | `location_surveys` | Pembuatan tabel skema survei tempat tinggal renter untuk validasi data kustomer. |
-| 14 | `2026_05_31_000002_create_vehicle_inspections_table.php` | `vehicle_inspections` | Pembuatan tabel log pengecekan fisik mobil sebelum/setelah penyewaan. |
-| 15 | `2026_05_31_100000_update_operational_tables.php` | `location_surveys`, `vehicle_inspections` | Pembaruan kolom kustom checklist data kustomer & penanganan denda fisik terpisah (bensin, cuci, kerusakan). |
-| 16 | `2026_05_31_200000_add_store_id_to_operational_tables.php` | `location_surveys`, `vehicle_inspections` | Penambahan foreign key `store_id` untuk mendukung arsitektur operasional multi-cabang/outlet. |
+| 14 | `2026_05_31_000002_create_operationals_table.php` | `operationals` | Pembuatan tabel log pengecekan fisik mobil sebelum/setelah penyewaan. |
+| 15 | `2026_05_31_100000_update_operational_tables.php` | `location_surveys`, `operationals` | Pembaruan kolom kustom checklist data kustomer & penanganan denda fisik terpisah (bensin, cuci, kerusakan). |
+| 16 | `2026_05_31_200000_add_store_id_to_operational_tables.php` | `location_surveys`, `operationals` | Penambahan foreign key `store_id` untuk mendukung arsitektur operasional multi-cabang/outlet. |
 
 ---
 

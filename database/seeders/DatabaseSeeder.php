@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
         DB::table('model_has_roles')->truncate();
         DB::table('customers')->truncate();
         DB::table('stores')->truncate();
+        if (\Illuminate\Support\Facades\Schema::hasTable('employees')) {
+            DB::table('employees')->truncate();
+        }
         if (\Illuminate\Support\Facades\Schema::hasTable('car_brands')) {
             DB::table('car_brands')->truncate();
         }
@@ -44,8 +47,6 @@ class DatabaseSeeder extends Seeder
             DB::table('car_locations')->truncate();
         }
         DB::table('expenses')->truncate();
-        \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
-
         // 1. Roles
         DB::table('roles')->insert([
             ['id' => 1, 'name' => 'super-admin', 'guard_name' => 'web', 'created_at' => $now, 'updated_at' => $now],
@@ -53,16 +54,18 @@ class DatabaseSeeder extends Seeder
             ['id' => 3, 'name' => 'customer', 'guard_name' => 'web', 'created_at' => $now, 'updated_at' => $now],
             ['id' => 4, 'name' => 'finance', 'guard_name' => 'web', 'created_at' => $now, 'updated_at' => $now],
             ['id' => 5, 'name' => 'driver', 'guard_name' => 'web', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 6, 'name' => 'operasional', 'guard_name' => 'web', 'created_at' => $now, 'updated_at' => $now],
         ]);
 
         // 2. Users
         $password = Hash::make('password'); // Default password
         DB::table('users')->insert([
-            ['id' => 1, 'name' => 'Super Admin', 'email' => 'admin@siliwangi.com', 'phone' => '081200000001', 'password' => $password, 'status' => 'active', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 2, 'name' => 'Owner', 'email' => 'owner@siliwangi.com', 'phone' => '081200000002', 'password' => $password, 'status' => 'active', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 3, 'name' => 'Budi Customer', 'email' => 'budi@gmail.com', 'phone' => '081200000003', 'password' => $password, 'status' => 'active', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 4, 'name' => 'Siti Finance', 'email' => 'finance@siliwangi.com', 'phone' => '081200000004', 'password' => $password, 'status' => 'active', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 5, 'name' => 'Asep Supir', 'email' => 'asep@siliwangi.com', 'phone' => '081200000005', 'password' => $password, 'status' => 'active', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 1, 'name' => 'Super Admin', 'email' => 'admin@siliwangi.com', 'phone' => '081200000001', 'password' => $password, 'status' => 'active', 'store_id' => 1, 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 2, 'name' => 'Owner', 'email' => 'owner@siliwangi.com', 'phone' => '081200000002', 'password' => $password, 'status' => 'active', 'store_id' => 1, 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 3, 'name' => 'Budi Customer', 'email' => 'budi@gmail.com', 'phone' => '081200000003', 'password' => $password, 'status' => 'active', 'store_id' => null, 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 4, 'name' => 'Siti Finance', 'email' => 'finance@siliwangi.com', 'phone' => '081200000004', 'password' => $password, 'status' => 'active', 'store_id' => 1, 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 5, 'name' => 'Asep Supir', 'email' => 'asep@siliwangi.com', 'phone' => '081200000005', 'password' => $password, 'status' => 'active', 'store_id' => 1, 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 6, 'name' => 'Operasional', 'email' => 'operasional@siliwangi.com', 'phone' => '081200000006', 'password' => $password, 'status' => 'active', 'store_id' => 1, 'created_at' => $now, 'updated_at' => $now],
         ]);
 
         // 3. Model Has Roles
@@ -72,6 +75,7 @@ class DatabaseSeeder extends Seeder
             ['role_id' => 3, 'model_type' => 'App\\Models\\User', 'model_id' => 3],
             ['role_id' => 4, 'model_type' => 'App\\Models\\User', 'model_id' => 4],
             ['role_id' => 5, 'model_type' => 'App\\Models\\User', 'model_id' => 5],
+            ['role_id' => 6, 'model_type' => 'App\\Models\\User', 'model_id' => 6],
         ]);
 
         // 3.5 Customers
@@ -97,6 +101,77 @@ class DatabaseSeeder extends Seeder
             ['id' => 1, 'name' => 'Store Jakarta Pusat', 'slug' => 'store-jakarta-pusat', 'phone' => '021-1234567', 'email' => 'jkt@siliwangi.com', 'address' => 'Jl. Jend. Sudirman No. 1', 'city' => 'Jakarta Selatan', 'province' => 'DKI Jakarta', 'status' => 1, 'created_at' => $now, 'updated_at' => $now],
             ['id' => 2, 'name' => 'Store Bandung', 'slug' => 'store-bandung', 'phone' => '022-7654321', 'email' => 'bdg@siliwangi.com', 'address' => 'Jl. Asia Afrika No. 100', 'city' => 'Bandung', 'province' => 'Jawa Barat', 'status' => 1, 'created_at' => $now, 'updated_at' => $now],
         ]);
+
+        // 4.1 Employees
+        if (\Illuminate\Support\Facades\Schema::hasTable('employees')) {
+            DB::table('employees')->insert([
+                [
+                    'id' => 1,
+                    'user_id' => 1,
+                    'store_id' => 1,
+                    'name' => 'Super Admin',
+                    'email' => 'admin@siliwangi.com',
+                    'phone' => '081200000001',
+                    'nip' => 'NIP-00001',
+                    'position' => 'Super Admin',
+                    'is_active' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ],
+                [
+                    'id' => 2,
+                    'user_id' => 2,
+                    'store_id' => 1,
+                    'name' => 'Owner',
+                    'email' => 'owner@siliwangi.com',
+                    'phone' => '081200000002',
+                    'nip' => 'NIP-00002',
+                    'position' => 'Owner',
+                    'is_active' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ],
+                [
+                    'id' => 3,
+                    'user_id' => 4,
+                    'store_id' => 1,
+                    'name' => 'Siti Finance',
+                    'email' => 'finance@siliwangi.com',
+                    'phone' => '081200000004',
+                    'nip' => 'NIP-00004',
+                    'position' => 'Finance',
+                    'is_active' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ],
+                [
+                    'id' => 4,
+                    'user_id' => 5,
+                    'store_id' => 1,
+                    'name' => 'Asep Supir',
+                    'email' => 'asep@siliwangi.com',
+                    'phone' => '081200000005',
+                    'nip' => 'NIP-00005',
+                    'position' => 'Driver',
+                    'is_active' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ],
+                [
+                    'id' => 5,
+                    'user_id' => 6,
+                    'store_id' => 1,
+                    'name' => 'Operasional',
+                    'email' => 'operasional@siliwangi.com',
+                    'phone' => '081200000006',
+                    'nip' => 'NIP-00006',
+                    'position' => 'Operasional',
+                    'is_active' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ],
+            ]);
+        }
 
         // 4.5 Car Brands
         if (\Illuminate\Support\Facades\Schema::hasTable('car_brands')) {
@@ -398,5 +473,7 @@ class DatabaseSeeder extends Seeder
             ['id' => 2, 'date' => $now->copy()->subDays(10)->format('Y-m-d'), 'category' => 'operational', 'store_id' => 1, 'amount' => 150000.00, 'description' => 'Cuci Mobil & Salon', 'attachment' => null, 'created_at' => $now, 'updated_at' => $now],
             ['id' => 3, 'date' => $now->copy()->subDays(15)->format('Y-m-d'), 'category' => 'marketing', 'store_id' => 2, 'amount' => 1000000.00, 'description' => 'Instagram Ads', 'attachment' => null, 'created_at' => $now, 'updated_at' => $now],
         ]);
+
+        \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
     }
 }

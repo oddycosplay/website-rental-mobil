@@ -250,7 +250,7 @@ erDiagram
         timestamp created_at
     }
 
-    vehicle_inspections {
+    operationals {
         bigint id PK
         bigint store_id FK
         bigint booking_id FK
@@ -287,7 +287,7 @@ erDiagram
     stores ||--o{ employees : "employs"
     stores ||--o{ expenses : "incurs"
     stores ||--o{ location_surveys : "conducts"
-    stores ||--o{ vehicle_inspections : "oversees"
+    stores ||--o{ operationals : "oversees"
     cars ||--o{ bookings : "booked in"
     customers ||--o{ bookings : "makes"
     drivers ||--o{ bookings : "assigned to"
@@ -295,8 +295,8 @@ erDiagram
     bookings ||--o{ payments : "has payments"
     bookings ||--o{ reviews : "reviewed in"
     bookings ||--o{ location_surveys : "surveyed in"
-    bookings ||--o{ vehicle_inspections : "inspected in"
-    cars ||--o{ vehicle_inspections : "inspected"
+    bookings ||--o{ operationals : "inspected in"
+    cars ||--o{ operationals : "inspected"
 ```
 
 ---
@@ -314,7 +314,7 @@ erDiagram
 | **Store → Driver**               | `1:N`            | Cabang menugaskan pengemudi (`drivers`) untuk transaksi sewa dengan supir.                               |
 | **Store → Expense**              | `1:N`            | Cabang mencatat pengeluaran operasional cabang langsung (`expenses`).                                    |
 | **Store → Location Survey**      | `1:N`            | Toko cabang mengoordinasikan survei validasi lokasi tempat tinggal kustomer (`location_surveys`).        |
-| **Store → Vehicle Inspection**   | `1:N`            | Toko cabang mengawasi proses pengecekan keluar/masuk unit mobil (`vehicle_inspections`).                 |
+| **Store → Operational**   | `1:N`            | Toko cabang mengawasi proses pengecekan keluar/masuk unit mobil (`operationals`).                 |
 | **Car → Booking**                | `1:N`            | Satu unit kendaraan dapat dipesan pada banyak transaksi booking berbeda.                                 |
 | **Driver → Booking**             | `1:N`            | Pengemudi ditugaskan pada transaksi booking sewa dengan sopir.                                           |
 | **Promo → Booking**              | `1:N`            | Kode kupon promo dapat digunakan pada transaksi booking untuk mendapatkan potongan harga.                |
@@ -322,8 +322,8 @@ erDiagram
 | **Booking → Review**             | `1:1`            | Setiap transaksi booking yang selesai dapat dinilai oleh penyewa dalam bentuk 1 ulasan.                  |
 | **Customer → Review**            | `1:N`            | Kustomer memberikan penilaian kepuasan sewa terhadap kendaraan.                                          |
 | **Booking → Location Survey**    | `1:N`            | Transaksi pemesanan memicu pembuatan survei validasi kelayakan kustomer (`location_surveys`).            |
-| **Booking → Vehicle Inspection** | `1:N`            | Transaksi pemesanan memiliki log pengecekan mobil sebelum sewa dan sesudah sewa (`vehicle_inspections`). |
-| **Car → Vehicle Inspection**     | `1:N`            | Armada mobil menerima log inspeksi kelayakan fisik berkala (`vehicle_inspections`).                      |
+| **Booking → Operational** | `1:N`            | Transaksi pemesanan memiliki log pengecekan mobil sebelum sewa dan sesudah sewa (`operationals`). |
+| **Car → Operational**     | `1:N`            | Armada mobil menerima log inspeksi kelayakan fisik berkala (`operationals`).                      |
 
 ---
 

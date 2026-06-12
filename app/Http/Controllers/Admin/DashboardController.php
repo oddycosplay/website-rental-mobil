@@ -38,11 +38,15 @@ class DashboardController extends Controller
             ->get();
 
         // Chart Data: Monthly Revenue (Last 6 Months)
+        $monthExpr = DB::getDriverName() === 'sqlite'
+            ? "CAST(strftime('%m', payment_date) AS INTEGER)"
+            : 'MONTH(payment_date)';
+
         $monthlyRevenue = DB::table('payments')
             ->where('payment_status', 'success')
             ->select([
                 DB::raw('SUM(paid_amount) as total'),
-                DB::raw('MONTH(payment_date) as month')
+                DB::raw("{$monthExpr} as month")
             ])
             ->where('payment_date', '>=', now()->subMonths(6))
             ->groupBy('month')
@@ -51,10 +55,14 @@ class DashboardController extends Controller
             ->all();
 
         // Chart Data: Monthly Expenses (Last 6 Months)
+        $expMonthExpr = DB::getDriverName() === 'sqlite'
+            ? "CAST(strftime('%m', date) AS INTEGER)"
+            : 'MONTH(date)';
+
         $monthlyExpenses = DB::table('expenses')
             ->select([
                 DB::raw('SUM(amount) as total'),
-                DB::raw('MONTH(date) as month')
+                DB::raw("{$expMonthExpr} as month")
             ])
             ->where('date', '>=', now()->subMonths(6))
             ->groupBy('month')

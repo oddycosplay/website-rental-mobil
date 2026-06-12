@@ -204,7 +204,11 @@
 
         html.light .bg-slate-900,
         html.light [class*="bg-[#0B1120]"],
-        html.light [class*="bg-[#080E1A]"] {
+        html.light [class*="bg-[#080E1A]"],
+        html.light [class*="bg-[#080B14]"],
+        html.light [class*="bg-[#060912]"],
+        html.light [class*="bg-[#0A0F1C]"],
+        html.light [class*="bg-[#0B0F1A]"] {
             background-color: #FFFFFF !important;
         }
 
@@ -322,6 +326,57 @@
 
         html.light .wa-float {
             box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.2) !important;
+        }
+
+        /* UI/UX Compliance Overrides (placed at the end to guarantee precedence) */
+        html.light h1.hero-title {
+            color: #FFFFFF !important;
+        }
+
+        .hero-text-shadow {
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        html.light p.hero-desc {
+            color: #000000 !important;
+            opacity: 1 !important;
+            font-weight: 500 !important;
+        }
+
+        html.light .btn-lihat-armada {
+            background-color: #FFFFFF !important;
+            color: #000000 !important;
+            border-color: rgba(15, 23, 42, 0.12) !important;
+        }
+        
+        html.light .btn-lihat-armada:hover {
+            background-color: #F1F5F9 !important;
+            color: #000000 !important;
+            border-color: rgba(15, 23, 42, 0.2) !important;
+        }
+
+        html.light .glass-card,
+        html.light .glass-faq {
+            background: rgba(255, 255, 255, 0.8) !important;
+            border-color: rgba(15, 23, 42, 0.08) !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        html.light .text-transparent {
+            color: transparent !important;
+        }
+
+        /* Hero Content Card wrapper style */
+        .hero-content-card {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        html.light .hero-content-card {
+            background: rgba(255, 255, 255, 0.6) !important;
+            border-color: rgba(15, 23, 42, 0.08) !important;
+            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.05) !important;
         }
     </style>
 </head>
