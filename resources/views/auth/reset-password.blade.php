@@ -1,36 +1,35 @@
 <x-guest-layout>
     <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+        <h2 class="text-2xl font-bold text-center text-white mb-8">Reset Password</h2>
 
-        <x-validation-errors class="mb-4" />
+        <x-validation-errors class="mb-6 text-red-400 bg-red-400/10 p-4 rounded-xl border border-red-400/20" />
 
-        <form method="POST" action="{{ route('password.update') }}">
+        <form method="POST" action="{{ route('password.update') }}" class="space-y-6">
             @csrf
 
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
+            <div>
+                <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                <input id="email" type="email" name="email" value="{{ old('email', $request->email) }}" required autofocus autocomplete="username"
+                    class="block w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl focus:ring-gold focus:border-gold placeholder-slate-500 transition-colors shadow-inner" placeholder="nama@email.com" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            <div>
+                <label for="password" class="block text-sm font-medium text-slate-300 mb-2">Password Baru</label>
+                <input id="password" type="password" name="password" required autocomplete="new-password"
+                    class="block w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl focus:ring-gold focus:border-gold placeholder-slate-500 transition-colors shadow-inner" placeholder="••••••••" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            <div>
+                <label for="password_confirmation" class="block text-sm font-medium text-slate-300 mb-2">Konfirmasi Password</label>
+                <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password"
+                    class="block w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl focus:ring-gold focus:border-gold placeholder-slate-500 transition-colors shadow-inner" placeholder="Ulangi password baru" />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Reset Password') }}
-                </x-button>
-            </div>
+            <button type="submit" class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-[0_0_15px_rgba(212,175,55,0.3)] text-sm font-bold text-slate-900 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold focus:ring-offset-slate-900 transition-all transform hover:scale-[1.02]">
+                SIMPAN PASSWORD BARU
+            </button>
         </form>
     </x-authentication-card>
 </x-guest-layout>

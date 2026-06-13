@@ -12,7 +12,7 @@ class StorePerformanceChart extends ChartWidget
     protected static ?string $heading = 'Performa Pendapatan per Toko';
  
     protected static ?int $sort = 6;
-    protected int | string | array $columnSpan = 'full';
+    protected int | string | array $columnSpan = 1;
     protected static ?string $pollingInterval = '30s';
     protected static ?string $maxHeight = '300px';
  
@@ -23,10 +23,11 @@ class StorePerformanceChart extends ChartWidget
  
     protected function getData(): array
     {
-        $data = Booking::where('payment_status', 'paid')
+        $data = Booking::query()
+            ->where('payment_status', 'paid')
             ->join('cars', 'bookings.car_id', '=', 'cars.id')
             ->join('stores', 'cars.store_id', '=', 'stores.id')
-            ->select('stores.name', DB::raw('SUM(bookings.grand_total) as total'))
+            ->select(['stores.name', DB::raw('SUM(bookings.grand_total) as total')])
             ->groupBy('stores.name')
             ->orderByDesc('total')
             ->get();

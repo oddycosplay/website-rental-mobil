@@ -1,68 +1,71 @@
 <x-guest-layout>
     <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+        <h2 class="text-2xl font-bold text-center text-white mb-8">Daftar Akun Baru</h2>
 
-        <x-validation-errors class="mb-4" />
+        <x-validation-errors class="mb-6 text-red-400 bg-red-400/10 p-4 rounded-xl border border-red-400/20" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" class="space-y-6">
             @csrf
 
             <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Nama Lengkap</label>
+                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name"
+                    class="block w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl focus:ring-gold focus:border-gold placeholder-slate-500 transition-colors shadow-inner" placeholder="Nama Anda" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <div>
+                <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username"
+                    class="block w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl focus:ring-gold focus:border-gold placeholder-slate-500 transition-colors shadow-inner" placeholder="nama@email.com" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="role" value="{{ __('Role (Peran)') }}" />
-                <select id="role" name="role" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
+            <div>
+                <label for="role" class="block text-sm font-medium text-slate-300 mb-2">Daftar Sebagai</label>
+                <select id="role" name="role" required
+                    class="block w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl focus:ring-gold focus:border-gold transition-colors shadow-inner">
                     <option value="customer" {{ old('role') == 'customer' ? 'selected' : '' }}>Customer (Pelanggan)</option>
                     <option value="driver" {{ old('role') == 'driver' ? 'selected' : '' }}>Driver (Sopir)</option>
                 </select>
             </div>
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            <div>
+                <label for="password" class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                <input id="password" type="password" name="password" required autocomplete="new-password"
+                    class="block w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl focus:ring-gold focus:border-gold placeholder-slate-500 transition-colors shadow-inner" placeholder="Minimal 8 karakter" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            <div>
+                <label for="password_confirmation" class="block text-sm font-medium text-slate-300 mb-2">Konfirmasi Password</label>
+                <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password"
+                    class="block w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl focus:ring-gold focus:border-gold placeholder-slate-500 transition-colors shadow-inner" placeholder="Ulangi password" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
-                        <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
-
-                            <div class="ms-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
-                                ]) !!}
-                            </div>
+                <div>
+                    <label for="terms" class="flex items-start group cursor-pointer">
+                        <div class="flex items-center h-5">
+                            <input id="terms" name="terms" type="checkbox" required
+                                class="rounded border-slate-700 bg-slate-900/50 text-gold shadow-sm focus:ring-gold focus:ring-offset-slate-900 transition-colors" />
                         </div>
-                    </x-label>
+                        <div class="ml-3 text-sm">
+                            <span class="text-slate-400 group-hover:text-slate-300 transition-colors">
+                                Saya setuju dengan <a target="_blank" href="{{ route('terms.show') }}" class="font-bold text-gold hover:text-gold-light transition-colors">Syarat Layanan</a> dan <a target="_blank" href="{{ route('policy.show') }}" class="font-bold text-gold hover:text-gold-light transition-colors">Kebijakan Privasi</a>
+                            </span>
+                        </div>
+                    </label>
                 </div>
             @endif
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
+            <button type="submit" class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-[0_0_15px_rgba(212,175,55,0.3)] text-sm font-bold text-slate-900 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold focus:ring-offset-slate-900 transition-all transform hover:scale-[1.02]">
+                DAFTAR SEKARANG
+            </button>
 
-                <x-button class="ms-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
+            <p class="text-center text-sm text-slate-400 mt-6">
+                Sudah punya akun? 
+                <a href="{{ route('login') }}" class="font-bold text-gold hover:text-gold-light transition-colors ml-1">
+                    Log in di sini
+                </a>
+            </p>
         </form>
     </x-authentication-card>
 </x-guest-layout>

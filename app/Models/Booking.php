@@ -86,6 +86,64 @@ class Booking extends Model
             } else {
                 DriverSchedule::query()->where('booking_id', $booking->id)->delete();
             }
+
+            // 3. Sync Payment Record
+            /** @var \App\Models\Payment|null $payment */
+            $payment = \App\Models\Payment::query()->where('booking_id', $booking->id)->first();
+            
+            if (!$payment) {
+                // Always ensure a Payment record exists for every booking
+                $paidAmount = $booking->payment_status === 'partial' 
+                    ? ($booking->dp_amount > 0 ? $booking->dp_amount : ($booking->grand_total * 0.5)) 
+                    : ($booking->payment_status === 'paid' ? $booking->grand_total : 0);
+
+                $paymentStatusMap = [
+                    'unpaid' => 'pending',
+                    'partial' => 'success',
+                    'paid' => 'success',
+                    'refunded' => 'refund',
+                ];
+
+                \App\Models\Payment::create([
+                    'booking_id' => $booking->id,
+                    'payment_code' => 'PAY-' . now()->format('Ym') . '-' . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT),
+                    'payment_method' => 'manual_admin',
+                    'transaction_id' => 'MANUAL-' . uniqid(),
+                    'gross_amount' => $booking->grand_total,
+                    'paid_amount' => $paidAmount,
+                    'payment_status' => $paymentStatusMap[$booking->payment_status] ?? 'pending',
+                    'payment_date' => in_array($booking->payment_status, ['partial', 'paid']) ? now() : null,
+                ]);
+            } else {
+                // If payment exists, only update it if the Booking's payment_status was explicitly changed
+                if ($booking->isDirty('payment_status')) {
+                    $paymentStatusMap = [
+                        'unpaid' => 'pending',
+                        'partial' => 'success',
+                        'paid' => 'success',
+                        'refunded' => 'refund',
+                    ];
+                    
+                    $targetStatus = $paymentStatusMap[$booking->payment_status] ?? 'pending';
+                    $paidAmount = $booking->payment_status === 'partial' 
+                        ? ($booking->dp_amount > 0 ? $booking->dp_amount : ($booking->grand_total * 0.5)) 
+                        : ($booking->payment_status === 'paid' ? $booking->grand_total : 0);
+                        
+                    $payment->fill([
+                        'payment_status' => $targetStatus,
+                        'paid_amount' => $paidAmount,
+                        'payment_method' => 'manual_admin',
+                        'payment_date' => in_array($targetStatus, ['success', 'refund']) && !$payment->payment_date ? now() : $payment->payment_date,
+                    ])->save();
+                } else if ($booking->isDirty('grand_total')) {
+                    // Update gross_amount if grand_total changes and payment is still pending
+                    if ($payment->payment_status === 'pending') {
+                         $payment->fill([
+                             'gross_amount' => $booking->grand_total
+                         ])->save();
+                    }
+                }
+            }
         });
     }
 

@@ -13,6 +13,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use App\Models\Driver;
+use Illuminate\Support\Str;
 
 
 class BookingForm
@@ -105,6 +106,7 @@ class BookingForm
                                     ])
                                     ->default('pribadi')
                                     ->required()
+                                    ->live()
                                     ->native(false),
 
                                 Select::make('rental_type')
@@ -114,11 +116,24 @@ class BookingForm
                                         'monthly' => 'Monthly',
                                     ])
                                     ->required()
+                                    ->live()
+                                    ->afterStateUpdated(function (?string $state, Set $set, Get $get) {
+                                        $carId = $get('car_id');
+                                        if ($carId) {
+                                            $car = \App\Models\Car::query()->find($carId);
+                                            if ($car) {
+                                                $price = $state === 'monthly' ? $car->monthly_price : $car->daily_price;
+                                                $set('grand_total', $price);
+                                            }
+                                        }
+                                    })
                                     ->native(false),
                                 TextInput::make('booking_code')
                                     ->label('Kode Booking')
+                                    ->default(fn () => 'TRX-' . strtoupper(Str::random(8)))
                                     ->disabled()
-                                    ->dehydrated(),
+                                    ->dehydrated()
+                                    ->unique(ignoreRecord: true),
                             ])->columnSpan(1),
                         Section::make('Armada & Sopir')
                             ->schema([
@@ -127,7 +142,18 @@ class BookingForm
                                     ->relationship('car', 'car_name')
                                     ->required()
                                     ->searchable()
-                                    ->preload(),
+                                    ->preload()
+                                    ->live()
+                                    ->afterStateUpdated(function (?string $state, Set $set, Get $get) {
+                                        if ($state) {
+                                            $car = \App\Models\Car::query()->find($state);
+                                            if ($car) {
+                                                $rentalType = $get('rental_type') ?? 'daily';
+                                                $price = $rentalType === 'monthly' ? $car->monthly_price : $car->daily_price;
+                                                $set('grand_total', $price);
+                                            }
+                                        }
+                                    }),
 
                                 Toggle::make('is_new_customer')
                                     ->label('Kustomer Baru (New User)')
@@ -220,7 +246,9 @@ class BookingForm
                                     ->label('Total Bayar')
                                     ->numeric()
                                     ->prefix('Rp')
-                                    ->required(),
+                                    ->required()
+                                    ->disabled(fn (Get $get) => $get('rental_category') !== 'perusahaan')
+                                    ->dehydrated(),
 
                                 TextInput::make('discount')
                                     ->label('Diskon')

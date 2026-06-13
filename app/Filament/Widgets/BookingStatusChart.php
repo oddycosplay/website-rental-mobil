@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\DB;
 class BookingStatusChart extends ChartWidget
 {
     protected static ?string $heading = 'Status Pesanan (Keseluruhan)';
-    protected static ?int $sort = 7;
+    protected static ?int $sort = 3;
     protected int | string | array $columnSpan = 1;
 
     protected function getData(): array
     {
         $data = Booking::query()
             ->when(Filament::getTenant(), fn($q, $tenant) => $q->where('bookings.store_id', $tenant->id))
-            ->select('booking_status', DB::raw('count(*) as total'))
+            ->select(['booking_status', DB::raw('count(*) as total')])
             ->groupBy('booking_status')
             ->get();
 

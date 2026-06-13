@@ -88,6 +88,11 @@ class RoleResource extends Resource
                     ->label('Guard')
                     ->badge()
                     ->color('info'),
+                Tables\Columns\TextColumn::make('permissions.name')
+                    ->label('Fitur Akses')
+                    ->badge()
+                    ->color('success')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('permissions_count')
                     ->label('Jumlah Permission')
                     ->counts('permissions')

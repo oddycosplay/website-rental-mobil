@@ -33,8 +33,16 @@ class PaymentsTable
                     ->weight('bold')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('payment_status')
-                    ->label('Status')
+                    ->label('Status Transaksi')
                     ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'success' => 'Berhasil',
+                        'pending' => 'Pending',
+                        'failed' => 'Gagal',
+                        'expired' => 'Kedaluwarsa',
+                        'refund' => 'Refund',
+                        default => ucfirst($state),
+                    })
                     ->icon(fn (string $state): string => match ($state) {
                         'success' => 'heroicon-m-check-circle',
                         'pending' => 'heroicon-m-clock',
@@ -45,6 +53,30 @@ class PaymentsTable
                         'success' => 'success',
                         'pending' => 'warning',
                         'failed', 'expired' => 'danger',
+                        default => 'gray',
+                    }),
+                Tables\Columns\TextColumn::make('booking.payment_status')
+                    ->label('Status Tagihan')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'paid' => 'Sudah Bayar',
+                        'partial' => 'Sudah DP',
+                        'unpaid' => 'Belum Bayar',
+                        'refunded' => 'Refund',
+                        default => ucfirst($state),
+                    })
+                    ->icon(fn (string $state): string => match ($state) {
+                        'paid' => 'heroicon-m-check-badge',
+                        'partial' => 'heroicon-m-banknotes',
+                        'unpaid' => 'heroicon-m-x-circle',
+                        'refunded' => 'heroicon-m-arrow-path',
+                        default => 'heroicon-m-question-mark-circle',
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'paid' => 'success',
+                        'partial' => 'info',
+                        'unpaid' => 'danger',
+                        'refunded' => 'warning',
                         default => 'gray',
                     }),
                 Tables\Columns\TextColumn::make('payment_date')
@@ -59,6 +91,13 @@ class PaymentsTable
                         'pending' => 'Pending',
                         'success' => 'Berhasil',
                         'failed' => 'Gagal',
+                    ]),
+                Tables\Filters\SelectFilter::make('booking.payment_status')
+                    ->label('Filter Status Tagihan')
+                    ->options([
+                        'paid' => 'Sudah Bayar',
+                        'partial' => 'Sudah DP',
+                        'unpaid' => 'Belum Bayar',
                     ]),
             ])
             ->headerActions([

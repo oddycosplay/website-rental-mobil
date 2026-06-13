@@ -16,6 +16,7 @@ class BookingsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->poll('5s')
             ->columns([
                 Tables\Columns\ImageColumn::make('car.thumbnail')
                     ->label('')

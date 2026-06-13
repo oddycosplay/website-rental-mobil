@@ -1,4 +1,4 @@
-<x-filament-widgets::widget>
+<x-filament-widgets::widget class="analytics-widget-transparent">
     @php
         $dailyChart    = $this->dailyRevenueChart;
         $vehicleChart  = $this->vehicleTypeChart;
@@ -6,11 +6,43 @@
         $stats         = $this->stats;
     @endphp
 
-    <div class="space-y-5">
+    <style>
+        .analytics-widget-transparent section {
+            background-color: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+            padding: 0 !important;
+            ring: 0 !important;
+        }
+        .ao-container { display: flex; flex-direction: column; gap: 1.25rem; }
+        .ao-filter { display: flex; flex-direction: column; gap: 1rem; align-items: flex-end; }
+        @media (min-width: 768px) { .ao-filter { flex-direction: row; } }
+        .ao-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .dark .ao-card {
+            background-color: #1f2937;
+            border-color: #374151;
+        }
+        .ao-grid-stats { display: grid; gap: 1rem; grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        @media (min-width: 640px) { .ao-grid-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 1280px) { .ao-grid-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+        .ao-grid-charts { display: grid; gap: 1rem; grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        @media (min-width: 768px) { .ao-grid-charts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+        .ao-chart-main { grid-column: span 1 / span 1; }
+        @media (min-width: 768px) { .ao-chart-main { grid-column: span 2 / span 2; } }
+    </style>
+
+    <div class="ao-container">
         {{-- Filter Bar --}}
-        <div class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm p-4">
-            <div class="flex flex-col md:flex-row items-end gap-4">
-                <div class="flex-1 min-w-[200px]">
+        <div class="ao-card" style="padding: 1rem;">
+            <div class="ao-filter">
+                <div style="flex: 1; min-width: 200px;">
                     <label class="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1.5">
                         Periode Waktu
                     </label>
@@ -20,7 +52,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="flex-1 min-w-[200px]">
+                <div style="flex: 1; min-width: 200px;">
                     <label class="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1.5">
                         Tipe Layanan
                     </label>
@@ -30,7 +62,7 @@
                         @endforeach
                     </select>
                 </div>
-                <button wire:click="$refresh" class="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition shadow-sm">
+                <button wire:click="$refresh" class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition shadow-sm" style="height: 38px;">
                     <svg wire:loading.class="animate-spin" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                     </svg>
@@ -40,9 +72,9 @@
         </div>
 
         {{-- Stats Cards --}}
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div class="ao-grid-stats">
             {{-- Revenue --}}
-            <div class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm p-5 flex flex-col gap-2">
+            <div class="ao-card flex flex-col gap-2">
                 <div class="text-2xl font-bold text-gray-900 dark:text-white">Rp {{ number_format($stats['total_revenue'], 0, ',', '.') }}</div>
                 <div class="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">Total Pendapatan</div>
                 <div class="flex items-center gap-1.5 mt-1">
@@ -50,7 +82,7 @@
                 </div>
             </div>
             {{-- Booking --}}
-            <div class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm p-5 flex flex-col gap-2">
+            <div class="ao-card flex flex-col gap-2">
                 <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ number_format($stats['total_bookings']) }}</div>
                 <div class="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">Total Booking</div>
                 <div class="flex items-center gap-1.5 mt-1">
@@ -58,7 +90,7 @@
                 </div>
             </div>
             {{-- Duration --}}
-            <div class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm p-5 flex flex-col gap-2">
+            <div class="ao-card flex flex-col gap-2">
                 <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ $stats['avg_duration'] }} Hari</div>
                 <div class="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">Rata-rata Durasi</div>
                 <div class="flex items-center gap-1.5 mt-1">
@@ -66,7 +98,7 @@
                 </div>
             </div>
             {{-- Refund --}}
-            <div class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm p-5 flex flex-col gap-2">
+            <div class="ao-card flex flex-col gap-2">
                 <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ number_format($stats['refunded']) }}</div>
                 <div class="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">Refund / Batal</div>
                 <div class="flex items-center gap-1.5 mt-1">
@@ -76,8 +108,8 @@
         </div>
 
         {{-- Charts --}}
-        <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
-            <div class="xl:col-span-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm p-5">
+        <div class="ao-grid-charts">
+            <div class="ao-chart-main ao-card">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-sm font-semibold text-gray-800 dark:text-white">Pendapatan Harian ({{ $currentMonth }})</h3>
                 </div>
@@ -85,7 +117,7 @@
                     <canvas id="bar-{{ $this->getId() }}" data-labels="{{ json_encode($dailyChart['labels']) }}" data-values="{{ json_encode($dailyChart['data']) }}"></canvas>
                 </div>
             </div>
-            <div class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm p-5">
+            <div class="ao-card">
                 <h3 class="text-sm font-semibold text-gray-800 dark:text-white mb-4">Booking Berdasarkan Kendaraan</h3>
                 <div class="relative flex justify-center items-center" style="height: 220px;">
                     <canvas id="doughnut-{{ $this->getId() }}" data-labels="{{ json_encode($vehicleChart['labels']) }}" data-values="{{ json_encode($vehicleChart['data']) }}" data-colors="{{ json_encode($vehicleChart['backgroundColors']) }}"></canvas>
