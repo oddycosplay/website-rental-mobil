@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.8 Chrome/140.0.7339.240 Electron/38.4.0 Safari/537.36" version="28.2.8">
   <diagram id="diagram-class-siliwangi" name="Class Diagram Siliwangi Rental">
-    <mxGraphModel dx="1426" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="413" pageHeight="291" math="0" shadow="0">
+    <mxGraphModel dx="1160" dy="2063" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="583" pageHeight="413" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -8,42 +8,42 @@
           <mxGeometry x="1030" y="45" width="420" height="40" as="geometry" />
         </mxCell>
         <mxCell id="class_user" value="&lt;b&gt;User&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ name: string&lt;br&gt;+ email: string&lt;br&gt;+ phone: string&lt;br&gt;+ password: string&lt;br&gt;+ role: string&lt;br&gt;+ status: enum&lt;br&gt;+ is_active: boolean&lt;br&gt;+ store_id: bigint (FK)&lt;br&gt;+ email_verified_at: timestamp&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ canAccessPanel(panel): bool&lt;br&gt;+ getTenants(panel): Collection&lt;br&gt;+ canAccessTenant(tenant): bool&lt;br&gt;+ store(): BelongsTo&lt;br&gt;+ branch(): BelongsTo&lt;br&gt;+ customer(): HasOne&lt;br&gt;+ employee(): HasOne" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
-          <mxGeometry x="670" y="556" width="240" height="324" as="geometry" />
+          <mxGeometry x="682" y="440" width="240" height="324" as="geometry" />
         </mxCell>
         <mxCell id="class_driver" value="&lt;b&gt;Driver&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ user_id: bigint (FK)&lt;br&gt;+ store_id: bigint (FK)&lt;br&gt;+ name: string&lt;br&gt;+ phone: string&lt;br&gt;+ address: text&lt;br&gt;+ license_number: string&lt;br&gt;+ photo: string&lt;br&gt;+ daily_fee: decimal&lt;br&gt;+ rating: decimal&lt;br&gt;+ status: string&lt;br&gt;+ is_available: boolean&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ store(): BelongsTo&lt;br&gt;+ branch(): BelongsTo&lt;br&gt;+ user(): BelongsTo&lt;br&gt;+ schedules(): HasMany&lt;br&gt;+ scopeActive(query): Builder&lt;br&gt;+ scopeAvailableForDates(): Builder&lt;br&gt;+ getIsBusyAttribute(): bool" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
-          <mxGeometry x="1070" y="1290" width="240" height="350" as="geometry" />
+          <mxGeometry x="1070" y="1190" width="240" height="350" as="geometry" />
         </mxCell>
         <mxCell id="class_customer" value="&lt;b&gt;Customer&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ user_id: bigint (FK)&lt;br&gt;+ name: string&lt;br&gt;+ email: string&lt;br&gt;+ phone: string&lt;br&gt;+ nik: string&lt;br&gt;+ sim_number: string&lt;br&gt;+ ktp_image: string&lt;br&gt;+ sim_image: string&lt;br&gt;+ selfie_image: string&lt;br&gt;+ ktp_path: string&lt;br&gt;+ sim_path: string&lt;br&gt;+ no_kk: string&lt;br&gt;+ kk_photo: string&lt;br&gt;+ nip_nim: string&lt;br&gt;+ id_card_photo: string&lt;br&gt;+ pekerjaan: string&lt;br&gt;+ customer_status: string&lt;br&gt;+ address: text&lt;br&gt;+ date_of_birth: string&lt;br&gt;+ is_active: boolean&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ user(): BelongsTo&lt;br&gt;+ bookings(): HasMany&lt;br&gt;+ reviews(): HasMany" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
-          <mxGeometry x="80" y="146" width="240" height="410" as="geometry" />
+          <mxGeometry x="80" y="146" width="240" height="414" as="geometry" />
         </mxCell>
         <mxCell id="class_employee" value="&lt;b&gt;Employee&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ user_id: bigint (FK)&lt;br&gt;+ store_id: bigint (FK)&lt;br&gt;+ name: string&lt;br&gt;+ email: string&lt;br&gt;+ phone: string&lt;br&gt;+ nip: string&lt;br&gt;+ position: string&lt;br&gt;+ is_active: boolean&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ user(): BelongsTo&lt;br&gt;+ store(): BelongsTo" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
-          <mxGeometry x="320" y="593" width="240" height="250" as="geometry" />
+          <mxGeometry x="332" y="477" width="240" height="250" as="geometry" />
         </mxCell>
         <mxCell id="class_store" value="&lt;b&gt;Store&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ name: string&lt;br&gt;+ slug: string&lt;br&gt;+ phone: string&lt;br&gt;+ email: string&lt;br&gt;+ address: text&lt;br&gt;+ city: string&lt;br&gt;+ province: string&lt;br&gt;+ google_maps: text&lt;br&gt;+ status: boolean&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ booted(): void&lt;br&gt;+ cars(): HasMany&lt;br&gt;+ drivers(): HasMany&lt;br&gt;+ bookings(): HasMany" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
-          <mxGeometry x="440" y="1010" width="240" height="290" as="geometry" />
+          <mxGeometry x="415" y="926" width="240" height="290" as="geometry" />
         </mxCell>
         <mxCell id="class_car" value="&lt;b&gt;Car&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ store_id: bigint (FK)&lt;br&gt;+ category: string&lt;br&gt;+ car_name: string&lt;br&gt;+ slug: string&lt;br&gt;+ plate_number: string&lt;br&gt;+ stnk_expiry: string&lt;br&gt;+ tax_expiry: string&lt;br&gt;+ year: integer&lt;br&gt;+ color: string&lt;br&gt;+ seat: integer&lt;br&gt;+ transmission: string&lt;br&gt;+ fuel_type: string&lt;br&gt;+ mileage: integer&lt;br&gt;+ daily_price: decimal&lt;br&gt;+ driver_daily_price: decimal&lt;br&gt;+ is_call_for_price: boolean&lt;br&gt;+ monthly_price: decimal&lt;br&gt;+ late_fee: decimal&lt;br&gt;+ thumbnail: string&lt;br&gt;+ description: text&lt;br&gt;+ status: string&lt;br&gt;+ is_available: boolean&lt;br&gt;+ featured: boolean&lt;br&gt;+ brand_name: string&lt;br&gt;+ brand_slug: string&lt;br&gt;+ brand_logo: string&lt;br&gt;+ type_name: string&lt;br&gt;+ type_description: text&lt;br&gt;+ images: array&lt;br&gt;+ latitude: decimal&lt;br&gt;+ longitude: decimal&lt;br&gt;+ speed: decimal&lt;br&gt;+ location_address: string&lt;br&gt;+ location_raw_data: array&lt;br&gt;+ maintenances: array&lt;br&gt;+ inspections: array&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ store(): BelongsTo&lt;br&gt;+ branch(): BelongsTo&lt;br&gt;+ bookings(): HasMany&lt;br&gt;+ reviews(): HasMany&lt;br&gt;+ getBrandAttribute(): object&lt;br&gt;+ getTypeAttribute(): object&lt;br&gt;+ getLatestLocationAttribute(): object&lt;br&gt;+ getStockAttribute(): int" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
-          <mxGeometry x="1300" y="145" width="240" height="710" as="geometry" />
+          <mxGeometry x="1110" y="136" width="240" height="710" as="geometry" />
         </mxCell>
         <mxCell id="class_expense" value="&lt;b&gt;Expense&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ date: date&lt;br&gt;+ category: string&lt;br&gt;+ store_id: bigint (FK)&lt;br&gt;+ amount: decimal&lt;br&gt;+ description: string&lt;br&gt;+ attachment: string&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ store(): BelongsTo&lt;br&gt;+ branch(): BelongsTo&lt;br&gt;+ getCategoryAttribute(): object" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
-          <mxGeometry x="650" y="1760" width="240" height="230" as="geometry" />
+          <mxGeometry x="620" y="1330" width="240" height="240" as="geometry" />
         </mxCell>
         <mxCell id="class_promo" value="&lt;b&gt;Promo&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ code: string&lt;br&gt;+ title: string&lt;br&gt;+ description: text&lt;br&gt;+ discount_type: string&lt;br&gt;+ discount_value: decimal&lt;br&gt;+ minimum_transaction: decimal&lt;br&gt;+ start_date: date&lt;br&gt;+ end_date: date&lt;br&gt;+ quota: integer&lt;br&gt;+ used: integer&lt;br&gt;+ status: boolean&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ bookings(): HasMany" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
           <mxGeometry x="1835" y="145" width="250" height="270" as="geometry" />
         </mxCell>
         <mxCell id="class_booking" value="&lt;b&gt;Booking&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ booking_code: string&lt;br&gt;+ customer_id: bigint (FK)&lt;br&gt;+ car_id: bigint (FK)&lt;br&gt;+ store_id: bigint (FK)&lt;br&gt;+ driver_id: bigint (FK)&lt;br&gt;+ promo_id: bigint (FK)&lt;br&gt;+ rental_type: string&lt;br&gt;+ rental_category: string&lt;br&gt;+ with_driver: boolean&lt;br&gt;+ driver_name: string&lt;br&gt;+ pickup_date: datetime&lt;br&gt;+ return_date: datetime&lt;br&gt;+ pickup_location: text&lt;br&gt;+ return_location: text&lt;br&gt;+ total_day: integer&lt;br&gt;+ price: decimal&lt;br&gt;+ driver_price: decimal&lt;br&gt;+ extra_price: decimal&lt;br&gt;+ late_fee: decimal&lt;br&gt;+ discount: decimal&lt;br&gt;+ tax: decimal&lt;br&gt;+ grand_total: decimal&lt;br&gt;+ dp_amount: decimal&lt;br&gt;+ remaining_payment: decimal&lt;br&gt;+ payment_status: string&lt;br&gt;+ booking_status: string&lt;br&gt;+ notes: text&lt;br&gt;+ expired_at: datetime&lt;br&gt;+ guest_token: string&lt;br&gt;+ guest_name: string&lt;br&gt;+ guest_email: string&lt;br&gt;+ guest_phone: string&lt;br&gt;+ ktp_path: string&lt;br&gt;+ sim_path: string&lt;br&gt;+ delivery_type: string&lt;br&gt;+ pickup_type: string&lt;br&gt;+ delivery_fee: float&lt;br&gt;+ pickup_fee: float&lt;br&gt;+ ojol_fee: float&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ customer(): BelongsTo&lt;br&gt;+ payment(): HasOne&lt;br&gt;+ user(): BelongsTo&lt;br&gt;+ car(): BelongsTo&lt;br&gt;+ store(): BelongsTo&lt;br&gt;+ branch(): BelongsTo&lt;br&gt;+ driver(): BelongsTo&lt;br&gt;+ promo(): BelongsTo&lt;br&gt;+ getBookingTypeAttribute(): string&lt;br&gt;+ getBookingCategoryAttribute(): string" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
-          <mxGeometry x="1830" y="510" width="260" height="780" as="geometry" />
+          <mxGeometry x="1500" y="146" width="260" height="780" as="geometry" />
         </mxCell>
         <mxCell id="class_payment" value="&lt;div style=&quot;&quot;&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Payment&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ booking_id: bigint (FK)&lt;br&gt;+ payment_code: string&lt;br&gt;+ payment_method: string&lt;br&gt;+ transaction_id: string&lt;br&gt;+ snap_token: text&lt;br&gt;+ gross_amount: decimal&lt;br&gt;+ paid_amount: decimal&lt;br&gt;+ payment_status: string&lt;br&gt;+ payment_date: datetime&lt;br&gt;+ proof_payment: string&lt;br&gt;+ midtrans_response: array&lt;br&gt;+ payment_logs: array&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ booking(): BelongsTo&lt;br&gt;+ store(): HasOneThrough&lt;br&gt;+ getLogsAttribute(): Collection" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
           <mxGeometry x="2152" y="136" width="240" height="310" as="geometry" />
         </mxCell>
         <mxCell id="class_review" value="&lt;b&gt;Review&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ booking_id: bigint (FK)&lt;br&gt;+ customer_id: bigint (FK)&lt;br&gt;+ car_id: bigint (FK)&lt;br&gt;+ rating: integer&lt;br&gt;+ review: text&lt;br&gt;+ status: boolean&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ booking(): BelongsTo&lt;br&gt;+ customer(): BelongsTo&lt;br&gt;+ user(): BelongsTo&lt;br&gt;+ car(): BelongsTo" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
-          <mxGeometry x="80" y="1590" width="240" height="240" as="geometry" />
+          <mxGeometry x="110" y="840" width="240" height="250" as="geometry" />
         </mxCell>
         <mxCell id="edge_user_customer" value="hasOne" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" parent="1" source="class_user" target="class_customer" edge="1">
           <mxGeometry x="-0.0078" y="-10" relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="730" y="450" />
+              <mxPoint x="742" y="420" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
@@ -53,26 +53,25 @@
             <mxPoint x="1060" y="1390" as="targetPoint" />
             <Array as="points">
               <mxPoint x="970" y="718" />
-              <mxPoint x="970" y="1378" />
-              <mxPoint x="1050" y="1378" />
+              <mxPoint x="970" y="1278" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_user_store" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" parent="1" source="class_user" target="class_store" edge="1">
-          <mxGeometry x="0.0003" y="-10" relative="1" as="geometry">
+          <mxGeometry x="0.2611" y="-10" relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="760" y="980" />
-              <mxPoint x="560" y="980" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_driver_store" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" parent="1" source="class_driver" target="class_store" edge="1">
-          <mxGeometry x="-0.4711" y="-15" relative="1" as="geometry">
+          <mxGeometry x="-0.6742" y="-10" relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="875" y="1465" />
-              <mxPoint x="875" y="1250" />
+              <mxPoint x="920" y="1360" />
+              <mxPoint x="920" y="1250" />
+              <mxPoint x="600" y="1250" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
@@ -81,7 +80,7 @@
           <mxGeometry x="-0.3366" y="20" relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="1075" y="390" />
-              <mxPoint x="1075" y="900" />
+              <mxPoint x="1075" y="870" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
@@ -91,6 +90,7 @@
             <mxPoint as="offset" />
             <Array as="points">
               <mxPoint x="1380" y="1120" />
+              <mxPoint x="1380" y="640" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -106,10 +106,15 @@
         <mxCell id="edge_store_expense" value="hasMany" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="class_store" target="class_expense" edge="1">
           <mxGeometry x="0.0149" y="10" relative="1" as="geometry">
             <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="560" y="1216" />
+              <mxPoint x="560" y="1298" />
+              <mxPoint x="730" y="1298" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_car_booking" value="hasMany" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" parent="1" source="class_car" target="class_booking" edge="1">
-          <mxGeometry x="-0.551" y="10" relative="1" as="geometry">
+          <mxGeometry x="-0.0667" y="11" relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="1685" y="500" />
               <mxPoint x="1685" y="700" />
@@ -120,12 +125,17 @@
         <mxCell id="edge_booking_payment" value="hasOne" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" parent="1" source="class_booking" target="class_payment" edge="1">
           <mxGeometry x="-0.5597" y="10" relative="1" as="geometry">
             <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="2120" y="560" />
+              <mxPoint x="2120" y="291" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_booking_review" value="hasOne" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" parent="1" source="class_booking" target="class_review" edge="1">
           <mxGeometry y="-10" relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="200" y="940" />
+              <mxPoint x="640" y="900" />
+              <mxPoint x="640" y="900" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
@@ -144,7 +154,9 @@
         <mxCell id="edge_review_car" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" parent="1" source="class_review" target="class_car" edge="1">
           <mxGeometry x="0.0025" y="10" relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1410" y="1710" />
+              <mxPoint x="230" y="1640" />
+              <mxPoint x="1410" y="1640" />
+              <mxPoint x="1410" y="600" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
@@ -155,31 +167,37 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_employee_store" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="class_employee" target="class_store" edge="1">
-          <mxGeometry x="0.3031" y="10" relative="1" as="geometry">
+          <mxGeometry x="0.1843" relative="1" as="geometry">
             <mxPoint x="470" y="860" as="sourcePoint" />
             <Array as="points">
-              <mxPoint x="440" y="980" />
-              <mxPoint x="560" y="980" />
+              <mxPoint x="452" y="820" />
+              <mxPoint x="452" y="820" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="class_operational" value="&lt;b&gt;Operational&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ store_id: bigint (FK)&lt;br&gt;+ booking_id: bigint (FK)&lt;br&gt;+ car_id: bigint (FK)&lt;br&gt;+ inspector_name: string&lt;br&gt;+ inspection_type: string&lt;br&gt;+ inspected_at: datetime&lt;br&gt;+ odometer_km: integer&lt;br&gt;+ fuel_level: string&lt;br&gt;+ fuel_photos: array&lt;br&gt;+ exterior: array&lt;br&gt;+ interior: array&lt;br&gt;+ equipment: array&lt;br&gt;+ engine: array&lt;br&gt;+ photos: array&lt;br&gt;+ damage_found: boolean&lt;br&gt;+ damage_description: text&lt;br&gt;+ damage_photos: array&lt;br&gt;+ damage_cost: decimal&lt;br&gt;+ dirty_fine: decimal&lt;br&gt;+ fuel_fine: decimal&lt;br&gt;+ customer_confirmed: boolean&lt;br&gt;+ customer_note: text&lt;br&gt;+ status: string&lt;br&gt;+ notes: text&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ store(): BelongsTo&lt;br&gt;+ booking(): BelongsTo&lt;br&gt;+ car(): BelongsTo&lt;br&gt;+ getInspectionTypeLabelAttribute(): string&lt;br&gt;+ getFuelLevelLabelAttribute(): string&lt;br&gt;+ getStatusLabelAttribute(): string&lt;br&gt;+ hasExteriorIssue(): bool" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
-          <mxGeometry x="1830" y="1350" width="260" height="500" as="geometry" />
+          <mxGeometry x="2160" y="520" width="260" height="520" as="geometry" />
         </mxCell>
         <mxCell id="class_location_survey" value="&lt;b&gt;LocationSurvey&lt;/b&gt;&lt;hr&gt;+ id: bigint (PK)&lt;br&gt;+ store_id: bigint (FK)&lt;br&gt;+ booking_id: bigint (FK)&lt;br&gt;+ surveyor_name: string&lt;br&gt;+ survey_date: date&lt;br&gt;+ survey_type: string&lt;br&gt;+ address: text&lt;br&gt;+ residence_status: array&lt;br&gt;+ job_status: array&lt;br&gt;+ neighbor_interview: array&lt;br&gt;+ photos: array&lt;br&gt;+ recommendation: string&lt;br&gt;+ notes: text&lt;br&gt;+ status: string&lt;br&gt;+ approved_by: bigint (FK)&lt;br&gt;+ approved_at: timestamp&lt;br&gt;+ created_at: timestamp&lt;br&gt;+ updated_at: timestamp&lt;hr&gt;+ store(): BelongsTo&lt;br&gt;+ booking(): BelongsTo&lt;br&gt;+ approvedBy(): BelongsTo&lt;br&gt;+ getRecommendationLabelAttribute(): string&lt;br&gt;+ getStatusLabelAttribute(): string" style="rounded=0;whiteSpace=wrap;html=1;arcSize=0;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;fontSize=11;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontFamily=Helvetica;" parent="1" vertex="1">
-          <mxGeometry x="1490" y="1100" width="250" height="370" as="geometry" />
+          <mxGeometry x="1870" y="650" width="250" height="380" as="geometry" />
         </mxCell>
         <mxCell id="edge_operational_booking" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" parent="1" source="class_operational" target="class_booking" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="2040" y="580" />
+              <mxPoint x="2040" y="580" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_operational_car" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" parent="1" source="class_operational" target="class_car" edge="1">
           <mxGeometry x="-0.5595" y="-20" relative="1" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
-              <mxPoint x="1440" y="1600" />
+              <mxPoint x="2240" y="1210" />
+              <mxPoint x="1440" y="1210" />
+              <mxPoint x="1440" y="560" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -187,16 +205,18 @@
           <mxGeometry y="-10" relative="1" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
-              <mxPoint x="560" y="1670" />
+              <mxPoint x="2290" y="1610" />
+              <mxPoint x="520" y="1610" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_locationsurvey_booking" value="belongsTo" style="endArrow=open;endSize=8;html=1;rounded=0;strokeColor=#475569;strokeWidth=1.5;edgeStyle=orthogonalEdgeStyle;fontColor=#475569;fontSize=11;fontFamily=Helvetica;" parent="1" source="class_location_survey" target="class_booking" edge="1">
-          <mxGeometry x="0.5385" y="21" relative="1" as="geometry">
-            <mxPoint x="-5" y="1" as="offset" />
+          <mxGeometry x="0.2431" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
             <Array as="points">
-              <mxPoint x="1785" y="1285" />
-              <mxPoint x="1785" y="1180" />
+              <mxPoint x="1840" y="835" />
+              <mxPoint x="1840" y="1040" />
+              <mxPoint x="1650" y="1040" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -204,8 +224,7 @@
           <mxGeometry x="-0.2402" y="-20" relative="1" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
-              <mxPoint x="1085" y="1240" />
-              <mxPoint x="1085" y="1155" />
+              <mxPoint x="1995" y="1155" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -213,7 +232,8 @@
           <mxGeometry x="0.1765" y="-10" relative="1" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
-              <mxPoint x="790" y="1200" />
+              <mxPoint x="1960" y="1070" />
+              <mxPoint x="790" y="1070" />
             </Array>
           </mxGeometry>
         </mxCell>

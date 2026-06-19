@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.8 Chrome/140.0.7339.240 Electron/38.4.0 Safari/537.36" version="28.2.8">
   <diagram name="Page-1" id="8ece8461-acc0-41bb-a800-4bb4cbfaecc3">
-    <mxGraphModel dx="2037" dy="1201" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1426" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -11,40 +11,43 @@
           <mxGeometry x="70" y="60" width="180" height="50" as="geometry" />
         </mxCell>
         <mxCell id="UC2" value="Browse Katalog Mobil" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="70" y="120" width="180" height="50" as="geometry" />
+          <mxGeometry x="70" y="121" width="180" height="50" as="geometry" />
         </mxCell>
         <mxCell id="UC3" value="Proses Booking &amp; Checkout" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="70" y="240" width="180" height="50" as="geometry" />
+          <mxGeometry x="70" y="220" width="180" height="50" as="geometry" />
         </mxCell>
         <mxCell id="UC4" value="Riwayat &amp; Pembatalan Booking" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="70" y="310" width="200" height="50" as="geometry" />
+          <mxGeometry x="70" y="279" width="200" height="50" as="geometry" />
         </mxCell>
         <mxCell id="UC5" value="Kelola Pembayaran &amp; Invoice" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="70" y="540" width="180" height="50" as="geometry" />
+          <mxGeometry x="70" y="340" width="180" height="50" as="geometry" />
         </mxCell>
         <mxCell id="UC6" value="Edit Profil Akun" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="70" y="475" width="180" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="UC7" value="Verifikasi &amp; Persetujuan Booking" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="520" y="240" width="210" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="UC8" value="Assign Driver" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="535" y="340" width="180" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="UC9" value="Input Hasil Survei Lokasi" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="535" y="399" width="180" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="UC10" value="Return Processing &amp; Log Armada" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="370" y="660" width="180" height="50" as="geometry" />
+          <mxGeometry x="70" y="410" width="180" height="50" as="geometry" />
         </mxCell>
         <mxCell id="UC11" value="Bayar Denda" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="70" y="399" width="180" height="50" as="geometry" />
+          <mxGeometry x="150" y="480" width="180" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="UC12" value="Kelola Booking dan schadule Armada" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="700" y="680" width="240" height="50" as="geometry" />
+        <mxCell id="UC20" value="Beri Review &amp; Rating" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
+          <mxGeometry x="150" y="540" width="180" height="50" as="geometry" />
         </mxCell>
         <mxCell id="UC13" value="Kelola Jadwal &amp; Status Driver" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="60" y="830" width="180" height="50" as="geometry" />
+          <mxGeometry x="110" y="780" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UC7" value="Verifikasi Kelayakan Booking &amp; Survei Lokasi" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
+          <mxGeometry x="460" y="490" width="310" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UC8" value="Assign Driver" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
+          <mxGeometry x="520" y="300" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UC10" value="Serah Terima &amp; Inspeksi Armada" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
+          <mxGeometry x="390" y="660" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UC12" value="Manajemen Pemesanan &amp; Jadwal" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
+          <mxGeometry x="380" y="730" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UC24" value="Logout" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
+          <mxGeometry x="410" y="880" width="180" height="50" as="geometry" />
         </mxCell>
         <mxCell id="UC14" value="Kelola Data Master" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
           <mxGeometry x="750" y="60" width="180" height="50" as="geometry" />
@@ -52,20 +55,20 @@
         <mxCell id="UC15" value="Dashboard Analytics" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
           <mxGeometry x="750" y="130" width="180" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="UC16" value="Kelola Laporan &amp; Ekspor" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="690" y="475" width="180" height="50" as="geometry" />
-        </mxCell>
         <mxCell id="UC17" value="Kelola User &amp; Hak Akses" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="750" y="190" width="180" height="50" as="geometry" />
+          <mxGeometry x="750" y="200" width="180" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="UC18" value="Proses Refund Dana" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="735" y="843" width="180" height="50" as="geometry" />
+        <mxCell id="UC22" value="Manajemen Mobil" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
+          <mxGeometry x="750" y="270" width="180" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="UC20" value="Beri Review &amp; Rating" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="70" y="620" width="180" height="50" as="geometry" />
+        <mxCell id="UC23" value="Manajemen Supir" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
+          <mxGeometry x="640" y="350" width="180" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="UC21" value="Kelola Pembayaran &amp;amp; keuangan&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="720" y="913" width="210" height="50" as="geometry" />
+        <mxCell id="UC16" value="Kelola Laporan &amp; Ekspor" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
+          <mxGeometry x="640" y="420" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UC19" value="Manajemen Keuangan &amp; Transaksi Finansial" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
+          <mxGeometry x="730" y="810" width="260" height="55" as="geometry" />
         </mxCell>
         <mxCell id="ext_UC20_UC4" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;edgeStyle=elbowEdgeStyle;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="system_boundary" source="UC20" target="UC4" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -74,20 +77,6 @@
             </Array>
             <mxPoint x="150" y="360" as="targetPoint" />
           </mxGeometry>
-        </mxCell>
-        <mxCell id="ext_UC18_UC4" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;edgeStyle=elbowEdgeStyle;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="system_boundary" source="UC18" target="UC4" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="310" y="570" />
-            </Array>
-            <mxPoint x="160" y="370" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="sLLLLdhLj74hq9pmAywo-1" value="Kelola Management Mobil" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="490" y="180" width="180" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="sLLLLdhLj74hq9pmAywo-3" value="inspeksi armada" style="ellipse;whiteSpace=wrap;html=1;" parent="system_boundary" vertex="1">
-          <mxGeometry x="715" y="750" width="240" height="50" as="geometry" />
         </mxCell>
         <mxCell id="actor_customer" value="Customer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
           <mxGeometry x="80" y="380" width="30" height="60" as="geometry" />
@@ -131,31 +120,35 @@
         <mxCell id="assoc_actor_customer_UC20" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_customer" target="UC20" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="assoc_actor_customer_UC24" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_customer" target="UC24" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="assoc_actor_driver_UC10" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_driver" target="UC10" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
         <mxCell id="assoc_actor_driver_UC13" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_driver" target="UC13" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_actor_operasional_UC9" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_operasional" target="UC9" edge="1">
+        <mxCell id="assoc_actor_driver_UC24" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_driver" target="UC24" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc_actor_operasional_UC7" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_operasional" target="UC7" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
         <mxCell id="assoc_actor_operasional_UC10" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_operasional" target="UC10" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_actor_finance_UC16" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_finance" target="UC16" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1140" y="340" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="assoc_actor_finance_UC18" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_finance" target="UC18" edge="1">
+        <mxCell id="assoc_actor_operasional_UC24" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_operasional" target="UC24" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_actor_finance_UC21" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_finance" target="UC21" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="920" y="720" as="targetPoint" />
-            <Array as="points" />
-          </mxGeometry>
+        <mxCell id="assoc_actor_finance_UC16" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_finance" target="UC16" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc_actor_finance_UC19" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_finance" target="UC19" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc_actor_finance_UC24" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_finance" target="UC24" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
         <mxCell id="assoc_actor_admin_UC7" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC7" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
@@ -164,15 +157,12 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
         <mxCell id="assoc_actor_admin_UC10" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC10" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="800" y="440" as="targetPoint" />
-            <Array as="points" />
-          </mxGeometry>
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
         <mxCell id="assoc_actor_admin_UC12" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC12" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_actor_admin_UC14" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="actor_owner" target="UC14" edge="1">
+        <mxCell id="assoc_actor_admin_UC14" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC14" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
         <mxCell id="assoc_actor_admin_UC15" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC15" edge="1">
@@ -184,6 +174,21 @@
         <mxCell id="assoc_actor_admin_UC17" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC17" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="assoc_actor_admin_UC19" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC19" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc_actor_admin_UC22" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC22" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc_actor_admin_UC23" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC23" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc_actor_admin_UC24" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC24" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc_actor_owner_UC14" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_owner" target="UC14" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="assoc_actor_owner_UC15" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_owner" target="UC15" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
@@ -191,6 +196,12 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
         <mxCell id="assoc_actor_owner_UC17" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_owner" target="UC17" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc_actor_owner_UC22" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_owner" target="UC22" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="assoc_actor_owner_UC24" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_owner" target="UC24" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry" />
         </mxCell>
         <mxCell id="inc_UC3_UC2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="UC3" target="UC2" edge="1">
@@ -201,7 +212,6 @@
             <Array as="points">
               <mxPoint x="600" y="460" />
             </Array>
-            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="inc_UC6_UC1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;edgeStyle=elbowEdgeStyle;elbow=vertical;" parent="1" source="UC6" target="UC1" edge="1">
@@ -211,60 +221,9 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="inc_UC21_UC16" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;elbow=vertical;edgeStyle=elbowEdgeStyle;" parent="1" source="UC21" target="UC16" edge="1">
-          <mxGeometry x="0.0587" width="50" height="50" relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="840" y="700" />
-              <mxPoint x="900" y="915" />
-            </Array>
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="ext_UC8_UC7" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="UC8" target="UC7" edge="1">
           <mxGeometry x="-0.2" y="-5" width="50" height="50" relative="1" as="geometry">
             <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="ext_UC9_UC7" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="UC9" target="UC7" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="680" y="390" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="ext_UC11_UC10" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;edgeStyle=elbowEdgeStyle;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="UC11" target="UC10" edge="1">
-          <mxGeometry x="0.4758" width="50" height="50" relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="660" y="474" />
-              <mxPoint x="690" y="570" />
-            </Array>
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="ext_UC12_UC10" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;edgeStyle=elbowEdgeStyle;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="UC12" target="UC10" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="800" y="820" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="2fBb9rKwwMQ7TPZRbp79-1" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="UC14" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1590" y="245" as="sourcePoint" />
-            <mxPoint x="1320" y="200" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="2fBb9rKwwMQ7TPZRbp79-3" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="actor_admin" target="UC21" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1220" y="1077" as="targetPoint" />
-            <Array as="points" />
-            <mxPoint x="1490" y="880" as="sourcePoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="sLLLLdhLj74hq9pmAywo-2" value="" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="actor_admin" target="sLLLLdhLj74hq9pmAywo-1" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1460" y="400" as="sourcePoint" />
-            <mxPoint x="1200" y="693" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
