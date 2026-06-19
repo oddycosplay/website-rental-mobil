@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0
+    container_name: siliwangi_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: siliwangi_rental
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: siliwangi
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - siliwangi
+
+  # Backend PHP-FPM Service (Laravel)
+  backend_app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: siliwangi_backend_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./backend:/var/www
+    depends_on:
+      - mysql
+    networks:
+      - siliwangi
+
+  # Backend Web Service (Nginx serving Laravel assets & PHP requests)
+  backend_web:
+    image: nginx:stable-alpine
+    container_name: siliwangi_backend_web
+    restart: unless-stopped
+    volumes:
+      - ./backend:/var/www
+      - ./backend/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend_app
+    networks:
+      - siliwangi
+
+  # Laravel Queue Worker
+  queue_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: siliwangi_queue_worker
+    restart: unless-stopped
+    working_dir: /var/www
+    command: php artisan queue:work --sleep=3 --tries=3
+    volumes:
+      - ./backend:/var/www
+    depends_on:
+      - mysql
+      - backend_app
+    networks:
+      - siliwangi
+
+  # Frontend Web Service (Nginx serving built Vue 3 SPA)
+  frontend_web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: siliwangi_frontend_web
+    restart: unless-stopped
+    depends_on:
+      - backend_web
+    networks:
+      - siliwangi
+
+  # Nginx Gateway Proxy (Routing traffic to either backend or frontend)
+  gateway:
+    image: nginx:stable-alpine
+    container_name: siliwangi_gateway
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./docker/nginx/gateway.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend_web
+      - frontend_web
+    networks:
+      - siliwangi
+
+networks:
+  siliwangi:
+    driver: bridge
+
+volumes:
+  mysql_data:

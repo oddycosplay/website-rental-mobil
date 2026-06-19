@@ -1,0 +1,405 @@
+Table: bookings
+  - id bigint NOT NULL 
+  - booking_code varchar(100) NOT NULL 
+  - customer_id bigint NULL 
+  - car_id bigint NOT NULL 
+  - driver_id bigint NULL 
+  - driver_name varchar(255) NULL 
+  - store_id bigint NOT NULL 
+  - promo_id bigint NULL 
+  - rental_type varchar(20) NOT NULL DEFAULT 'daily'
+  - rental_category varchar(255) NOT NULL DEFAULT 'pribadi'
+  - area varchar(255) NULL 
+  - guest_token varchar(255) NULL 
+  - guest_name varchar(255) NULL 
+  - guest_email varchar(255) NULL 
+  - guest_phone varchar(255) NULL 
+  - ktp_path varchar(255) NULL 
+  - sim_path varchar(255) NULL 
+  - with_driver tinyint NOT NULL DEFAULT '0'
+  - pickup_date datetime NOT NULL 
+  - return_date datetime NOT NULL 
+  - pickup_location text(65535) NULL 
+  - return_location text(65535) NULL 
+  - delivery_type varchar(255) NOT NULL DEFAULT 'none'
+  - pickup_type varchar(255) NOT NULL DEFAULT 'none'
+  - total_day int NOT NULL 
+  - price decimal NOT NULL 
+  - delivery_fee decimal NOT NULL DEFAULT '0.00'
+  - pickup_fee decimal NOT NULL DEFAULT '0.00'
+  - ojol_fee decimal NOT NULL DEFAULT '0.00'
+  - driver_price decimal NOT NULL DEFAULT '0.00'
+  - extra_price decimal NOT NULL DEFAULT '0.00'
+  - late_fee decimal NOT NULL DEFAULT '0.00'
+  - discount decimal NOT NULL DEFAULT '0.00'
+  - tax decimal NOT NULL DEFAULT '0.00'
+  - grand_total decimal NOT NULL 
+  - dp_amount decimal NOT NULL DEFAULT '0.00'
+  - remaining_payment decimal NOT NULL DEFAULT '0.00'
+  - payment_status enum(8) NOT NULL DEFAULT 'unpaid'
+  - booking_status enum(9) NOT NULL DEFAULT 'pending'
+  - notes text(65535) NULL 
+  - expired_at datetime NULL 
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: cache
+  - key varchar(255) NOT NULL 
+  - value mediumtext(16777215) NOT NULL 
+  - expiration int NOT NULL 
+
+Table: cache_locks
+  - key varchar(255) NOT NULL 
+  - owner varchar(255) NOT NULL 
+  - expiration int NOT NULL 
+
+Table: cars
+  - id bigint NOT NULL 
+  - store_id bigint NOT NULL 
+  - car_name varchar(255) NOT NULL 
+  - slug varchar(255) NOT NULL 
+  - plate_number varchar(20) NOT NULL 
+  - stnk_expiry date NULL 
+  - tax_expiry date NULL 
+  - year year NOT NULL 
+  - color varchar(50) NULL 
+  - seat int NOT NULL DEFAULT '4'
+  - transmission enum(9) NOT NULL 
+  - fuel_type enum(7) NOT NULL 
+  - mileage int NOT NULL DEFAULT '0'
+  - daily_price decimal NOT NULL 
+  - driver_daily_price decimal NOT NULL DEFAULT '0.00'
+  - is_call_for_price tinyint NOT NULL DEFAULT '0'
+  - monthly_price decimal NOT NULL 
+  - late_fee decimal NOT NULL 
+  - thumbnail varchar(255) NULL 
+  - description text(65535) NULL 
+  - status enum(11) NOT NULL DEFAULT 'available'
+  - is_available tinyint NOT NULL DEFAULT '1'
+  - featured tinyint NOT NULL DEFAULT '0'
+  - brand_name varchar(255) NOT NULL 
+  - brand_slug varchar(255) NOT NULL 
+  - brand_logo varchar(255) NULL 
+  - type_name varchar(255) NOT NULL 
+  - category enum(10) NOT NULL DEFAULT 'both'
+  - type_description text(65535) NULL 
+  - images json NULL 
+  - latitude decimal NULL 
+  - longitude decimal NULL 
+  - speed decimal NULL 
+  - location_address varchar(255) NULL 
+  - location_raw_data json NULL 
+  - maintenances json NULL 
+  - inspections json NULL 
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: checkout_drafts
+  - id bigint NOT NULL 
+  - user_id bigint NULL 
+  - ip_address varchar(255) NULL 
+  - step int NOT NULL DEFAULT '1'
+  - payload json NOT NULL 
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: customers
+  - id bigint NOT NULL 
+  - user_id bigint NULL 
+  - name varchar(255) NOT NULL 
+  - email varchar(255) NULL 
+  - phone varchar(255) NULL 
+  - nik varchar(50) NULL 
+  - sim_number varchar(50) NULL 
+  - ktp_image varchar(255) NULL 
+  - sim_image varchar(255) NULL 
+  - selfie_image varchar(255) NULL 
+  - ktp_path varchar(255) NULL 
+  - sim_path varchar(255) NULL 
+  - no_kk varchar(50) NULL 
+  - kk_photo varchar(255) NULL 
+  - nip_nim varchar(50) NULL 
+  - id_card_photo varchar(255) NULL 
+  - pekerjaan varchar(100) NULL 
+  - customer_status varchar(50) NULL DEFAULT 'pending'
+  - address text(65535) NULL 
+  - date_of_birth varchar(50) NULL 
+  - is_active tinyint NOT NULL DEFAULT '1'
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: driver_schedules
+  - id bigint NOT NULL 
+  - driver_id bigint NOT NULL 
+  - booking_id bigint NOT NULL 
+  - start_date datetime NOT NULL 
+  - end_date datetime NOT NULL 
+  - status enum(9) NOT NULL DEFAULT 'scheduled'
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: drivers
+  - id bigint NOT NULL 
+  - user_id bigint NULL 
+  - store_id bigint NOT NULL 
+  - name varchar(255) NOT NULL 
+  - phone varchar(20) NOT NULL 
+  - address text(65535) NULL 
+  - license_number varchar(50) NULL 
+  - photo varchar(255) NULL 
+  - daily_fee decimal NOT NULL 
+  - rating decimal NOT NULL DEFAULT '0.00'
+  - status enum(8) NOT NULL DEFAULT 'active'
+  - is_available tinyint NOT NULL DEFAULT '1'
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: employees
+  - id bigint NOT NULL 
+  - user_id bigint NULL 
+  - store_id bigint NULL 
+  - name varchar(255) NOT NULL 
+  - email varchar(255) NULL 
+  - phone varchar(255) NULL 
+  - nip varchar(50) NULL 
+  - position varchar(100) NULL 
+  - is_active tinyint NOT NULL DEFAULT '1'
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: expenses
+  - id bigint NOT NULL 
+  - date date NOT NULL 
+  - category varchar(255) NOT NULL 
+  - store_id bigint NOT NULL 
+  - amount decimal NOT NULL 
+  - description varchar(255) NULL 
+  - attachment varchar(255) NULL 
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: failed_jobs
+  - id bigint NOT NULL 
+  - uuid varchar(255) NOT NULL 
+  - connection text(65535) NOT NULL 
+  - queue text(65535) NOT NULL 
+  - payload longtext(4294967295) NOT NULL 
+  - exception longtext(4294967295) NOT NULL 
+  - failed_at timestamp NOT NULL DEFAULT 'CURRENT_TIMESTAMP'
+
+Table: job_batches
+  - id varchar(255) NOT NULL 
+  - name varchar(255) NOT NULL 
+  - total_jobs int NOT NULL 
+  - pending_jobs int NOT NULL 
+  - failed_jobs int NOT NULL 
+  - failed_job_ids longtext(4294967295) NOT NULL 
+  - options mediumtext(16777215) NULL 
+  - cancelled_at int NULL 
+  - created_at int NOT NULL 
+  - finished_at int NULL 
+
+Table: jobs
+  - id bigint NOT NULL 
+  - queue varchar(255) NOT NULL 
+  - payload longtext(4294967295) NOT NULL 
+  - attempts tinyint NOT NULL 
+  - reserved_at int NULL 
+  - available_at int NOT NULL 
+  - created_at int NOT NULL 
+
+Table: location_surveys
+  - id bigint NOT NULL 
+  - store_id bigint NULL 
+  - booking_id bigint NOT NULL 
+  - surveyor_name varchar(255) NOT NULL 
+  - survey_date date NOT NULL 
+  - survey_type enum(8) NOT NULL DEFAULT 'delivery'
+  - address text(65535) NOT NULL 
+  - residence_status json NULL 
+  - job_status json NULL 
+  - neighbor_interview json NULL 
+  - photos json NULL 
+  - recommendation enum(20) NULL 
+  - notes text(65535) NULL 
+  - status enum(9) NOT NULL DEFAULT 'draft'
+  - approved_by bigint NULL 
+  - approved_at timestamp NULL 
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: migrations
+  - id int NOT NULL 
+  - migration varchar(255) NOT NULL 
+  - batch int NOT NULL 
+
+Table: model_has_permissions
+  - permission_id bigint NOT NULL 
+  - model_type varchar(255) NOT NULL 
+  - model_id bigint NOT NULL 
+
+Table: model_has_roles
+  - role_id bigint NOT NULL 
+  - model_type varchar(255) NOT NULL 
+  - model_id bigint NOT NULL 
+
+Table: operationals
+  - id bigint NOT NULL 
+  - store_id bigint NULL 
+  - booking_id bigint NOT NULL 
+  - car_id bigint NOT NULL 
+  - inspector_name varchar(255) NOT NULL 
+  - inspection_type enum(11) NOT NULL 
+  - inspected_at timestamp NOT NULL 
+  - odometer_km int NULL 
+  - fuel_level enum(13) NOT NULL DEFAULT 'full'
+  - exterior json NULL 
+  - interior json NULL 
+  - equipment json NULL 
+  - engine json NULL 
+  - photos json NULL 
+  - fuel_photos json NULL 
+  - damage_found tinyint NOT NULL DEFAULT '0'
+  - damage_description text(65535) NULL 
+  - damage_cost decimal NULL 
+  - dirty_fine decimal NULL 
+  - fuel_fine decimal NULL 
+  - damage_photos json NULL 
+  - customer_confirmed tinyint NOT NULL DEFAULT '0'
+  - customer_note text(65535) NULL 
+  - notes text(65535) NULL 
+  - status enum(9) NOT NULL DEFAULT 'draft'
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: passkeys
+  - id bigint NOT NULL 
+  - user_id bigint NOT NULL 
+  - name varchar(255) NOT NULL 
+  - credential_id varchar(255) NOT NULL 
+  - credential json NOT NULL 
+  - last_used_at timestamp NULL 
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: password_reset_tokens
+  - email varchar(255) NOT NULL 
+  - token varchar(255) NOT NULL 
+  - created_at timestamp NULL 
+
+Table: payments
+  - id bigint NOT NULL 
+  - booking_id bigint NOT NULL 
+  - payment_code varchar(100) NOT NULL 
+  - payment_method varchar(50) NULL 
+  - transaction_id varchar(255) NULL 
+  - snap_token text(65535) NULL 
+  - gross_amount decimal NOT NULL 
+  - paid_amount decimal NOT NULL DEFAULT '0.00'
+  - payment_status enum(7) NOT NULL DEFAULT 'pending'
+  - payment_date datetime NULL 
+  - proof_payment varchar(255) NULL 
+  - midtrans_response json NULL 
+  - payment_logs json NULL 
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: permissions
+  - id bigint NOT NULL 
+  - name varchar(255) NOT NULL 
+  - guard_name varchar(255) NOT NULL 
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: personal_access_tokens
+  - id bigint NOT NULL 
+  - tokenable_type varchar(255) NOT NULL 
+  - tokenable_id bigint NOT NULL 
+  - name text(65535) NOT NULL 
+  - token varchar(64) NOT NULL 
+  - abilities text(65535) NULL 
+  - last_used_at timestamp NULL 
+  - expires_at timestamp NULL 
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: promos
+  - id bigint NOT NULL 
+  - code varchar(50) NOT NULL 
+  - title varchar(255) NOT NULL 
+  - description text(65535) NULL 
+  - discount_type enum(10) NOT NULL 
+  - discount_value decimal NOT NULL 
+  - minimum_transaction decimal NOT NULL DEFAULT '0.00'
+  - start_date date NOT NULL 
+  - end_date date NOT NULL 
+  - quota int NOT NULL DEFAULT '0'
+  - used int NOT NULL DEFAULT '0'
+  - status tinyint NOT NULL DEFAULT '1'
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: reviews
+  - id bigint NOT NULL 
+  - booking_id bigint NOT NULL 
+  - customer_id bigint NULL 
+  - car_id bigint NOT NULL 
+  - rating int NOT NULL DEFAULT '5'
+  - review text(65535) NULL 
+  - status tinyint NOT NULL DEFAULT '1'
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: role_has_permissions
+  - permission_id bigint NOT NULL 
+  - role_id bigint NOT NULL 
+
+Table: roles
+  - id bigint NOT NULL 
+  - name varchar(255) NOT NULL 
+  - guard_name varchar(255) NOT NULL 
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: sessions
+  - id varchar(255) NOT NULL 
+  - user_id bigint NULL 
+  - ip_address varchar(45) NULL 
+  - user_agent text(65535) NULL 
+  - payload longtext(4294967295) NOT NULL 
+  - last_activity int NOT NULL 
+
+Table: stores
+  - id bigint NOT NULL 
+  - name varchar(255) NOT NULL 
+  - slug varchar(255) NOT NULL 
+  - phone varchar(20) NULL 
+  - email varchar(255) NULL 
+  - address text(65535) NULL 
+  - city varchar(100) NULL 
+  - province varchar(100) NULL 
+  - google_maps text(65535) NULL 
+  - status tinyint NOT NULL DEFAULT '1'
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+
+Table: users
+  - id bigint NOT NULL 
+  - name varchar(255) NOT NULL 
+  - email varchar(255) NOT NULL 
+  - phone varchar(20) NULL 
+  - email_verified_at timestamp NULL 
+  - password varchar(255) NOT NULL 
+  - avatar varchar(255) NULL 
+  - status enum(8) NOT NULL DEFAULT 'active'
+  - last_login timestamp NULL 
+  - two_factor_secret text(65535) NULL 
+  - two_factor_recovery_codes text(65535) NULL 
+  - two_factor_confirmed_at timestamp NULL 
+  - remember_token varchar(100) NULL 
+  - current_team_id bigint NULL 
+  - profile_photo_path varchar(2048) NULL 
+  - created_at timestamp NULL 
+  - updated_at timestamp NULL 
+  - store_id bigint NULL 
+

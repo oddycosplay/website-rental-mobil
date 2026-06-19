@@ -1,0 +1,80 @@
+name: CI-CD Pipeline (Siliwangi Rental)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  # Job 1: Test & Lint Backend (Laravel)
+  backend-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: siliwangi_rental_test
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo_mysql, bcmath, soap, alpine, gd, exif
+        coverage: none
+
+    - name: Install Composer Dependencies
+      run: |
+        cd backend
+        composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+
+    - name: Prepare Application Environment
+      run: |
+        cd backend
+        cp .env.example .env
+        php artisan key:generate
+
+    - name: Run Migrations & Tests
+      env:
+        DB_CONNECTION: mysql
+        DB_HOST: 127.0.0.1
+        DB_PORT: 3306
+        DB_DATABASE: siliwangi_rental_test
+        DB_USERNAME: root
+        DB_PASSWORD: root
+      run: |
+        cd backend
+        php artisan migrate --force
+        php artisan test
+
+  # Job 2: Build & Validate Frontend (Vue 3)
+  frontend-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install NPM Dependencies
+      run: |
+        cd frontend
+        npm ci
+
+    - name: Build Application
+      run: |
+        cd frontend
+        npm run build
