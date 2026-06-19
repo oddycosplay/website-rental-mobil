@@ -41,14 +41,14 @@ graph TD
 
 ### Identifikasi Masalah Sistem Manual
 
-| No | Kategori | Kendala |
-|:--|:--|:--|
-| 1 | **Koordinasi** | Perpindahan data antar divisi terlambat karena bergantung pada pesan WA |
-| 2 | **Validasi Pembayaran** | Cek mutasi bank manual, rentan keterlambatan dan human error |
-| 3 | **Arsip Inspeksi** | Form fisik kertas sering hilang, rusak, atau tidak terbaca |
-| 4 | **Transparansi** | Customer tidak bisa memantau status booking secara mandiri |
-| 5 | **Keamanan Dokumen** | Pengecekan KTP/SIM hanya visual, rawan pemalsuan |
-| 6 | **Pelaporan** | Laporan keuangan dibuat manual di Excel, tidak real-time |
+| No  | Kategori                | Kendala                                                                 |
+| :-- | :---------------------- | :---------------------------------------------------------------------- |
+| 1   | **Koordinasi**          | Perpindahan data antar divisi terlambat karena bergantung pada pesan WA |
+| 2   | **Validasi Pembayaran** | Cek mutasi bank manual, rentan keterlambatan dan human error            |
+| 3   | **Arsip Inspeksi**      | Form fisik kertas sering hilang, rusak, atau tidak terbaca              |
+| 4   | **Transparansi**        | Customer tidak bisa memantau status booking secara mandiri              |
+| 5   | **Keamanan Dokumen**    | Pengecekan KTP/SIM hanya visual, rawan pemalsuan                        |
+| 6   | **Pelaporan**           | Laporan keuangan dibuat manual di Excel, tidak real-time                |
 
 ---
 
@@ -106,11 +106,11 @@ graph TD
     B10 --> B11([Transaksi Selesai])
 ```
 
-### 3.4 Alur Fleet Health & Maintenance
+### 3.4 Alur Car Health & Maintenance
 
 ```mermaid
 graph TD
-    M1([Admin Buka Fleet Health Dashboard]) --> M2{Sumber Maintenance?}
+    M1([Admin Buka Car Health Dashboard]) --> M2{Sumber Maintenance?}
     M2 -->|Dari Inspeksi Check-in| M3[Otomatis: Status Mobil maintenance]
     M2 -->|Manual Admin| M4[Admin Buat Catatan Perawatan Baru]
     M3 --> M5[Input Detail: Biaya, Tanggal, Bengkel, Keterangan]
@@ -137,18 +137,18 @@ graph TD
 
 ## 4. Peta Aktor & Tanggung Jawab (RACI Summary)
 
-| Aktivitas | Customer | Admin | Tim Ops | Driver | Sistem |
-|:--|:--:|:--:|:--:|:--:|:--:|
-| Booking kendaraan | **R** | I | — | — | A |
-| Upload dokumen identitas | **R** | I | — | — | A |
-| Konfirmasi & assign driver | — | **R** | — | I | A |
-| Audit inspeksi check-out | — | I | **R** | — | A |
-| Mengemudikan kendaraan (sopir) | — | — | — | **R** | I |
-| Audit inspeksi check-in | I | I | **R** | — | A |
-| Update status kendaraan | — | — | — | — | **R** (auto) |
-| Pencatatan maintenance | — | **R** | — | — | A |
-| Finalisasi tagihan | — | **R** | — | — | A |
-| Laporan keuangan | — | **R** | — | — | A |
+| Aktivitas                      | Customer | Admin | Tim Ops | Driver |    Sistem    |
+| :----------------------------- | :------: | :---: | :-----: | :----: | :----------: |
+| Booking kendaraan              |  **R**   |   I   |    —    |   —    |      A       |
+| Upload dokumen identitas       |  **R**   |   I   |    —    |   —    |      A       |
+| Konfirmasi & assign driver     |    —     | **R** |    —    |   I    |      A       |
+| Audit inspeksi check-out       |    —     |   I   |  **R**  |   —    |      A       |
+| Mengemudikan kendaraan (sopir) |    —     |   —   |    —    | **R**  |      I       |
+| Audit inspeksi check-in        |    I     |   I   |  **R**  |   —    |      A       |
+| Update status kendaraan        |    —     |   —   |    —    |   —    | **R** (auto) |
+| Pencatatan maintenance         |    —     | **R** |    —    |   —    |      A       |
+| Finalisasi tagihan             |    —     | **R** |    —    |   —    |      A       |
+| Laporan keuangan               |    —     | **R** |    —    |   —    |      A       |
 
 > **R** = Responsible (Pelaksana) · **A** = Accountable (Penanggung Jawab Sistem) · **I** = Informed
 
@@ -170,30 +170,30 @@ stateDiagram-v2
 
 ## 6. Modul Sistem yang Aktif (v1.0.2)
 
-| Modul | Status | Keterangan |
-|:--|:--:|:--|
-| Katalog & Booking Public | ✅ Aktif | Checkout 5-langkah dengan upload dokumen |
-| Gateway Pembayaran Midtrans | ✅ Aktif | DP dan pelunasan otomatis |
-| Admin Dashboard (Filament) | ✅ Aktif | Manajemen booking, pelanggan, armada |
-| Vehicle Inspection Hub | ✅ Aktif | Check-out & Check-in dengan audit fisik |
-| Fleet Health & Maintenance | ✅ Aktif | Grafik biaya & riwayat perawatan per unit |
-| Financial Records & Analytics | ✅ Aktif | Grafik pendapatan harian dan bulanan |
-| Live GPS Tracking | 🚧 Placeholder | Belum terintegrasi dengan perangkat GPS |
-| WhatsApp Notification | 🚧 Placeholder | Antrean siap, integrasi API WA belum aktif |
-| Loyalty Program | 🔜 Planned | Direncanakan pada roadmap v1.1.x |
+| Modul                         |     Status     | Keterangan                                 |
+| :---------------------------- | :------------: | :----------------------------------------- |
+| Katalog & Booking Public      |    ✅ Aktif    | Checkout 5-langkah dengan upload dokumen   |
+| Gateway Pembayaran Midtrans   |    ✅ Aktif    | DP dan pelunasan otomatis                  |
+| Admin Dashboard (Filament)    |    ✅ Aktif    | Manajemen booking, pelanggan, armada       |
+| Vehicle Inspection Hub        |    ✅ Aktif    | Check-out & Check-in dengan audit fisik    |
+| Car Health & Maintenance      |    ✅ Aktif    | Grafik biaya & riwayat perawatan per unit  |
+| Financial Records & Analytics |    ✅ Aktif    | Grafik pendapatan harian dan bulanan       |
+| Live GPS Tracking             | 🚧 Placeholder | Belum terintegrasi dengan perangkat GPS    |
+| WhatsApp Notification         | 🚧 Placeholder | Antrean siap, integrasi API WA belum aktif |
+| Loyalty Program               |   🔜 Planned   | Direncanakan pada roadmap v1.1.x           |
 
 ---
 
 ## 7. Referensi Dokumen Terkait
 
-| Dokumen | Lokasi |
-|:--|:--|
-| Sistem Usulan Digital | `documents/BRD/sistem-usulan.md` |
+| Dokumen                     | Lokasi                                         |
+| :-------------------------- | :--------------------------------------------- |
+| Sistem Usulan Digital       | `documents/BRD/sistem-usulan.md`               |
 | Business Requirement Design | `documents/BRD/business-requirement-design.md` |
-| Flowchart Inspeksi Draw.io | `documents/flowchart_inspeksi.drawio` |
-| Diagram UML Sistem Berjalan | `documents/UML/sistem berjalan manual.drawio` |
-| ERD Database | `documents/DATABASE/erd_siliwangi.drawio` |
-| Progress & Changelog | `documents/BRD/progress.md` |
+| Flowchart Inspeksi Draw.io  | `documents/flowchart_inspeksi.drawio`          |
+| Diagram UML Sistem Berjalan | `documents/UML/sistem berjalan manual.drawio`  |
+| ERD Database                | `documents/DATABASE/erd_siliwangi.drawio`      |
+| Progress & Changelog        | `documents/BRD/progress.md`                    |
 
 ---
 

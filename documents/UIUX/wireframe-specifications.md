@@ -14,7 +14,7 @@ Sistem Siliwangi Rental dirancang dengan pendekatan **Modern Premium UX** yang b
 
 - **Modern Glassmorphism:** Memanfaatkan efek transparansi blur yang halus dengan border tipis untuk memberikan kesan premium, bersih, dan futuristik.
 - **Dark/Light Hybrid:** Area publik (Frontend) menggunakan gaya modern light mode dengan aksen amber/biru premium untuk kenyamanan mata, sedangkan area admin (Backend) menggunakan gaya SaaS dashboard yang terstruktur dan fungsional.
-- **Conversion-Oriented:** Penempatan tombol CTA (Call to Action) utama seperti *Book Now* dibuat kontras dan konsisten di seluruh halaman katalog dan detail.
+- **Conversion-Oriented:** Penempatan tombol CTA (Call to Action) utama seperti _Book Now_ dibuat kontras dan konsisten di seluruh halaman katalog dan detail.
 
 ### 1.2 Grid & Layouting
 
@@ -28,18 +28,18 @@ Sistem Siliwangi Rental dirancang dengan pendekatan **Modern Premium UX** yang b
 Seluruh rancangan antarmuka telah diekspor ke dalam bentuk lembar kerja Figma yang disimpan di direktori `documents/UIUX/`:
 
 1. **`wireframe_frontend_main_flow.png`**  
-   *Menampilkan alur utama pelanggan (Beranda, Katalog Mobil, Detail Mobil, dan 5-Step Checkout Wizard).*
+   _Menampilkan alur utama pelanggan (Beranda, Katalog Mobil, Detail Mobil, dan 5-Step Checkout Wizard)._
 2. **`wireframe_frontend_auth_info.png`**  
-   *Menampilkan halaman informasi dan manajemen akun pelanggan (Login, Daftar Akun, Tentang, FAQ, dan Kontak).*
+   _Menampilkan halaman informasi dan manajemen akun pelanggan (Login, Daftar Akun, Tentang, FAQ, dan Kontak)._
 3. **`wireframe_backend_dashboard_system.png`**  
-   *Menampilkan panel admin Filament v4 secara keseluruhan (Dashboard, Manajemen Armada/Cars, Penjadwalan, Laporan Keuangan, dan Pengelolaan Drivers).*
+   _Menampilkan panel admin Filament v4 secara keseluruhan (Dashboard, Manajemen Armada/Cars, Penjadwalan, Laporan Keuangan, dan Pengelolaan Drivers)._
 4. **Gambar Wireframe per Halaman Admin Backend (Terpisah untuk Laporan):**
-   - **[wireframe_backend_dashboard.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_dashboard.png)** : Tampilan utama dashboard analitik staf admin dengan widgets pendapatan dan rasio kesiapan armada.
-   - **[wireframe_backend_cars.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_cars.png)** : Tampilan menu pengelolaan armada mobil (Cars CRUD) beserta status ketersediaan unit.
-   - **[wireframe_backend_bookings.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_bookings.png)** : Tampilan menu daftar transaksi sewa (Bookings CRUD) dan antrean verifikasi jaminan.
-   - **[wireframe_backend_drivers.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_drivers.png)** : Tampilan menu pengelolaan driver, WhatsApp link, rating bintang, dan status tugas.
-   - **[wireframe_backend_keuangan.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_keuangan.png)** : Tampilan laporan grafik keuangan bulanan dan rincian pengeluaran operasional.
-   - **[wireframe_backend_penjadwalan.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_penjadwalan.png)** : Tampilan modul kalender/timeline penjadwalan pemakaian mobil secara real-time.
+    - **[wireframe_backend_dashboard.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_dashboard.png)** : Tampilan utama dashboard analitik staf admin dengan widgets pendapatan dan rasio kesiapan armada.
+    - **[wireframe_backend_cars.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_cars.png)** : Tampilan menu pengelolaan armada mobil (Cars CRUD) beserta status ketersediaan unit.
+    - **[wireframe_backend_bookings.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_bookings.png)** : Tampilan menu daftar transaksi sewa (Bookings CRUD) dan antrean verifikasi jaminan.
+    - **[wireframe_backend_drivers.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_drivers.png)** : Tampilan menu pengelolaan driver, WhatsApp link, rating bintang, dan status tugas.
+    - **[wireframe_backend_keuangan.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_keuangan.png)** : Tampilan laporan grafik keuangan bulanan dan rincian pengeluaran operasional.
+    - **[wireframe_backend_penjadwalan.png](file:///C:/laragon/www/rental_project/documents/UIUX/wireframe_backend_penjadwalan.png)** : Tampilan modul kalender/timeline penjadwalan pemakaian mobil secara real-time.
 
 ---
 
@@ -47,10 +47,10 @@ Seluruh rancangan antarmuka telah diekspor ke dalam bentuk lembar kerja Figma ya
 
 ### 3.1 Tampilan Beranda Website (`/`)
 
-- **Header / Navigation Bar:** 
-  - Logo Siliwangi Rental (kiri), Link Navigasi (Home, Fleet, About, FAQ, Contact) di tengah, Tombol Sign In / Akun & CTA *Book Now* (kanan).
-  - Indikator Lonceng Notifikasi dinamis untuk pengguna yang telah login.
-- **Hero Section:** Headline besar *"Choose Your Dream Vehicle"*, sub-headline deskriptif, dan ilustrasi visual mobil premium dengan latar belakang gradien halus.
+- **Header / Navigation Bar:**
+- Logo Siliwangi Rental (kiri), Link Navigasi (Home, Car, About, FAQ, Contact) di tengah, Tombol Sign In / Akun & CTA _Book Now_ (kanan).
+- Indikator Lonceng Notifikasi dinamis untuk pengguna yang telah login.
+- **Hero Section:** Headline besar _"Choose Your Dream Vehicle"_, sub-headline deskriptif, dan ilustrasi visual mobil premium dengan latar belakang gradien halus.
 - **Quick Search Bar (Floating Card):** Input tanggal mulai sewa, tanggal selesai sewa, filter tipe mobil, dan tombol pencari interaktif.
 - **Featured Cars Section:** Grid berisi 3-4 kartu armada unggulan dengan badge harga per hari dan rating.
 - **Value Propositions:** 4 kolom yang memaparkan kelebihan Siliwangi Rental (Best Price, 24/7 Support, Premium Clean Cars, Flexible Pick-up).
@@ -59,18 +59,18 @@ Seluruh rancangan antarmuka telah diekspor ke dalam bentuk lembar kerja Figma ya
 ### 3.2 Tampilan Daftar Mobil / Katalog (`/catalog`)
 
 - **Layout Split:**
-  - **Sidebar Filter (Kiri):** Filter pencarian teks, kategori (SUV, MPV, Sedan, Luxury), tipe transmisi (Automatic, Manual), tipe bahan bakar (Bensin, Diesel, Hybrid), kapasitas kursi, rentang harga sewa, dan tombol reset.
-  - **Grid Armada (Kanan):** Area layout 3 kolom (desktop) menampilkan daftar mobil dengan pagination di bagian bawah.
-- **Car Card Component:** Image placeholder, brand & nama model, badge tipe mobil, spesifikasi kapasitas & transmisi, harga sewa bersih per hari, indikator ketersediaan (*Available/Rented*), tombol *Detail* (outline), dan tombol *Book Now* (solid amber).
+- **Sidebar Filter (Kiri):** Filter pencarian teks, kategori (SUV, MPV, Sedan, Luxury), tipe transmisi (Automatic, Manual), tipe bahan bakar (Bensin, Diesel, Hybrid), kapasitas kursi, rentang harga sewa, dan tombol reset.
+- **Grid Armada (Kanan):** Area layout 3 kolom (desktop) menampilkan daftar mobil dengan pagination di bagian bawah.
+- **Car Card Component:** Image placeholder, brand & nama model, badge tipe mobil, spesifikasi kapasitas & transmisi, harga sewa bersih per hari, indikator ketersediaan (_Available/Rented_), tombol _Detail_ (outline), dan tombol _Book Now_ (solid amber).
 
 ### 3.3 Tampilan Detail Mobil (`/cars/{slug}`)
 
 - **Image Gallery (Kiri/Atas):** Menampilkan 1 foto utama berukuran besar dengan 3-4 thumbnail foto detail di bagian bawahnya.
 - **Specification Sheet (Kanan/Tengah):** Nama mobil, tipe transmisi, tipe bahan bakar, tahun armada, konsumsi bahan bakar, kapasitas tangki, dan fitur tambahan (AC, Airbag, Sunroof, GPS).
 - **Check Availability & Pricing Card (Floating Sidebar):**
-  - Input rentang tanggal sewa.
-  - Kalkulator estimasi biaya sewa instan.
-  - Tombol *Booking Sekarang* yang mengarahkan langsung ke halaman Checkout Wizard.
+- Input rentang tanggal sewa.
+- Kalkulator estimasi biaya sewa instan.
+- Tombol _Booking Sekarang_ yang mengarahkan langsung ke halaman Checkout Wizard.
 - **Customer Reviews Section:** Daftar testimoni riil pelanggan sebelumnya lengkap dengan nilai rating bintang (1-5).
 
 ### 3.4 Tampilan Form Booking (`/checkout/{car}`)
@@ -82,19 +82,19 @@ Menggunakan arsitektur **5-Step Wizard** yang sinkron secara real-time via Livew
 - **Step 2: Customer Details:** Formulir pengisian nama lengkap, NIK, nomor telepon WhatsApp aktif, dan email.
 - **Step 3: Verification Documents:** Area drag-and-drop upload file foto KTP dan foto SIM A pelanggan (dengan validasi ukuran file maksimal 2MB).
 - **Step 4: Extras & Add-ons:** Pilihan sewa dengan driver, tambahan asuransi perjalanan, serta input kode kupon promo.
-- **Step 5: Review & Checkout:** Rincian perhitungan biaya (Harga Sewa + Layanan Driver + PPN 12% - Diskon Promo = Total Pembayaran) dan tombol final *Bayar Sekarang*.
+- **Step 5: Review & Checkout:** Rincian perhitungan biaya (Harga Sewa + Layanan Driver + PPN 12% - Diskon Promo = Total Pembayaran) dan tombol final _Bayar Sekarang_.
 
 ### 3.5 Tampilan Login (`/login`)
 
 - **Layout Centered Card:** Kartu login terapung di tengah layar dengan latar belakang blur transparan (glassmorphism).
-- **Fields:** Input alamat email dengan ikon surat, input password dengan tombol toggle mata (show/hide), checkbox *Remember Me*, dan link *Lupa Password*.
-- **Actions:** Tombol *Sign In* berwarna kuning amber solid dengan efek transisi hover, dan link registrasi akun baru di bagian bawah.
+- **Fields:** Input alamat email dengan ikon surat, input password dengan tombol toggle mata (show/hide), checkbox _Remember Me_, dan link _Lupa Password_.
+- **Actions:** Tombol _Sign In_ berwarna kuning amber solid dengan efek transisi hover, dan link registrasi akun baru di bagian bawah.
 
 ### 3.6 Tampilan Daftar Akun (`/register`)
 
 - **Layout Split-Screen:** Bagian kiri menampilkan ilustrasi branding Siliwangi Rental, bagian kanan menampilkan form registrasi yang bersih.
 - **Fields:** Formulir input Nama Lengkap, Alamat Email, Nomor WhatsApp, Password, dan Konfirmasi Password.
-- **Actions:** Tombol *Daftar Akun Baru* dan tautan balik ke halaman login.
+- **Actions:** Tombol _Daftar Akun Baru_ dan tautan balik ke halaman login.
 
 ### 3.7 Tampilan Tentang (`/about`)
 
@@ -104,13 +104,13 @@ Menggunakan arsitektur **5-Step Wizard** yang sinkron secara real-time via Livew
 ### 3.8 Tampilan FAQ (`/faq`)
 
 - **Layout Accordion:** Daftar pertanyaan yang sering diajukan pelanggan dengan interaksi buka-tutup (collapsible) yang mulus.
-- **Kategori FAQ:** Pembagian tab navigasi seperti *Umum*, *Pembayaran*, *Persyaratan Dokumen*, dan *Kebijakan Pembatalan*.
+- **Kategori FAQ:** Pembagian tab navigasi seperti _Umum_, _Pembayaran_, _Persyaratan Dokumen_, dan _Kebijakan Pembatalan_.
 
 ### 3.9 Tampilan Contact (`/contact`)
 
 - **Layout 2 Kolom:**
-  - **Kolom Informasi (Kiri):** Alamat kantor pusat, jam operasional, email dukungan pelanggan, nomor telepon hotline, dan tautan direct chat WhatsApp.
-  - **Formulir Hubungi Kami (Kanan):** Input Nama, Email, Subjek, dan detail isi pesan saran/pertanyaan.
+- **Kolom Informasi (Kiri):** Alamat kantor pusat, jam operasional, email dukungan pelanggan, nomor telepon hotline, dan tautan direct chat WhatsApp.
+- **Formulir Hubungi Kami (Kanan):** Input Nama, Email, Subjek, dan detail isi pesan saran/pertanyaan.
 - **Maps Integration:** Peta satelit Google Maps tersemat di bagian bawah untuk navigasi fisik ke kantor pusat.
 
 ---
@@ -122,13 +122,13 @@ Seluruh halaman backend dirancang menggunakan framework **Filament v4** dengan s
 ### 4.1 Tampilan Dashboard Utama
 
 - **Header Bar:** Menampilkan breadcrumb navigasi, profil pengguna aktif, dan dropdown pemilih cabang (active store).
-- **Metrik KPI Widgets (Top Row):** 
-  - Total Pendapatan Bulanan (Rp), Total Booking Selesai, Rata-rata Durasi Sewa, dan Jumlah Booking Pending.
+- **Metrik KPI Widgets (Top Row):**
+- Total Pendapatan Bulanan (Rp), Total Booking Selesai, Rata-rata Durasi Sewa, dan Jumlah Booking Pending.
 - **Visual Charts Section (Middle Row):**
-  - **Line Chart:** Tren volume transaksi pemesanan harian/mingguan.
-  - **Bar Chart:** Pendapatan dan pengeluaran per bulan sepanjang tahun.
-  - **Pie Chart:** Distribusi tipe armada terpopuler yang disewa (Luxury vs SUV vs MPV).
-- **Recent Activity Table (Bottom Row):** Tabel berisi daftar 5 transaksi pemesanan terbaru dengan badge status pembayaran (*Unpaid/Paid*).
+- **Line Chart:** Tren volume transaksi pemesanan harian/mingguan.
+- **Bar Chart:** Pendapatan dan pengeluaran per bulan sepanjang tahun.
+- **Pie Chart:** Distribusi tipe armada terpopuler yang disewa (Luxury vs SUV vs MPV).
+- **Recent Activity Table (Bottom Row):** Tabel berisi daftar 5 transaksi pemesanan terbaru dengan badge status pembayaran (_Unpaid/Paid_).
 
 ### 4.2 Tampilan Store Jakarta Pusat (Active Store Profile)
 
@@ -137,17 +137,17 @@ Seluruh halaman backend dirancang menggunakan framework **Filament v4** dengan s
 
 ### 4.3 Tampilan Menu Drivers
 
-- **Drivers Data Table:** Kolom Nama Driver, Nomor Telepon, Status Ketersediaan (*On Trip / Available / Off Duty*), dan Rating Pelanggan.
+- **Drivers Data Table:** Kolom Nama Driver, Nomor Telepon, Status Ketersediaan (_On Trip / Available / Off Duty_), dan Rating Pelanggan.
 - **Actions:** Tombol tambah driver baru, upload foto SIM B, edit data, dan tombol ganti status ketersediaan secara manual.
 
 ### 4.4 Tampilan Menu Stores (Cabang)
 
-- **Stores Grid/Table:** Kolom Kode Cabang, Nama Cabang (misal: Store Jakarta Pusat, Store Bandung), Kota, Jumlah Armada Aktif, dan Status Cabang (*Open/Closed*).
+- **Stores Grid/Table:** Kolom Kode Cabang, Nama Cabang (misal: Store Jakarta Pusat, Store Bandung), Kota, Jumlah Armada Aktif, dan Status Cabang (_Open/Closed_).
 - **CRUD Forms:** Input data koordinat peta, alamat lengkap, dan pengaturan jam kerja operasional cabang.
 
 ### 4.5 Tampilan Menu Users (Pengguna Sistem)
 
-- **User Management Table:** Kolom Foto Profil, Nama, Email, Role Akses (*Super Admin, Staff Admin, Customer*), dan Tanggal Registrasi.
+- **User Management Table:** Kolom Foto Profil, Nama, Email, Role Akses (_Super Admin, Staff Admin, Customer_), dan Tanggal Registrasi.
 - **Security Actions:** Fitur reset password paksa oleh Super Admin dan penonaktifan akun staf (suspend account).
 
 ### 4.6 Tampilan Menu Penjadwalan Mobil (Car Schedule / Gantt Chart)
@@ -157,22 +157,22 @@ Seluruh halaman backend dirancang menggunakan framework **Filament v4** dengan s
 
 ### 4.7 Tampilan Menu Cars (Armada Mobil)
 
-- **Inventory Data Table:** Menampilkan daftar seluruh unit armada dengan kolom Foto Mobil, Nama Model, Tipe (SUV/MPV/Luxury), Pelat Nomor, Harga Sewa per Hari, dan Status Fisik (*Available, Rented, Maintenance*).
+- **Inventory Data Table:** Menampilkan daftar seluruh unit armada dengan kolom Foto Mobil, Nama Model, Tipe (SUV/MPV/Luxury), Pelat Nomor, Harga Sewa per Hari, dan Status Fisik (_Available, Rented, Maintenance_).
 - **Form Creation Wizard:** Field input detail spesifikasi teknis mobil, upload galeri foto, penugasan ke cabang store tertentu, dan status asuransi armada.
 
 ### 4.8 Tampilan Menu Laporan Keuangan
 
 - **Financial Analytics Sheet:** Filter laporan berdasarkan rentang tanggal, store cabang, dan tipe pembayaran.
 - **Tabel Jurnal Transaksi:** Kolom Tanggal, Kode Transaksi, Deskripsi Aliran Dana, Kategori (Pemasukan Sewa / Denda), Metode (Midtrans / Transfer Bank), dan Nominal (Rp).
-- **Action:** Tombol *Export to PDF/Excel* untuk keperluan pelaporan kerja praktek dan perpajakan perusahaan.
+- **Action:** Tombol _Export to PDF/Excel_ untuk keperluan pelaporan kerja praktek dan perpajakan perusahaan.
 
 ### 4.9 Tampilan Menu Laporan Denda
 
-- **Fines Tracking Table:** Kolom Kode Booking, Nama Pelanggan, Jenis Pelanggaran (Keterlambatan Pengembalian, Kerusakan Unit, Bahan Bakar Kurang), Jumlah Hari Terlambat, Nominal Denda (Rp), Status Denda (*Unpaid / Paid*), dan Bukti Pembayaran Denda.
+- **Fines Tracking Table:** Kolom Kode Booking, Nama Pelanggan, Jenis Pelanggaran (Keterlambatan Pengembalian, Kerusakan Unit, Bahan Bakar Kurang), Jumlah Hari Terlambat, Nominal Denda (Rp), Status Denda (_Unpaid / Paid_), dan Bukti Pembayaran Denda.
 
 ### 4.10 Tampilan Menu Bookings
 
-- **General Bookings Table:** Daftar seluruh transaksi sewa secara global dengan kolom Kode Booking, Nama Pelanggan, Unit Mobil, Durasi Sewa, Total Biaya, dan Status Alur (*Pending, Active, Returned, Completed*).
+- **General Bookings Table:** Daftar seluruh transaksi sewa secara global dengan kolom Kode Booking, Nama Pelanggan, Unit Mobil, Durasi Sewa, Total Biaya, dan Status Alur (_Pending, Active, Returned, Completed_).
 
 ### 4.11 Tampilan Menu Data Booking (Detail Transaksi)
 
@@ -180,17 +180,17 @@ Seluruh halaman backend dirancang menggunakan framework **Filament v4** dengan s
 
 ### 4.12 Tampilan Menu Pembayaran
 
-- **Payment Log Table:** Kolom ID Transaksi Midtrans, Kode Booking Siliwangi, Waktu Bayar, Jumlah Nominal, Tipe Pembayaran (Credit Card, GoPay, Bank Transfer, ShopeePay), dan Status Transaksi dari Midtrans API (*Settlement, Pending, Expired, Denied*).
+- **Payment Log Table:** Kolom ID Transaksi Midtrans, Kode Booking Siliwangi, Waktu Bayar, Jumlah Nominal, Tipe Pembayaran (Credit Card, GoPay, Bank Transfer, ShopeePay), dan Status Transaksi dari Midtrans API (_Settlement, Pending, Expired, Denied_).
 
 ### 4.13 Tampilan Menu Data Pelanggan
 
-- **Customer Profile Table:** Kolom Nama Pelanggan, NIK, Nomor HP WhatsApp, Email, dan Status Verifikasi Akun (*Verified / Pending Verification / Rejected*).
+- **Customer Profile Table:** Kolom Nama Pelanggan, NIK, Nomor HP WhatsApp, Email, dan Status Verifikasi Akun (_Verified / Pending Verification / Rejected_).
 - **Verification Drawer:** Modul pop-up detail untuk admin memeriksa berkas jaminan pelanggan (KTP, SIM A, Swafoto dengan KTP) sebelum memberikan persetujuan sewa armada.
 
 ### 4.14 Tampilan Menu User Management Roles (Hak Akses)
 
 - **Spatie Roles & Permissions Table:** Kolom Nama Role (Super Admin, Staff Jakarta Pusat, Staf Keuangan, Driver), Jumlah Hak Akses (Permissions), dan daftar user yang terasosiasi.
-- **Permission Checklist Grid:** Matriks checklist untuk mengatur hak CRUD secara detail per modul (misal: Staf Keuangan hanya memiliki hak *Read* pada modul armada tetapi memiliki hak *Write* pada modul pengeluaran).
+- **Permission Checklist Grid:** Matriks checklist untuk mengatur hak CRUD secara detail per modul (misal: Staf Keuangan hanya memiliki hak _Read_ pada modul armada tetapi memiliki hak _Write_ pada modul pengeluaran).
 
 ### 4.15 Tampilan Menu Keuangan Pengeluaran
 
@@ -224,4 +224,5 @@ sequenceDiagram
 ```
 
 ---
-*Dokumen ini merupakan bagian tak terpisahkan dari Bab IV Laporan Kerja Praktek Siliwangi Rental.*
+
+_Dokumen ini merupakan bagian tak terpisahkan dari Bab IV Laporan Kerja Praktek Siliwangi Rental._

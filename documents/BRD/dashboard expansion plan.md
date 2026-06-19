@@ -2,10 +2,10 @@
 
 Expanding the Siliwangi Rental Admin Dashboard with advanced operational, financial, and market intelligence features.
 
-## Phase 1: Operational & Fleet Intelligence
+## Phase 1: Operational & Car Intelligence
 
 - [x] **Document Expiry Alerts**: Add a dedicated widget to monitor STNK, Tax, and Insurance expiration dates.
-- [x] **GPS Tracking Map**: Integrate a high-fidelity map placeholder (Leaflet.js) to simulate real-time fleet monitoring.
+- [x] **GPS Tracking Map**: Integrate a high-fidelity map placeholder (Leaflet.js) to simulate real-time Car monitoring.
 - [x] **Maintenance Schedule**: Add a list/grid of upcoming services for the next 30 days.
 - [x] **Check-in/Out Tool**: Implement a Quick Action button that opens a modal for rapid vehicle inspection entry.
 

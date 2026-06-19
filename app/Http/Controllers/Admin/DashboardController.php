@@ -166,9 +166,9 @@ class DashboardController extends Controller
             ->groupBy('stores.name')
             ->get();
 
-        // --- PHASE 1: Operational & Fleet Intelligence ---
-        // 1. GPS Fleet (Mocked data for premium demo)
-        $gpsFleet = [
+        // --- PHASE 1: Operational & Car Intelligence ---
+        // 1. GPS Car (Mocked data for premium demo)
+        $gpsCar = [
             [
                 'name' => 'Toyota Avanza - B 1234 ABC', 
                 'lat' => -6.9175, 'lng' => 107.6191, 
@@ -256,7 +256,7 @@ class DashboardController extends Controller
             'totalBooking', 'totalRevenue', 'totalExpense', 'availableCars', 'totalCars', 
             'activeRentals', 'recentBookings', 'months', 'revenueData', 'expenseData',
             'netProfit', 'successRate', 'paymentStats', 'totalDepositsHeld', 
-            'pendingRefunds', 'blacklistedCustomers', 'gpsFleet', 'expiringDocs', 
+            'pendingRefunds', 'blacklistedCustomers', 'gpsCar', 'expiringDocs', 
             'upcomingMaintenance', 'peakSeasonLabels', 'peakSeasonData', 'branchPerformance',
             'pnlRevenue', 'pnlMaintenance', 'pnlDriverFees', 'pnlFuel'
         ));

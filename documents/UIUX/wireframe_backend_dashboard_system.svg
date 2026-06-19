@@ -153,7 +153,7 @@
         <!-- Chart 2: Status Distribusi Armada -->
         <g transform="translate(710, 0)">
           <rect width="665" height="240" class="card-bg" rx="12" />
-          <text x="20" y="30" class="text-primary" font-size="14" font-weight="700">Rasio Kesiapan Armada (Fleet Ratio)</text>
+          <text x="20" y="30" class="text-primary" font-size="14" font-weight="700">Rasio Kesiapan Armada (Car Ratio)</text>
           <!-- Pie chart placeholder representation -->
           <circle cx="160" cy="130" r="60" fill="none" stroke="#E2E8F0" stroke-width="30" />
           <circle cx="160" cy="130" r="60" fill="none" stroke="#10B981" stroke-width="30" stroke-dasharray="280, 376" />

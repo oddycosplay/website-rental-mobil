@@ -45,7 +45,7 @@
       <text x="40" y="32" class="text-brand" font-size="20" font-weight="800">SILIWANGI RENTAL</text>
       <g id="Nav_Links" font-size="14" font-weight="500">
         <text x="350" y="30" class="text-primary" font-weight="700">Home</text>
-        <text x="430" y="30" class="text-muted">Fleet Catalog</text>
+        <text x="430" y="30" class="text-muted">Car Catalog</text>
         <text x="560" y="30" class="text-muted">About Us</text>
         <text x="660" y="30" class="text-muted">FAQ</text>
         <text x="730" y="30" class="text-muted">Contact</text>
@@ -195,7 +195,7 @@
       <text x="40" y="32" class="text-brand" font-size="20" font-weight="800">SILIWANGI RENTAL</text>
       <g id="Nav_Links_2" font-size="14" font-weight="500">
         <text x="350" y="30" class="text-muted">Home</text>
-        <text x="430" y="30" class="text-brand" font-weight="700">Fleet Catalog</text>
+        <text x="430" y="30" class="text-brand" font-weight="700">Car Catalog</text>
         <text x="560" y="30" class="text-muted">About Us</text>
         <text x="660" y="30" class="text-muted">FAQ</text>
         <text x="730" y="30" class="text-muted">Contact</text>

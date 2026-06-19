@@ -49,7 +49,7 @@
 
 ### Admin Panel
 
-- [x] Dashboard menampilkan stats real-time (Revenue, Bookings, Fleet)
+- [x] Dashboard menampilkan stats real-time (Revenue, Bookings, Car)
 - [x] Approval booking bekerja (Status change logic)
 - [x] Rejection dengan alasan bekerja
 - [x] Return processing bekerja (Vehicle inspection integration)

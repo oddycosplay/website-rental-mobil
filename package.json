@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^6.0.7",
+        "puppeteer-core": "^25.1.0",
         "startbootstrap-sb-admin": "^7.0.7",
         "vue": "^3.5.34"
     }

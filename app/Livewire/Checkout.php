@@ -275,7 +275,9 @@ class Checkout extends Component
             $this->calculateTotal();
         }
 
-        $this->step++;
+        if ($this->step < 5) {
+            $this->step++;
+        }
         $this->saveDraft();
     }
 
@@ -795,7 +797,7 @@ class Checkout extends Component
 
         if ($draft && $draft->payload) {
             $payload = $draft->payload;
-            $this->step = $draft->step;
+            $this->step = min(5, max(1, $draft->step));
 
             foreach ($payload as $key => $value) {
                 if ($key && is_string($key) && !str_starts_with($key, '$') && $key !== '$' && property_exists($this, $key)) {

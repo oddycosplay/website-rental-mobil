@@ -46,7 +46,7 @@ class CreateBooking extends CreateRecord
             $data['total_day'] = 1;
         }
 
-        $car = \App\Models\Car::find($data['car_id'] ?? null);
+        $car = \App\Models\Car::where('id', $data['car_id'] ?? null)->first();
         if ($car) {
             $rentalType = $data['rental_type'] ?? 'daily';
             $data['price'] = $rentalType === 'monthly' ? $car->monthly_price : $car->daily_price;

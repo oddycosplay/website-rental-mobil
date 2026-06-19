@@ -614,7 +614,7 @@
                 <div class="menu-item {{ request()->routeIs('admin.maintenances.*') ? 'active' : '' }}">
                     <a href="{{ route('admin.maintenances.index') }}" class="menu-link">
                         <i class="fas fa-tools"></i>
-                        <span class="text">Fleet Health & Maint.</span>
+                        <span class="text">Car Health & Maint.</span>
                         <span class="badge bg-danger ms-auto" style="font-size: 8px;">NEW</span>
                     </a>
                 </div>
@@ -660,7 +660,7 @@
                 <div class="menu-item {{ request()->routeIs('admin.cars.*') ? 'active' : '' }}">
                     <div class="menu-link" onclick="toggleSubmenu(this)" style="cursor: pointer;">
                         <i class="fas fa-car"></i>
-                        <span class="text">Fleet Management</span>
+                        <span class="text">Car Management</span>
                         <i class="fas fa-chevron-right arrow" style="margin-left: auto; font-size: 10px;"></i>
                     </div>
                     <div class="submenu">
@@ -812,7 +812,7 @@
                                         </div>
                                         <div>
                                             <div style="font-weight: 600; font-size: 13px; color: var(--text-main);">New Booking BK-2605</div>
-                                            <div style="font-size: 11px; color: var(--text-muted);">Just now • Fleet: Pajero Sport</div>
+                                            <div style="font-size: 11px; color: var(--text-muted);">Just now • Car: Pajero Sport</div>
                                         </div>
                                     </a>
                                     <a href="#" class="dropdown-item" style="display: flex; gap: 12px; padding: 14px 16px; text-decoration: none; border-bottom: 1px solid var(--card-border); transition: 0.2s;">
