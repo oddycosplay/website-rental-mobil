@@ -4,8 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Car;
 use App\Models\Store;
-use App\Models\User;
-use App\Models\Customer;
 use App\Models\Driver;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;

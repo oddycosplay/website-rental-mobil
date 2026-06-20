@@ -99,11 +99,12 @@ class CarController extends Controller
             'stock' => 'required|integer|min:1',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'description' => 'nullable|string',
-            'category' => 'nullable|in:pribadi,perusahaan,both',
+            'category' => 'nullable|in:perusahaan',
         ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->car_name . '-' . Str::random(5));
+        $data['category'] = 'perusahaan';
 
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')->store('cars', 'public');
@@ -159,10 +160,11 @@ class CarController extends Controller
             'stock' => 'required|integer|min:1',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'description' => 'nullable|string',
-            'category' => 'nullable|in:pribadi,perusahaan,both',
+            'category' => 'nullable|in:perusahaan',
         ]);
 
         $data = $request->all();
+        $data['category'] = 'perusahaan';
 
         if ($request->hasFile('thumbnail')) {
             if ($car->thumbnail) {
@@ -185,7 +187,7 @@ class CarController extends Controller
         $request->validate([
             'ids' => 'required|array',
             'ids.*' => 'exists:cars,id',
-            'category' => 'nullable|in:pribadi,perusahaan,both',
+            'category' => 'nullable|in:perusahaan',
             'status' => 'nullable|string',
         ]);
 

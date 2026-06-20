@@ -43,13 +43,11 @@
                             <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-[10px] pointer-events-none"></i>
                         </div>
 
-                        <div class="relative">
-                            <select wire:model.live="category" class="w-full bg-slate-800/50 border border-white/10 rounded-2xl px-5 py-4 text-white text-sm focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all appearance-none cursor-pointer">
-                                <option value="" class="bg-slate-900">Category</option>
-                                <option value="pribadi" class="bg-slate-900">Personal</option>
-                                <option value="perusahaan" class="bg-slate-900">Corporate</option>
+                        <div class="relative opacity-60">
+                            <select wire:model.live="category" disabled class="w-full bg-slate-800/50 border border-white/10 rounded-2xl px-5 py-4 text-slate-400 text-sm focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all appearance-none cursor-not-allowed">
+                                <option value="perusahaan" class="bg-slate-900">Corporate Only</option>
                             </select>
-                            <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-[10px] pointer-events-none"></i>
+                            <i class="fas fa-lock absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-[10px] pointer-events-none"></i>
                         </div>
                         
                         <div class="relative">

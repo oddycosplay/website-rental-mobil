@@ -33,7 +33,7 @@ class Checkout extends Component
     public ?string $pickup_location = null;
     public ?string $return_location = null;
     public string $rental_type = 'daily'; // daily, monthly
-    public string $rental_category = 'pribadi'; // pribadi, perusahaan
+    public string $rental_category = 'perusahaan'; // pribadi, perusahaan
     public ?int $branch_id = null;
     public string $delivery_type = 'none'; // none, standard, airport
     public string $pickup_type = 'none'; // none, standard, airport
@@ -166,7 +166,7 @@ class Checkout extends Component
                 'need_type'        => 'required|in:jemput,antar',
                 'pickup_location'  => 'nullable|string|max:255',
                 'rental_type'      => 'required|in:daily,monthly',
-                'rental_category'  => 'required|in:pribadi,perusahaan',
+                'rental_category'  => 'required|in:perusahaan',
                 'ojol_service'     => 'required|in:none,gojek,grab,maxim,lainnya',
                 'branch_id'        => 'required|exists:stores,id',
             ]);
@@ -337,7 +337,7 @@ class Checkout extends Component
                 }
                 return 1;
             case 'jateng':
-                return 3;
+                return 2;
             case 'diy':
                 return 3;
             case 'jatim':

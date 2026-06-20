@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Booking;
 use App\Models\Car;
-use App\Models\Customer;
 use App\Models\Payment;
 use App\Models\Store;
 use App\Models\User;
@@ -21,7 +20,7 @@ class BookingPaymentTest extends TestCase
 
     protected Store $store;
     protected Car $car;
-    protected Customer $customer;
+    protected User $customer;
 
     protected function setUp(): void
     {
@@ -35,7 +34,7 @@ class BookingPaymentTest extends TestCase
             'late_fee'    => 50000,
             'status'      => 'available',
         ]);
-        $this->customer = Customer::factory()->create();
+        $this->customer = User::factory()->create();
     }
 
     // ─────────────────────────────────────────────
@@ -50,12 +49,12 @@ class BookingPaymentTest extends TestCase
             'car_id'         => $this->car->id,
             'store_id'       => $this->store->id,
             'booking_status' => 'pending',
-            'payment_status' => 'pending',
+            'payment_status' => 'unpaid',
         ]);
 
         $this->assertDatabaseHas('bookings', [
             'id'             => $booking->id,
-            'customer_id'    => $this->customer->id,
+            'user_id'        => $this->customer->id,
             'booking_status' => 'pending',
         ]);
     }

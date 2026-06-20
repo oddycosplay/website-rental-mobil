@@ -51,7 +51,7 @@ return new class extends Migration
             $table->boolean('is_available')->default(true);
             $table->boolean('featured')->default(false);
             $table->integer('mileage')->default(0);
-            $table->string('category', 50)->default('Pribadi');
+            $table->string('category', 50)->default('perusahaan');
             $table->date('stnk_expiry')->nullable();
             $table->date('tax_expiry')->nullable();
 
@@ -124,7 +124,10 @@ return new class extends Migration
             $table->foreignId('promo_id')->nullable()->constrained('promos')->nullOnDelete();
             
             $table->string('rental_type', 20)->default('daily');
+            $table->string('rental_category', 50)->nullable();
+            $table->string('area', 100)->nullable();
             $table->boolean('with_driver')->default(false);
+            $table->string('driver_name')->nullable();
             $table->dateTime('pickup_date');
             $table->dateTime('return_date');
             $table->text('pickup_location')->nullable();
@@ -153,6 +156,11 @@ return new class extends Migration
             $table->string('guest_phone', 20)->nullable();
             $table->string('ktp_path')->nullable();
             $table->string('sim_path')->nullable();
+            $table->string('delivery_type', 50)->nullable();
+            $table->string('pickup_type', 50)->nullable();
+            $table->decimal('delivery_fee', 15, 2)->default(0);
+            $table->decimal('pickup_fee', 15, 2)->default(0);
+            $table->decimal('ojol_fee', 15, 2)->default(0);
             $table->timestamps();
         });
 

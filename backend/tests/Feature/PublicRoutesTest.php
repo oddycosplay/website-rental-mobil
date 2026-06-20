@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Car;
-use App\Models\Customer;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

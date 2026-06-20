@@ -101,12 +101,12 @@ class BookingForm
                                 Select::make('rental_category')
                                     ->label('Kategori Rental')
                                     ->options([
-                                        'pribadi' => 'Pribadi',
                                         'perusahaan' => 'Perusahaan',
                                     ])
-                                    ->default('pribadi')
+                                    ->default('perusahaan')
                                     ->required()
-                                    ->live()
+                                    ->disabled()
+                                    ->dehydrated()
                                     ->native(false),
 
                                 Select::make('rental_type')

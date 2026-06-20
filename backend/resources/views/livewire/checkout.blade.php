@@ -205,14 +205,13 @@
                                 @error('rental_type') <span class="text-red-500 text-[10px] font-bold ml-1">{{ $message }}</span> @enderror
                             </div>
 
-                            <div class="space-y-3">
+                            <div class="space-y-3 opacity-60">
                                 <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Kategori Sewa</label>
                                 <div class="relative">
-                                    <select wire:model.live="rental_category" class="w-full bg-slate-900/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-gold outline-none transition-all font-medium appearance-none cursor-pointer">
-                                        <option value="pribadi" class="bg-slate-900">Pribadi</option>
-                                        <option value="perusahaan" class="bg-slate-900">Perusahaan</option>
+                                    <select wire:model.live="rental_category" disabled class="w-full bg-slate-900/50 border border-white/10 rounded-2xl px-6 py-4 text-slate-400 focus:border-gold outline-none transition-all font-medium appearance-none cursor-not-allowed">
+                                        <option value="perusahaan" class="bg-slate-900">Perusahaan Only</option>
                                     </select>
-                                    <i class="fas fa-chevron-down absolute right-6 top-1/2 -translate-y-1/2 text-slate-600 pointer-events-none"></i>
+                                    <i class="fas fa-lock absolute right-6 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"></i>
                                 </div>
                                 @error('rental_category') <span class="text-red-500 text-[10px] font-bold ml-1">{{ $message }}</span> @enderror
                             </div>
@@ -652,17 +651,19 @@
                                 <p class="font-bold text-white">Kebijakan Wilayah:</p>
                                 <p class="mt-0.5">
                                     @if($dest_region === 'jabar')
-                                        Jawa Barat: Minimum 1 hari sewa (khusus <strong class="text-gold">Tasikmalaya & Pangandaran</strong> minimum <strong class="text-gold">2 hari</strong> sewa).
+                                        Jawa Barat: Minimum 1-2 hari sewa.
                                     @elseif($dest_region === 'jateng')
-                                        Jawa Tengah: Minimum <strong class="text-gold">3 hari</strong> sewa.
+                                        Jawa Tengah: Minimum 2-3 hari sewa.
                                     @elseif($dest_region === 'diy')
-                                        D.I. Yogyakarta: Minimum <strong class="text-gold">3 hari</strong> sewa.
+                                        Daerah Istimewa Yogyakarta: Minimum 3 hari sewa.
                                     @elseif($dest_region === 'jatim')
-                                        Jawa Timur & Madura: Minimum <strong class="text-gold">5 hari</strong> sewa.
+                                        Jawa Timur: Minimum 5 hari sewa.
                                     @elseif($dest_region === 'bali')
-                                        Bali: Minimum <strong class="text-gold">7 hari</strong> sewa.
+                                        Bali: Minimum 7-10 hari sewa.
+                                    @elseif($dest_region === 'banten')
+                                        Banten: 1 hari sewa.
                                     @else
-                                        Banten: Minimum 1 hari sewa.
+                                        DKI Jakarta: 1 hari sewa.
                                     @endif
                                 </p>
                             </div>

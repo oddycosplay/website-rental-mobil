@@ -199,6 +199,7 @@ class DatabaseSeeder extends Seeder
                 ['id' => 2, 'name' => 'SUV', 'slug' => 'suv', 'description' => 'Sport Utility Vehicle', 'created_at' => $now, 'updated_at' => $now],
                 ['id' => 3, 'name' => 'Luxury', 'slug' => 'luxury', 'description' => 'Premium luxury vehicles', 'created_at' => $now, 'updated_at' => $now],
                 ['id' => 4, 'name' => 'City Car', 'slug' => 'city-car', 'description' => 'Compact City Car', 'created_at' => $now, 'updated_at' => $now],
+                ['id' => 5, 'name' => 'Minibus', 'slug' => 'minibus', 'description' => 'Large passenger van for group travel', 'created_at' => $now, 'updated_at' => $now],
             ]);
         }
 
@@ -378,6 +379,37 @@ class DatabaseSeeder extends Seeder
                 'is_call_for_price' => 0,
                 'thumbnail' => 'cars/honda_brio_rs.png'
             ],
+            // Minibus
+            [
+                'id' => 14,
+                'brand_name' => 'Toyota',
+                'brand_slug' => 'toyota',
+                'type_name' => 'Minibus',
+                'type_description' => 'Large passenger van for group travel',
+                'car_name' => 'Toyota Hiace Premio Hitam',
+                'slug' => 'toyota-hiace-premio-hitam',
+                'daily_price' => 1200000,
+                'driver_daily_price' => 800000,
+                'is_call_for_price' => 0,
+                'seat' => 15,
+                'color' => 'Hitam',
+                'thumbnail' => 'cars/toyota_hiace_premio_hitam.png'
+            ],
+            [
+                'id' => 15,
+                'brand_name' => 'Toyota',
+                'brand_slug' => 'toyota',
+                'type_name' => 'Minibus',
+                'type_description' => 'Large passenger van for group travel',
+                'car_name' => 'Toyota Hiace Premio Putih',
+                'slug' => 'toyota-hiace-premio-putih',
+                'daily_price' => 1200000,
+                'driver_daily_price' => 800000,
+                'is_call_for_price' => 0,
+                'seat' => 15,
+                'color' => 'Putih',
+                'thumbnail' => 'cars/toyota_hiace_premio_putih.png'
+            ],
         ];
 
         foreach ($carsData as $c) {
@@ -388,8 +420,8 @@ class DatabaseSeeder extends Seeder
                 'slug' => $c['slug'],
                 'plate_number' => 'D ' . rand(1000, 9999) . ' ' . strtoupper(\Illuminate\Support\Str::random(3)),
                 'year' => rand(2021, 2024),
-                'color' => 'Hitam',
-                'seat' => ($c['type_name'] == 'City Car') ? 5 : 7,
+                'color' => $c['color'] ?? 'Hitam',
+                'seat' => $c['seat'] ?? (($c['type_name'] == 'City Car') ? 5 : 7),
                 'transmission' => 'Automatic',
                 'fuel_type' => ($c['car_name'] == 'Toyota Fortuner GR' || $c['car_name'] == 'Mitsubishi Pajero Sport') ? 'Diesel' : 'Bensin',
                 'daily_price' => $c['daily_price'],

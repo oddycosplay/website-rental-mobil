@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Booking;
 use App\Models\Car;
-use App\Models\Customer;
 use App\Models\Payment;
 use App\Models\Store;
 use App\Models\User;
@@ -99,7 +98,6 @@ class AdminRoutesTest extends TestCase
     {
         $targetUser = User::factory()->create();
         $targetUser->assignRole('customer');
-        Customer::factory()->create(['user_id' => $targetUser->id]);
 
         $response = $this->actingAs($this->adminUser)
             ->get('/dashboard/customers/' . $targetUser->id);

@@ -17,7 +17,7 @@ class CarCatalog extends Component
     public $capacity = '';
     public $price_range = '';
     public $branch = '';
-    public $category = '';
+    public $category = 'perusahaan';
 
     public function updatingSearch() { $this->resetPage(); }
     public function updatingType() { $this->resetPage(); }
@@ -95,7 +95,8 @@ class CarCatalog extends Component
 
         if (!empty($this->category)) {
             $query->where(function($q) {
-                $q->where('category', $this->category)
+                $q->where('category', 'perusahaan')
+                    ->orWhere('category', 'Perusahaan')
                     ->orWhere('category', 'both');
             });
         }
