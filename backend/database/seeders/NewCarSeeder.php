@@ -200,6 +200,7 @@ class NewCarSeeder extends Seeder
                 'daily_price' => $car['daily'],
                 'driver_daily_price' => $car['driver'],
                 'is_call_for_price' => $car['call'],
+                'category' => $car['call'] ? 'perusahaan' : 'both',
                 'monthly_price' => $car['daily'] * 20,
                 'late_fee' => $car['daily'] * 0.1,
                 'thumbnail' => $car['thumbnail'],

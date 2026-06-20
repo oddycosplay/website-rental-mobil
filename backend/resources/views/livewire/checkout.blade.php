@@ -205,13 +205,21 @@
                                 @error('rental_type') <span class="text-red-500 text-[10px] font-bold ml-1">{{ $message }}</span> @enderror
                             </div>
 
-                            <div class="space-y-3 opacity-60">
+                            <div class="space-y-3 {{ $is_corporate_only ? 'opacity-60' : '' }}">
                                 <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Kategori Sewa</label>
                                 <div class="relative">
-                                    <select wire:model.live="rental_category" disabled class="w-full bg-slate-900/50 border border-white/10 rounded-2xl px-6 py-4 text-slate-400 focus:border-gold outline-none transition-all font-medium appearance-none cursor-not-allowed">
-                                        <option value="perusahaan" class="bg-slate-900">Perusahaan Only</option>
-                                    </select>
-                                    <i class="fas fa-lock absolute right-6 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"></i>
+                                    @if($is_corporate_only)
+                                        <select wire:model.live="rental_category" disabled class="w-full bg-slate-900/50 border border-white/10 rounded-2xl px-6 py-4 text-slate-400 focus:border-gold outline-none transition-all font-medium appearance-none cursor-not-allowed">
+                                            <option value="perusahaan" class="bg-slate-900">Perusahaan Only</option>
+                                        </select>
+                                        <i class="fas fa-lock absolute right-6 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"></i>
+                                    @else
+                                        <select wire:model.live="rental_category" class="w-full bg-slate-900/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-gold outline-none transition-all font-medium appearance-none cursor-pointer">
+                                            <option value="pribadi" class="bg-slate-900">Pribadi</option>
+                                            <option value="perusahaan" class="bg-slate-900">Perusahaan</option>
+                                        </select>
+                                        <i class="fas fa-chevron-down absolute right-6 top-1/2 -translate-y-1/2 text-slate-600 pointer-events-none"></i>
+                                    @endif
                                 </div>
                                 @error('rental_category') <span class="text-red-500 text-[10px] font-bold ml-1">{{ $message }}</span> @enderror
                             </div>
@@ -631,6 +639,7 @@
                                         <option value="jatim" class="bg-slate-900">Jawa Timur & Madura</option>
                                         <option value="banten" class="bg-slate-900">Banten (Luar Kota)</option>
                                         <option value="bali" class="bg-slate-900">Bali</option>
+                                        <option value="sumatera" class="bg-slate-900">Sumatera</option>
                                     </select>
                                     <i class="fas fa-chevron-down absolute right-6 top-1/2 -translate-y-1/2 text-slate-600 pointer-events-none"></i>
                                 </div>
@@ -639,7 +648,14 @@
 
                             <div class="space-y-3">
                                 <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Nama Kota Tujuan <span class="text-red-500">*</span></label>
-                                <input type="text" wire:model.live="dest_city" class="w-full bg-slate-900/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-gold outline-none transition-all font-medium placeholder:text-slate-700" placeholder="e.g. Tasikmalaya, Semarang, Surabaya">
+                                <div class="relative">
+                                    <select wire:model.live="dest_city" class="w-full bg-slate-900/50 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-gold outline-none transition-all font-medium appearance-none cursor-pointer">
+                                        @foreach($this->getCitiesForRegion($dest_region) as $cityOpt)
+                                            <option value="{{ $cityOpt }}" class="bg-slate-900">{{ $cityOpt }}</option>
+                                        @endforeach
+                                    </select>
+                                    <i class="fas fa-chevron-down absolute right-6 top-1/2 -translate-y-1/2 text-slate-600 pointer-events-none"></i>
+                                </div>
                                 @error('dest_city') <span class="text-red-500 text-[10px] font-bold ml-1">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -662,6 +678,8 @@
                                         Bali: Minimum 7-10 hari sewa.
                                     @elseif($dest_region === 'banten')
                                         Banten: 1 hari sewa.
+                                    @elseif($dest_region === 'sumatera')
+                                        Sumatera: Belum ditentukan pada requirement.
                                     @else
                                         DKI Jakarta: 1 hari sewa.
                                     @endif
@@ -748,6 +766,14 @@
                                 <p class="text-[10px] text-slate-500">{{ $phone }} · {{ $email }}</p>
                             </div>
                         </div>
+                        {{-- Kategori Layanan --}}
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-gold/10 text-gold flex items-center justify-center flex-shrink-0"><i class="fas fa-briefcase"></i></div>
+                            <div class="flex-1">
+                                <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Kategori Layanan</p>
+                                <p class="text-sm font-bold text-white">{{ $rental_category === 'pribadi' ? 'Layanan Pribadi' : 'Layanan Perusahaan' }}</p>
+                            </div>
+                        </div>
                         {{-- Location & Type --}}
                         <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
                             <div class="flex items-center gap-4">
@@ -806,6 +832,7 @@
                                             'jatim'   => 'Jawa Timur & Madura',
                                             'banten'  => 'Banten',
                                             'bali'    => 'Bali',
+                                            'sumatera' => 'Sumatera',
                                             default   => 'Luar Jabotabek',
                                         } }} ({{ $dest_city }})
                                     </strong>

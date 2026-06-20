@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\Car;
 use App\Models\Promo;
 use App\Models\User;
+use App\Services\ImageUploadService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -33,7 +34,8 @@ class Checkout extends Component
     public ?string $pickup_location = null;
     public ?string $return_location = null;
     public string $rental_type = 'daily'; // daily, monthly
-    public string $rental_category = 'perusahaan'; // pribadi, perusahaan
+    public string $rental_category = 'pribadi'; // pribadi, perusahaan
+    public bool $is_corporate_only = false;
     public ?int $branch_id = null;
     public string $delivery_type = 'none'; // none, standard, airport
     public string $pickup_type = 'none'; // none, standard, airport
@@ -149,6 +151,20 @@ class Checkout extends Component
             }
         }
 
+        // Pre-select dest_city if empty
+        if (empty($this->dest_city)) {
+            $cities = $this->getCitiesForRegion($this->dest_region);
+            $this->dest_city = !empty($cities) ? $cities[0] : null;
+        }
+
+        $anyCallForPrice = collect($this->cars)->contains('is_call_for_price', true);
+        $this->is_corporate_only = $anyCallForPrice;
+        if ($this->is_corporate_only) {
+            $this->rental_category = 'perusahaan';
+        } elseif (empty($this->rental_category) || ($this->rental_category === 'perusahaan' && !$restored)) {
+            $this->rental_category = 'pribadi';
+        }
+
         // Initial calculation
         $this->calculateTotal();
     }
@@ -166,7 +182,7 @@ class Checkout extends Component
                 'need_type'        => 'required|in:jemput,antar',
                 'pickup_location'  => 'nullable|string|max:255',
                 'rental_type'      => 'required|in:daily,monthly',
-                'rental_category'  => 'required|in:perusahaan',
+                'rental_category'  => $this->is_corporate_only ? 'required|in:perusahaan' : 'required|in:pribadi,perusahaan',
                 'ojol_service'     => 'required|in:none,gojek,grab,maxim,lainnya',
                 'branch_id'        => 'required|exists:stores,id',
             ]);
@@ -206,10 +222,10 @@ class Checkout extends Component
             // Upload dokumen wajib jika belum punya atau belum login
             if (!$this->existingCustomerHasDocs()) {
                 $rules = [
-                    'ktp_image'     => 'required|image|max:2048',
-                    'sim_image'     => 'required|image|max:2048',
-                    'kk_image'      => 'required|image|max:2048',
-                    'id_card_image' => 'required|image|max:2048',
+                    'ktp_image'     => 'required|image|max:2048|mimes:jpeg,jpg,png,webp,gif',
+                    'sim_image'     => 'required|image|max:2048|mimes:jpeg,jpg,png,webp,gif',
+                    'kk_image'      => 'required|image|max:2048|mimes:jpeg,jpg,png,webp,gif',
+                    'id_card_image' => 'required|image|max:2048|mimes:jpeg,jpg,png,webp,gif',
                 ];
 
                 if ($this->selfie_image instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
@@ -229,16 +245,16 @@ class Checkout extends Component
             } else {
                 $rules = [];
                 if ($this->ktp_image) {
-                    $rules['ktp_image'] = 'image|max:2048';
+                    $rules['ktp_image'] = 'image|max:2048|mimes:jpeg,jpg,png,webp,gif';
                 }
                 if ($this->sim_image) {
-                    $rules['sim_image'] = 'image|max:2048';
+                    $rules['sim_image'] = 'image|max:2048|mimes:jpeg,jpg,png,webp,gif';
                 }
                 if ($this->kk_image) {
-                    $rules['kk_image'] = 'image|max:2048';
+                    $rules['kk_image'] = 'image|max:2048|mimes:jpeg,jpg,png,webp,gif';
                 }
                 if ($this->id_card_image) {
-                    $rules['id_card_image'] = 'image|max:2048';
+                    $rules['id_card_image'] = 'image|max:2048|mimes:jpeg,jpg,png,webp,gif';
                 }
                 if ($this->selfie_image) {
                     if ($this->selfie_image instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
@@ -275,7 +291,7 @@ class Checkout extends Component
             } else {
                 $rules['dest_type'] = 'required|in:jabotabek,luar_jabotabek';
                 if ($this->dest_type === 'luar_jabotabek') {
-                    $rules['dest_region'] = 'required|in:jabar,jateng,diy,jatim,banten,bali';
+                    $rules['dest_region'] = 'required|in:jabar,jateng,diy,jatim,banten,bali,sumatera';
                     $rules['dest_city']   = 'required|string|min:3|max:100';
                 }
             }
@@ -293,6 +309,7 @@ class Checkout extends Component
                         'jatim'   => 'Jawa Timur & Madura',
                         'banten'  => 'Banten',
                         'bali'    => 'Bali',
+                        'sumatera' => 'Sumatera',
                         default   => 'Luar Jabotabek',
                     };
                     $cityName = $this->dest_city ? " ({$this->dest_city})" : "";
@@ -344,6 +361,8 @@ class Checkout extends Component
                 return 5;
             case 'bali':
                 return 7;
+            case 'sumatera':
+                return 1;
             default:
                 return 1;
         }
@@ -374,6 +393,8 @@ class Checkout extends Component
                 return 5.0;
             case 'bali':
                 return 7.0;
+            case 'sumatera':
+                return 1.0;
             default:
                 return 1.0;
         }
@@ -409,6 +430,11 @@ class Checkout extends Component
     public function updated(string $propertyName): void
     {
         if (in_array($propertyName, ['pickup_date', 'return_date', 'with_driver', 'delivery_type', 'pickup_type', 'ojol_fee', 'ojol_service', 'dest_type', 'dest_region', 'dest_city', 'needs_ojol'])) {
+            // Reset dest_city if region changes
+            if ($propertyName === 'dest_region') {
+                $cities = $this->getCitiesForRegion($this->dest_region);
+                $this->dest_city = !empty($cities) ? $cities[0] : null;
+            }
             // Ensure boolean casting for with_driver
             if ($propertyName === 'with_driver') {
                 $this->with_driver = (bool) $this->with_driver;
@@ -574,33 +600,65 @@ class Checkout extends Component
             'address'    => $this->address,
         ]);
 
-        // Upload dokumen langsung ke tabel users
+        // Upload dokumen — semua gambar dikonversi ke WebP sebelum disimpan
+        /** @var ImageUploadService $imageService */
+        $imageService = app(ImageUploadService::class);
+
         if ($this->selfie_image) {
             if (is_string($this->selfie_image) && str_starts_with($this->selfie_image, 'data:image')) {
-                // Decode base64 and save
-                $image_parts = explode(";base64,", $this->selfie_image);
-                $image_type_aux = explode("image/", $image_parts[0]);
-                $image_type = $image_type_aux[1];
-                $image_base64 = base64_decode($image_parts[1]);
-                $fileName = 'users/selfie/' . uniqid() . '.' . $image_type;
-                \Illuminate\Support\Facades\Storage::disk('public')->put($fileName, $image_base64);
-                $user->avatar = $fileName;
+                // Kamera browser: base64 → WebP
+                try {
+                    $user->avatar = $imageService->storeBase64AsWebp($this->selfie_image, 'users/selfie');
+                } catch (\RuntimeException $e) {
+                    $this->addError('selfie_image', $e->getMessage());
+                    return;
+                }
             } elseif ($this->selfie_image instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
-                // Regular uploaded file
-                $user->avatar = $this->selfie_image->store('users/selfie', 'public');
+                // File upload biasa → WebP
+                try {
+                    $imageService->deleteOldFile($user->avatar);
+                    $user->avatar = $imageService->storeAsWebp($this->selfie_image, 'users/selfie');
+                } catch (\RuntimeException $e) {
+                    $this->addError('selfie_image', $e->getMessage());
+                    return;
+                }
             }
         }
         if ($this->ktp_image) {
-            $user->ktp_image = $this->ktp_image->store('users/ktp', 'public');
+            try {
+                $imageService->deleteOldFile($user->ktp_image);
+                $user->ktp_image = $imageService->storeAsWebp($this->ktp_image, 'users/ktp');
+            } catch (\RuntimeException $e) {
+                $this->addError('ktp_image', $e->getMessage());
+                return;
+            }
         }
         if ($this->sim_image) {
-            $user->sim_image = $this->sim_image->store('users/sim', 'public');
+            try {
+                $imageService->deleteOldFile($user->sim_image);
+                $user->sim_image = $imageService->storeAsWebp($this->sim_image, 'users/sim');
+            } catch (\RuntimeException $e) {
+                $this->addError('sim_image', $e->getMessage());
+                return;
+            }
         }
         if ($this->kk_image) {
-            $user->kk_image = $this->kk_image->store('users/kk', 'public');
+            try {
+                $imageService->deleteOldFile($user->kk_image);
+                $user->kk_image = $imageService->storeAsWebp($this->kk_image, 'users/kk');
+            } catch (\RuntimeException $e) {
+                $this->addError('kk_image', $e->getMessage());
+                return;
+            }
         }
         if ($this->id_card_image) {
-            $user->pelajar_image = $this->id_card_image->store('users/id_card', 'public');
+            try {
+                $imageService->deleteOldFile($user->pelajar_image);
+                $user->pelajar_image = $imageService->storeAsWebp($this->id_card_image, 'users/id_card');
+            } catch (\RuntimeException $e) {
+                $this->addError('id_card_image', $e->getMessage());
+                return;
+            }
         }
         $user->save();
 
@@ -631,6 +689,7 @@ class Checkout extends Component
                     'jatim'   => 'Jawa Timur & Madura',
                     'banten'  => 'Banten',
                     'bali'    => 'Bali',
+                    'sumatera' => 'Sumatera',
                     default   => 'Luar Jabotabek',
                 };
                 $destText .= " ({$regionName} - {$this->dest_city})";
@@ -814,6 +873,184 @@ class Checkout extends Component
         }
 
         return false;
+    }
+
+    public function getCitiesForRegion(string $region): array
+    {
+        $cities_by_region = [
+            'jabar' => [
+                'Kabupaten Bandung',
+                'Kabupaten Bandung Barat',
+                'Kabupaten Bekasi',
+                'Kabupaten Bogor',
+                'Kabupaten Ciamis',
+                'Kabupaten Cianjur',
+                'Kabupaten Cirebon',
+                'Kabupaten Garut',
+                'Kabupaten Indramayu',
+                'Kabupaten Karawang',
+                'Kabupaten Kuningan',
+                'Kabupaten Majalengka',
+                'Kabupaten Pangandaran',
+                'Kabupaten Purwakarta',
+                'Kabupaten Subang',
+                'Kabupaten Sukabumi',
+                'Kabupaten Sumedang',
+                'Kabupaten Tasikmalaya',
+                'Kota Bandung',
+                'Kota Banjar',
+                'Kota Bekasi',
+                'Kota Bogor',
+                'Kota Cimahi',
+                'Kota Cirebon',
+                'Kota Depok',
+                'Kota Sukabumi',
+                'Kota Tasikmalaya',
+            ],
+            'jateng' => [
+                'Kota Semarang',
+                'Kota Surakarta (Solo)',
+                'Kota Magelang',
+                'Kota Salatiga',
+                'Kota Pekalongan',
+                'Kota Tegal',
+                'Kabupaten Banjarnegara',
+                'Kabupaten Banyumas',
+                'Kabupaten Batang',
+                'Kabupaten Blora',
+                'Kabupaten Boyolali',
+                'Kabupaten Brebes',
+                'Kabupaten Cilacap',
+                'Kabupaten Demak',
+                'Kabupaten Grobogan',
+                'Kabupaten Jepara',
+                'Kabupaten Karanganyar',
+                'Kabupaten Kebumen',
+                'Kabupaten Kendal',
+                'Kabupaten Klaten',
+                'Kabupaten Kudus',
+                'Kabupaten Magelang',
+                'Kabupaten Pati',
+                'Kabupaten Pekalongan',
+                'Kabupaten Pemalang',
+                'Kabupaten Purbalingga',
+                'Kabupaten Purworejo',
+                'Kabupaten Rembang',
+                'Kabupaten Semarang',
+                'Kabupaten Sragen',
+                'Kabupaten Sukoharjo',
+                'Kabupaten Tegal',
+                'Kabupaten Temanggung',
+                'Kabupaten Wonogiri',
+                'Kabupaten Wonosobo',
+            ],
+            'jatim' => [
+                'Kabupaten Bangkalan',
+                'Kabupaten Banyuwangi',
+                'Kabupaten Blitar',
+                'Kabupaten Bojonegoro',
+                'Kabupaten Bondowoso',
+                'Kabupaten Gresik',
+                'Kabupaten Jember',
+                'Kabupaten Jombang',
+                'Kabupaten Kediri',
+                'Kabupaten Lamongan',
+                'Kabupaten Lumajang',
+                'Kabupaten Madiun',
+                'Kabupaten Magetan',
+                'Kabupaten Malang',
+                'Kabupaten Mojokerto',
+                'Kabupaten Nganjuk',
+                'Kabupaten Ngawi',
+                'Kabupaten Pacitan',
+                'Kabupaten Pamekasan',
+                'Kabupaten Pasuruan',
+                'Kabupaten Ponorogo',
+                'Kabupaten Probolinggo',
+                'Kabupaten Sampang',
+                'Kabupaten Sidoarjo',
+                'Kabupaten Situbondo',
+                'Kabupaten Sumenep',
+                'Kabupaten Trenggalek',
+                'Kabupaten Tuban',
+                'Kabupaten Tulungagung',
+                'Kota Batu',
+                'Kota Blitar',
+                'Kota Kediri',
+                'Kota Madiun',
+                'Kota Malang',
+                'Kota Mojokerto',
+                'Kota Pasuruan',
+                'Kota Probolinggo',
+                'Kota Surabaya',
+            ],
+            'banten' => [
+                'Kabupaten Pandeglang',
+                'Kabupaten Lebak',
+                'Kabupaten Serang',
+                'Kabupaten Tangerang',
+                'Kota Serang',
+                'Kota Cilegon',
+                'Kota Tangerang',
+                'Kota Tangerang Selatan',
+            ],
+            'diy' => [
+                'Belum ditentukan pada requirement.',
+            ],
+            'bali' => [
+                'Belum ditentukan pada requirement.',
+            ],
+            'sumatera' => [
+                'Banda Aceh (Aceh)',
+                'Lhokseumawe (Aceh)',
+                'Sabang (Aceh)',
+                'Langsa (Aceh)',
+                'Meulaboh (Aceh)',
+                'Medan (Sumatera Utara)',
+                'Binjai (Sumatera Utara)',
+                'Pematangsiantar (Sumatera Utara)',
+                'Tebing Tinggi (Sumatera Utara)',
+                'Tanjungbalai (Sumatera Utara)',
+                'Padang (Sumatera Barat)',
+                'Bukittinggi (Sumatera Barat)',
+                'Payakumbuh (Sumatera Barat)',
+                'Solok (Sumatera Barat)',
+                'Pariaman (Sumatera Barat)',
+                'Pekanbaru (Riau)',
+                'Dumai (Riau)',
+                'Bengkalis (Riau)',
+                'Siak (Riau)',
+                'Rokan Hilir (Riau)',
+                'Tanjung Pinang (Kepulauan Riau)',
+                'Batam (Kepulauan Riau)',
+                'Karimun (Kepulauan Riau)',
+                'Natuna (Kepulauan Riau)',
+                'Lingga (Kepulauan Riau)',
+                'Kota Jambi (Jambi)',
+                'Sungai Penuh (Jambi)',
+                'Muaro Jambi (Jambi)',
+                'Sarolangun (Jambi)',
+                'Palembang (Sumatera Selatan)',
+                'Lubuklinggau (Sumatera Selatan)',
+                'Prabumulih (Sumatera Selatan)',
+                'Pagar Alam (Sumatera Selatan)',
+                'Pangkalpinang (Bangka Belitung)',
+                'Belitung (Bangka Belitung)',
+                'Bangka Barat (Bangka Belitung)',
+                'Bangka Tengah (Bangka Belitung)',
+                'Kota Bengkulu (Bengkulu)',
+                'Rejang Lebong (Bengkulu)',
+                'Mukomuko (Bengkulu)',
+                'Seluma (Bengkulu)',
+                'Bandar Lampung (Lampung)',
+                'Metro (Lampung)',
+                'Pringsewu (Lampung)',
+                'Lampung Tengah (Lampung)',
+                'Lampung Timur (Lampung)',
+            ],
+        ];
+
+        return $cities_by_region[$region] ?? [];
     }
 
     #[Layout('layouts.app')]

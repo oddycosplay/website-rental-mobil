@@ -65,7 +65,6 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         'password',
         'store_id',
         'role',
-        'is_active',
         'avatar',
         'identity_number',
         'identity_photo',

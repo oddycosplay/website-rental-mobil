@@ -102,10 +102,11 @@
 
                             <div class="col-md-4">
                                 <label for="category" class="form-label fw-semibold text-muted small text-uppercase">Segmentasi <span class="text-danger">*</span></label>
-                                <select class="form-select bg-light border-0 py-2" id="category_select" disabled>
-                                    <option value="perusahaan" selected>Perusahaan Only</option>
+                                <select class="form-select bg-light border-0 py-2" id="category" name="category" required>
+                                    <option value="pribadi" {{ old('category', $car->category) == 'pribadi' ? 'selected' : '' }}>Pribadi</option>
+                                    <option value="perusahaan" {{ old('category', $car->category) == 'perusahaan' ? 'selected' : '' }}>Perusahaan</option>
+                                    <option value="both" {{ old('category', $car->category) == 'both' ? 'selected' : '' }}>Keduanya (All)</option>
                                 </select>
-                                <input type="hidden" name="category" value="perusahaan">
                             </div>
 
                             <div class="col-md-4">

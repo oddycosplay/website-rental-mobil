@@ -243,16 +243,48 @@
             color: #0F172A !important;
         }
 
-        html.light .text-slate-300 {
-            color: #334155 !important;
+        /* Dark mode default (when html does not have .light class) */
+        html:not(.light) .text-slate-200,
+        html:not(.light) .text-slate-300,
+        html:not(.light) .text-slate-400,
+        html:not(.light) .text-slate-500,
+        html:not(.light) .text-slate-600,
+        html:not(.light) .text-slate-700,
+        html:not(.light) .text-gray-200,
+        html:not(.light) .text-gray-300,
+        html:not(.light) .text-gray-400,
+        html:not(.light) .text-gray-500,
+        html:not(.light) .text-gray-600,
+        html:not(.light) .text-gray-700,
+        html:not(.light) .text-neutral-200,
+        html:not(.light) .text-neutral-300,
+        html:not(.light) .text-neutral-400,
+        html:not(.light) .text-neutral-500,
+        html:not(.light) .text-neutral-600,
+        html:not(.light) .text-neutral-700 {
+            color: #FFFFFF !important;
         }
 
-        html.light .text-slate-400 {
-            color: #475569 !important;
-        }
-
-        html.light .text-slate-500 {
-            color: #64748B !important;
+        /* Light/White mode overrides */
+        html.light .text-slate-200,
+        html.light .text-slate-300,
+        html.light .text-slate-400,
+        html.light .text-slate-500,
+        html.light .text-slate-600,
+        html.light .text-slate-700,
+        html.light .text-gray-200,
+        html.light .text-gray-300,
+        html.light .text-gray-400,
+        html.light .text-gray-500,
+        html.light .text-gray-600,
+        html.light .text-gray-700,
+        html.light .text-neutral-200,
+        html.light .text-neutral-300,
+        html.light .text-neutral-400,
+        html.light .text-neutral-500,
+        html.light .text-neutral-600,
+        html.light .text-neutral-700 {
+            color: #000000 !important;
         }
 
         html.light [class*="border-white/10"],

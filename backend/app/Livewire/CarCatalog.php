@@ -17,7 +17,7 @@ class CarCatalog extends Component
     public $capacity = '';
     public $price_range = '';
     public $branch = '';
-    public $category = 'perusahaan';
+    public $category = '';
 
     public function updatingSearch() { $this->resetPage(); }
     public function updatingType() { $this->resetPage(); }
@@ -94,15 +94,22 @@ class CarCatalog extends Component
         }
 
         if (!empty($this->category)) {
-            $query->where(function($q) {
-                $q->where('category', 'perusahaan')
-                    ->orWhere('category', 'Perusahaan')
-                    ->orWhere('category', 'both');
-            });
+            if ($this->category === 'pribadi') {
+                $query->where(function($q) {
+                    $q->where('category', 'pribadi')
+                        ->orWhere('category', 'both');
+                });
+            } elseif ($this->category === 'perusahaan') {
+                $query->where(function($q) {
+                    $q->where('category', 'perusahaan')
+                        ->orWhere('category', 'Perusahaan')
+                        ->orWhere('category', 'both');
+                });
+            }
         }
 
         // Always put available cars first, then rented
-        $query->orderByRaw("CASE status WHEN 'available' THEN 1 WHEN 'rented' THEN 2 WHEN 'maintenance' THEN 3 ELSE 4 END");
+        $query->orderByRaw("CASE status WHEN 'available' THEN 1 WHEN 'rented' THEN 2 WHEN 'maintenance' THEN 3 ELSE 4 END", []);
         $query->orderBy('daily_price', 'asc');
 
         $cars = $query->paginate(9);

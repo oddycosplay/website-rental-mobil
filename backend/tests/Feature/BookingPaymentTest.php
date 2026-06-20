@@ -172,7 +172,7 @@ class BookingPaymentTest extends TestCase
             'booking_code' => 'TRX-FIND-ME-9999',
         ]);
 
-        $found = Booking::where('booking_code', 'TRX-FIND-ME-9999')->first();
+        $found = Booking::query()->where('booking_code', 'TRX-FIND-ME-9999')->first();
 
         $this->assertNotNull($found);
         $this->assertEquals($booking->id, $found->id);
@@ -204,7 +204,7 @@ class BookingPaymentTest extends TestCase
         ]);
 
         $bookingIds = $this->customer->bookings()->pluck('id');
-        $totalPaid  = Payment::whereIn('booking_id', $bookingIds)
+        $totalPaid  = Payment::query()->whereIn('booking_id', $bookingIds)
             ->where('payment_status', 'success')
             ->sum('paid_amount');
 
@@ -234,7 +234,8 @@ class BookingPaymentTest extends TestCase
     public function test_car_status_reverts_to_available_when_booking_cancelled(): void
     {
         // First set the car as rented
-        $this->car->update(['status' => 'rented']);
+        $this->car->status = 'rented';
+        $this->car->save();
 
         $booking = Booking::factory()->create([
             'customer_id'    => $this->customer->id,

@@ -149,7 +149,7 @@ class DashboardController extends Controller
 
         // 4. Customer Blacklist (Retrieve inactive customers from users table)
         $blacklistedCustomers = \App\Models\User::role('customer')
-            ->where('is_active', false)
+            ->where('status', 'inactive')
             ->get();
 
         // --- PHASE 3: Business Intelligence & Predictions ---

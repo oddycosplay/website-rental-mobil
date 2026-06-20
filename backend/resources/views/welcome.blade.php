@@ -30,7 +30,7 @@
                 </h1>
                 
                 <div class="hero-content-card bg-white/20 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-8 mb-8 max-w-xl">
-                    <p class="hero-desc text-slate-300 text-lg lg:text-xl leading-relaxed mb-6 opacity-80">
+                    <p class="hero-desc text-white text-lg lg:text-xl leading-relaxed mb-6 opacity-80">
                         <strong>Siliwangi Rental Trans Nusa</strong> menyediakan layanan sewa mobil lepas kunci maupun dengan driver profesional untuk kebutuhan pribadi, wisata, perjalanan dinas, hingga operasional perusahaan.
                     </p>
 

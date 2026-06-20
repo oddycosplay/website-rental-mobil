@@ -218,4 +218,57 @@ class CheckoutComponentTest extends TestCase
         $component->assertHasErrors(['ktp_image' => 'max']);
         $this->assertEquals(3, $component->get('step'));
     }
+
+    public function test_checkout_dest_region_dropdown_and_sumatera()
+    {
+        // 1. Create a Store/Branch
+        $store = Store::create([
+            'name' => 'Siliwangi Bandung',
+            'slug' => 'siliwangi-bandung',
+            'code' => 'SLW-BDG',
+            'address' => 'Bandung City',
+            'phone' => '6281234567890',
+            'email' => 'bandung@siliwangi.com',
+            'status' => 'active',
+        ]);
+
+        // 2. Create a Car
+        $car = Car::create([
+            'store_id' => $store->id,
+            'category' => 'both',
+            'car_name' => 'Toyota Avanza Veloz',
+            'slug' => 'toyota-avanza-veloz',
+            'plate_number' => 'D 1234 ABC',
+            'year' => 2023,
+            'color' => 'Black',
+            'transmission' => 'Automatic',
+            'fuel_type' => 'Bensin',
+            'daily_price' => 350000,
+            'driver_daily_price' => 150000,
+            'monthly_price' => 7000000,
+            'late_fee' => 50000,
+            'is_available' => true,
+            'featured' => true,
+            'brand_name' => 'Toyota',
+            'brand_slug' => 'toyota',
+            'type_name' => 'Avanza',
+        ]);
+
+        // 3. Mount Livewire Component
+        $component = Livewire::test(\App\Livewire\Checkout::class, [
+            'car' => $car->slug,
+        ]);
+
+        // Default region is jabar, first city should be Kabupaten Bandung
+        $this->assertEquals('jabar', $component->get('dest_region'));
+        $this->assertEquals('Kabupaten Bandung', $component->get('dest_city'));
+
+        // Change region to sumatera
+        $component->set('dest_region', 'sumatera');
+        $this->assertEquals('Banda Aceh (Aceh)', $component->get('dest_city'));
+
+        // Change region to jateng
+        $component->set('dest_region', 'jateng');
+        $this->assertEquals('Kota Semarang', $component->get('dest_city'));
+    }
 }

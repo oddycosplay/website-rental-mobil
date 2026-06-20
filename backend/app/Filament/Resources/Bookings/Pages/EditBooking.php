@@ -39,7 +39,6 @@ class EditBooking extends EditRecord
                 'address' => $data['new_customer_address'] ?? '',
                 'password' => \Illuminate\Support\Facades\Hash::make('password123'),
                 'status' => 'active',
-                'is_active' => true,
             ]);
 
             $customer->assignRole('customer');

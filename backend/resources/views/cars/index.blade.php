@@ -44,7 +44,7 @@
     <div class="page-hero-inner">
       <span class="section-tag">Premium Car</span>
       <h1 class="section-title">Choose Your <span class="text-gold">Dream</span> Vehicle</h1>
-      <p class="section-sub" style="margin:0 auto;text-align:center;">Hundreds of premium vehicles ready for use — SUV, Sedan, MPV, to Minibus for all your travel needs.</p>
+      <p class="section-sub text-white" style="margin:0 auto;text-align:center;">Hundreds of premium vehicles ready for use — SUV, Sedan, MPV, to Minibus for all your travel needs.</p>
     </div>
   </div>
 </section>

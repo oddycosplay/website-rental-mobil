@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Customers\Schemas;
 
+use App\Services\ImageUploadService;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Grid;
@@ -92,7 +93,7 @@ class CustomerForm
                     ]),
 
                 Section::make('Dokumen Verifikasi')
-                    ->description('Berkas digital identitas resmi dan foto selfie pelanggan.')
+                    ->description('Berkas digital identitas resmi dan foto selfie pelanggan. Maks. 2MB per file — disimpan otomatis dalam format WebP.')
                     ->icon('heroicon-m-document-text')
                     ->collapsible()
                     ->schema([
@@ -102,36 +103,46 @@ class CustomerForm
                                     ->image()
                                     ->imageEditor()
                                     ->maxSize(2048)
+                                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'])
                                     ->directory('customers/selfies')
-                                    ->label('Foto Selfie Renter')
+                                    ->label('Foto Selfie Penyewa')
+                                    ->helperText('Maks. 2MB — Akan dikonversi ke format WebP')
                                     ->columnSpan(1),
                                 Forms\Components\FileUpload::make('ktp_image')
                                     ->image()
                                     ->imageEditor()
                                     ->maxSize(2048)
+                                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'])
                                     ->directory('customers/identities')
-                                    ->label('Foto KTP Resmi')
+                                    ->label('Foto KTP Asli')
+                                    ->helperText('Maks. 2MB — Akan dikonversi ke format WebP')
                                     ->columnSpan(1),
                                 Forms\Components\FileUpload::make('sim_image')
                                     ->image()
                                     ->imageEditor()
                                     ->maxSize(2048)
+                                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'])
                                     ->directory('customers/sims')
-                                    ->label('Foto SIM Resmi')
+                                    ->label('Foto SIM Asli')
+                                    ->helperText('Maks. 2MB — Akan dikonversi ke format WebP')
                                     ->columnSpan(1),
                                 Forms\Components\FileUpload::make('kk_image')
                                     ->image()
                                     ->imageEditor()
                                     ->maxSize(2048)
+                                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'])
                                     ->directory('customers/kk')
                                     ->label('Foto Kartu Keluarga')
+                                    ->helperText('Maks. 2MB — Akan dikonversi ke format WebP')
                                     ->columnSpan(1),
                                 Forms\Components\FileUpload::make('pelajar_image')
                                     ->image()
                                     ->imageEditor()
                                     ->maxSize(2048)
+                                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'])
                                     ->directory('customers/idcards')
-                                    ->label('Foto ID Card Pekerjaan / Pelajar')
+                                    ->label('Foto ID Card (Karyawan/Pelajar)')
+                                    ->helperText('Maks. 2MB — Akan dikonversi ke format WebP')
                                     ->columnSpan(2),
                             ]),
                     ]),

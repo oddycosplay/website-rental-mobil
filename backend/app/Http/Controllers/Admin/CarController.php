@@ -99,12 +99,11 @@ class CarController extends Controller
             'stock' => 'required|integer|min:1',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'description' => 'nullable|string',
-            'category' => 'nullable|in:perusahaan',
+            'category' => 'required|in:pribadi,perusahaan,both',
         ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->car_name . '-' . Str::random(5));
-        $data['category'] = 'perusahaan';
 
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')->store('cars', 'public');
@@ -160,11 +159,10 @@ class CarController extends Controller
             'stock' => 'required|integer|min:1',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'description' => 'nullable|string',
-            'category' => 'nullable|in:perusahaan',
+            'category' => 'required|in:pribadi,perusahaan,both',
         ]);
 
         $data = $request->all();
-        $data['category'] = 'perusahaan';
 
         if ($request->hasFile('thumbnail')) {
             if ($car->thumbnail) {

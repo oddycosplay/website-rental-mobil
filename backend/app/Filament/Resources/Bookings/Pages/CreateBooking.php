@@ -29,7 +29,6 @@ class CreateBooking extends CreateRecord
                 'address' => $data['new_customer_address'] ?? '',
                 'password' => \Illuminate\Support\Facades\Hash::make('password123'),
                 'status' => 'active',
-                'is_active' => true,
             ]);
 
             $customer->assignRole('customer');
@@ -56,7 +55,7 @@ class CreateBooking extends CreateRecord
             $data['total_day'] = 1;
         }
 
-        $car = \App\Models\Car::find($data['car_id'] ?? null);
+        $car = \App\Models\Car::query()->find($data['car_id'] ?? null);
         if ($car) {
             $rentalType = $data['rental_type'] ?? 'daily';
             $data['price'] = $rentalType === 'monthly' ? $car->monthly_price : $car->daily_price;

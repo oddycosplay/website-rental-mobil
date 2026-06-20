@@ -427,6 +427,7 @@ class DatabaseSeeder extends Seeder
                 'daily_price' => $c['daily_price'],
                 'driver_daily_price' => $c['driver_daily_price'],
                 'is_call_for_price' => $c['is_call_for_price'],
+                'category' => $c['is_call_for_price'] ? 'perusahaan' : 'both',
                 'monthly_price' => $c['daily_price'] * 20,
                 'late_fee' => $c['daily_price'] * 0.1,
                 'status' => 'available',

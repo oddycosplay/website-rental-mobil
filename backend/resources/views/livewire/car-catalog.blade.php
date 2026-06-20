@@ -8,7 +8,7 @@
         <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
             <span class="inline-block py-1 px-3 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-bold tracking-widest uppercase mb-4">Premium Car</span>
             <h1 class="font-poppins text-4xl md:text-5xl font-extrabold mb-4">Choose Your <span class="text-gold">Dream</span> Vehicle</h1>
-            <p class="text-slate-400 text-lg max-w-2xl mx-auto">Hundreds of premium vehicles ready for use — SUV, Sedan, MPV, to Minibus for all your travel needs.</p>
+            <p class="text-white text-lg max-w-2xl mx-auto">Hundreds of premium vehicles ready for use — SUV, Sedan, MPV, to Minibus for all your travel needs.</p>
         </div>
     </section>
 
@@ -43,11 +43,13 @@
                             <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-[10px] pointer-events-none"></i>
                         </div>
 
-                        <div class="relative opacity-60">
-                            <select wire:model.live="category" disabled class="w-full bg-slate-800/50 border border-white/10 rounded-2xl px-5 py-4 text-slate-400 text-sm focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all appearance-none cursor-not-allowed">
-                                <option value="perusahaan" class="bg-slate-900">Corporate Only</option>
+                        <div class="relative">
+                            <select wire:model.live="category" class="w-full bg-slate-800/50 border border-white/10 rounded-2xl px-5 py-4 text-white text-sm focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all appearance-none cursor-pointer">
+                                <option value="" class="bg-slate-900">Semua Kategori</option>
+                                <option value="pribadi" class="bg-slate-900">Pribadi</option>
+                                <option value="perusahaan" class="bg-slate-900">Perusahaan</option>
                             </select>
-                            <i class="fas fa-lock absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-[10px] pointer-events-none"></i>
+                            <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-[10px] pointer-events-none"></i>
                         </div>
                         
                         <div class="relative">
@@ -121,11 +123,9 @@
                                 <span class="px-4 py-1.5 rounded-xl bg-slate-900/80 backdrop-blur-md border border-gold/30 text-gold text-[10px] font-black uppercase tracking-[0.1em]">
                                     {{ $car->type->name ?? 'Premium' }}
                                 </span>
-                                @if($car->category && $car->category !== 'both')
                                 <span class="px-4 py-1.5 rounded-xl bg-slate-900/80 backdrop-blur-md border border-white/10 text-slate-300 text-[10px] font-bold uppercase tracking-widest">
-                                    <i class="fas fa-tag text-gold mr-1"></i> {{ ucfirst($car->category) }}
+                                    <i class="fas fa-tag text-gold mr-1"></i> {{ $car->is_call_for_price ? 'Perusahaan' : 'Pribadi & Perusahaan' }}
                                 </span>
-                                @endif
                             </div>
 
                             @if($car->status == 'rented')
@@ -168,8 +168,16 @@
                                             <div class="text-gold font-black text-xl tracking-tight">Call for Price</div>
                                             <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">contact admin</span>
                                         @else
-                                            <div class="text-gold font-black text-2xl tracking-tight">Rp {{ number_format($car->daily_price, 0, ',', '.') }}</div>
-                                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">per day</span>
+                                            <div class="space-y-1">
+                                                <div class="flex items-center gap-1.5">
+                                                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">🔑 Lepas Kunci:</span>
+                                                    <span class="text-gold font-black text-sm">Rp {{ number_format($car->daily_price, 0, ',', '.') }}<span class="text-[9px] text-slate-500 font-bold normal-case">/hari</span></span>
+                                                </div>
+                                                <div class="flex items-center gap-1.5">
+                                                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">👨‍✈️ Sama Driver:</span>
+                                                    <span class="text-gold font-black text-sm">Rp {{ number_format($car->daily_price + $car->driver_daily_price, 0, ',', '.') }}<span class="text-[9px] text-slate-500 font-bold normal-case">/hari</span></span>
+                                                </div>
+                                            </div>
                                         @endif
                                     </div>
                                     <div class="text-right">

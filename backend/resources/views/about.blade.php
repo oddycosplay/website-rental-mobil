@@ -86,7 +86,7 @@
             <h1 class="font-poppins font-black text-5xl md:text-7xl text-white mb-8 leading-[1] tracking-tighter">
                 Tentang <span class="text-gradient-gold drop-shadow-[0_0_40px_rgba(212,175,55,0.3)]">Kami</span>
             </h1>
-            <p class="text-slate-400 text-lg md:text-xl leading-relaxed font-medium max-w-3xl mx-auto mb-12 opacity-90">
+            <p class="text-white text-lg md:text-xl leading-relaxed font-medium max-w-3xl mx-auto mb-12 opacity-90">
                 Siliwangi Rental Trans Nusa berkomitmen menghadirkan pengalaman perjalanan yang aman, nyaman, dan menyenangkan di setiap perjalanan Anda.
             </p>
         </div>
@@ -113,7 +113,7 @@
                                     <p class="text-gold text-[9px] font-black uppercase tracking-[0.3em]">Bandung, Jawa Barat</p>
                                 </div>
                             </div>
-                            <p class="text-slate-400 text-xs leading-relaxed font-medium">Layanan armada terintegrasi untuk menjamin ketersediaan unit tepat waktu di berbagai lokasi.</p>
+                            <p class="text-white text-xs leading-relaxed font-medium">Layanan armada terintegrasi untuk menjamin ketersediaan unit tepat waktu di berbagai lokasi.</p>
                         </div>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                     Solusi Transportasi <br> Terpercaya Anda
                 </h2>
                 
-                <div class="space-y-6 text-slate-400 text-base md:text-lg leading-relaxed font-medium opacity-90 max-w-2xl">
+                <div class="space-y-6 text-white text-base md:text-lg leading-relaxed font-medium opacity-90 max-w-2xl">
                     <p>
                         <strong>Siliwangi Rental Trans Nusa</strong> adalah perusahaan penyedia jasa rental mobil yang berkomitmen memberikan layanan transportasi yang aman, nyaman, dan terpercaya untuk berbagai kebutuhan perjalanan. Dengan dukungan armada yang terawat serta pelayanan profesional, kami hadir sebagai solusi transportasi bagi individu, keluarga, perusahaan, maupun instansi.
                     </p>
@@ -159,7 +159,7 @@
                     <i class="fas fa-eye"></i>
                 </div>
                 <h3 class="text-white font-black text-3xl mb-6 tracking-tighter uppercase">Visi</h3>
-                <p class="text-slate-400 leading-relaxed text-lg font-medium opacity-85">
+                <p class="text-white leading-relaxed text-lg font-medium opacity-85">
                     Menjadi perusahaan rental mobil terpercaya yang memberikan layanan transportasi berkualitas, profesional, dan berorientasi pada kepuasan pelanggan.
                 </p>
             </div>
@@ -179,7 +179,7 @@
                     'Menjalin hubungan jangka panjang dengan pelanggan melalui pelayanan terbaik.',
                     'Mengembangkan layanan secara berkelanjutan dengan memanfaatkan teknologi informasi.'
                     ] as $misi)
-                    <li class="flex items-start gap-4 text-slate-400 text-base font-medium group/li">
+                    <li class="flex items-start gap-4 text-white text-base font-medium group/li">
                         <div class="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center shrink-0 mt-0.5 group-hover/li:bg-gold transition-colors">
                             <i class="fas fa-check text-gold text-[10px] group-hover/li:text-slate-950 transition-colors"></i>
                         </div>
@@ -218,7 +218,7 @@
                         <i class="{{ $reason['icon'] }}"></i>
                     </div>
                     <h3 class="text-white font-black text-xl mb-4 tracking-tight group-hover:text-gold transition-colors">{{ $reason['title'] }}</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm font-medium">{{ $reason['desc'] }}</p>
+                    <p class="text-white leading-relaxed text-sm font-medium">{{ $reason['desc'] }}</p>
                 </div>
             </div>
             @endforeach
